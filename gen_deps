@@ -1,0 +1,13 @@
+rm -v gen/*
+
+d=512
+
+for i in {1..100}; do
+	echo "dw $d" >> gen/it_mdata.s
+	d=$(($d + 554))
+done
+
+for i in {1..100}; do
+	echo "dw $d" >> gen/it_mdata.s
+	d=$(($d + 80))
+done

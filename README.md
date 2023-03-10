@@ -1,33 +1,20 @@
 Impulse Tracker
 ===============
 
-Full source code for Impulse Tracker, including sound drivers, network drivers,
-and some supporting documentation
-
- 
+Eventually, maybe, a version of IT for modern systems
 
 Pre-Requisite Software
 ----------------------
 
 To build Impulse Tracker, you will need:
 
--   Turbo Assembler v4.1
+-   Netwide Assembler
 
--   Turbo Link v3.01
+-   GCC
 
--   Borland MAKE v4.0
+-   sh
 
--   A DOS environment
-
- 
-
-Once you have these, building IT.EXE should be just a single call to `MAKE`
-
-
-Sound drivers are build individually via M\*.BAT files inside the SoundDrivers
-subdirectory
-
- 
+Once you have these, building IT should be just a single call to `./build`
 
 Quick File Overview
 -------------------
@@ -105,8 +92,6 @@ Quick File Overview
 -	SWITCH.INC:
 	High level switches for the program
 
-
-
 Frequently Asked Questions
 --------------------------
 
@@ -129,10 +114,8 @@ A: The original code was compatible all the way back to an 8086 machine. 8086 wo
 conditional jumps only within +/-128 bytes, so I spent too much time shuffling code around to meet 
 this restriction. When I shifted away from this 8086 restriction, I never went back to update the 
 code that was mutilated by it.
- 
-
 
 License
 -------
 
-License for this source code is pending.
+Refer to LICENSE.TXT

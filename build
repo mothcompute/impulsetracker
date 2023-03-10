@@ -1,0 +1,9 @@
+mkdir -p obj gen
+./gen_deps
+
+for i in *.s; do
+	echo $i
+	nasm -g $i -felf32 -o "obj/$(echo $i | sed 's/s$/o/g')"
+done
+
+cc -m32 main.c c/* obj/* -g3

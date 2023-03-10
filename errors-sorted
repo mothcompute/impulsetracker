@@ -1,0 +1,29 @@
+18	it_mdata.s
+37	it_err.s
+51	it_vesa.s
+90	it_h.s
+140	it_four.s
+165	it_tute.s
+167	it_m.s
+172	it_l.s
+174	it_mmtsr.s
+238	it_k.s
+240	it_ems.s
+287	it_s.s
+311	it_msg.s
+318	it_mouse.s
+336	it.s
+425	it_g.s
+641	it_net.s
+815	it_displ.s
+1563	it_f.s
+1795	it_music.s
+2057	it_pe.s
+2155	it_i.s
+2238	it_disk.s
+2398	it_obj1.s
+
+instances in source code:
+EndM: 374
+EndP: 3320
+Proc: 3597
