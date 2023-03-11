@@ -2,7 +2,7 @@
 ;³ EMS Module                                                                  ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-include switch.inc
+%include "switch.inc"
 
 ; Memory structure for patterns:
 ;  Memory Block Header
@@ -16,27 +16,24 @@ include switch.inc
 ; Offset 9-0Fh: Not used
 ; Offset 10h    Data
 
-                        Jumps
-                        .386
-
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Externals                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
 Segment         Object1 BYTE Public 'Data'
-                Extrn   EMSErrorValue:Word
-                Extrn   EMSErrorValue2:Word
-                Extrn   EMSErrorValue3:Word
-                Extrn   EMSErrorValue4:Word
-                Extrn   EMSErrorValue5:Word
-                Extrn   EMSErrorValue6:Word
-                Extrn   EMSErrorValue7:Word
-                Extrn   EMSErrorValue8:Word
+                extern    EMSErrorValue:Word
+                extern    EMSErrorValue2:Word
+                extern    EMSErrorValue3:Word
+                extern    EMSErrorValue4:Word
+                extern    EMSErrorValue5:Word
+                extern    EMSErrorValue6:Word
+                extern    EMSErrorValue7:Word
+                extern    EMSErrorValue8:Word
 EndS
 
-                Extrn   M_Object1List:Far
+                extern    M_Object1List:Far
 
-                Extrn   O1_EMSWarningMessage
+                extern    O1_EMSWarningMessage
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Globals                                                                     ³
@@ -57,37 +54,37 @@ EndS
                 Global  E_GetEMSVersion:Far
                 Global  E_GetInternalEMSHandle:Far
 
-IF EMSDEBUG
+%IF  EMSDEBUG
 
                 Global  E_DumpEMSMemory:Far
 
-ENDIF
+%ENDIF 
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
 Segment                 EMS WORD Public 'Code' USE16
-                        Assume CS:EMS, DS:Nothing
+                        ;Assume CS:EMS, DS:Nothing
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Variables                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
 CREATENEWLOGFILE        EQU     0
-include debug.inc
+%include "debug.inc"
 
 EMSDetectString         DB      "EMMXXXX0"      ; Identification string
 EMSHandlesRemaining     DW      0
-EMSAvailable            DW      0               ; Assume that it's not avail.
+EMSAvailable            DW      0               ; ;Assume that it's not avail.
 EMSPageFrame            DW      0
 EMSHandle               DW      0
 EMSVersion              DB      0
                         DB      0
 
-IF EMSDEBUG
+%IF  EMSDEBUG
 
 EMSDumpName             DB      "EMSDump", 0
 
-ENDIF
+%ENDIF 
 
 EMSCorrespondenceList   Label   Word
         Page0   DB      0, 0
@@ -103,7 +100,7 @@ EMSCorrespondenceList   Label   Word
 ;³ Functions                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-Proc            E_InitEMS Far
+Proc E_InitEMS Far
 
                 Push    DS
                 Push    ES
@@ -122,7 +119,7 @@ Proc            E_InitEMS Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:EMS
+                        ;Assume DS:EMS
 
                 Mov     SI, Offset EMSDetectString
 
@@ -242,12 +239,12 @@ E_InitEMS1:
                 Pop     DS
                 Ret
 
-EndP            E_InitEMS
-                Assume DS:Nothing
+;EndP            E_InitEMS
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            E_GetFreeEMS Far        ; Returns kb free..
+Proc E_GetFreeEMS Far        ; Returns kb free..
 
                 Push    BX
                 Push    DX
@@ -274,11 +271,11 @@ E_GetFreeEMS1:
                 Pop     BX
                 Ret
 
-EndP            E_GetFreeEMS
+;EndP            E_GetFreeEMS
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            E_ReleaseEMS Far                ; AX = handle.
+Proc E_ReleaseEMS Far                ; AX = handle.
 
                 Push    AX
                 Push    DX
@@ -300,11 +297,11 @@ E_ReleaseEMS1:
 
                 Ret
 
-EndP            E_ReleaseEMS
+;EndP            E_ReleaseEMS
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            EMSWarning
+Proc EMSWarning
 
                 PushAD
                 Push    DS
@@ -312,7 +309,7 @@ Proc            EMSWarning
 
                 Mov     BX, Object1
                 Mov     DS, BX
-                        Assume DS:Object1
+                        ;Assume DS:Object1
 
                 Mov     Byte Ptr EMSErrorValue, AH
                 Mov     EMSErrorValue2, CX
@@ -343,12 +340,12 @@ Proc            EMSWarning
 
                 Ret
 
-EndP            EMSWarning
-                Assume DS:Nothing
+;EndP            EMSWarning
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            E_MapAvailableEMSMemory Far
+Proc E_MapAvailableEMSMemory Far
                                         ; AX = handle.
 
                 Push    AX BX DX
@@ -375,11 +372,11 @@ E_MapAvailableEMSMemory2:
 
                 Ret
 
-EndP            E_MapAvailableEMSMemory
+;EndP            E_MapAvailableEMSMemory
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            E_MapEMSMemory Far      ; CL = total pages in handle
+Proc E_MapEMSMemory Far      ; CL = total pages in handle
                                         ; CH = starting (base) page.
                                         ; DX = handle
 
@@ -397,10 +394,10 @@ Proc            E_MapEMSMemory Far      ; CL = total pages in handle
 
 E_MapEMSMemory003:
 
-IF EMSUSE41
+%IF  EMSUSE41
                 Cmp     CS:EMSVersion, 40h
                 JAE     E_MapEMSMemoryV4_1
-ENDIF
+%ENDIF 
 
                 Xor     BX, BX
 
@@ -419,7 +416,7 @@ E_MapEMSMemory001:
                 JNZ     E_MapEMSMemory001
                 Jmp     E_MapEMSMemory002
 
-IF EMSUSE41
+%IF  EMSUSE41
 
 E_MapEMSMemoryV4_1:
                 Push    DS
@@ -430,7 +427,7 @@ E_MapEMSMemoryV4_1:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:EMS
+                        ;Assume DS:EMS
 
                 Mov     Page0, CH
                 Inc     CH
@@ -448,12 +445,12 @@ E_MapEMSMemoryV4_1:
                 PopF
                 Pop     SI
                 Pop     DS
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Test    AH, AH
                 JZ      E_MapEMSMemory002
 
-ENDIF
+%ENDIF 
 
 E_MapEMSMemory004:
 ;                Call    EMSWarning
@@ -466,11 +463,11 @@ E_MapEMSMemory002:
 E_MapEMSMemoryExit:
                 Ret
 
-EndP            E_MapEMSMemory
+;EndP            E_MapEMSMemory
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            E_UnInitEMS Far
+Proc E_UnInitEMS Far
 
                 Cmp     EMSAvailable, 0
                 JE      E_UnInitEMS1
@@ -481,20 +478,20 @@ Proc            E_UnInitEMS Far
 E_UnInitEMS1:
                 Ret
 
-EndP            E_UnInitEMS
+;EndP            E_UnInitEMS
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            E_GetEMSPageFrame Far
+Proc E_GetEMSPageFrame Far
 
                 Mov     AX, CS:EMSPageFrame
                 Ret
 
-EndP            E_GetEMSPageFrame
+;EndP            E_GetEMSPageFrame
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            E_MapAlignedBlockEMS Far        ; Given AX, Return DS:SI
+Proc E_MapAlignedBlockEMS Far        ; Given AX, Return DS:SI
 
                 Push    CX DX
 
@@ -514,11 +511,11 @@ Proc            E_MapAlignedBlockEMS Far        ; Given AX, Return DS:SI
 
                 Ret
 
-EndP            E_MapAlignedBlockEMS
+;EndP            E_MapAlignedBlockEMS
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            E_AllocateBlockEMS Far          ; EAX = number of bytes
+Proc E_AllocateBlockEMS Far          ; EAX = number of bytes
                                                 ; Destroys EMS page frame
                                                 ; Returns AX = segment address
                                                 ; Carry set if fail, clear if
@@ -635,11 +632,11 @@ AllocateBlockQuit:
                 StI
                 Ret
 
-EndP            E_AllocateBlockEMS
+;EndP            E_AllocateBlockEMS
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            E_ReleaseBlockEMS Far           ; Given AX = 'segment'.
+Proc E_ReleaseBlockEMS Far           ; Given AX = 'segment'.
 
                 ClI
                 Push    EAX EBX DS SI
@@ -721,11 +718,11 @@ E_ReleaseBlockCleanup:
                 StI
                 Ret
 
-EndP            E_ReleaseBlockEMS
+;EndP            E_ReleaseBlockEMS
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            E_AllocateEMS Far               ; EAX = number of bytes
+Proc E_AllocateEMS Far               ; EAX = number of bytes
                                                 ; Returns AX with handle
                                                 ;  0 if no handle allocated
                                                 ; given carry = essential
@@ -771,22 +768,22 @@ E_AllocateEMS1:
                 Pop     EBX
                 Ret
 
-EndP            E_AllocateEMS
+;EndP            E_AllocateEMS
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            E_EMSAvailable Far            ; Returns Zero flag set if no EMS
+Proc E_EMSAvailable Far            ; Returns Zero flag set if no EMS
 
                 Cmp     CS:EMSAvailable, 0
                 Ret
 
-EndP            E_EMSAvailable
+;EndP            E_EMSAvailable
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 Comment ~
 
-Proc            E_SavePageFrame Far             ; Given DX = Handle
+Proc E_SavePageFrame Far             ; Given DX = Handle
 Public          E_SavePageFrame
 
                 Push    AX
@@ -805,11 +802,11 @@ E_SavePageFrame1:
 
                 Ret
 
-EndP            E_SavePageFrame
+;EndP            E_SavePageFrame
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            E_RestorePageFrame Far          ; Given DX = Handle
+Proc E_RestorePageFrame Far          ; Given DX = Handle
 Public          E_RestorePageFrame
 
                 Push    AX
@@ -828,13 +825,13 @@ E_RestorePageFrame1:
 
                 Ret
 
-EndP            E_RestorePageFrame
+;EndP            E_RestorePageFrame
 
 ~
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            E_SaveEMSPageFrame Far
+Proc E_SaveEMSPageFrame Far
 
                 Cmp     CS:EMSAvailable, 0
                 JE      E_SaveEMSPageFrame1
@@ -865,11 +862,11 @@ E_SaveEMSPageFrame2:
 E_SaveEMSPageFrame1:
                 Ret
 
-EndP            E_SaveEMSPageFrame
+;EndP            E_SaveEMSPageFrame
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            E_RestoreEMSPageFrame Far
+Proc E_RestoreEMSPageFrame Far
 
                 Cmp     CS:EMSAvailable, 0
                 JE      E_RestoreEMSPageFrame1
@@ -887,35 +884,35 @@ Proc            E_RestoreEMSPageFrame Far
 E_RestoreEMSPageFrame1:
                 Ret
 
-EndP            E_RestoreEMSPageFrame
+;EndP            E_RestoreEMSPageFrame
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            E_GetEMSVersion Far
+Proc E_GetEMSVersion Far
 
                 Mov     AL, CS:EMSVersion
                 Ret
 
-EndP            E_GetEMSVersion
+;EndP            E_GetEMSVersion
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            E_GetInternalEMSHandle Far
+Proc E_GetInternalEMSHandle Far
 
                 Mov     AX, CS:EMSHandle
                 Ret
 
-EndP            E_GetInternalEMSHandle
+;EndP            E_GetInternalEMSHandle
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-IF EMSDEBUG
+%IF  EMSDEBUG
 
-Proc            E_DumpEMSMemory Far
+Proc E_DumpEMSMemory Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:EMS
+                        ;Assume DS:EMS
 
                 Mov     AH, 3Ch
                 Xor     CX, CX
@@ -959,10 +956,10 @@ Proc            E_DumpEMSMemory Far
                 Xor     AX, AX
                 Ret
 
-EndP            E_DumpEMSMemory
-                Assume DS:Nothing
+;EndP            E_DumpEMSMemory
+                ;Assume DS:Nothing
 
-ENDIF
+%ENDIF 
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 

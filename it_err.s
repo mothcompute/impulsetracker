@@ -23,7 +23,7 @@
 ;Segment                 Error BYTE Public 'Code' USE16
 section .text
 %warning "USE16"
-;                        Assume CS:Error
+;                        ;Assume CS:Error
 
 CREATENEWLOGFILE        EQU     0
 %include "debug.inc"
@@ -79,7 +79,7 @@ ErrorHandler:
 
                 Push    CS
                 Pop     DS
-;                        Assume DS:Error
+;                        ;Assume DS:Error
 
                 Mov     BX, DI
                 And     BX, 0FFh
@@ -117,7 +117,7 @@ ErrorHandler4:
                 IRet
 
 ;EndP            ErrorHandler
-;                Assume DS:Nothing
+;                ;Assume DS:Nothing
 
 ;컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴�
 

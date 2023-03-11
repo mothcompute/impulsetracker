@@ -2,9 +2,6 @@
 ;³ Mouse Module                                                                ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-                        Jumps
-                        .386P
-
 ; MouseRecord Structure...
 ;  Area         DW      Left, Top, Right, Bottom
 ;  Condition    DB      ?
@@ -31,15 +28,15 @@
 ;         On  - Cursor outside area
 ;  Bit 4: Always call, ignore area
 
-include switch.inc
+%include "switch.inc"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Externals                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-        Extrn   S_SetSequencer:Far, S_ResetSequencer:Far
-        Extrn   S_SetDirectMode:Far
-        Extrn   S_GetDestination:Far
+        extern    S_SetSequencer:Far, S_ResetSequencer:Far
+        extern    S_SetDirectMode:Far
+        extern    S_GetDestination:Far
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Globals                                                                     ³
@@ -63,10 +60,10 @@ include switch.inc
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
 Segment                 Mouse PARA Public 'Code' USE16
-                        Assume CS:Mouse, DS:Nothing
+                        ;Assume CS:Mouse, DS:Nothing
 
 CREATENEWLOGFILE        EQU     0
-include debug.inc
+%include "debug.inc"
 
                 ; Assumes 80x50 display (512 characters, 8x8 pixels per char.)
 
@@ -195,11 +192,11 @@ MouseQueueEnd           DB      0
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            RestoreMouse Far
+Proc RestoreMouse Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Mouse
+                        ;Assume DS:Mouse
 
                 Cmp     MouseDisplay, 0
                 JE      RestoreMouse1
@@ -209,14 +206,14 @@ Proc            RestoreMouse Far
 RestoreMouse1:
                 Ret
 
-EndP            RestoreMouse
-                Assume DS:Nothing
+;EndP            RestoreMouse
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            RemoveMouseCursor               ; Given ES=cursor to remove
+Proc RemoveMouseCursor               ; Given ES=cursor to remove
 
-                        Assume DS:Mouse
+                        ;Assume DS:Mouse
                 Mov     BX, Offset OldCharacterData
                 Mov     DI, MouseCursorOffset
 
@@ -270,16 +267,16 @@ RemoveMouseCursor8:
 RemoveMouseCursor3:
                 Ret
 
-EndP            RemoveMouseCursor
-                Assume DS:Nothing
+;EndP            RemoveMouseCursor
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            RestoreMouseGraphics Far
+Proc RestoreMouseGraphics Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Mouse
+                        ;Assume DS:Mouse
 
                 Mov     AL, RestoreGraphicsRequired
                 Cmp     MouseDisplay, 0
@@ -343,13 +340,13 @@ RestoreMouseGraphics3:
 RestoreMouseGraphics4:
                 Ret
 
-EndP            RestoreMouseGraphics
-                Assume DS:Nothing
+;EndP            RestoreMouseGraphics
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SaveMouseCursor
-                Assume DS:Mouse
+Proc SaveMouseCursor
+                ;Assume DS:Mouse
 
                 Push    CS              ; ***
                 Pop     DS              ; ***
@@ -482,13 +479,13 @@ SaveMouseCursor7:
 SaveMouseCursor9:
                 Ret
 
-EndP            SaveMouseCursor
-                Assume DS:Nothing
+;EndP            SaveMouseCursor
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GenerateMouseCursor
-                Assume DS:Mouse
+Proc GenerateMouseCursor
+                ;Assume DS:Mouse
 
 ;                Push    CS              ; ***
 ;                Pop     DS              ; ***
@@ -628,13 +625,13 @@ GenerateMouseCharacter6:
 
                 Ret
 
-EndP            GenerateMouseCursor
-                Assume DS:Nothing
+;EndP            GenerateMouseCursor
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PlotMouseCursor
-                Assume DS:Mouse
+Proc PlotMouseCursor
+                ;Assume DS:Mouse
 
                 Push    CS              ; ***
                 Pop     DS              ; ***
@@ -675,12 +672,12 @@ PlotMouseCursor3:
 PlotMouseCursor4:
                 Ret
 
-EndP            PlotMouseCursor
-                Assume DS:Nothing
+;EndP            PlotMouseCursor
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DrawMouseCursor         ; Given ES to write to.
+Proc DrawMouseCursor         ; Given ES to write to.
 
                 Call    SaveMouseCursor
                 Call    GenerateMouseCursor
@@ -692,15 +689,15 @@ Proc            DrawMouseCursor         ; Given ES to write to.
 
                 Ret
 
-EndP            DrawMouseCursor
+;EndP            DrawMouseCursor
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DrawMouse Far
+Proc DrawMouse Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Mouse
+                        ;Assume DS:Mouse
 
                 Cmp     MouseDisplay, 0
                 JE      DrawMouse1
@@ -710,12 +707,12 @@ Proc            DrawMouse Far
 DrawMouse1:
                 Ret
 
-EndP            DrawMouse
-                Assume DS:Nothing
+;EndP            DrawMouse
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseInterruptHandler Far
+Proc MouseInterruptHandler Far
 
                 PushF
 
@@ -728,7 +725,7 @@ Proc            MouseInterruptHandler Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Mouse
+                        ;Assume DS:Mouse
 
                 Mov     NewMouseX, CX
                 Mov     NewMouseY, DX
@@ -891,12 +888,12 @@ MouseInterruptHandler1:
 
                 Ret
 
-EndP            MouseInterruptHandler
-                Assume DS:Nothing
+;EndP            MouseInterruptHandler
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            InitMouse Far
+Proc InitMouse Far
 
                 Cmp     CS:MouseEnabled, 0
                 JE      InitMouse2
@@ -951,44 +948,44 @@ InitMouse1:
 
                 Ret
 
-EndP            InitMouse
+;EndP            InitMouse
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            UnInitMouse Far
+Proc UnInitMouse Far
 
                 Xor     AX, AX
                 Int     33h
 
                 Ret
 
-EndP            UnInitMouse
+;EndP            UnInitMouse
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseSecondSetEnable Far
+Proc MouseSecondSetEnable Far
 
                 Mov     CS:OverwriteSecondSet, 0
                 Ret
 
-EndP            MouseSecondSetEnable
+;EndP            MouseSecondSetEnable
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseSecondSetDisable Far
+Proc MouseSecondSetDisable Far
 
                 Mov     CS:OverwriteSecondSet, 1
                 Ret
 
-EndP            MouseSecondSetDisable
+;EndP            MouseSecondSetDisable
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseToggle Far
+Proc MouseToggle Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Mouse
+                        ;Assume DS:Mouse
 
                 Cmp     MouseAvailable, 0
                 JE      MouseToggle1
@@ -1008,12 +1005,12 @@ MouseToggle1:
                 Mov     AX, 1
                 Ret
 
-EndP            MouseToggle
-                Assume DS:Nothing
+;EndP            MouseToggle
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseSetXY Far
+Proc MouseSetXY Far
 
                 PushF
 
@@ -1062,18 +1059,18 @@ MouseSetXY1:
 
                 Ret
 
-EndP            MouseSetXY
+;EndP            MouseSetXY
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseSaveEvents Far
+Proc MouseSaveEvents Far
 
                 PushF
                 Push    DS
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Mouse
+                        ;Assume DS:Mouse
 
                 Cmp     MouseAvailable, 0
                 JE      MouseSaveEvents1
@@ -1094,19 +1091,19 @@ MouseSaveEvents1:
 
                 Ret
 
-EndP            MouseSaveEvents
-                Assume DS:Nothing
+;EndP            MouseSaveEvents
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseRestoreEvents Far
+Proc MouseRestoreEvents Far
 
                 PushF
                 Push    DS
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Mouse
+                        ;Assume DS:Mouse
 
                 Cmp     MouseAvailable, 0
                 JE      MouseRestoreEvents1
@@ -1127,36 +1124,36 @@ MouseRestoreEvents1:
 
                 Ret
 
-EndP            MouseRestoreEvents
-                Assume DS:Nothing
+;EndP            MouseRestoreEvents
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetKeyboardLock Far             ; AL = lock state
+Proc SetKeyboardLock Far             ; AL = lock state
 
                 Mov     CS:LockKeyBoard, AL
                 Ret
 
-EndP            SetKeyboardLock
+;EndP            SetKeyboardLock
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetKeyboardLock Far
+Proc GetKeyboardLock Far
 
                 Mov     AL, CS:LockKeyBoard
                 Ret
 
-EndP            GetKeyboardLock
+;EndP            GetKeyboardLock
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            AddMouseQueue Far               ; AX, CX, DX
+Proc AddMouseQueue Far               ; AX, CX, DX
 
                 Push    DS
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Mouse
+                        ;Assume DS:Mouse
 
                 Mov     BH, QUEUEELEMENTSIZE
                 Mov     BL, MouseQueueEnd
@@ -1175,18 +1172,18 @@ AddMouseQueue1:
                 Pop     DS
                 Ret
 
-EndP            AddMouseQueue
-                Assume DS:Nothing
+;EndP            AddMouseQueue
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseInput Far
+Proc MouseInput Far
 
                 PushF
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Mouse
+                        ;Assume DS:Mouse
 
                 ClI
 
@@ -1226,12 +1223,12 @@ MouseInput3:
                 PopF
                 Ret
 
-EndP            MouseInput
-                Assume DS:Nothing
+;EndP            MouseInput
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseAddEvent Far       ; Given DS:SI to event
+Proc MouseAddEvent Far       ; Given DS:SI to event
 
                 PushF
 
@@ -1262,74 +1259,74 @@ MouseAddEvent1:
                 PopF
                 Ret
 
-EndP            MouseAddEvent
+;EndP            MouseAddEvent
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseClearEvents Far
+Proc MouseClearEvents Far
 
                 Mov     AX, CS:MouseEventStart
                 Mov     CS:MouseEventEnd, AX
                 Ret
 
-EndP            MouseClearEvents
+;EndP            MouseClearEvents
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseRemoveEvents Far           ; AX = number to remove
+Proc MouseRemoveEvents Far           ; AX = number to remove
 
                 ShL     AX, 4
                 Sub     CS:MouseEventEnd, AX
                 Ret
 
-EndP            MouseRemoveEvents
+;EndP            MouseRemoveEvents
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseGetStatus Far
+Proc MouseGetStatus Far
 
                 Mov     AL, CS:MouseStatus
                 Ret
 
-EndP            MouseGetStatus
+;EndP            MouseGetStatus
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            NewCharacterSet Far
+Proc NewCharacterSet Far
 
                 Or      CS:RestoreGraphicsRequired, 2
                 Ret
 
-EndP            NewCharacterSet
+;EndP            NewCharacterSet
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseUpdateEnable Far
+Proc MouseUpdateEnable Far
 
                 Mov     CS:UpdateScreen, 1
                 Ret
 
-EndP            MouseUpdateEnable
+;EndP            MouseUpdateEnable
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseUpdateDisable Far
+Proc MouseUpdateDisable Far
 
                 Mov     CS:UpdateScreen, 0
                 Ret
 
-EndP            MouseUpdateDisable
+;EndP            MouseUpdateDisable
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetMouseCursorType Far
+Proc SetMouseCursorType Far
 
                 PushF
                 Push    DS
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Mouse
+                        ;Assume DS:Mouse
                 ClI
 
                 Mov     MouseCursorType, BX
@@ -1376,20 +1373,20 @@ SetMouseCursorType4:
                 PopF
                 Ret
 
-EndP            SetMouseCursorType
+;EndP            SetMouseCursorType
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            CmdLineDisableMouse Far
+Proc CmdLineDisableMouse Far
 
                 Mov     Word Ptr CS:MouseDisplay, 0
                 Ret
 
-EndP            CmdLineDisableMouse
+;EndP            CmdLineDisableMouse
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ForceMouseRestore Far
+Proc ForceMouseRestore Far
 
                 Call    MouseUpdateDisable
                 ClI
@@ -1399,7 +1396,7 @@ Proc            ForceMouseRestore Far
                 StI
                 Jmp     MouseUpdateEnable
 
-EndP            ForceMouseRestore
+;EndP            ForceMouseRestore
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 

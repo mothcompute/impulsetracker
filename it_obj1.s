@@ -1,377 +1,375 @@
-                Jumps
+%include "switch.inc"
 
-include switch.inc
+                extern    D_SaveInstrument:Far
+                extern    D_LSCheckLoopValues:Far
+                extern    D_LSCheckSusLoopValues:Far
 
-                Extrn   D_SaveInstrument:Far
-                Extrn   D_LSCheckLoopValues:Far
-                Extrn   D_LSCheckSusLoopValues:Far
+                extern    D_PreLoadSampleWindow:Far
+                extern    D_DrawLoadSampleWindow:Far
+                extern    D_PostLoadSampleWindow:Far
 
-                Extrn   D_PreLoadSampleWindow:Far
-                Extrn   D_DrawLoadSampleWindow:Far
-                Extrn   D_PostLoadSampleWindow:Far
+                extern    D_LSDrawDriveWindow:Far
+                extern    D_LSPreDriveWindow:Far
+                extern    D_LSPostDriveWindow:Far
 
-                Extrn   D_LSDrawDriveWindow:Far
-                Extrn   D_LSPreDriveWindow:Far
-                Extrn   D_LSPostDriveWindow:Far
+                extern    D_LIDrawDriveWindow:Far
+                extern    D_LIPreDriveWindow:Far
+                extern    D_LIPostDriveWindow:Far
 
-                Extrn   D_LIDrawDriveWindow:Far
-                Extrn   D_LIPreDriveWindow:Far
-                Extrn   D_LIPostDriveWindow:Far
+                extern    D_SaveSample:Far
+                extern    D_SaveRawSample:Far
+                extern    D_SaveST3Sample:Far
 
-                Extrn   D_SaveSample:Far
-                Extrn   D_SaveRawSample:Far
-                Extrn   D_SaveST3Sample:Far
+                extern    D_GetFormatType:Far
 
-                Extrn   D_GetFormatType:Far
+                extern    D_SlowSampleSort:Far
+                extern    D_SlowInstrumentSort:Far
+                extern    D_SaveDirectoryConfiguration:Far
+                extern    D_LoadSampleNames:Far
+                extern    D_LoadSongNames:Far
+                extern    D_DrawFileWindow:Far
+                extern    D_DrawDirectoryWindow:Far
+                extern    D_DrawDriveWindow:Far
+                extern    D_PreFileWindow:Far
+                extern    D_SaveModule:Far
+                extern    D_PostFileLoadWindow:Far
+                extern    D_PostFileSaveWindow:Far
+                extern    D_PreDirectoryWindow:Far
+                extern    D_PostDirectoryWindow:Far
+                extern    D_PostViewSampleLibrary:Far
+                extern    D_PreDriveWindow:Far
+                extern    D_PostDriveWindow:Far
+                extern    D_PostSaveDriveWindow:Far
+                extern    D_NewDirectory:Far
+                extern    D_NewSpecifier:Far
 
-                Extrn   D_SlowSampleSort:Far
-                Extrn   D_SlowInstrumentSort:Far
-                Extrn   D_SaveDirectoryConfiguration:Far
-                Extrn   D_LoadSampleNames:Far
-                Extrn   D_LoadSongNames:Far
-                Extrn   D_DrawFileWindow:Far
-                Extrn   D_DrawDirectoryWindow:Far
-                Extrn   D_DrawDriveWindow:Far
-                Extrn   D_PreFileWindow:Far
-                Extrn   D_SaveModule:Far
-                Extrn   D_PostFileLoadWindow:Far
-                Extrn   D_PostFileSaveWindow:Far
-                Extrn   D_PreDirectoryWindow:Far
-                Extrn   D_PostDirectoryWindow:Far
-                Extrn   D_PostViewSampleLibrary:Far
-                Extrn   D_PreDriveWindow:Far
-                Extrn   D_PostDriveWindow:Far
-                Extrn   D_PostSaveDriveWindow:Far
-                Extrn   D_NewDirectory:Far
-                Extrn   D_NewSpecifier:Far
+%IF  TUTORIAL
+%ELSE
+                extern    D_LoadXM:Far
+                extern    D_LoadS3M:Far
+                extern    D_LoadMOD:Far
+                extern    D_LoadIT:Far
+                extern    D_LoadMTM:Far
+                extern    D_Load669:Far
+%ENDIF 
+                extern    D_DrawHeader:Far
+                extern    D_SaveIT:Far
+                extern    D_SaveS3M:Far
+                extern    D_SaveSong:Far
+                extern    Quit:Far
 
-IF TUTORIAL
-ELSE
-                Extrn   D_LoadXM:Far
-                Extrn   D_LoadS3M:Far
-                Extrn   D_LoadMOD:Far
-                Extrn   D_LoadIT:Far
-                Extrn   D_LoadMTM:Far
-                Extrn   D_Load669:Far
-ENDIF
-                Extrn   D_DrawHeader:Far
-                Extrn   D_SaveIT:Far
-                Extrn   D_SaveS3M:Far
-                Extrn   D_SaveSong:Far
-                Extrn   Quit:Far
+                extern    D_DrawLoadInstrument:Far
+                extern    D_PreLoadInstrument:Far
+                extern    D_PostLoadInstrument:Far
+                extern    D_LoadInstrumentNames:Far
+                extern    D_ViewInstrument:Far
 
-                Extrn   D_DrawLoadInstrument:Far
-                Extrn   D_PreLoadInstrument:Far
-                Extrn   D_PostLoadInstrument:Far
-                Extrn   D_LoadInstrumentNames:Far
-                Extrn   D_ViewInstrument:Far
+%IF  EMSDEBUG
 
-IF EMSDEBUG
+                extern    E_DumpEMSMemory:Far
 
-                Extrn   E_DumpEMSMemory:Far
+%ENDIF 
 
-ENDIF
+                extern    LSWindow_Up:Far
+                extern    LSWindow_Down:Far
 
-                Extrn   LSWindow_Up:Far
-                Extrn   LSWindow_Down:Far
+                extern    SongDirectory:Byte
+                extern    FileSpecifier:Byte
 
-                Extrn   SongDirectory:Byte
-                Extrn   FileSpecifier:Byte
-
-                Extrn   F_InstrumentButtonHandler:Far
+                extern    F_InstrumentButtonHandler:Far
 
 
-                Extrn   F_DrawHeader:Far
-                Extrn   F_Return0:Far
-                Extrn   F_Return1:Far
-                Extrn   F_ShowChannels:Far
-                Extrn   F_RedrawScreen:Far
-                Extrn   F_GotoEmptyList:Far
-                Extrn   F_DrawSMCChannels:Far
-                Extrn   F_Nothing:Far
-                Extrn   F_CalculateLength:Far
+                extern    F_DrawHeader:Far
+                extern    F_Return0:Far
+                extern    F_Return1:Far
+                extern    F_ShowChannels:Far
+                extern    F_RedrawScreen:Far
+                extern    F_GotoEmptyList:Far
+                extern    F_DrawSMCChannels:Far
+                extern    F_Nothing:Far
+                extern    F_CalculateLength:Far
 
-                Extrn   F_MainMenu:Far
-                Extrn   F_Help:Far                      ;  Menu functions
-                Extrn   F_ViewVariables:Far
-                Extrn   F_ViewOrderPan:Far
-                Extrn   F_ViewPattern:Far
+                extern    F_MainMenu:Far
+                extern    F_Help:Far                      ;  Menu functions
+                extern    F_ViewVariables:Far
+                extern    F_ViewOrderPan:Far
+                extern    F_ViewPattern:Far
 
-                Extrn   F_FileMenu:Far
-                Extrn   F_FileLoad:Far
-                Extrn   F_FileNew:Far
-                Extrn   F_FileSaveCurrent:Far
-                Extrn   F_FileSaveAs:Far
-                Extrn   F_FileDOSShell:Far
-                Extrn   F_FileQuit:Far
+                extern    F_FileMenu:Far
+                extern    F_FileLoad:Far
+                extern    F_FileNew:Far
+                extern    F_FileSaveCurrent:Far
+                extern    F_FileSaveAs:Far
+                extern    F_FileDOSShell:Far
+                extern    F_FileQuit:Far
 
-                Extrn   F_PlaybackMenu:Far
-                Extrn   F_InfoPage:Far
-                Extrn   F_PlaySong:Far
-                Extrn   F_PlayPattern:Far
-                Extrn   F_PlayOrder:Far
-                Extrn   F_PlayMark:Far
-                Extrn   F_Stop:Far
-                Extrn   F_ReinitSoundCard:Far
-                Extrn   F_DriverScreen:Far
-                Extrn   F_CalculateLength:Far
+                extern    F_PlaybackMenu:Far
+                extern    F_InfoPage:Far
+                extern    F_PlaySong:Far
+                extern    F_PlayPattern:Far
+                extern    F_PlayOrder:Far
+                extern    F_PlayMark:Far
+                extern    F_Stop:Far
+                extern    F_ReinitSoundCard:Far
+                extern    F_DriverScreen:Far
+                extern    F_CalculateLength:Far
 
-                Extrn   F_MessageEditor:Far
-                Extrn   F_SampleMenu:Far
-                Extrn   F_SampleList:Far
-                Extrn   F_SampleLibrary:Far
-                Extrn   F_ReloadGravis:Far
+                extern    F_MessageEditor:Far
+                extern    F_SampleMenu:Far
+                extern    F_SampleList:Far
+                extern    F_SampleLibrary:Far
+                extern    F_ReloadGravis:Far
 
-                Extrn   F_Return64:Far
-                Extrn   F_Return192:Far
+                extern    F_Return64:Far
+                extern    F_Return192:Far
 
-                Extrn   F_InstrumentMenu:Far
-                Extrn   F_InstrumentList:Far
-                Extrn   F_InstrumentLibrary:Far
+                extern    F_InstrumentMenu:Far
+                extern    F_InstrumentList:Far
+                extern    F_InstrumentLibrary:Far
 
-                Extrn   F_ShowMIDIZxxInput:Far
-                Extrn   F_MIDI_Up:Far, F_MIDI_Down:Far
-                Extrn   F_MIDI_PgUp:Far, F_MIDI_PgDn:Far
+                extern    F_ShowMIDIZxxInput:Far
+                extern    F_MIDI_Up:Far, F_MIDI_Down:Far
+                extern    F_MIDI_PgUp:Far, F_MIDI_PgDn:Far
 
-IF SPECTRUMANALYSER
-                Extrn   Fourier_Start:Far
-                Extrn   Fourier_PreDrawScreen:Far
-                Extrn   Fourier_DrawScreen:Far
-                Extrn   Fourier_PostFunction:Far
-                Extrn   Fourier_IdleList:Far
-                Extrn   Fourier_ChangePalette:Far
-ENDIF
+%IF  SPECTRUMANALYSER
+                extern    Fourier_Start:Far
+                extern    Fourier_PreDrawScreen:Far
+                extern    Fourier_DrawScreen:Far
+                extern    Fourier_PostFunction:Far
+                extern    Fourier_IdleList:Far
+                extern    Fourier_ChangePalette:Far
+%ENDIF 
 
-                Extrn   K_DrawTables:Far
-                Extrn   K_ResetKeyboardTables:Far
-                Extrn   K_ShowMIDIInput:Far
+                extern    K_DrawTables:Far
+                extern    K_ResetKeyboardTables:Far
+                extern    K_ShowMIDIInput:Far
 
-                Extrn   PEFunction_IncreaseOctave:Far
-                Extrn   PEFunction_DecreaseOctave:Far
+                extern    PEFunction_IncreaseOctave:Far
+                extern    PEFunction_DecreaseOctave:Far
 
-                Extrn   Glbl_DriverScreen:Far
-                Extrn   Glbl_Ctrl_F1:Far
-                Extrn   Glbl_Ctrl_F3:Far
-                Extrn   Glbl_Ctrl_F4:Far
-                Extrn   Glbl_Ctrl_F5:Far
-                Extrn   Glbl_Ctrl_F12:Far
-                Extrn   Glbl_F8:Far
-                Extrn   Glbl_F9:Far
-                Extrn   Glbl_F10:Far
-                Extrn   Glbl_F11:Far
-                Extrn   Glbl_F12:Far
-                Extrn   Glbl_F2:Far
-                Extrn   Glbl_F3:Far
-                Extrn   Glbl_F4:Far
-                Extrn   Glbl_F5:Far
-                Extrn   Glbl_F6:Far
-                Extrn   PE_F7:Far                       ; Global...
-                Extrn   Glbl_Shift_F1:Far
-                Extrn   Glbl_Shift_F6:Far
-                Extrn   Glbl_Shift_F9:Far
-                Extrn   Glbl_Alt_F1:Far
-                Extrn   Glbl_Alt_F2:Far
-                Extrn   Glbl_Alt_F3:Far
-                Extrn   Glbl_Alt_F4:Far
-                Extrn   Glbl_Alt_F5:Far
-                Extrn   Glbl_Alt_F6:Far
-                Extrn   Glbl_Alt_F7:Far
-                Extrn   Glbl_Alt_F8:Far
-                Extrn   Glbl_LoadSample:Far
-                Extrn   Glbl_LoadInstrument:Far
-                Extrn   Glbl_LeftBrace:Far
-                Extrn   Glbl_RightBrace:Far
-                Extrn   Glbl_LeftSquareBracket:Far
-                Extrn   Glbl_RightSquareBracket:Far
+                extern    Glbl_DriverScreen:Far
+                extern    Glbl_Ctrl_F1:Far
+                extern    Glbl_Ctrl_F3:Far
+                extern    Glbl_Ctrl_F4:Far
+                extern    Glbl_Ctrl_F5:Far
+                extern    Glbl_Ctrl_F12:Far
+                extern    Glbl_F8:Far
+                extern    Glbl_F9:Far
+                extern    Glbl_F10:Far
+                extern    Glbl_F11:Far
+                extern    Glbl_F12:Far
+                extern    Glbl_F2:Far
+                extern    Glbl_F3:Far
+                extern    Glbl_F4:Far
+                extern    Glbl_F5:Far
+                extern    Glbl_F6:Far
+                extern    PE_F7:Far                       ; Global...
+                extern    Glbl_Shift_F1:Far
+                extern    Glbl_Shift_F6:Far
+                extern    Glbl_Shift_F9:Far
+                extern    Glbl_Alt_F1:Far
+                extern    Glbl_Alt_F2:Far
+                extern    Glbl_Alt_F3:Far
+                extern    Glbl_Alt_F4:Far
+                extern    Glbl_Alt_F5:Far
+                extern    Glbl_Alt_F6:Far
+                extern    Glbl_Alt_F7:Far
+                extern    Glbl_Alt_F8:Far
+                extern    Glbl_LoadSample:Far
+                extern    Glbl_LoadInstrument:Far
+                extern    Glbl_LeftBrace:Far
+                extern    Glbl_RightBrace:Far
+                extern    Glbl_LeftSquareBracket:Far
+                extern    Glbl_RightSquareBracket:Far
 
-IF NETWORKENABLED
-                Extrn   Network_DriverScreen:Far
-                Extrn   Network_DrawDriverScreen:Far
-                Extrn   Network_PreDriverScreen:Far
-                Extrn   Network_PostDriverScreen:Far
+%IF  NETWORKENABLED
+                extern    Network_DriverScreen:Far
+                extern    Network_DrawDriverScreen:Far
+                extern    Network_PreDriverScreen:Far
+                extern    Network_PostDriverScreen:Far
 
                 Public  O1_LoadNetworkDriver
-ENDIF
+%ENDIF 
 
-IF TIMERSCREEN
-                Extrn   Glbl_TimerScreen:Far
-                Extrn   D_DrawTimer:Far, D_PostTimerList:Far
-ENDIF
+%IF  TIMERSCREEN
+                extern    Glbl_TimerScreen:Far
+                extern    D_DrawTimer:Far, D_PostTimerList:Far
+%ENDIF 
 
-                Extrn   H_HelpESC:Far
-                Extrn   H_Help:Far
-                Extrn   H_DrawHelp:Far
+                extern    H_HelpESC:Far
+                extern    H_Help:Far
+                extern    H_DrawHelp:Far
 
-                Extrn   H_HelpUp:Far
-                Extrn   H_HelpDown:Far
-                Extrn   H_HelpPgUp:Far
-                Extrn   H_HelpPgDn:Far
+                extern    H_HelpUp:Far
+                extern    H_HelpDown:Far
+                extern    H_HelpPgUp:Far
+                extern    H_HelpPgDn:Far
 
-                Extrn   I_SelectScreen:Far
-                Extrn   I_InstrumentListSpace:Far
-                Extrn   I_InstrumentListNoteOff:Far
-                Extrn   I_AmplifySample:Far
-                Extrn   I_GetInstrumentScreen:Far
-                Extrn   I_SampleButtonHandler:Far
-                Extrn   I_CalculateC5Speed:Far
-                Extrn   I_PrintC5Frequency:Far
+                extern    I_SelectScreen:Far
+                extern    I_InstrumentListSpace:Far
+                extern    I_InstrumentListNoteOff:Far
+                extern    I_AmplifySample:Far
+                extern    I_GetInstrumentScreen:Far
+                extern    I_SampleButtonHandler:Far
+                extern    I_CalculateC5Speed:Far
+                extern    I_PrintC5Frequency:Far
 
-                Extrn   I_DoubleSampleSpeed:Far
-                Extrn   I_HalveSampleSpeed:Far
-                Extrn   I_SampleSpeedSemiUp:Far
-                Extrn   I_SampleSpeedSemiDown:Far
+                extern    I_DoubleSampleSpeed:Far
+                extern    I_HalveSampleSpeed:Far
+                extern    I_SampleSpeedSemiUp:Far
+                extern    I_SampleSpeedSemiDown:Far
 
-                Extrn   I_PlaySample:Far
-                Extrn   I_PlayNote:Far
+                extern    I_PlaySample:Far
+                extern    I_PlayNote:Far
 
-                Extrn   I_DrawPitchPanCenter:Far
-                Extrn   I_PrePitchPanCenter:Far
-                Extrn   I_PostPitchPanCenter:Far
+                extern    I_DrawPitchPanCenter:Far
+                extern    I_PrePitchPanCenter:Far
+                extern    I_PostPitchPanCenter:Far
 
-                Extrn   I_IncreasePlayChannel:Far
-                Extrn   I_DecreasePlayChannel:Far
+                extern    I_IncreasePlayChannel:Far
+                extern    I_DecreasePlayChannel:Far
 
-                Extrn   I_DeleteInstrument:Far
-                Extrn   I_ReverseSample:Far
-                Extrn   I_InvertSample:Far
-                Extrn   I_CutSampleBeforeLoop:Far
-                Extrn   I_ConvertSample:Far
-                Extrn   I_DeleteSample:Far
-                Extrn   I_CutSample:Far
-                Extrn   I_ExchangeSamples:Far
-                Extrn   I_SwapSamples:Far
-                Extrn   I_ReplaceSample:Far
-                Extrn   I_ReplaceInstrument:Far
-                Extrn   I_SwapInstruments:Far
-                Extrn   I_ResizeSample:Far
-                Extrn   I_ResizeSampleNoInt:Far
-                Extrn   I_UpdateInstrument:Far
-                Extrn   I_ToggleSampleQuality:Far
-                Extrn   I_CopyInstrument:Far
-                Extrn   I_CenterSample:Far
-                Extrn   I_ScaleInstrumentVolumes:Far
-                Extrn   I_ScaleSampleVolumes:Far
+                extern    I_DeleteInstrument:Far
+                extern    I_ReverseSample:Far
+                extern    I_InvertSample:Far
+                extern    I_CutSampleBeforeLoop:Far
+                extern    I_ConvertSample:Far
+                extern    I_DeleteSample:Far
+                extern    I_CutSample:Far
+                extern    I_ExchangeSamples:Far
+                extern    I_SwapSamples:Far
+                extern    I_ReplaceSample:Far
+                extern    I_ReplaceInstrument:Far
+                extern    I_SwapInstruments:Far
+                extern    I_ResizeSample:Far
+                extern    I_ResizeSampleNoInt:Far
+                extern    I_UpdateInstrument:Far
+                extern    I_ToggleSampleQuality:Far
+                extern    I_CopyInstrument:Far
+                extern    I_CenterSample:Far
+                extern    I_ScaleInstrumentVolumes:Far
+                extern    I_ScaleSampleVolumes:Far
 
-                Extrn   I_DrawInstrumentWindow:Far
-                Extrn   I_PreInstrumentWindow:Far
-                Extrn   I_PostInstrumentWindow:Far
-                Extrn   I_ToggleMultiChannel:Far
+                extern    I_DrawInstrumentWindow:Far
+                extern    I_PreInstrumentWindow:Far
+                extern    I_PostInstrumentWindow:Far
+                extern    I_ToggleMultiChannel:Far
 
-                Extrn   I_DrawNoteWindow:Far
-                Extrn   I_PreNoteWindow:Far
-                Extrn   I_PostNoteWindow:Far
+                extern    I_DrawNoteWindow:Far
+                extern    I_PreNoteWindow:Far
+                extern    I_PostNoteWindow:Far
 
-                Extrn   I_DrawEnvelope:Far
-                Extrn   I_PreEnvelope:Far
-                Extrn   I_PostEnvelope:Far
+                extern    I_DrawEnvelope:Far
+                extern    I_PreEnvelope:Far
+                extern    I_PostEnvelope:Far
 
-                Extrn   I_ShowSampleInfo:Far
-                Extrn   I_SampleUp:Far
-                Extrn   I_SampleDown:Far
-                Extrn   I_CheckLoopValues:Far
-                Extrn   I_CheckSusLoopValues:Far
+                extern    I_ShowSampleInfo:Far
+                extern    I_SampleUp:Far
+                extern    I_SampleDown:Far
+                extern    I_CheckLoopValues:Far
+                extern    I_CheckSusLoopValues:Far
 
-                Extrn   I_DrawSampleList:Far
-                Extrn   I_PreSampleList:Far
-                Extrn   I_PostSampleList:Far
-                Extrn   I_IdleUpdateEnvelope:Far
+                extern    I_DrawSampleList:Far
+                extern    I_PreSampleList:Far
+                extern    I_PostSampleList:Far
+                extern    I_IdleUpdateEnvelope:Far
 
-                Extrn   Msg_DrawMessage:Far
-                Extrn   Msg_PreMessage:Far
-                Extrn   Msg_PostMessage:Far
+                extern    Msg_DrawMessage:Far
+                extern    Msg_PreMessage:Far
+                extern    Msg_PostMessage:Far
 
-                Extrn   Music_SoundCardLoadAllSamples:Far
-                Extrn   Music_ReinitSoundCard:Far
-                Extrn   Music_SaveMIDIConfig:Far
-                Extrn   Music_ShowAutodetectSoundcard:Far
-                Extrn   Music_ToggleOrderUpdate:Far
+                extern    Music_SoundCardLoadAllSamples:Far
+                extern    Music_ReinitSoundCard:Far
+                extern    Music_SaveMIDIConfig:Far
+                extern    Music_ShowAutodetectSoundcard:Far
+                extern    Music_ToggleOrderUpdate:Far
 
-                Extrn   PE_FillHeader:Far
-                Extrn   PE_SetCommandCursor:Far
-                Extrn   PE_DrawPatternEdit:Far
-                Extrn   PE_PrePatternEdit:Far
-                Extrn   PE_PostPatternEdit:Far
+                extern    PE_FillHeader:Far
+                extern    PE_SetCommandCursor:Far
+                extern    PE_DrawPatternEdit:Far
+                extern    PE_PrePatternEdit:Far
+                extern    PE_PostPatternEdit:Far
 
-                Extrn   PEFunction_DrawUndo:Far
-                Extrn   PEFunction_PreUndo:Far
-                Extrn   PEFunction_PostUndo:Far
+                extern    PEFunction_DrawUndo:Far
+                extern    PEFunction_PreUndo:Far
+                extern    PEFunction_PostUndo:Far
 
-                Extrn   S_UpdateScreen:Far
-                Extrn   S_RestoreScreen:Far
+                extern    S_UpdateScreen:Far
+                extern    S_RestoreScreen:Far
 
-                Extrn   DrawDisplayData:Far
-                Extrn   PostDisplayData:Far
-                Extrn   DisplayUpdateScreen:Far
+                extern    DrawDisplayData:Far
+                extern    PostDisplayData:Far
+                extern    DisplayUpdateScreen:Far
 
-                Extrn   BaseOctave
-                Extrn   SkipValue
-                Extrn   RowHiLight1
-                Extrn   RowHiLight2
-                Extrn   NumberOfRows:Word
-                Extrn   Amplification
-                Extrn   InstrumentAmplification
-                Extrn   FastVolumeAmplification
-                Extrn   SampleAmplification
-                Extrn   CommandToValue
-                Extrn   MultiChannelInfo
-                Extrn   SampleNumberInput:Byte
-                Extrn   SongDirectory:Byte
-                Extrn   SampleDirectory:Byte
-                Extrn   InstrumentDirectory:Byte
+                extern    BaseOctave
+                extern    SkipValue
+                extern    RowHiLight1
+                extern    RowHiLight2
+                extern    NumberOfRows:Word
+                extern    Amplification
+                extern    InstrumentAmplification
+                extern    FastVolumeAmplification
+                extern    SampleAmplification
+                extern    CommandToValue
+                extern    MultiChannelInfo
+                extern    SampleNumberInput:Byte
+                extern    SongDirectory:Byte
+                extern    SampleDirectory:Byte
+                extern    InstrumentDirectory:Byte
 
-                Extrn   IdleUpdateInfoLine:Far
-                Extrn   DOSShell:Far
+                extern    IdleUpdateInfoLine:Far
+                extern    DOSShell:Far
 
-                Extrn   I_ExchangeInstruments:Far
+                extern    I_ExchangeInstruments:Far
 
-                Extrn   F_ConfigButtonSetup:Far
-                Extrn   F_SetControlInstrument:Far
-                Extrn   F_SetControlSample:Far
-                Extrn   F_SetMono:Far
-                Extrn   F_SetStereo:Far
-                Extrn   F_SetAmiga:Far
-                Extrn   F_SetLinear:Far
+                extern    F_ConfigButtonSetup:Far
+                extern    F_SetControlInstrument:Far
+                extern    F_SetControlSample:Far
+                extern    F_SetMono:Far
+                extern    F_SetStereo:Far
+                extern    F_SetAmiga:Far
+                extern    F_SetLinear:Far
 
-                Extrn   F_NewSong:Far
+                extern    F_NewSong:Far
 
-                Extrn   AddressInput:Byte
-                Extrn   NewSampleSize:Word
-                Extrn   ThumbStringEnter:Byte
-                Extrn   SampleName:Byte
+                extern    AddressInput:Byte
+                extern    NewSampleSize:Word
+                extern    ThumbStringEnter:Byte
+                extern    SampleName:Byte
 
-If MEMORYDEBUG
+%If MEMORYDEBUG
 
-                Extrn   F_PostDebug:Far
-                Extrn   Glbl_Debug:Far
-                Extrn   F_DrawDebug:Far
-                Extrn   F_DebugUp:Far
-                Extrn   F_DebugDown:Far
-                Extrn   F_DebugPgUp:Far
-                Extrn   F_DebugPgDn:Far
-                Extrn   F_DebugStringInput:Far
+                extern    F_PostDebug:Far
+                extern    Glbl_Debug:Far
+                extern    F_DrawDebug:Far
+                extern    F_DebugUp:Far
+                extern    F_DebugDown:Far
+                extern    F_DebugPgUp:Far
+                extern    F_DebugPgDn:Far
+                extern    F_DebugStringInput:Far
                 Global  O1_DebugList
 
-ENDIF
+%ENDIF 
 
-                Extrn   PaletteDefs:Byte
+                extern    PaletteDefs:Byte
 
-                Extrn   S_UsePresetPalette:Far
-                Extrn   DisplayMinus:Far
-                Extrn   DisplayPlus:Far
-                Extrn   PatternSetLength, PatternLengthStart, PatternLengthEnd
+                extern    S_UsePresetPalette:Far
+                extern    DisplayMinus:Far
+                extern    DisplayPlus:Far
+                extern    PatternSetLength, PatternLengthStart, PatternLengthEnd
 
-                Extrn   MouseToggle:Far
-                Extrn   Refresh:Far
+                extern    MouseToggle:Far
+                extern    Refresh:Far
 
-                Extrn   MIDI_SetInstrument:Far, CentraliseCursor
-                Extrn   MIDI_PlayNote:Far, MIDI_NoteOff:Far, MIDI_PlaySample:Far
-                Extrn   MIDICentralNote, MIDIAmplification
+                extern    MIDI_SetInstrument:Far, CentraliseCursor
+                extern    MIDI_PlayNote:Far, MIDI_NoteOff:Far, MIDI_PlaySample:Far
+                extern    MIDICentralNote, MIDIAmplification
 
-                Extrn   Music_TimeSong:Far, Music_ShowTime:Far
-                Extrn   Flags
+                extern    Music_TimeSong:Far, Music_ShowTime:Far
+                extern    Flags
 
-                Extrn   Music_ToggleSoloInstrument:Far
-                Extrn   Music_ToggleSoloSample:Far
+                extern    Music_ToggleSoloInstrument:Far
+                extern    Music_ToggleSoloSample:Far
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
@@ -416,19 +414,19 @@ ENDIF
                 Global  O1_GetInstrumentAmpList
                 Global  O1_GetFastAmpList
 
-IF SHOWPATTERNLENGTH
+%IF  SHOWPATTERNLENGTH
                 Global  O1_ShowPatternLengthList
-ENDIF
+%ENDIF 
 
                 Global  O1_C5FrequencyList
 
-IF SPECTRUMANALYSER
+%IF  SPECTRUMANALYSER
                 Global  O1_FourierDisplay
-ENDIF
+%ENDIF 
                 Global  O1_EMSWarningMessage
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Global  O1_NetworkErrorList
-ENDIF
+%ENDIF 
                 Global  O1_TemplateErrorList
                 Global  O1_PatternTooLongList
                 Global  O1_SampleList
@@ -499,9 +497,9 @@ ENDIF
                 Global  EMSErrorValue5, EMSErrorValue6
                 Global  EMSErrorValue7, EMSErrorValue8
 
-IF TIMERSCREEN
+%IF  TIMERSCREEN
                 Public  O1_TimerList
-ENDIF
+%ENDIF 
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
@@ -509,14 +507,14 @@ Segment                 Object1 BYTE Public 'Data'
 
 O1_AutoDetectList       DW      6
                         DW      0
-                        DW      Near Ptr ESCContinueList
-                        DW      Near Ptr AboutBox
-                        DW      Near Ptr ImpulseLogo
-                        DW      Near Ptr AutoMiniBox
-                        DW      Near Ptr AboutText
-                        DW      Near Ptr AutoDetectText
-                        DW      Near Ptr CallAutoDetect
-                        DW      Near Ptr AutoContinueButton
+                        DW      ESCContinueList
+                        DW      AboutBox
+                        DW      ImpulseLogo
+                        DW      AutoMiniBox
+                        DW      AboutText
+                        DW      AutoDetectText
+                        DW      CallAutoDetect
+                        DW      AutoContinueButton
                         DW      0
 
 ESCContinueList         DB      0               ; ESC
@@ -526,148 +524,148 @@ ESCContinueList         DB      0               ; ESC
                         DB      0FFh
 
 O1_OrderPanningList     DW      10
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox ; 0
-                        DW      Near Ptr ScreenHeader  ; 1
-                        DW      Near Ptr FillHeader    ; 2
-                        DW      Near Ptr OrderandPanningMsg ; 3
-                        DW      Near Ptr OrderBox      ; 4
-                        DW      Near Ptr PanBox1       ; 5
-                        DW      Near Ptr PanBox2       ; 6
-                        DW      Near Ptr ShowChannelMsgs ; 7
-                        DW      Near Ptr PanText1      ; 8
-                        DW      Near Ptr PanText2      ; 9
-                        DW      Near Ptr OrderList     ; 10
-                        DW      Near Ptr Channel1      ; 11
-                        DW      Near Ptr Channel2      ; 12
-                        DW      Near Ptr Channel3      ; 13
-                        DW      Near Ptr Channel4      ; 14
-                        DW      Near Ptr Channel5      ; 15
-                        DW      Near Ptr Channel6      ; 16
-                        DW      Near Ptr Channel7      ; 17
-                        DW      Near Ptr Channel8      ; 18
-                        DW      Near Ptr Channel9      ; 19
-                        DW      Near Ptr Channel10     ; 20
-                        DW      Near Ptr Channel11     ; 21
-                        DW      Near Ptr Channel12     ; 22
-                        DW      Near Ptr Channel13     ; 23
-                        DW      Near Ptr Channel14     ; 24
-                        DW      Near Ptr Channel15     ; 25
-                        DW      Near Ptr Channel16     ; 26
-                        DW      Near Ptr Channel17
-                        DW      Near Ptr Channel18
-                        DW      Near Ptr Channel19
-                        DW      Near Ptr Channel20
-                        DW      Near Ptr Channel21
-                        DW      Near Ptr Channel22
-                        DW      Near Ptr Channel23
-                        DW      Near Ptr Channel24
-                        DW      Near Ptr Channel25
-                        DW      Near Ptr Channel26
-                        DW      Near Ptr Channel27
-                        DW      Near Ptr Channel28
-                        DW      Near Ptr Channel29
-                        DW      Near Ptr Channel30
-                        DW      Near Ptr Channel31
-                        DW      Near Ptr Channel32
-                        DW      Near Ptr Channel33
-                        DW      Near Ptr Channel34
-                        DW      Near Ptr Channel35
-                        DW      Near Ptr Channel36
-                        DW      Near Ptr Channel37
-                        DW      Near Ptr Channel38
-                        DW      Near Ptr Channel39
-                        DW      Near Ptr Channel40
-                        DW      Near Ptr Channel41
-                        DW      Near Ptr Channel42
-                        DW      Near Ptr Channel43
-                        DW      Near Ptr Channel44
-                        DW      Near Ptr Channel45
-                        DW      Near Ptr Channel46
-                        DW      Near Ptr Channel47
-                        DW      Near Ptr Channel48
-                        DW      Near Ptr Channel49
-                        DW      Near Ptr Channel50
-                        DW      Near Ptr Channel51
-                        DW      Near Ptr Channel52
-                        DW      Near Ptr Channel53
-                        DW      Near Ptr Channel54
-                        DW      Near Ptr Channel55
-                        DW      Near Ptr Channel56
-                        DW      Near Ptr Channel57
-                        DW      Near Ptr Channel58
-                        DW      Near Ptr Channel59
-                        DW      Near Ptr Channel60
-                        DW      Near Ptr Channel61
-                        DW      Near Ptr Channel62
-                        DW      Near Ptr Channel63
-                        DW      Near Ptr Channel64
-                        DW      Near Ptr SetHelpContext0
+                        DW      IdleFunctionList
+                        DW      GlobalKeyList
+                        DW      FullScreenBox ; 0
+                        DW      ScreenHeader  ; 1
+                        DW      FillHeader    ; 2
+                        DW      OrderandPanningMsg ; 3
+                        DW      OrderBox      ; 4
+                        DW      PanBox1       ; 5
+                        DW      PanBox2       ; 6
+                        DW      ShowChannelMsgs ; 7
+                        DW      PanText1      ; 8
+                        DW      PanText2      ; 9
+                        DW      OrderList     ; 10
+                        DW      Channel1      ; 11
+                        DW      Channel2      ; 12
+                        DW      Channel3      ; 13
+                        DW      Channel4      ; 14
+                        DW      Channel5      ; 15
+                        DW      Channel6      ; 16
+                        DW      Channel7      ; 17
+                        DW      Channel8      ; 18
+                        DW      Channel9      ; 19
+                        DW      Channel10     ; 20
+                        DW      Channel11     ; 21
+                        DW      Channel12     ; 22
+                        DW      Channel13     ; 23
+                        DW      Channel14     ; 24
+                        DW      Channel15     ; 25
+                        DW      Channel16     ; 26
+                        DW      Channel17
+                        DW      Channel18
+                        DW      Channel19
+                        DW      Channel20
+                        DW      Channel21
+                        DW      Channel22
+                        DW      Channel23
+                        DW      Channel24
+                        DW      Channel25
+                        DW      Channel26
+                        DW      Channel27
+                        DW      Channel28
+                        DW      Channel29
+                        DW      Channel30
+                        DW      Channel31
+                        DW      Channel32
+                        DW      Channel33
+                        DW      Channel34
+                        DW      Channel35
+                        DW      Channel36
+                        DW      Channel37
+                        DW      Channel38
+                        DW      Channel39
+                        DW      Channel40
+                        DW      Channel41
+                        DW      Channel42
+                        DW      Channel43
+                        DW      Channel44
+                        DW      Channel45
+                        DW      Channel46
+                        DW      Channel47
+                        DW      Channel48
+                        DW      Channel49
+                        DW      Channel50
+                        DW      Channel51
+                        DW      Channel52
+                        DW      Channel53
+                        DW      Channel54
+                        DW      Channel55
+                        DW      Channel56
+                        DW      Channel57
+                        DW      Channel58
+                        DW      Channel59
+                        DW      Channel60
+                        DW      Channel61
+                        DW      Channel62
+                        DW      Channel63
+                        DW      Channel64
+                        DW      SetHelpContext0
                         DW      0
 
 O1_HelpList             DW      6
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr HelpKeyList
-                        DW      Near Ptr FullScreenBox ; 0
-                        DW      Near Ptr ScreenHeader  ; 1
-                        DW      Near Ptr FillHeader    ; 2
-                        DW      Near Ptr HelpMsg       ; 3
-                        DW      Near Ptr HelpBox       ; 4
-                        DW      Near Ptr ShowHelp      ; 5
-                        DW      Near Ptr HelpDoneButton ; 6
+                        DW      IdleFunctionList
+                        DW      HelpKeyList
+                        DW      FullScreenBox ; 0
+                        DW      ScreenHeader  ; 1
+                        DW      FillHeader    ; 2
+                        DW      HelpMsg       ; 3
+                        DW      HelpBox       ; 4
+                        DW      ShowHelp      ; 5
+                        DW      HelpDoneButton ; 6
                         DW      0
 
 O1_PatternEditList      DW      3
-                        DW      Near Ptr InfoPageIdleList
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox ; 0
-                        DW      Near Ptr ScreenHeader  ; 1
-                        DW      Near Ptr PatternEditMsg ; 2
-                        DW      Near Ptr PatternEdit   ; 3
-                        DW      Near Ptr FillHeader    ; 4
-                        DW      Near Ptr SetHelpContext1 ; 5
+                        DW      InfoPageIdleList
+                        DW      GlobalKeyList
+                        DW      FullScreenBox ; 0
+                        DW      ScreenHeader  ; 1
+                        DW      PatternEditMsg ; 2
+                        DW      PatternEdit   ; 3
+                        DW      FillHeader    ; 4
+                        DW      SetHelpContext1 ; 5
                         DW      0
 
 O1_PEConfigList         DW      14
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESCF2&ReturnList
-                        DW      Near Ptr PEConfigBox   ; 0
-                        DW      Near Ptr PEConfigText  ; 1
-                        DW      Near Ptr PEConfigBsOctText ; 2
-                        DW      Near Ptr PEConfigSkipValueText ; 3
-                        DW      Near Ptr PEConfigRHLMinorText ; 4
-                        DW      Near Ptr PEConfigRHLMajorText  ;5
-                        DW      Near Ptr PEConfigMaxRowsText ; 6
-                        DW      Near Ptr PEConfigCommandCursor ; 7
-                        DW      Near Ptr PECBox1
-                        DW      Near Ptr PECBox2
-                        DW      Near Ptr PECBox3
-                        DW      Near Ptr PECBox4
-                        DW      Near Ptr PECBox5
-                        DW      Near Ptr PEConfigDoneButton ; 13
-                        DW      Near Ptr PETBBaseOctave ; 14
-                        DW      Near Ptr PETBSkipValue ; 15
-                        DW      Near Ptr PETBRHLMinor ; 16
-                        DW      Near Ptr PETBRHLMajor ; 17
-                        DW      Near Ptr PETBMaxRow ; 18
-                        DW      Near Ptr PECLinkButton ; 19
-                        DW      Near Ptr PECSplitButton ; 20
-                        DW      Near Ptr FillHeader
+                        DW      IdleFunctionList
+                        DW      ESCF2&ReturnList
+                        DW      PEConfigBox   ; 0
+                        DW      PEConfigText  ; 1
+                        DW      PEConfigBsOctText ; 2
+                        DW      PEConfigSkipValueText ; 3
+                        DW      PEConfigRHLMinorText ; 4
+                        DW      PEConfigRHLMajorText  ;5
+                        DW      PEConfigMaxRowsText ; 6
+                        DW      PEConfigCommandCursor ; 7
+                        DW      PECBox1
+                        DW      PECBox2
+                        DW      PECBox3
+                        DW      PECBox4
+                        DW      PECBox5
+                        DW      PEConfigDoneButton ; 13
+                        DW      PETBBaseOctave ; 14
+                        DW      PETBSkipValue ; 15
+                        DW      PETBRHLMinor ; 16
+                        DW      PETBRHLMajor ; 17
+                        DW      PETBMaxRow ; 18
+                        DW      PECLinkButton ; 19
+                        DW      PECSplitButton ; 20
+                        DW      FillHeader
                         DW      0
 
 O1_SetPatternLength     DW      4
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESC&ReturnList
-                        DW      Near Ptr SetPatternLengthBox    ; 0
-                        DW      Near Ptr SetPatternLengthHeader
-                        DW      Near Ptr SetPatternLengthThumbBox1
-                        DW      Near Ptr SetPatternLengthThumbBox2
-                        DW      Near Ptr SetPatternLengthThumbBar       ; 4
-                        DW      Near Ptr SetPatternLengthStart          ; 5
-                        DW      Near Ptr SetPatternLengthEnd            ; 6
-                        DW      Near Ptr SetPatternLengthOKButton       ; 7
-                        DW      Near Ptr SetPatternLengthText
+                        DW      IdleFunctionList
+                        DW      ESC&ReturnList
+                        DW      SetPatternLengthBox    ; 0
+                        DW      SetPatternLengthHeader
+                        DW      SetPatternLengthThumbBox1
+                        DW      SetPatternLengthThumbBox2
+                        DW      SetPatternLengthThumbBar       ; 4
+                        DW      SetPatternLengthStart          ; 5
+                        DW      SetPatternLengthEnd            ; 6
+                        DW      SetPatternLengthOKButton       ; 7
+                        DW      SetPatternLengthText
                         DW      0
 
 SetPatternLengthBox     DW      0
@@ -699,21 +697,21 @@ SetPatternLengthThumbBox2 DW    0
 SetPatternLengthThumbBar DW     9
                         DB      34, 24
                         DW      32, 200
-                        DW      1, Offset PatternSetLength
+                        DW      1, PatternSetLength
                         DW      0FFFFh, 5, 0FFFFh, 0FFFFh
                         DW      0FFFFh, 0FFFFh
 
 SetPatternLengthStart   DW      9
                         DB      34, 27
                         DW      0, 199
-                        DW      1, Offset PatternLengthStart
+                        DW      1, PatternLengthStart
                         DW      4, 6, 0FFFFh, 0FFFFh
                         DW      0FFFFh, 0FFFFh
 
 SetPatternLengthEnd     DW      9
                         DB      34, 28
                         DW      0, 199
-                        DW      1, Offset PatternLengthEnd
+                        DW      1, PatternLengthEnd
                         DW      5, 7, 0FFFFh, 0FFFFh
                         DW      0FFFFh, 0FFFFh
 
@@ -750,275 +748,275 @@ ESCReturnList           DB      0
                         DD      DWord Ptr F_Return0
 
                         DB      5
-                        DW      Near Ptr ChainMIDICommands
+                        DW      ChainMIDICommands
 
 O1_NoBlockMarkedList    DW      2
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr NBMBox
-                        DW      Near Ptr NBMText
-                        DW      Near Ptr OKButton
-                        DW      Near Ptr FillHeader
+                        DW      IdleFunctionList
+                        DW      ESCReturnList
+                        DW      NBMBox
+                        DW      NBMText
+                        DW      OKButton
+                        DW      FillHeader
                         DW      0
 
 O1_OutOfSoundCardMemoryList   DW      2
                         DW      0
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr NBMBox
-                        DW      Near Ptr OOSoundCardMemoryText
-                        DW      Near Ptr OKButton
-                        DW      Near Ptr FillHeader
+                        DW      ESCReturnList
+                        DW      NBMBox
+                        DW      OOSoundCardMemoryText
+                        DW      OKButton
+                        DW      FillHeader
                         DW      0
 
 O1_OutOfMemoryList      DW      2
                         DW      0
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr NBMBox
-                        DW      Near Ptr OOMText
-                        DW      Near Ptr OKButton
-                        DW      Near Ptr FillHeader
+                        DW      ESCReturnList
+                        DW      NBMBox
+                        DW      OOMText
+                        DW      OKButton
+                        DW      FillHeader
                         DW      0
 
 O1_PatternSizeMismatchList DW   2
                         DW      0
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr NBMBox
-                        DW      Near Ptr PSMText
-                        DW      Near Ptr OKButton
-                        DW      Near Ptr FillHeader
+                        DW      ESCReturnList
+                        DW      NBMBox
+                        DW      PSMText
+                        DW      OKButton
+                        DW      FillHeader
                         DW      0
 
 O1_LongMessageList      DW      2
                         DW      0
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr NBMBox
-                        DW      Near Ptr LongMsgText
-                        DW      Near Ptr OKButton
-                        DW      Near Ptr FillHeader
+                        DW      ESCReturnList
+                        DW      NBMBox
+                        DW      LongMsgText
+                        DW      OKButton
+                        DW      FillHeader
                         DW      0
 
 O1_OutOfSamplesList     DW      2
                         DW      0
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr NBMBox
-                        DW      Near Ptr OOSText
-                        DW      Near Ptr OKButton
-                        DW      Near Ptr FillHeader
+                        DW      ESCReturnList
+                        DW      NBMBox
+                        DW      OOSText
+                        DW      OKButton
+                        DW      FillHeader
                         DW      0
 
 O1_OverlapBlockList     DW      2
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr NBMBox
-                        DW      Near Ptr OLBText
-                        DW      Near Ptr OKButton
-                        DW      Near Ptr FillHeader
+                        DW      IdleFunctionList
+                        DW      ESCReturnList
+                        DW      NBMBox
+                        DW      OLBText
+                        DW      OKButton
+                        DW      FillHeader
                         DW      0
 
 O1_SwapOutOfRangeList   DW      2
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr NBMBox
-                        DW      Near Ptr SOORText
-                        DW      Near Ptr OKButton
-                        DW      Near Ptr FillHeader
+                        DW      IdleFunctionList
+                        DW      ESCReturnList
+                        DW      NBMBox
+                        DW      SOORText
+                        DW      OKButton
+                        DW      FillHeader
                         DW      0
 
 O1_NoBlockDataList      DW      2
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr NBMBox
-                        DW      Near Ptr NBDText
-                        DW      Near Ptr OKButton
-                        DW      Near Ptr FillHeader
+                        DW      IdleFunctionList
+                        DW      ESCReturnList
+                        DW      NBMBox
+                        DW      NBDText
+                        DW      OKButton
+                        DW      FillHeader
                         DW      0
 
 O1_PatternTooLongList   DW      2
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr NBMBox
-                        DW      Near Ptr PatternTooLongText
-                        DW      Near Ptr OKButton
-                        DW      Near Ptr FillHeader
+                        DW      IdleFunctionList
+                        DW      ESCReturnList
+                        DW      NBMBox
+                        DW      PatternTooLongText
+                        DW      OKButton
+                        DW      FillHeader
                         DW      0
 
 O1_GetAmpList           DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr AmpExtraKeyList
-                        DW      Near Ptr AmpBox        ; 0
-                        DW      Near Ptr AmpText       ; 1
-                        DW      Near Ptr AmpTBBox      ; 2
-                        DW      Near Ptr AmpTB         ; 3
-                        DW      Near Ptr ConfirmOKButton   ; 4
-                        DW      Near Ptr ConfirmCancelButton ; 5
-                        DW      Near Ptr FillHeader
+                        DW      IdleFunctionList
+                        DW      AmpExtraKeyList
+                        DW      AmpBox        ; 0
+                        DW      AmpText       ; 1
+                        DW      AmpTBBox      ; 2
+                        DW      AmpTB         ; 3
+                        DW      ConfirmOKButton   ; 4
+                        DW      ConfirmCancelButton ; 5
+                        DW      FillHeader
                         DW      0
 
 O1_GetInstrumentAmpList DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr AmpExtraKeyList
-                        DW      Near Ptr AmpBox        ; 0
-                        DW      Near Ptr AmpText       ; 1
-                        DW      Near Ptr AmpTBBox      ; 2
-                        DW      Near Ptr InstrumentAmpTB   ; 3
-                        DW      Near Ptr ConfirmOKButton   ; 4
-                        DW      Near Ptr ConfirmCancelButton ; 5
-                        DW      Near Ptr FillHeader
+                        DW      IdleFunctionList
+                        DW      AmpExtraKeyList
+                        DW      AmpBox        ; 0
+                        DW      AmpText       ; 1
+                        DW      AmpTBBox      ; 2
+                        DW      InstrumentAmpTB   ; 3
+                        DW      ConfirmOKButton   ; 4
+                        DW      ConfirmCancelButton ; 5
+                        DW      FillHeader
                         DW      0
 
 O1_GetFastAmpList       DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr AmpExtraKeyList
-                        DW      Near Ptr AmpBox        ; 0
-                        DW      Near Ptr AmpText       ; 1
-                        DW      Near Ptr FastAmpTBBox  ; 2
-                        DW      Near Ptr FastAmpTB     ; 3
-                        DW      Near Ptr ConfirmOKButton   ; 4
-                        DW      Near Ptr ConfirmCancelButton ; 5
-                        DW      Near Ptr FillHeader
+                        DW      IdleFunctionList
+                        DW      AmpExtraKeyList
+                        DW      AmpBox        ; 0
+                        DW      AmpText       ; 1
+                        DW      FastAmpTBBox  ; 2
+                        DW      FastAmpTB     ; 3
+                        DW      ConfirmOKButton   ; 4
+                        DW      ConfirmCancelButton ; 5
+                        DW      FillHeader
                         DW      0
 
 O1_SampleAmplificationList DW   3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESC&ReturnList
-                        DW      Near Ptr SampleAmpBox
-                        DW      Near Ptr SampleAmpText ; 1
-                        DW      Near Ptr SampleAmpTBBox ; 2
-                        DW      Near Ptr SampleAmpTB   ; 3
-                        DW      Near Ptr ConfirmOKButton   ; 4
-                        DW      Near Ptr ConfirmCancelButton ; 5
-                        DW      Near Ptr FillHeader
+                        DW      IdleFunctionList
+                        DW      ESC&ReturnList
+                        DW      SampleAmpBox
+                        DW      SampleAmpText ; 1
+                        DW      SampleAmpTBBox ; 2
+                        DW      SampleAmpTB   ; 3
+                        DW      ConfirmOKButton   ; 4
+                        DW      ConfirmCancelButton ; 5
+                        DW      FillHeader
                         DW      0
 
-IF SHOWPATTERNLENGTH
+%IF  SHOWPATTERNLENGTH
 
 O1_ShowPatternLengthList DW     2
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr NBMBox
-                        DW      Near Ptr PatternLengthText
-                        DW      Near Ptr OKButton
-                        DW      Near Ptr FillHeader
+                        DW      IdleFunctionList
+                        DW      ESCReturnList
+                        DW      NBMBox
+                        DW      PatternLengthText
+                        DW      OKButton
+                        DW      FillHeader
                         DW      0
 
-ENDIF
+%ENDIF 
 
 O1_C5FrequencyList      DW      2
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr NBMBox
-                        DW      Near Ptr C5FrequencyText
-                        DW      Near Ptr OKButton
-                        DW      Near Ptr FillHeader
+                        DW      IdleFunctionList
+                        DW      ESCReturnList
+                        DW      NBMBox
+                        DW      C5FrequencyText
+                        DW      OKButton
+                        DW      FillHeader
                         DW      0
 
 O1_EMSWarningMessage    DW      2
                         DW      0
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr EMSErrorBox
-                        DW      Near Ptr EMSErrorText
-                        DW      Near Ptr OKButton
-                        DW      Near Ptr FillHeader
+                        DW      ESCReturnList
+                        DW      EMSErrorBox
+                        DW      EMSErrorText
+                        DW      OKButton
+                        DW      FillHeader
                         DW      0
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
 O1_NetworkErrorList     DW      2
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr TemplateErrorBox
-                        DW      Near Ptr NetworkErrorText
-                        DW      Near Ptr TemplateOKButton
-                        DW      Near Ptr FillHeader
+                        DW      IdleFunctionList
+                        DW      ESCReturnList
+                        DW      TemplateErrorBox
+                        DW      NetworkErrorText
+                        DW      TemplateOKButton
+                        DW      FillHeader
                         DW      0
-ENDIF
+%ENDIF 
 
 O1_TemplateErrorList    DW      2
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr TemplateErrorBox
-                        DW      Near Ptr TemplateErrorText
-                        DW      Near Ptr TemplateOKButton
-                        DW      Near Ptr FillHeader
+                        DW      IdleFunctionList
+                        DW      ESCReturnList
+                        DW      TemplateErrorBox
+                        DW      TemplateErrorText
+                        DW      TemplateOKButton
+                        DW      FillHeader
                         DW      0
 
 O1_CrashRecovery        DW      2
                         DW      0
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr CrashRecoveryBox
-                        DW      Near Ptr CrashRecoveryText
-                        DW      Near Ptr CrashRecoveryOKButton
+                        DW      ESCReturnList
+                        DW      CrashRecoveryBox
+                        DW      CrashRecoveryText
+                        DW      CrashRecoveryOKButton
                         DW      0
 
 O1_LoadSampleList       DW      15
-                        DW      Near Ptr SampleNameLoader
-                        DW      Near Ptr LoadSampleKeyList
-                        DW      Near Ptr FullScreenBox ; 0
-                        DW      Near Ptr ScreenHeader  ; 1
-                        DW      Near Ptr LoadSampleHeader ; 2
-                        DW      Near Ptr FillHeader    ; 3
-                        DW      Near Ptr LoadSampleBox
-                        DW      Near Ptr DriveSampleBox
-                        DW      Near Ptr LSInfoBox
-                        DW      Near Ptr LSInfoText
-                        DW      Near Ptr LSWaveFormBox
-                        DW      Near Ptr LSParametersBox
-                        DW      Near Ptr LSParametersText      ; 10
-                        DW      Near Ptr LSParametersVolBox    ; 11
-                        DW      Near Ptr LSParametersVibBox
-                        DW      Near Ptr LSFileInfoBox
-                        DW      Near Ptr LSFileInfoText
-                        DW      Near Ptr LoadSampleWindow      ; 15
-                        DW      Near Ptr LSDriveWindow         ; 16
-                        DW      Near Ptr LSFileNameInput       ; 17
-                        DW      Near Ptr LSSpeedInput
-                        DW      Near Ptr LSLoopToggle          ; 19
-                        DW      Near Ptr LSLoopBeginInput
-                        DW      Near Ptr LSLoopEndInput
-                        DW      Near Ptr LSSusLoopToggle       ; 22
-                        DW      Near Ptr LSSusLoopBeginInput
-                        DW      Near Ptr LSSusLoopEndInput
-                        DW      Near Ptr LSDefaultVolumeInput  ; 25
-                        DW      Near Ptr LSGlobalVolumeInput   ; 26
-                        DW      Near Ptr LSVibratoSpeedInput   ; 27
-                        DW      Near Ptr LSVibratoDepthInput   ; 28
-                        DW      Near Ptr LSVibratoRateInput    ; 29
-                        DW      Near Ptr SetHelpContext6
+                        DW      SampleNameLoader
+                        DW      LoadSampleKeyList
+                        DW      FullScreenBox ; 0
+                        DW      ScreenHeader  ; 1
+                        DW      LoadSampleHeader ; 2
+                        DW      FillHeader    ; 3
+                        DW      LoadSampleBox
+                        DW      DriveSampleBox
+                        DW      LSInfoBox
+                        DW      LSInfoText
+                        DW      LSWaveFormBox
+                        DW      LSParametersBox
+                        DW      LSParametersText      ; 10
+                        DW      LSParametersVolBox    ; 11
+                        DW      LSParametersVibBox
+                        DW      LSFileInfoBox
+                        DW      LSFileInfoText
+                        DW      LoadSampleWindow      ; 15
+                        DW      LSDriveWindow         ; 16
+                        DW      LSFileNameInput       ; 17
+                        DW      LSSpeedInput
+                        DW      LSLoopToggle          ; 19
+                        DW      LSLoopBeginInput
+                        DW      LSLoopEndInput
+                        DW      LSSusLoopToggle       ; 22
+                        DW      LSSusLoopBeginInput
+                        DW      LSSusLoopEndInput
+                        DW      LSDefaultVolumeInput  ; 25
+                        DW      LSGlobalVolumeInput   ; 26
+                        DW      LSVibratoSpeedInput   ; 27
+                        DW      LSVibratoDepthInput   ; 28
+                        DW      LSVibratoRateInput    ; 29
+                        DW      SetHelpContext6
                         DW      0
 
 O1_ViewSampleLibrary    DW      15
-                        DW      Near Ptr SampleNameLoader
-                        DW      Near Ptr LoadSampleKeyList
-                        DW      Near Ptr FullScreenBox ; 0
-                        DW      Near Ptr ScreenHeader  ; 1
-                        DW      Near Ptr ViewSampleHeader ; 2
-                        DW      Near Ptr FillHeader    ; 3
-                        DW      Near Ptr LoadSampleBox
-                        DW      Near Ptr DriveSampleBox
-                        DW      Near Ptr LSInfoBox
-                        DW      Near Ptr LSInfoText
-                        DW      Near Ptr LSWaveFormBox
-                        DW      Near Ptr LSParametersBox
-                        DW      Near Ptr LSParametersText      ; 10
-                        DW      Near Ptr LSParametersVolBox    ; 11
-                        DW      Near Ptr LSParametersVibBox
-                        DW      Near Ptr LSFileInfoBox
-                        DW      Near Ptr LSFileInfoText
-                        DW      Near Ptr ViewSampleWindow      ; 15
-                        DW      Near Ptr LSDriveWindow         ; 16
-                        DW      Near Ptr LSFileNameInput       ; 17
-                        DW      Near Ptr LSSpeedInput
-                        DW      Near Ptr LSLoopToggle          ; 19
-                        DW      Near Ptr LSLoopBeginInput
-                        DW      Near Ptr LSLoopEndInput
-                        DW      Near Ptr LSSusLoopToggle       ; 22
-                        DW      Near Ptr LSSusLoopBeginInput
-                        DW      Near Ptr LSSusLoopEndInput
-                        DW      Near Ptr LSDefaultVolumeInput  ; 25
-                        DW      Near Ptr LSGlobalVolumeInput   ; 26
-                        DW      Near Ptr LSVibratoSpeedInput   ; 27
-                        DW      Near Ptr LSVibratoDepthInput   ; 28
-                        DW      Near Ptr LSVibratoRateInput    ; 29
-                        DW      Near Ptr SetHelpContext6
+                        DW      SampleNameLoader
+                        DW      LoadSampleKeyList
+                        DW      FullScreenBox ; 0
+                        DW      ScreenHeader  ; 1
+                        DW      ViewSampleHeader ; 2
+                        DW      FillHeader    ; 3
+                        DW      LoadSampleBox
+                        DW      DriveSampleBox
+                        DW      LSInfoBox
+                        DW      LSInfoText
+                        DW      LSWaveFormBox
+                        DW      LSParametersBox
+                        DW      LSParametersText      ; 10
+                        DW      LSParametersVolBox    ; 11
+                        DW      LSParametersVibBox
+                        DW      LSFileInfoBox
+                        DW      LSFileInfoText
+                        DW      ViewSampleWindow      ; 15
+                        DW      LSDriveWindow         ; 16
+                        DW      LSFileNameInput       ; 17
+                        DW      LSSpeedInput
+                        DW      LSLoopToggle          ; 19
+                        DW      LSLoopBeginInput
+                        DW      LSLoopEndInput
+                        DW      LSSusLoopToggle       ; 22
+                        DW      LSSusLoopBeginInput
+                        DW      LSSusLoopEndInput
+                        DW      LSDefaultVolumeInput  ; 25
+                        DW      LSGlobalVolumeInput   ; 26
+                        DW      LSVibratoSpeedInput   ; 27
+                        DW      LSVibratoDepthInput   ; 28
+                        DW      LSVibratoRateInput    ; 29
+                        DW      SetHelpContext6
                         DW      0
 
 
@@ -1206,242 +1204,242 @@ LSDriveWindow           DW      15
                         DD      DWord Ptr D_LSPostDriveWindow
 
 O1_SampleList           DW      28
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr SampleGlobalKeyList
-                        DW      Near Ptr FullScreenBox ; 0
-                        DW      Near Ptr ScreenHeader  ; 1
-                        DW      Near Ptr SampleListHeader
-                        DW      Near Ptr SampleListBox
-                        DW      Near Ptr InstDVBox
-                        DW      Near Ptr InstDVText
-                        DW      Near Ptr InstDVTBBox
-                        DW      Near Ptr InstDVTB      ; 7
-                        DW      Near Ptr InstGVBox
-                        DW      Near Ptr InstGVText
-                        DW      Near Ptr InstGVTBBox
-                        DW      Near Ptr InstGVTB      ; 11
-                        DW      Near Ptr InstVSBox
-                        DW      Near Ptr InstVSText
-                        DW      Near Ptr InstVSTBBox
-                        DW      Near Ptr InstVSTB      ; 15
-                        DW      Near Ptr InstVDBox
-                        DW      Near Ptr InstVDText
-                        DW      Near Ptr InstVDTBBox
-                        DW      Near Ptr InstVDTB      ; 19
-                        DW      Near Ptr InstVRBox
-                        DW      Near Ptr InstVRText
-                        DW      Near Ptr InstVRTBBox
-                        DW      Near Ptr InstVRTB      ; 23
-                        DW      Near Ptr InstVWBox
-                        DW      Near Ptr InstVWText
-                        DW      Near Ptr InstParamBox
-                        DW      Near Ptr InstParamText
-                        DW      Near Ptr SampleList      ; 28
-                        DW      Near Ptr InstFileName  ; 29
-                        DW      Near Ptr InstSpeed
-                        DW      Near Ptr InstLoopToggle
-                        DW      Near Ptr InstLoopBegin
-                        DW      Near Ptr InstLoopEnd
-                        DW      Near Ptr InstSusLoopToggle
-                        DW      Near Ptr InstSusLoopBegin
-                        DW      Near Ptr InstSusLoopEnd ;36
-                        DW      Near Ptr InstVibSine   ; 37
-                        DW      Near Ptr InstVibRamp   ; 38
-                        DW      Near Ptr InstVibSquare ; 39
-                        DW      Near Ptr InstVibRandom ; 40
-                        DW      Near Ptr InstWaveFormBox ; 41
-                        DW      Near Ptr InstWaveFormText ; 42
-                        DW      Near Ptr InstDPBox      ; 43
-                        DW      Near Ptr InstDPText
-                        DW      Near Ptr InstDPTBBox
-                        DW      Near Ptr InstDPToggle   ; 46
-                        DW      Near Ptr InstDPTB       ; 47
-                        DW      Near Ptr InstFillInfo
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr SetHelpContext2
+                        DW      IdleFunctionList
+                        DW      SampleGlobalKeyList
+                        DW      FullScreenBox ; 0
+                        DW      ScreenHeader  ; 1
+                        DW      SampleListHeader
+                        DW      SampleListBox
+                        DW      InstDVBox
+                        DW      InstDVText
+                        DW      InstDVTBBox
+                        DW      InstDVTB      ; 7
+                        DW      InstGVBox
+                        DW      InstGVText
+                        DW      InstGVTBBox
+                        DW      InstGVTB      ; 11
+                        DW      InstVSBox
+                        DW      InstVSText
+                        DW      InstVSTBBox
+                        DW      InstVSTB      ; 15
+                        DW      InstVDBox
+                        DW      InstVDText
+                        DW      InstVDTBBox
+                        DW      InstVDTB      ; 19
+                        DW      InstVRBox
+                        DW      InstVRText
+                        DW      InstVRTBBox
+                        DW      InstVRTB      ; 23
+                        DW      InstVWBox
+                        DW      InstVWText
+                        DW      InstParamBox
+                        DW      InstParamText
+                        DW      SampleList      ; 28
+                        DW      InstFileName  ; 29
+                        DW      InstSpeed
+                        DW      InstLoopToggle
+                        DW      InstLoopBegin
+                        DW      InstLoopEnd
+                        DW      InstSusLoopToggle
+                        DW      InstSusLoopBegin
+                        DW      InstSusLoopEnd ;36
+                        DW      InstVibSine   ; 37
+                        DW      InstVibRamp   ; 38
+                        DW      InstVibSquare ; 39
+                        DW      InstVibRandom ; 40
+                        DW      InstWaveFormBox ; 41
+                        DW      InstWaveFormText ; 42
+                        DW      InstDPBox      ; 43
+                        DW      InstDPText
+                        DW      InstDPTBBox
+                        DW      InstDPToggle   ; 46
+                        DW      InstDPTB       ; 47
+                        DW      InstFillInfo
+                        DW      FillHeader
+                        DW      SetHelpContext2
                         DW      0
 
 O1_LoadModuleList       DW      12
-                        DW      Near Ptr SongNameModuleLoader
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox         ; 0
-                        DW      Near Ptr ScreenHeader
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr LoadModuleText
-                        DW      Near Ptr FileBox
-                        DW      Near Ptr DirBox                ; 5
-                        DW      Near Ptr DriveBox
-                        DW      Near Ptr SearchBox
-                        DW      Near Ptr FileInfoBox
-                        DW      Near Ptr FileNameBox
-                        DW      Near Ptr SearchText            ; 10
-                        DW      Near Ptr FileText
-                        DW      Near Ptr FileWindow            ; 12
-                        DW      Near Ptr DirectoryWindow
-                        DW      Near Ptr DriveWindow
-                        DW      Near Ptr FileNamePrompt        ; 15
-                        DW      Near Ptr SongDirectoryPrompt
-                        DW      Near Ptr SetHelpContext3
+                        DW      SongNameModuleLoader
+                        DW      GlobalKeyList
+                        DW      FullScreenBox         ; 0
+                        DW      ScreenHeader
+                        DW      FillHeader
+                        DW      LoadModuleText
+                        DW      FileBox
+                        DW      DirBox                ; 5
+                        DW      DriveBox
+                        DW      SearchBox
+                        DW      FileInfoBox
+                        DW      FileNameBox
+                        DW      SearchText            ; 10
+                        DW      FileText
+                        DW      FileWindow            ; 12
+                        DW      DirectoryWindow
+                        DW      DriveWindow
+                        DW      FileNamePrompt        ; 15
+                        DW      SongDirectoryPrompt
+                        DW      SetHelpContext3
                         DW      0
 
 O1_SaveModuleList       DW      15
-                        DW      Near Ptr SongNameModuleLoader
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox         ; 0
-                        DW      Near Ptr ScreenHeader
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr SaveModuleText
-                        DW      Near Ptr FileBox
-                        DW      Near Ptr DirBox                ; 5
-                        DW      Near Ptr DriveBox
-                        DW      Near Ptr SearchBox
-                        DW      Near Ptr FileInfoBox
-                        DW      Near Ptr FileNameBox
-                        DW      Near Ptr SearchText            ; 10
-                        DW      Near Ptr FileText
-                        DW      Near Ptr FileSaveWindow        ; 12
-                        DW      Near Ptr DirectoryWindow
-                        DW      Near Ptr SaveDriveWindow
-                        DW      Near Ptr FileNameSavePrompt    ; 15
-                        DW      Near Ptr SongDirectoryPrompt
-                        DW      Near Ptr ITFormatButton         ; 17
-                        DW      Near Ptr S3MFormatButton        ; 18
-                        DW      Near Ptr OldITFormatButton      ; 19
-IF DDCOMPRESS
-                        DW      Near Ptr IT215FormatButton      ; 20
-ENDIF
+                        DW      SongNameModuleLoader
+                        DW      GlobalKeyList
+                        DW      FullScreenBox         ; 0
+                        DW      ScreenHeader
+                        DW      FillHeader
+                        DW      SaveModuleText
+                        DW      FileBox
+                        DW      DirBox                ; 5
+                        DW      DriveBox
+                        DW      SearchBox
+                        DW      FileInfoBox
+                        DW      FileNameBox
+                        DW      SearchText            ; 10
+                        DW      FileText
+                        DW      FileSaveWindow        ; 12
+                        DW      DirectoryWindow
+                        DW      SaveDriveWindow
+                        DW      FileNameSavePrompt    ; 15
+                        DW      SongDirectoryPrompt
+                        DW      ITFormatButton         ; 17
+                        DW      S3MFormatButton        ; 18
+                        DW      OldITFormatButton      ; 19
+%IF  DDCOMPRESS
+                        DW      IT215FormatButton      ; 20
+%ENDIF 
                         DW      0
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
 O1_LoadNetworkDriver    DW      6
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox          ; 0
-                        DW      Near Ptr ScreenHeader
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr SaveModuleText
-                        DW      Near Ptr LoadNetworkText
-                        DW      Near Ptr LoadNetworkBox
-                        DW      Near Ptr LoadNetworkFunctions
+                        DW      IdleFunctionList
+                        DW      GlobalKeyList
+                        DW      FullScreenBox          ; 0
+                        DW      ScreenHeader
+                        DW      FillHeader
+                        DW      SaveModuleText
+                        DW      LoadNetworkText
+                        DW      LoadNetworkBox
+                        DW      LoadNetworkFunctions
                         DW      0
-ENDIF
+%ENDIF 
 
 O1_SaveITList           DW      7
-                        DW      Near Ptr IdleFunctionGotoEmpty
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox         ; 0
-                        DW      Near Ptr ScreenHeader
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr SaveModuleText
-                        DW      Near Ptr LoadBox
-                        DW      Near Ptr SaveITModuleText
-                        DW      Near Ptr DirectScreen          ; 6
-                        DW      Near Ptr SaveIT                ; 7
+                        DW      IdleFunctionGotoEmpty
+                        DW      GlobalKeyList
+                        DW      FullScreenBox         ; 0
+                        DW      ScreenHeader
+                        DW      FillHeader
+                        DW      SaveModuleText
+                        DW      LoadBox
+                        DW      SaveITModuleText
+                        DW      DirectScreen          ; 6
+                        DW      SaveIT                ; 7
                         DW      0
 
 O1_SaveS3MList          DW      7
-                        DW      Near Ptr IdleFunctionGotoEmpty
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox         ; 0
-                        DW      Near Ptr ScreenHeader
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr SaveModuleText
-                        DW      Near Ptr LoadBox
-                        DW      Near Ptr SaveS3MModuleText
-                        DW      Near Ptr DirectScreen          ; 6
-                        DW      Near Ptr SaveS3M               ; 7
+                        DW      IdleFunctionGotoEmpty
+                        DW      GlobalKeyList
+                        DW      FullScreenBox         ; 0
+                        DW      ScreenHeader
+                        DW      FillHeader
+                        DW      SaveModuleText
+                        DW      LoadBox
+                        DW      SaveS3MModuleText
+                        DW      DirectScreen          ; 6
+                        DW      SaveS3M               ; 7
                         DW      0
 
-IF TUTORIAL
-ELSE
+%IF  TUTORIAL
+%ELSE
 
 O1_LoadS3MList          DW      7
-                        DW      Near Ptr IdleFunctionGotoEmpty
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox         ; 0
-                        DW      Near Ptr ScreenHeader
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr LoadModuleText
-                        DW      Near Ptr LoadBox
-                        DW      Near Ptr LoadS3MModuleText
-                        DW      Near Ptr DirectScreen          ; 6
-                        DW      Near Ptr LoadS3M               ; 7
+                        DW      IdleFunctionGotoEmpty
+                        DW      GlobalKeyList
+                        DW      FullScreenBox         ; 0
+                        DW      ScreenHeader
+                        DW      FillHeader
+                        DW      LoadModuleText
+                        DW      LoadBox
+                        DW      LoadS3MModuleText
+                        DW      DirectScreen          ; 6
+                        DW      LoadS3M               ; 7
                         DW      0
 
 O1_LoadXMList           DW      7
-                        DW      Near Ptr IdleFunctionGotoEmpty
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox         ; 0
-                        DW      Near Ptr ScreenHeader
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr LoadModuleText
-                        DW      Near Ptr LoadBox
-                        DW      Near Ptr LoadXMModuleText
-                        DW      Near Ptr DirectScreen          ; 6
-                        DW      Near Ptr LoadXM                ; 7
+                        DW      IdleFunctionGotoEmpty
+                        DW      GlobalKeyList
+                        DW      FullScreenBox         ; 0
+                        DW      ScreenHeader
+                        DW      FillHeader
+                        DW      LoadModuleText
+                        DW      LoadBox
+                        DW      LoadXMModuleText
+                        DW      DirectScreen          ; 6
+                        DW      LoadXM                ; 7
                         DW      0
 
 O1_LoadMTMList          DW      7
-                        DW      Near Ptr IdleFunctionGotoEmpty
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox         ; 0
-                        DW      Near Ptr ScreenHeader
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr LoadModuleText
-                        DW      Near Ptr LoadBox
-                        DW      Near Ptr LoadMTMModuleText
-                        DW      Near Ptr DirectScreen          ; 6
-                        DW      Near Ptr LoadMTM               ; 7
+                        DW      IdleFunctionGotoEmpty
+                        DW      GlobalKeyList
+                        DW      FullScreenBox         ; 0
+                        DW      ScreenHeader
+                        DW      FillHeader
+                        DW      LoadModuleText
+                        DW      LoadBox
+                        DW      LoadMTMModuleText
+                        DW      DirectScreen          ; 6
+                        DW      LoadMTM               ; 7
                         DW      0
 
 O1_LoadMODList          DW      7
-                        DW      Near Ptr IdleFunctionGotoEmpty
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox         ; 0
-                        DW      Near Ptr ScreenHeader
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr LoadModuleText
-                        DW      Near Ptr LoadBox
-                        DW      Near Ptr LoadMODModuleText
-                        DW      Near Ptr DirectScreen          ; 6
-                        DW      Near Ptr LoadMOD               ; 7
+                        DW      IdleFunctionGotoEmpty
+                        DW      GlobalKeyList
+                        DW      FullScreenBox         ; 0
+                        DW      ScreenHeader
+                        DW      FillHeader
+                        DW      LoadModuleText
+                        DW      LoadBox
+                        DW      LoadMODModuleText
+                        DW      DirectScreen          ; 6
+                        DW      LoadMOD               ; 7
                         DW      0
 
 O1_Load669List          DW      7
-                        DW      Near Ptr IdleFunctionGotoEmpty
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox         ; 0
-                        DW      Near Ptr ScreenHeader
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr LoadModuleText
-                        DW      Near Ptr LoadBox
-                        DW      Near Ptr Load669ModuleText
-                        DW      Near Ptr DirectScreen          ; 6
-                        DW      Near Ptr Load669               ; 7
+                        DW      IdleFunctionGotoEmpty
+                        DW      GlobalKeyList
+                        DW      FullScreenBox         ; 0
+                        DW      ScreenHeader
+                        DW      FillHeader
+                        DW      LoadModuleText
+                        DW      LoadBox
+                        DW      Load669ModuleText
+                        DW      DirectScreen          ; 6
+                        DW      Load669               ; 7
                         DW      0
 
 O1_LoadITList           DW      7
-                        DW      Near Ptr IdleFunctionGotoEmpty
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox         ; 0
-                        DW      Near Ptr ScreenHeader
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr LoadModuleText
-                        DW      Near Ptr LoadBox
-                        DW      Near Ptr LoadITModuleText
-                        DW      Near Ptr DirectScreen          ; 6
-                        DW      Near Ptr LoadIT                ; 7
+                        DW      IdleFunctionGotoEmpty
+                        DW      GlobalKeyList
+                        DW      FullScreenBox         ; 0
+                        DW      ScreenHeader
+                        DW      FillHeader
+                        DW      LoadModuleText
+                        DW      LoadBox
+                        DW      LoadITModuleText
+                        DW      DirectScreen          ; 6
+                        DW      LoadIT                ; 7
                         DW      0
-ENDIF
+%ENDIF 
 
 O1_EmptyList            DW      0
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr InDirectScreen        ; 0
-                        DW      Near Ptr FullScreenBox         ; 1
-                        DW      Near Ptr ScreenHeader
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr NoText
+                        DW      IdleFunctionList
+                        DW      GlobalKeyList
+                        DW      InDirectScreen        ; 0
+                        DW      FullScreenBox         ; 1
+                        DW      ScreenHeader
+                        DW      FillHeader
+                        DW      NoText
                         DW      0
 
 ITFormatButton          DW      2
@@ -1470,7 +1468,7 @@ S3MFormatButton         DW      2
                         DB      0
                         DB      "  S3M", 0
 
-IF DDCOMPRESS
+%IF  DDCOMPRESS
 
 OldITFormatButton       DW      2
                         DW      18, 20, 14, 15
@@ -1499,7 +1497,7 @@ IT215FormatButton       DW      2
                         DB      " IT215", 0
 
 
-ELSE
+%ELSE
 
 OldITFormatButton       DW      2
                         DW      18, 15, 14, 15
@@ -1513,7 +1511,7 @@ OldITFormatButton       DW      2
                         DB      8
                         DB      0
                         DB      " IT2xx", 0
-ENDIF
+%ENDIF 
 
 
 NoText                  DW      10
@@ -1574,8 +1572,8 @@ LoadITModuleText        DW      1
 IdleFunctionGotoEmpty   DD      DWord Ptr F_GotoEmptyList
                         DD      0
 
-IF TUTORIAL
-ELSE
+%IF  TUTORIAL
+%ELSE
 
 LoadMOD                 DW      15
                         DD      DWord Ptr F_Return0
@@ -1607,7 +1605,7 @@ LoadIT                  DW      15
                         DD      DWord Ptr D_LoadIT
                         DD      DWord Ptr F_GotoEmptyList
 
-ENDIF
+%ENDIF 
 
 SaveIT                  DW      15
                         DD      DWord Ptr F_Return0
@@ -1622,7 +1620,7 @@ SaveS3M                 DW      15
 FileNamePrompt          DW      16
                         DB      13, 46
                         DW      0                       ; Disk segment
-                        DW      Offset FileSpecifier
+                        DW      FileSpecifier
                         DW      64                      ; Length
                         DD      D_NewSpecifier
                         DW      12, 16, 16, 14
@@ -1630,7 +1628,7 @@ FileNamePrompt          DW      16
 FileNameSavePrompt      DW      16
                         DB      13, 46
                         DW      0                       ; Disk segment
-                        DW      Offset FileSpecifier
+                        DW      FileSpecifier
                         DW      64                      ; Length
                         DD      D_SaveModule
                         DW      12, 16, 16, 14
@@ -1638,7 +1636,7 @@ FileNameSavePrompt      DW      16
 SongDirectoryPrompt     DW      16
                         DB      13, 47
                         DW      0
-                        DW      Offset SongDirectory
+                        DW      SongDirectory
                         DW      64
                         DD      D_NewDirectory
                         DW      15, 12, 12, 15
@@ -1673,7 +1671,7 @@ SaveDriveWindow         DW      15
                         DD      DWord Ptr D_PreDriveWindow
                         DD      DWord Ptr D_PostSaveDriveWindow
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
 LoadNetworkText         DW      10
                         DB      "Load Network Driver", 0
 
@@ -1686,7 +1684,7 @@ LoadNetworkFunctions    DW      15
                         DD      DWord Ptr Network_PreDriverScreen
                         DD      DWord Ptr Network_PostDriverScreen
 
-ENDIF
+%ENDIF 
 
 LoadModuleText          DW      10
                         DB      "Load Module (F9)", 0
@@ -2106,7 +2104,7 @@ TemplateErrorText       DW      1
                         DB      "  of the clipboard on which to", 13
                         DB      0FFh, 7, " base translations.", 0
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
 NetworkErrorText        DW      1
                         DB      23, 25
                         DB      20h
@@ -2114,7 +2112,7 @@ NetworkErrorText        DW      1
                         DB      "This function is not available in", 13
                         DB      " multi-composer mode. Disconnect", 13
                         DB      "   from network mode to enable.", 0
-ENDIF
+%ENDIF 
 
 CrashRecoveryBox        DW      0
                         DB      20, 19, 60, 30
@@ -2129,7 +2127,7 @@ CrashRecoveryText       DW      1
                         DB      "computer and rerun Impulse Tracker as", 13
                         DB      " the system is likely to be unstable", 0
 
-IF SHOWPATTERNLENGTH
+%IF  SHOWPATTERNLENGTH
 
 PatternLengthText       DW      1
                         DB      27, 27
@@ -2137,7 +2135,7 @@ PatternLengthText       DW      1
                         DB      "Pattern is ", 0FDh, 'D', " bytes long", 0
 PatternLength           DW      0
 
-ENDIF
+%ENDIF 
 
 C5FrequencyText         DW      8
                         DD      DWord Ptr I_PrintC5Frequency
@@ -2188,28 +2186,28 @@ SampleAmpTBBox          DW      0
 AmpTB                   DW      9
                         DB      26, 30
                         DW      0, 200
-                        DW      1, Offset Amplification
+                        DW      1, Amplification
                         DW      4, 4, 4, 4
                         DW      0FFFFh, 0FFFFh
 
 InstrumentAmpTB         DW      9
                         DB      26, 30
                         DW      0, 200
-                        DW      8, Offset InstrumentAmplification
+                        DW      8, InstrumentAmplification
                         DW      4, 4, 4, 4
                         DW      0FFFFh, 0FFFFh
 
 FastAmpTB               DW      9
                         DB      33, 30
                         DW      10, 90
-                        DW      1, Offset FastVolumeAmplification
+                        DW      1, FastVolumeAmplification
                         DW      4, 4, 4, 4
                         DW      0FFFFh, 0FFFFh
 
 SampleAmpTB             DW      9
                         DB      13, 30
                         DW      0, 400
-                        DW      8, Offset SampleAmplification
+                        DW      8, SampleAmplification
                         DW      4, 4, 4, 4
                         DW      0FFFFh, 0FFFFh
 
@@ -2437,35 +2435,35 @@ PEConfigDoneButton      DW      2
 PETBBaseOctave          DW      9
                         DB      40, 23
                         DW      0, 8
-                        DW      1, Offset BaseOctave
+                        DW      1, BaseOctave
                         DW      13, 15, 15, 13
                         DW      0FFFFh, 0FFFFh
 
 PETBSkipValue           DW      9
                         DB      40, 26
                         DW      0, 16
-                        DW      1, Offset SkipValue
+                        DW      1, SkipValue
                         DW      14, 16, 16, 14
                         DW      0FFFFh, 0FFFFh
 
 PETBRHLMinor            DW      9
                         DB      40, 29
                         DW      0, 32
-                        DW      1, Offset RowHiLight1
+                        DW      1, RowHiLight1
                         DW      15, 17, 17, 15
                         DW      0FFFFh, 0FFFFh
 
 PETBRHLMajor            DW      9
                         DB      40, 32
                         DW      0, 128
-                        DW      1, Offset RowHiLight2
+                        DW      1, RowHiLight2
                         DW      16, 18, 18, 16
                         DW      0FFFFh, 0FFFFh
 
 PETBMaxRow              DW      9
                         DB      40, 35
                         DW      32, 200
-                        DW      1, Offset NumberOfRows
+                        DW      1, NumberOfRows
                         DW      17, 19, 19, 17
                         DW      0FFFFh, 0FFFFh
 
@@ -2498,7 +2496,7 @@ HelpKeyList             DB      0
                         DD      DWord Ptr H_HelpESC
 
                         DB      5
-                        DW      Offset GlobalKeyChain
+                        DW      GlobalKeyChain
 
 ShowHelp                DW      8
                         DD      DWord Ptr H_DrawHelp
@@ -3060,7 +3058,7 @@ ViewSampleKeyList       Label
                         DD      DWord Ptr D_SlowSampleSort
 
                         DB      5               ; Chain to...
-                        DW      Offset GlobalKeyList
+                        DW      GlobalKeyList
 
 
 LoadInstrumentKeyList   DB      0
@@ -3072,7 +3070,7 @@ LoadInstrumentKeyList   DB      0
                         DD      DWord Ptr D_SlowInstrumentSort
 
                         DB      5
-                        DW      Offset GlobalKeyList
+                        DW      GlobalKeyList
 
 GlobalKeyList           DB      0               ; F1
 HelpKeyValue            DW      13Bh
@@ -3187,11 +3185,11 @@ OrderKeyValue           DW      157h
                         DW      16              ; Ctrl 'P'
                         DD      DWord Ptr Music_TimeSong
 
-IF MEMORYDEBUG
+%IF  MEMORYDEBUG
                         DB      0
                         DW      15B7h           ; Right shift+Ctrl+Printscreen
                         DD      DWord Ptr Glbl_Debug
-ENDIF
+%ENDIF 
 
                         DB      2               ; Alt..
                         DW      13Bh            ; F1
@@ -3229,11 +3227,11 @@ ENDIF
                         DW      157h            ; F11
                         DD      DWord Ptr Music_ToggleOrderUpdate
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                         DB      6               ; Shift
                         DW      101h            ; ESC
                         DD      DWord Ptr Network_DriverScreen
-ENDIF
+%ENDIF 
 
                         DB      6               ; Shift F1
                         DW      13Bh
@@ -3243,17 +3241,17 @@ ENDIF
                         DW      13Fh
                         DD      DWord Ptr Glbl_DriverScreen
 
-IF TIMERSCREEN
+%IF  TIMERSCREEN
                         DB      0               ; Left shift, left+right alt
                         DW      73C6h           ; Right ctrl + Pause
                         DD      DWord Ptr Glbl_TimerScreen
-ENDIF
+%ENDIF 
 
-IF EMSDEBUG
+%IF  EMSDEBUG
                         DB      0               ; Left shift, Left alt, right alt
                         DW      6329h           ; + ~
                         DD      DWord Ptr E_DumpEMSMemory
-ENDIF
+%ENDIF 
 
 PlayCommandChain:
                         DB      3               ; Ctrl...
@@ -3332,14 +3330,14 @@ ESCExitList             DB      0               ; ESC
                         DD      DWord Ptr F_Return0
 
                         DB      5
-                        DW      Near Ptr ChainMIDICommands
+                        DW      ChainMIDICommands
 
 SampleGlobalKeyList     Label
-IF ENABLESOLO
+%IF  ENABLESOLO
                         DB      1
                         DW      '`'
                         DD      DWord Ptr Music_ToggleSoloSample
-ENDIF
+%ENDIF 
 
                         DB      0
                         DW      1C9h
@@ -3471,7 +3469,7 @@ ENDIF
                         DD      DWord Ptr Glbl_LoadSample
 
                         DB      5
-                        DW      Offset GlobalKeyList
+                        DW      GlobalKeyList
 
 ScreenBox               DW      0                       ; Object type 0
                         DB      0, 0, 79, 49            ; Coordinates
@@ -3629,185 +3627,185 @@ LogoCharacter           DW      256                     ; First char to define
                         DB      192, 0, 0, 0, 0, 0, 0, 0                ; 107
 
 O1_ConfirmConvertList   DW      4
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr EmptyObject
-                        DW      Near Ptr ConfirmOverWriteBox
-                        DW      Near Ptr ConfirmConvertSampleText
-                        DW      Near Ptr ConfirmOverWriteOKButton
-                        DW      Near Ptr ConfirmOverWriteCancelButton
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      EmptyObject
+                        DW      ConfirmOverWriteBox
+                        DW      ConfirmConvertSampleText
+                        DW      ConfirmOverWriteOKButton
+                        DW      ConfirmOverWriteCancelButton
                         DW      0
 
 O1_ConfirmConvert2List  DW      4
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr EmptyObject
-                        DW      Near Ptr ConfirmOverWriteBox
-                        DW      Near Ptr ConfirmConvertSampleText
-                        DW      Near Ptr ConfirmConvertYesButton
-                        DW      Near Ptr ConfirmConvertNoButton
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      EmptyObject
+                        DW      ConfirmOverWriteBox
+                        DW      ConfirmConvertSampleText
+                        DW      ConfirmConvertYesButton
+                        DW      ConfirmConvertNoButton
                         DW      0
 
 O1_SampleCenterList     DW      4
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr EmptyObject
-                        DW      Near Ptr ConfirmOverWriteBox
-                        DW      Near Ptr ConfirmCenterSampleText
-                        DW      Near Ptr ConfirmConvertYesButton
-                        DW      Near Ptr ConfirmConvertNoButton
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      EmptyObject
+                        DW      ConfirmOverWriteBox
+                        DW      ConfirmCenterSampleText
+                        DW      ConfirmConvertYesButton
+                        DW      ConfirmConvertNoButton
                         DW      0
 
 O1_EnableInstrumentMode DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr EmptyObject
-                        DW      Near Ptr ConfirmOverWriteBox
-                        DW      Near Ptr EnableInstrumentModeText
-                        DW      Near Ptr ConfirmOverWriteOKButton
-                        DW      Near Ptr ConfirmOverWriteCancelButton
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      EmptyObject
+                        DW      ConfirmOverWriteBox
+                        DW      EnableInstrumentModeText
+                        DW      ConfirmOverWriteOKButton
+                        DW      ConfirmOverWriteCancelButton
                         DW      0
 
 
 O1_InitInstrument       DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr EmptyObject
-                        DW      Near Ptr ConfirmOverWriteBox
-                        DW      Near Ptr InitInstrumentText
-                        DW      Near Ptr ConfirmOverWriteOKButton
-                        DW      Near Ptr ConfirmInitialiseNoButton
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      EmptyObject
+                        DW      ConfirmOverWriteBox
+                        DW      InitInstrumentText
+                        DW      ConfirmOverWriteOKButton
+                        DW      ConfirmInitialiseNoButton
                         DW      0
 
 O1_ConfirmOverWriteList DW      4
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr EmptyObject
-                        DW      Near Ptr ConfirmOverWriteBox
-                        DW      Near Ptr ConfirmOverWriteText
-                        DW      Near Ptr ConfirmOverWriteOKButton
-                        DW      Near Ptr ConfirmOverWriteCancelButton
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      EmptyObject
+                        DW      ConfirmOverWriteBox
+                        DW      ConfirmOverWriteText
+                        DW      ConfirmOverWriteOKButton
+                        DW      ConfirmOverWriteCancelButton
                         DW      0
 
 O1_InitialiseInstrumentList DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr EmptyObject
-                        DW      Near Ptr ConfirmOverWriteBox
-                        DW      Near Ptr ConfirmInitialiseText
-                        DW      Near Ptr ConfirmOverWriteOKButton
-                        DW      Near Ptr ConfirmInitialiseNoButton
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      EmptyObject
+                        DW      ConfirmOverWriteBox
+                        DW      ConfirmInitialiseText
+                        DW      ConfirmOverWriteOKButton
+                        DW      ConfirmInitialiseNoButton
                         DW      0
 
 O1_ConfirmDelete        DW      4
-                        DW      Near Ptr SongNameModuleLoader
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr DrawFileNameWindow
-                        DW      Near Ptr ConfirmOverWriteBox
-                        DW      Near Ptr ConfirmDeleteText
-                        DW      Near Ptr ConfirmOverWriteOKButton
-                        DW      Near Ptr ConfirmOverWriteCancelButton
+                        DW      SongNameModuleLoader
+                        DW      OKCancelList
+                        DW      DrawFileNameWindow
+                        DW      ConfirmOverWriteBox
+                        DW      ConfirmDeleteText
+                        DW      ConfirmOverWriteOKButton
+                        DW      ConfirmOverWriteCancelButton
                         DW      0
 
 O1_ConfirmDelete2       DW      4
-                        DW      Near Ptr SampleNameLoader
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr DrawLoadSampleWindow
-                        DW      Near Ptr ConfirmOverWriteBox
-                        DW      Near Ptr ConfirmDeleteText
-                        DW      Near Ptr ConfirmOverWriteOKButton
-                        DW      Near Ptr ConfirmOverWriteCancelButton
+                        DW      SampleNameLoader
+                        DW      OKCancelList
+                        DW      DrawLoadSampleWindow
+                        DW      ConfirmOverWriteBox
+                        DW      ConfirmDeleteText
+                        DW      ConfirmOverWriteOKButton
+                        DW      ConfirmOverWriteCancelButton
                         DW      0
 
 O1_ConfirmDelete3       DW      4
-                        DW      Near Ptr InstrumentNameLoader
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr EmptyObject
-                        DW      Near Ptr ConfirmOverWriteBox
-                        DW      Near Ptr ConfirmDeleteText
-                        DW      Near Ptr ConfirmOverWriteOKButton
-                        DW      Near Ptr ConfirmOverWriteCancelButton
+                        DW      InstrumentNameLoader
+                        DW      OKCancelList
+                        DW      EmptyObject
+                        DW      ConfirmOverWriteBox
+                        DW      ConfirmDeleteText
+                        DW      ConfirmOverWriteOKButton
+                        DW      ConfirmOverWriteCancelButton
                         DW      0
 
 
 O1_ConfirmSaveRenameList DW      3
-                        DW      Near Ptr SampleNameLoader
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr DrawLoadSampleWindow
-                        DW      Near Ptr ConfirmOverWriteBox
-                        DW      Near Ptr ConfirmSaveRenameText
-                        DW      Near Ptr ConfirmOverWriteOKButton
-                        DW      Near Ptr ConfirmOverWriteCancelButton
+                        DW      SampleNameLoader
+                        DW      OKCancelList
+                        DW      DrawLoadSampleWindow
+                        DW      ConfirmOverWriteBox
+                        DW      ConfirmSaveRenameText
+                        DW      ConfirmOverWriteOKButton
+                        DW      ConfirmOverWriteCancelButton
                         DW      0
 
 O1_ConfirmResaveList    DW      3
-                        DW      Near Ptr SampleNameLoader
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr DrawLoadSampleWindow
-                        DW      Near Ptr ConfirmOverWriteBox
-                        DW      Near Ptr ConfirmResaveText
-                        DW      Near Ptr ConfirmOverWriteOKButton
-                        DW      Near Ptr ConfirmOverWriteCancelButton
+                        DW      SampleNameLoader
+                        DW      OKCancelList
+                        DW      DrawLoadSampleWindow
+                        DW      ConfirmOverWriteBox
+                        DW      ConfirmResaveText
+                        DW      ConfirmOverWriteOKButton
+                        DW      ConfirmOverWriteCancelButton
                         DW      0
 
 O1_ConfirmDiscardList   DW      3
-                        DW      Near Ptr SampleNameLoader
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr DrawLoadSampleWindow
-                        DW      Near Ptr ConfirmOverWriteBox
-                        DW      Near Ptr ConfirmDiscardText
-                        DW      Near Ptr ConfirmOverWriteOKButton
-                        DW      Near Ptr ConfirmOverWriteCancelButton
+                        DW      SampleNameLoader
+                        DW      OKCancelList
+                        DW      DrawLoadSampleWindow
+                        DW      ConfirmOverWriteBox
+                        DW      ConfirmDiscardText
+                        DW      ConfirmOverWriteOKButton
+                        DW      ConfirmOverWriteCancelButton
                         DW      0
 
 O1_ConfirmCutSample     DW      4
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr EmptyObject
-                        DW      Near Ptr ConfirmOverWriteBox
-                        DW      Near Ptr ConfirmCutSampleText
-                        DW      Near Ptr ConfirmOverWriteOKButton
-                        DW      Near Ptr ConfirmOverWriteCancelButton
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      EmptyObject
+                        DW      ConfirmOverWriteBox
+                        DW      ConfirmCutSampleText
+                        DW      ConfirmOverWriteOKButton
+                        DW      ConfirmOverWriteCancelButton
                         DW      0
 
 O1_ConfirmDeleteSample  DW      4
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr EmptyObject
-                        DW      Near Ptr ConfirmOverWriteBox
-                        DW      Near Ptr ConfirmDeleteSampleText
-                        DW      Near Ptr ConfirmOverWriteOKButton
-                        DW      Near Ptr ConfirmOverWriteCancelButton
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      EmptyObject
+                        DW      ConfirmOverWriteBox
+                        DW      ConfirmDeleteSampleText
+                        DW      ConfirmOverWriteOKButton
+                        DW      ConfirmOverWriteCancelButton
                         DW      0
 
 O1_ConfirmDeleteInstrument DW   4
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr EmptyObject
-                        DW      Near Ptr ConfirmOverWriteBox
-                        DW      Near Ptr ConfirmDeleteInstrumentText
-                        DW      Near Ptr ConfirmOverWriteOKButton
-                        DW      Near Ptr ConfirmOverWriteCancelButton
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      EmptyObject
+                        DW      ConfirmOverWriteBox
+                        DW      ConfirmDeleteInstrumentText
+                        DW      ConfirmOverWriteOKButton
+                        DW      ConfirmOverWriteCancelButton
                         DW      0
 
 O1_ConfirmClearMessage  DW      4
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr EmptyObject
-                        DW      Near Ptr ConfirmOverWriteBox
-                        DW      Near Ptr ConfirmClearMessageText
-                        DW      Near Ptr ConfirmOverWriteOKButton
-                        DW      Near Ptr ConfirmOverWriteCancelButton
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      EmptyObject
+                        DW      ConfirmOverWriteBox
+                        DW      ConfirmClearMessageText
+                        DW      ConfirmOverWriteOKButton
+                        DW      ConfirmOverWriteCancelButton
                         DW      0
 
 O1_ConfirmNoSave        DW      4
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr EmptyObject
-                        DW      Near Ptr ConfirmNoSaveBox
-                        DW      Near Ptr ConfirmNoSaveMessage
-                        DW      Near Ptr ConfirmOverWriteOKButton
-                        DW      Near Ptr ConfirmOverWriteCancelButton
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      EmptyObject
+                        DW      ConfirmNoSaveBox
+                        DW      ConfirmNoSaveMessage
+                        DW      ConfirmOverWriteOKButton
+                        DW      ConfirmOverWriteCancelButton
                         DW      0
 
 EmptyObject             DW      8
@@ -3972,10 +3970,10 @@ ConfirmInitialiseNoButton DW      2
 
 O1_UnableToSaveList     DW      2
                         DW      0
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr ConfirmOverWriteBox
-                        DW      Near Ptr UnableToSaveText
-                        DW      Near Ptr NoSaveOKButton
+                        DW      ESCReturnList
+                        DW      ConfirmOverWriteBox
+                        DW      UnableToSaveText
+                        DW      NoSaveOKButton
                         DW      0
 
 UnableToSaveText        DW      1
@@ -3996,90 +3994,90 @@ NoSaveOKButton          DW      2
                         DB      "   OK", 0
 
 O1_ConfirmQuit          DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr EmptyObject
-                        DW      Near Ptr ConfirmOverWriteBox
-                        DW      Near Ptr ConfirmQuitText
-                        DW      Near Ptr ConfirmOverWriteOKButton
-                        DW      Near Ptr ConfirmOverWriteCancelButton
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      EmptyObject
+                        DW      ConfirmOverWriteBox
+                        DW      ConfirmQuitText
+                        DW      ConfirmOverWriteOKButton
+                        DW      ConfirmOverWriteCancelButton
                         DW      0
 
 O1_SelectMultiChannel   DW      7
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr SMCBox                ; 0
-                        DW      Near Ptr SMCText               ; 1
-                        DW      Near Ptr SMCInBox1             ; 2
-                        DW      Near Ptr SMCInBox2             ; 3
-                        DW      Near Ptr SMCInBox3             ; 4
-                        DW      Near Ptr SMCInBox4             ; 5
-                        DW      Near Ptr SMCDrawChannel        ; 6
-                        DW      Near Ptr SMCChannel00Toggle    ; 7
-                        DW      Near Ptr SMCChannel01Toggle
-                        DW      Near Ptr SMCChannel02Toggle
-                        DW      Near Ptr SMCChannel03Toggle
-                        DW      Near Ptr SMCChannel04Toggle
-                        DW      Near Ptr SMCChannel05Toggle
-                        DW      Near Ptr SMCChannel06Toggle
-                        DW      Near Ptr SMCChannel07Toggle
-                        DW      Near Ptr SMCChannel08Toggle
-                        DW      Near Ptr SMCChannel09Toggle
-                        DW      Near Ptr SMCChannel10Toggle
-                        DW      Near Ptr SMCChannel11Toggle
-                        DW      Near Ptr SMCChannel12Toggle
-                        DW      Near Ptr SMCChannel13Toggle
-                        DW      Near Ptr SMCChannel14Toggle
-                        DW      Near Ptr SMCChannel15Toggle
-                        DW      Near Ptr SMCChannel16Toggle
-                        DW      Near Ptr SMCChannel17Toggle
-                        DW      Near Ptr SMCChannel18Toggle
-                        DW      Near Ptr SMCChannel19Toggle
-                        DW      Near Ptr SMCChannel20Toggle
-                        DW      Near Ptr SMCChannel21Toggle
-                        DW      Near Ptr SMCChannel22Toggle
-                        DW      Near Ptr SMCChannel23Toggle
-                        DW      Near Ptr SMCChannel24Toggle
-                        DW      Near Ptr SMCChannel25Toggle
-                        DW      Near Ptr SMCChannel26Toggle
-                        DW      Near Ptr SMCChannel27Toggle
-                        DW      Near Ptr SMCChannel28Toggle
-                        DW      Near Ptr SMCChannel29Toggle
-                        DW      Near Ptr SMCChannel30Toggle
-                        DW      Near Ptr SMCChannel31Toggle
-                        DW      Near Ptr SMCChannel32Toggle
-                        DW      Near Ptr SMCChannel33Toggle
-                        DW      Near Ptr SMCChannel34Toggle
-                        DW      Near Ptr SMCChannel35Toggle
-                        DW      Near Ptr SMCChannel36Toggle
-                        DW      Near Ptr SMCChannel37Toggle
-                        DW      Near Ptr SMCChannel38Toggle
-                        DW      Near Ptr SMCChannel39Toggle
-                        DW      Near Ptr SMCChannel40Toggle
-                        DW      Near Ptr SMCChannel41Toggle
-                        DW      Near Ptr SMCChannel42Toggle
-                        DW      Near Ptr SMCChannel43Toggle
-                        DW      Near Ptr SMCChannel44Toggle
-                        DW      Near Ptr SMCChannel45Toggle
-                        DW      Near Ptr SMCChannel46Toggle
-                        DW      Near Ptr SMCChannel47Toggle
-                        DW      Near Ptr SMCChannel48Toggle
-                        DW      Near Ptr SMCChannel49Toggle
-                        DW      Near Ptr SMCChannel50Toggle
-                        DW      Near Ptr SMCChannel51Toggle
-                        DW      Near Ptr SMCChannel52Toggle
-                        DW      Near Ptr SMCChannel53Toggle
-                        DW      Near Ptr SMCChannel54Toggle
-                        DW      Near Ptr SMCChannel55Toggle
-                        DW      Near Ptr SMCChannel56Toggle
-                        DW      Near Ptr SMCChannel57Toggle
-                        DW      Near Ptr SMCChannel58Toggle
-                        DW      Near Ptr SMCChannel59Toggle
-                        DW      Near Ptr SMCChannel60Toggle
-                        DW      Near Ptr SMCChannel61Toggle
-                        DW      Near Ptr SMCChannel62Toggle
-                        DW      Near Ptr SMCChannel63Toggle    ; 70
-                        DW      Near Ptr SMCOKButton           ; 71
+                        DW      IdleFunctionList
+                        DW      ESCReturnList
+                        DW      SMCBox                ; 0
+                        DW      SMCText               ; 1
+                        DW      SMCInBox1             ; 2
+                        DW      SMCInBox2             ; 3
+                        DW      SMCInBox3             ; 4
+                        DW      SMCInBox4             ; 5
+                        DW      SMCDrawChannel        ; 6
+                        DW      SMCChannel00Toggle    ; 7
+                        DW      SMCChannel01Toggle
+                        DW      SMCChannel02Toggle
+                        DW      SMCChannel03Toggle
+                        DW      SMCChannel04Toggle
+                        DW      SMCChannel05Toggle
+                        DW      SMCChannel06Toggle
+                        DW      SMCChannel07Toggle
+                        DW      SMCChannel08Toggle
+                        DW      SMCChannel09Toggle
+                        DW      SMCChannel10Toggle
+                        DW      SMCChannel11Toggle
+                        DW      SMCChannel12Toggle
+                        DW      SMCChannel13Toggle
+                        DW      SMCChannel14Toggle
+                        DW      SMCChannel15Toggle
+                        DW      SMCChannel16Toggle
+                        DW      SMCChannel17Toggle
+                        DW      SMCChannel18Toggle
+                        DW      SMCChannel19Toggle
+                        DW      SMCChannel20Toggle
+                        DW      SMCChannel21Toggle
+                        DW      SMCChannel22Toggle
+                        DW      SMCChannel23Toggle
+                        DW      SMCChannel24Toggle
+                        DW      SMCChannel25Toggle
+                        DW      SMCChannel26Toggle
+                        DW      SMCChannel27Toggle
+                        DW      SMCChannel28Toggle
+                        DW      SMCChannel29Toggle
+                        DW      SMCChannel30Toggle
+                        DW      SMCChannel31Toggle
+                        DW      SMCChannel32Toggle
+                        DW      SMCChannel33Toggle
+                        DW      SMCChannel34Toggle
+                        DW      SMCChannel35Toggle
+                        DW      SMCChannel36Toggle
+                        DW      SMCChannel37Toggle
+                        DW      SMCChannel38Toggle
+                        DW      SMCChannel39Toggle
+                        DW      SMCChannel40Toggle
+                        DW      SMCChannel41Toggle
+                        DW      SMCChannel42Toggle
+                        DW      SMCChannel43Toggle
+                        DW      SMCChannel44Toggle
+                        DW      SMCChannel45Toggle
+                        DW      SMCChannel46Toggle
+                        DW      SMCChannel47Toggle
+                        DW      SMCChannel48Toggle
+                        DW      SMCChannel49Toggle
+                        DW      SMCChannel50Toggle
+                        DW      SMCChannel51Toggle
+                        DW      SMCChannel52Toggle
+                        DW      SMCChannel53Toggle
+                        DW      SMCChannel54Toggle
+                        DW      SMCChannel55Toggle
+                        DW      SMCChannel56Toggle
+                        DW      SMCChannel57Toggle
+                        DW      SMCChannel58Toggle
+                        DW      SMCChannel59Toggle
+                        DW      SMCChannel60Toggle
+                        DW      SMCChannel61Toggle
+                        DW      SMCChannel62Toggle
+                        DW      SMCChannel63Toggle    ; 70
+                        DW      SMCOKButton           ; 71
                         DW      0
 
 SMCBox                  DW      0
@@ -4113,448 +4111,448 @@ SMCDrawChannel          DW      8
 SMCChannel00Toggle      DW      17
                         DB      20, 22
                         DW      1
-                        DW      Offset MultiChannelInfo+00
+                        DW      MultiChannelInfo+00
                         DB      1
                         DW      71, 8, 23, 55
 
 SMCChannel01Toggle      DW      17
                         DB      20, 23
                         DW      1
-                        DW      Offset MultiChannelInfo+01
+                        DW      MultiChannelInfo+01
                         DB      1
                         DW      7, 9, 24, 56
 
 SMCChannel02Toggle      DW      17
                         DB      20, 24
                         DW      1
-                        DW      Offset MultiChannelInfo+02
+                        DW      MultiChannelInfo+02
                         DB      1
                         DW      8, 10, 25, 57
 
 SMCChannel03Toggle      DW      17
                         DB      20, 25
                         DW      1
-                        DW      Offset MultiChannelInfo+03
+                        DW      MultiChannelInfo+03
                         DB      1
                         DW      9, 11, 26, 58
 
 SMCChannel04Toggle      DW      17
                         DB      20, 26
                         DW      1
-                        DW      Offset MultiChannelInfo+04
+                        DW      MultiChannelInfo+04
                         DB      1
                         DW      10, 12, 27, 59
 
 SMCChannel05Toggle      DW      17
                         DB      20, 27
                         DW      1
-                        DW      Offset MultiChannelInfo+05
+                        DW      MultiChannelInfo+05
                         DB      1
                         DW      11, 13, 28, 60
 
 SMCChannel06Toggle      DW      17
                         DB      20, 28
                         DW      1
-                        DW      Offset MultiChannelInfo+06
+                        DW      MultiChannelInfo+06
                         DB      1
                         DW      12, 14, 29, 61
 
 SMCChannel07Toggle      DW      17
                         DB      20, 29
                         DW      1
-                        DW      Offset MultiChannelInfo+07
+                        DW      MultiChannelInfo+07
                         DB      1
                         DW      13, 15, 30, 62
 
 SMCChannel08Toggle      DW      17
                         DB      20, 30
                         DW      1
-                        DW      Offset MultiChannelInfo+08
+                        DW      MultiChannelInfo+08
                         DB      1
                         DW      14, 16, 31, 63
 
 SMCChannel09Toggle      DW      17
                         DB      20, 31
                         DW      1
-                        DW      Offset MultiChannelInfo+09
+                        DW      MultiChannelInfo+09
                         DB      1
                         DW      15, 17, 32, 64
 
 SMCChannel10Toggle      DW      17
                         DB      20, 32
                         DW      1
-                        DW      Offset MultiChannelInfo+10
+                        DW      MultiChannelInfo+10
                         DB      1
                         DW      16, 18, 33, 65
 
 SMCChannel11Toggle      DW      17
                         DB      20, 33
                         DW      1
-                        DW      Offset MultiChannelInfo+11
+                        DW      MultiChannelInfo+11
                         DB      1
                         DW      17, 19, 34, 66
 
 SMCChannel12Toggle      DW      17
                         DB      20, 34
                         DW      1
-                        DW      Offset MultiChannelInfo+12
+                        DW      MultiChannelInfo+12
                         DB      1
                         DW      18, 20, 35, 67
 
 SMCChannel13Toggle      DW      17
                         DB      20, 35
                         DW      1
-                        DW      Offset MultiChannelInfo+13
+                        DW      MultiChannelInfo+13
                         DB      1
                         DW      19, 21, 36, 68
 
 SMCChannel14Toggle      DW      17
                         DB      20, 36
                         DW      1
-                        DW      Offset MultiChannelInfo+14
+                        DW      MultiChannelInfo+14
                         DB      1
                         DW      20, 22, 37, 69
 
 SMCChannel15Toggle      DW      17
                         DB      20, 37
                         DW      1
-                        DW      Offset MultiChannelInfo+15
+                        DW      MultiChannelInfo+15
                         DB      1
                         DW      21, 71, 38, 70
 
 SMCChannel16Toggle      DW      17
                         DB      36, 22
                         DW      1
-                        DW      Offset MultiChannelInfo+16
+                        DW      MultiChannelInfo+16
                         DB      1
                         DW      71, 24, 39, 7
 
 SMCChannel17Toggle      DW      17
                         DB      36, 23
                         DW      1
-                        DW      Offset MultiChannelInfo+17
+                        DW      MultiChannelInfo+17
                         DB      1
                         DW      23, 25, 40, 8
 
 SMCChannel18Toggle      DW      17
                         DB      36, 24
                         DW      1
-                        DW      Offset MultiChannelInfo+18
+                        DW      MultiChannelInfo+18
                         DB      1
                         DW      24, 26, 41, 9
 
 SMCChannel19Toggle      DW      17
                         DB      36, 25
                         DW      1
-                        DW      Offset MultiChannelInfo+19
+                        DW      MultiChannelInfo+19
                         DB      1
                         DW      25, 27, 42, 10
 
 SMCChannel20Toggle      DW      17
                         DB      36, 26
                         DW      1
-                        DW      Offset MultiChannelInfo+20
+                        DW      MultiChannelInfo+20
                         DB      1
                         DW      26, 28, 43, 11
 
 SMCChannel21Toggle      DW      17
                         DB      36, 27
                         DW      1
-                        DW      Offset MultiChannelInfo+21
+                        DW      MultiChannelInfo+21
                         DB      1
                         DW      27, 29, 44, 12
 
 SMCChannel22Toggle      DW      17
                         DB      36, 28
                         DW      1
-                        DW      Offset MultiChannelInfo+22
+                        DW      MultiChannelInfo+22
                         DB      1
                         DW      28, 30, 45, 13
 
 SMCChannel23Toggle      DW      17
                         DB      36, 29
                         DW      1
-                        DW      Offset MultiChannelInfo+23
+                        DW      MultiChannelInfo+23
                         DB      1
                         DW      29, 31, 46, 14
 
 SMCChannel24Toggle      DW      17
                         DB      36, 30
                         DW      1
-                        DW      Offset MultiChannelInfo+24
+                        DW      MultiChannelInfo+24
                         DB      1
                         DW      30, 32, 47, 15
 
 SMCChannel25Toggle      DW      17
                         DB      36, 31
                         DW      1
-                        DW      Offset MultiChannelInfo+25
+                        DW      MultiChannelInfo+25
                         DB      1
                         DW      31, 33, 48, 16
 
 SMCChannel26Toggle      DW      17
                         DB      36, 32
                         DW      1
-                        DW      Offset MultiChannelInfo+26
+                        DW      MultiChannelInfo+26
                         DB      1
                         DW      32, 34, 49, 17
 
 SMCChannel27Toggle      DW      17
                         DB      36, 33
                         DW      1
-                        DW      Offset MultiChannelInfo+27
+                        DW      MultiChannelInfo+27
                         DB      1
                         DW      33, 35, 50, 18
 
 SMCChannel28Toggle      DW      17
                         DB      36, 34
                         DW      1
-                        DW      Offset MultiChannelInfo+28
+                        DW      MultiChannelInfo+28
                         DB      1
                         DW      34, 36, 51, 19
 
 SMCChannel29Toggle      DW      17
                         DB      36, 35
                         DW      1
-                        DW      Offset MultiChannelInfo+29
+                        DW      MultiChannelInfo+29
                         DB      1
                         DW      35, 37, 52, 20
 
 SMCChannel30Toggle      DW      17
                         DB      36, 36
                         DW      1
-                        DW      Offset MultiChannelInfo+30
+                        DW      MultiChannelInfo+30
                         DB      1
                         DW      36, 38, 53, 21
 
 SMCChannel31Toggle      DW      17
                         DB      36, 37
                         DW      1
-                        DW      Offset MultiChannelInfo+31
+                        DW      MultiChannelInfo+31
                         DB      1
                         DW      37, 71, 54, 22
 
 SMCChannel32Toggle      DW      17
                         DB      52, 22
                         DW      1
-                        DW      Offset MultiChannelInfo+32
+                        DW      MultiChannelInfo+32
                         DB      1
                         DW      71, 40, 55, 23
 
 SMCChannel33Toggle      DW      17
                         DB      52, 23
                         DW      1
-                        DW      Offset MultiChannelInfo+33
+                        DW      MultiChannelInfo+33
                         DB      1
                         DW      39, 41, 56, 24
 
 SMCChannel34Toggle      DW      17
                         DB      52, 24
                         DW      1
-                        DW      Offset MultiChannelInfo+34
+                        DW      MultiChannelInfo+34
                         DB      1
                         DW      40, 42, 57, 25
 
 SMCChannel35Toggle      DW      17
                         DB      52, 25
                         DW      1
-                        DW      Offset MultiChannelInfo+35
+                        DW      MultiChannelInfo+35
                         DB      1
                         DW      41, 43, 58, 26
 
 SMCChannel36Toggle      DW      17
                         DB      52, 26
                         DW      1
-                        DW      Offset MultiChannelInfo+36
+                        DW      MultiChannelInfo+36
                         DB      1
                         DW      42, 44, 59, 27
 
 SMCChannel37Toggle      DW      17
                         DB      52, 27
                         DW      1
-                        DW      Offset MultiChannelInfo+37
+                        DW      MultiChannelInfo+37
                         DB      1
                         DW      43, 45, 60, 28
 
 SMCChannel38Toggle      DW      17
                         DB      52, 28
                         DW      1
-                        DW      Offset MultiChannelInfo+38
+                        DW      MultiChannelInfo+38
                         DB      1
                         DW      44, 46, 61, 29
 
 SMCChannel39Toggle      DW      17
                         DB      52, 29
                         DW      1
-                        DW      Offset MultiChannelInfo+39
+                        DW      MultiChannelInfo+39
                         DB      1
                         DW      45, 47, 62, 30
 
 SMCChannel40Toggle      DW      17
                         DB      52, 30
                         DW      1
-                        DW      Offset MultiChannelInfo+40
+                        DW      MultiChannelInfo+40
                         DB      1
                         DW      46, 48, 63, 31
 
 SMCChannel41Toggle      DW      17
                         DB      52, 31
                         DW      1
-                        DW      Offset MultiChannelInfo+41
+                        DW      MultiChannelInfo+41
                         DB      1
                         DW      47, 49, 64, 32
 
 SMCChannel42Toggle      DW      17
                         DB      52, 32
                         DW      1
-                        DW      Offset MultiChannelInfo+42
+                        DW      MultiChannelInfo+42
                         DB      1
                         DW      48, 50, 65, 33
 
 SMCChannel43Toggle      DW      17
                         DB      52, 33
                         DW      1
-                        DW      Offset MultiChannelInfo+43
+                        DW      MultiChannelInfo+43
                         DB      1
                         DW      49, 51, 66, 34
 
 SMCChannel44Toggle      DW      17
                         DB      52, 34
                         DW      1
-                        DW      Offset MultiChannelInfo+44
+                        DW      MultiChannelInfo+44
                         DB      1
                         DW      50, 52, 67, 35
 
 SMCChannel45Toggle      DW      17
                         DB      52, 35
                         DW      1
-                        DW      Offset MultiChannelInfo+45
+                        DW      MultiChannelInfo+45
                         DB      1
                         DW      51, 53, 68, 36
 
 SMCChannel46Toggle      DW      17
                         DB      52, 36
                         DW      1
-                        DW      Offset MultiChannelInfo+46
+                        DW      MultiChannelInfo+46
                         DB      1
                         DW      52, 54, 69, 37
 
 SMCChannel47Toggle      DW      17
                         DB      52, 37
                         DW      1
-                        DW      Offset MultiChannelInfo+47
+                        DW      MultiChannelInfo+47
                         DB      1
                         DW      53, 71, 70, 38
 
 SMCChannel48Toggle      DW      17
                         DB      68, 22
                         DW      1
-                        DW      Offset MultiChannelInfo+48
+                        DW      MultiChannelInfo+48
                         DB      1
                         DW      71, 56, 7, 39
 
 SMCChannel49Toggle      DW      17
                         DB      68, 23
                         DW      1
-                        DW      Offset MultiChannelInfo+49
+                        DW      MultiChannelInfo+49
                         DB      1
                         DW      55, 57, 8, 40
 
 SMCChannel50Toggle      DW      17
                         DB      68, 24
                         DW      1
-                        DW      Offset MultiChannelInfo+50
+                        DW      MultiChannelInfo+50
                         DB      1
                         DW      56, 58, 9, 41
 
 SMCChannel51Toggle      DW      17
                         DB      68, 25
                         DW      1
-                        DW      Offset MultiChannelInfo+51
+                        DW      MultiChannelInfo+51
                         DB      1
                         DW      57, 59, 10, 42
 
 SMCChannel52Toggle      DW      17
                         DB      68, 26
                         DW      1
-                        DW      Offset MultiChannelInfo+52
+                        DW      MultiChannelInfo+52
                         DB      1
                         DW      58, 60, 11, 43
 
 SMCChannel53Toggle      DW      17
                         DB      68, 27
                         DW      1
-                        DW      Offset MultiChannelInfo+53
+                        DW      MultiChannelInfo+53
                         DB      1
                         DW      59, 61, 12, 44
 
 SMCChannel54Toggle      DW      17
                         DB      68, 28
                         DW      1
-                        DW      Offset MultiChannelInfo+54
+                        DW      MultiChannelInfo+54
                         DB      1
                         DW      60, 62, 13, 45
 
 SMCChannel55Toggle      DW      17
                         DB      68, 29
                         DW      1
-                        DW      Offset MultiChannelInfo+55
+                        DW      MultiChannelInfo+55
                         DB      1
                         DW      61, 63, 14, 46
 
 SMCChannel56Toggle      DW      17
                         DB      68, 30
                         DW      1
-                        DW      Offset MultiChannelInfo+56
+                        DW      MultiChannelInfo+56
                         DB      1
                         DW      62, 64, 15, 47
 
 SMCChannel57Toggle      DW      17
                         DB      68, 31
                         DW      1
-                        DW      Offset MultiChannelInfo+57
+                        DW      MultiChannelInfo+57
                         DB      1
                         DW      63, 65, 16, 48
 
 SMCChannel58Toggle      DW      17
                         DB      68, 32
                         DW      1
-                        DW      Offset MultiChannelInfo+58
+                        DW      MultiChannelInfo+58
                         DB      1
                         DW      64, 66, 17, 49
 
 SMCChannel59Toggle      DW      17
                         DB      68, 33
                         DW      1
-                        DW      Offset MultiChannelInfo+59
+                        DW      MultiChannelInfo+59
                         DB      1
                         DW      65, 67, 18, 50
 
 SMCChannel60Toggle      DW      17
                         DB      68, 34
                         DW      1
-                        DW      Offset MultiChannelInfo+60
+                        DW      MultiChannelInfo+60
                         DB      1
                         DW      66, 68, 19, 51
 
 SMCChannel61Toggle      DW      17
                         DB      68, 35
                         DW      1
-                        DW      Offset MultiChannelInfo+61
+                        DW      MultiChannelInfo+61
                         DB      1
                         DW      67, 69, 20, 52
 
 SMCChannel62Toggle      DW      17
                         DB      68, 36
                         DW      1
-                        DW      Offset MultiChannelInfo+62
+                        DW      MultiChannelInfo+62
                         DB      1
                         DW      68, 70, 21, 53
 
 SMCChannel63Toggle      DW      17
                         DB      68, 37
                         DW      1
-                        DW      Offset MultiChannelInfo+63
+                        DW      MultiChannelInfo+63
                         DB      1
                         DW      69, 71, 22, 54
 
@@ -4571,83 +4569,83 @@ SMCOKButton             DW      2
                         DB      "   OK   ", 0
 
 O1_ExchangeSampleList   DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr ExchangeSampleBox
-                        DW      Near Ptr ExchangeSampleText
-                        DW      Near Ptr ExchangeSampleInputBox
-                        DW      Near Ptr ExchangeSampleInput   ; 3
-                        DW      Near Ptr CancelExchangeButton  ; 4
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      ExchangeSampleBox
+                        DW      ExchangeSampleText
+                        DW      ExchangeSampleInputBox
+                        DW      ExchangeSampleInput   ; 3
+                        DW      CancelExchangeButton  ; 4
                         DW      0
 
 O1_ReplaceSampleList    DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr ExchangeSampleBox
-                        DW      Near Ptr ReplaceSampleText
-                        DW      Near Ptr ExchangeSampleInputBox
-                        DW      Near Ptr ExchangeSampleInput   ; 3
-                        DW      Near Ptr CancelExchangeButton  ; 4
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      ExchangeSampleBox
+                        DW      ReplaceSampleText
+                        DW      ExchangeSampleInputBox
+                        DW      ExchangeSampleInput   ; 3
+                        DW      CancelExchangeButton  ; 4
                         DW      0
 
 O1_ReplaceInstrumentList DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr ExchangeSampleBox
-                        DW      Near Ptr ReplaceInstrumentText
-                        DW      Near Ptr ExchangeSampleInputBox
-                        DW      Near Ptr ExchangeSampleInput   ; 3
-                        DW      Near Ptr CancelExchangeButton  ; 4
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      ExchangeSampleBox
+                        DW      ReplaceInstrumentText
+                        DW      ExchangeSampleInputBox
+                        DW      ExchangeSampleInput   ; 3
+                        DW      CancelExchangeButton  ; 4
                         DW      0
 
 O1_SwapSampleList       DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr ExchangeSampleBox
-                        DW      Near Ptr SwapSampleText
-                        DW      Near Ptr ExchangeSampleInputBox
-                        DW      Near Ptr ExchangeSampleInput   ; 3
-                        DW      Near Ptr CancelExchangeButton  ; 4
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      ExchangeSampleBox
+                        DW      SwapSampleText
+                        DW      ExchangeSampleInputBox
+                        DW      ExchangeSampleInput   ; 3
+                        DW      CancelExchangeButton  ; 4
                         DW      0
 
 O1_SwapInstrumentList   DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr ExchangeSampleBox
-                        DW      Near Ptr SwapInstrumentText
-                        DW      Near Ptr ExchangeSampleInputBox
-                        DW      Near Ptr ExchangeSampleInput   ; 3
-                        DW      Near Ptr CancelExchangeButton  ; 4
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      ExchangeSampleBox
+                        DW      SwapInstrumentText
+                        DW      ExchangeSampleInputBox
+                        DW      ExchangeSampleInput   ; 3
+                        DW      CancelExchangeButton  ; 4
                         DW      0
 
 O1_CopyInstrumentList   DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr ExchangeSampleBox
-                        DW      Near Ptr CopyInstrumentText
-                        DW      Near Ptr ExchangeSampleInputBox
-                        DW      Near Ptr ExchangeSampleInput   ; 3
-                        DW      Near Ptr CancelExchangeButton  ; 4
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      ExchangeSampleBox
+                        DW      CopyInstrumentText
+                        DW      ExchangeSampleInputBox
+                        DW      ExchangeSampleInput   ; 3
+                        DW      CancelExchangeButton  ; 4
                         DW      0
 
 O1_ExchangeInstrumentList DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr OKCancelList
-                        DW      Near Ptr ExchangeSampleBox
-                        DW      Near Ptr ExchangeInstrumentText
-                        DW      Near Ptr ExchangeSampleInputBox
-                        DW      Near Ptr ExchangeSampleInput   ; 3
-                        DW      Near Ptr CancelExchangeButton  ; 4
+                        DW      IdleFunctionList
+                        DW      OKCancelList
+                        DW      ExchangeSampleBox
+                        DW      ExchangeInstrumentText
+                        DW      ExchangeSampleInputBox
+                        DW      ExchangeSampleInput   ; 3
+                        DW      CancelExchangeButton  ; 4
                         DW      0
 
 O1_ResizeSampleList     DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESC&ReturnList
-                        DW      Near Ptr ResizeSampleBox        ; 0
-                        DW      Near Ptr ResizeSampleText       ; 1
-                        DW      Near Ptr ResizeSampleInputBox   ; 2
-                        DW      Near Ptr ResizeSampleInput      ; 3
-                        DW      Near Ptr CancelExchangeButton
+                        DW      IdleFunctionList
+                        DW      ESC&ReturnList
+                        DW      ResizeSampleBox        ; 0
+                        DW      ResizeSampleText       ; 1
+                        DW      ResizeSampleInputBox   ; 2
+                        DW      ResizeSampleInput      ; 3
+                        DW      CancelExchangeButton
                         DW      0
 
 ESCF2&ReturnList        DB      0
@@ -4663,7 +4661,7 @@ ESC&ReturnList          DB      0
                         DD      DWord Ptr F_Return1
 
                         DB      5
-                        DW      Near Ptr ChainMIDICommands
+                        DW      ChainMIDICommands
 
 ExchangeSampleBox       DW      0
                         DB      26, 23, 54, 32
@@ -4694,7 +4692,7 @@ ResizeSampleInputBox    DW      0
 ResizeSampleInput       DW      18
                         DB      42, 27
                         DW      2
-                        DW      Offset NewSampleSize
+                        DW      NewSampleSize
                         DD      0
                         DW      0FFFFh, 4, 4, 0FFFFh
 
@@ -4747,7 +4745,7 @@ ExchangeSampleInputBox  DW      0
 ExchangeSampleInput     DW      16
                         DB      42, 27
                         DW      2
-                        DW      Offset SampleNumberInput
+                        DW      SampleNumberInput
                         DW      3
                         DD      DWord Ptr F_Return1
                         DW      0FFFFh, 4, 4, 0FFFFh
@@ -4766,84 +4764,84 @@ CancelExchangeButton    DW      2
 
 
 O1_OrderVolumeList      DW      10
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox ; 0
-                        DW      Near Ptr ScreenHeader  ; 1
-                        DW      Near Ptr FillHeader    ; 2
-                        DW      Near Ptr OrderandVolumeMsg ; 3
-                        DW      Near Ptr OrderBox      ; 4
-                        DW      Near Ptr PanBox1       ; 5
-                        DW      Near Ptr PanBox2       ; 6
-                        DW      Near Ptr ShowChannelMsgs ; 7
-                        DW      Near Ptr VolumeText1      ; 8
-                        DW      Near Ptr VolumeText2      ; 9
-                        DW      Near Ptr OrderList     ; 10
-                        DW      Near Ptr ChannelVol1      ; 11
-                        DW      Near Ptr ChannelVol2      ; 12
-                        DW      Near Ptr ChannelVol3      ; 13
-                        DW      Near Ptr ChannelVol4      ; 14
-                        DW      Near Ptr ChannelVol5      ; 15
-                        DW      Near Ptr ChannelVol6      ; 16
-                        DW      Near Ptr ChannelVol7      ; 17
-                        DW      Near Ptr ChannelVol8      ; 18
-                        DW      Near Ptr ChannelVol9      ; 19
-                        DW      Near Ptr ChannelVol10     ; 20
-                        DW      Near Ptr ChannelVol11     ; 21
-                        DW      Near Ptr ChannelVol12     ; 22
-                        DW      Near Ptr ChannelVol13     ; 23
-                        DW      Near Ptr ChannelVol14     ; 24
-                        DW      Near Ptr ChannelVol15     ; 25
-                        DW      Near Ptr ChannelVol16     ; 26
-                        DW      Near Ptr ChannelVol17
-                        DW      Near Ptr ChannelVol18
-                        DW      Near Ptr ChannelVol19
-                        DW      Near Ptr ChannelVol20
-                        DW      Near Ptr ChannelVol21
-                        DW      Near Ptr ChannelVol22
-                        DW      Near Ptr ChannelVol23
-                        DW      Near Ptr ChannelVol24
-                        DW      Near Ptr ChannelVol25
-                        DW      Near Ptr ChannelVol26
-                        DW      Near Ptr ChannelVol27
-                        DW      Near Ptr ChannelVol28
-                        DW      Near Ptr ChannelVol29
-                        DW      Near Ptr ChannelVol30
-                        DW      Near Ptr ChannelVol31
-                        DW      Near Ptr ChannelVol32
-                        DW      Near Ptr ChannelVol33
-                        DW      Near Ptr ChannelVol34
-                        DW      Near Ptr ChannelVol35
-                        DW      Near Ptr ChannelVol36
-                        DW      Near Ptr ChannelVol37
-                        DW      Near Ptr ChannelVol38
-                        DW      Near Ptr ChannelVol39
-                        DW      Near Ptr ChannelVol40
-                        DW      Near Ptr ChannelVol41
-                        DW      Near Ptr ChannelVol42
-                        DW      Near Ptr ChannelVol43
-                        DW      Near Ptr ChannelVol44
-                        DW      Near Ptr ChannelVol45
-                        DW      Near Ptr ChannelVol46
-                        DW      Near Ptr ChannelVol47
-                        DW      Near Ptr ChannelVol48
-                        DW      Near Ptr ChannelVol49
-                        DW      Near Ptr ChannelVol50
-                        DW      Near Ptr ChannelVol51
-                        DW      Near Ptr ChannelVol52
-                        DW      Near Ptr ChannelVol53
-                        DW      Near Ptr ChannelVol54
-                        DW      Near Ptr ChannelVol55
-                        DW      Near Ptr ChannelVol56
-                        DW      Near Ptr ChannelVol57
-                        DW      Near Ptr ChannelVol58
-                        DW      Near Ptr ChannelVol59
-                        DW      Near Ptr ChannelVol60
-                        DW      Near Ptr ChannelVol61
-                        DW      Near Ptr ChannelVol62
-                        DW      Near Ptr ChannelVol63
-                        DW      Near Ptr ChannelVol64   ; 74
-                        DW      Near Ptr SetHelpContext4
+                        DW      IdleFunctionList
+                        DW      GlobalKeyList
+                        DW      FullScreenBox ; 0
+                        DW      ScreenHeader  ; 1
+                        DW      FillHeader    ; 2
+                        DW      OrderandVolumeMsg ; 3
+                        DW      OrderBox      ; 4
+                        DW      PanBox1       ; 5
+                        DW      PanBox2       ; 6
+                        DW      ShowChannelMsgs ; 7
+                        DW      VolumeText1      ; 8
+                        DW      VolumeText2      ; 9
+                        DW      OrderList     ; 10
+                        DW      ChannelVol1      ; 11
+                        DW      ChannelVol2      ; 12
+                        DW      ChannelVol3      ; 13
+                        DW      ChannelVol4      ; 14
+                        DW      ChannelVol5      ; 15
+                        DW      ChannelVol6      ; 16
+                        DW      ChannelVol7      ; 17
+                        DW      ChannelVol8      ; 18
+                        DW      ChannelVol9      ; 19
+                        DW      ChannelVol10     ; 20
+                        DW      ChannelVol11     ; 21
+                        DW      ChannelVol12     ; 22
+                        DW      ChannelVol13     ; 23
+                        DW      ChannelVol14     ; 24
+                        DW      ChannelVol15     ; 25
+                        DW      ChannelVol16     ; 26
+                        DW      ChannelVol17
+                        DW      ChannelVol18
+                        DW      ChannelVol19
+                        DW      ChannelVol20
+                        DW      ChannelVol21
+                        DW      ChannelVol22
+                        DW      ChannelVol23
+                        DW      ChannelVol24
+                        DW      ChannelVol25
+                        DW      ChannelVol26
+                        DW      ChannelVol27
+                        DW      ChannelVol28
+                        DW      ChannelVol29
+                        DW      ChannelVol30
+                        DW      ChannelVol31
+                        DW      ChannelVol32
+                        DW      ChannelVol33
+                        DW      ChannelVol34
+                        DW      ChannelVol35
+                        DW      ChannelVol36
+                        DW      ChannelVol37
+                        DW      ChannelVol38
+                        DW      ChannelVol39
+                        DW      ChannelVol40
+                        DW      ChannelVol41
+                        DW      ChannelVol42
+                        DW      ChannelVol43
+                        DW      ChannelVol44
+                        DW      ChannelVol45
+                        DW      ChannelVol46
+                        DW      ChannelVol47
+                        DW      ChannelVol48
+                        DW      ChannelVol49
+                        DW      ChannelVol50
+                        DW      ChannelVol51
+                        DW      ChannelVol52
+                        DW      ChannelVol53
+                        DW      ChannelVol54
+                        DW      ChannelVol55
+                        DW      ChannelVol56
+                        DW      ChannelVol57
+                        DW      ChannelVol58
+                        DW      ChannelVol59
+                        DW      ChannelVol60
+                        DW      ChannelVol61
+                        DW      ChannelVol62
+                        DW      ChannelVol63
+                        DW      ChannelVol64   ; 74
+                        DW      SetHelpContext4
                         DW      0
 
 ChannelVol1                DW      9                       ; Object 9
@@ -5295,42 +5293,42 @@ ChannelVol64               DW      9
                         DW      66, 74                  ; PgUp/PgDn
 
 O1_ConfigureITList      DW      14                      ; Song name input
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox ; 0
-                        DW      Near Ptr ScreenHeader  ; 1
-                        DW      Near Ptr FillHeader    ; 2
-                        DW      Near Ptr ConfigureListHeader
-                        DW      Near Ptr DivisionLine
-                        DW      Near Ptr SongVarText1
-                        DW      Near Ptr SongNameBox
-                        DW      Near Ptr InitialSpeedBox
-                        DW      Near Ptr VolumeBox
-                        DW      Near Ptr SongVarText2
-                        DW      Near Ptr LinkCommandGToggle    ; 10
-                        DW      Near Ptr DirectoryText1
-                        DW      Near Ptr DirectoryText2
-                        DW      Near Ptr DirectoryInputBox
-                        DW      Near Ptr SongNameInput         ; 14
-                        DW      Near Ptr InitialTempoInput     ; 15
-                        DW      Near Ptr InitialSpeedInput     ; 16
-                        DW      Near Ptr GlobalVolumeInput     ; 17
-                        DW      Near Ptr MixingVolumeInput     ; 18
-                        DW      Near Ptr SeparationInput       ; 19
-                        DW      Near Ptr OldEffectsModeToggle  ; 20
-                        DW      Near Ptr ConfigSetupButtons    ; 21
-                        DW      Near Ptr ControlInstrumentButton ; 22
-                        DW      Near Ptr ControlSampleButton   ; 23
-                        DW      Near Ptr PlayBackStereoButton   ; 24
-                        DW      Near Ptr PlayBackMonoButton     ; 25
-                        DW      Near Ptr SlideLinearButton      ; 26
-                        DW      Near Ptr SlideAmigaButton       ; 27
-                        DW      Near Ptr SongDirectoryInput     ; 28
-                        DW      Near Ptr SampleDirectoryInput   ; 29
-                        DW      Near Ptr InstrumentDirectoryInput       ; 30
-                        DW      Near Ptr SaveDirectoryConfigButton      ; 31
-                        DW      Near Ptr LinkCommandGToggle     ; 32
-                        DW      Near Ptr SetHelpContext5
+                        DW      IdleFunctionList
+                        DW      GlobalKeyList
+                        DW      FullScreenBox ; 0
+                        DW      ScreenHeader  ; 1
+                        DW      FillHeader    ; 2
+                        DW      ConfigureListHeader
+                        DW      DivisionLine
+                        DW      SongVarText1
+                        DW      SongNameBox
+                        DW      InitialSpeedBox
+                        DW      VolumeBox
+                        DW      SongVarText2
+                        DW      LinkCommandGToggle    ; 10
+                        DW      DirectoryText1
+                        DW      DirectoryText2
+                        DW      DirectoryInputBox
+                        DW      SongNameInput         ; 14
+                        DW      InitialTempoInput     ; 15
+                        DW      InitialSpeedInput     ; 16
+                        DW      GlobalVolumeInput     ; 17
+                        DW      MixingVolumeInput     ; 18
+                        DW      SeparationInput       ; 19
+                        DW      OldEffectsModeToggle  ; 20
+                        DW      ConfigSetupButtons    ; 21
+                        DW      ControlInstrumentButton ; 22
+                        DW      ControlSampleButton   ; 23
+                        DW      PlayBackStereoButton   ; 24
+                        DW      PlayBackMonoButton     ; 25
+                        DW      SlideLinearButton      ; 26
+                        DW      SlideAmigaButton       ; 27
+                        DW      SongDirectoryInput     ; 28
+                        DW      SampleDirectoryInput   ; 29
+                        DW      InstrumentDirectoryInput       ; 30
+                        DW      SaveDirectoryConfigButton      ; 31
+                        DW      LinkCommandGToggle     ; 32
+                        DW      SetHelpContext5
                         DW      0
 
 ConfigureListHeader     DW      10
@@ -5448,14 +5446,14 @@ SeparationInput         DW      9
 OldEffectsModeToggle    DW      17
                         DB      17, 26
                         DW      2
-                        DW      2Ch             ; Offset of 'Flags'
+                        DW      2Ch             ; of 'Flags'
                         DB      16
                         DW      19, 10, 10, 19
 
 LinkCommandGToggle      DW      17
                         DB      17, 27
                         DW      2
-                        DW      2Ch             ; Offset of 'Flags'
+                        DW      2Ch             ; of 'Flags'
                         DB      32
                         DW      20, 22, 22, 20
 
@@ -5538,21 +5536,21 @@ SlideAmigaButton        DW      2
 
 SongDirectoryInput      DW      16
                         DB      13, 42
-                        DW      0, Offset SongDirectory
+                        DW      0, SongDirectory
                         DW      65
                         DD      0
                         DW      26, 29, 29, 26
 
 SampleDirectoryInput    DW      16
                         DB      013, 43
-                        DW      0, Offset SampleDirectory
+                        DW      0, SampleDirectory
                         DW      65
                         DD      0
                         DW      28, 30, 30, 28
 
 InstrumentDirectoryInput DW      16
                         DB      13, 44
-                        DW      0, Offset InstrumentDirectory
+                        DW      0, InstrumentDirectory
                         DW      65
                         DD      0
                         DW      29, 31, 31, 29
@@ -5570,19 +5568,19 @@ SaveDirectoryConfigButton DW    2
                         DB      "  Save all Preferences", 0
 
 O1_KeyboardList         DW      8
-                        DW      Near Ptr IdleKeyboardFunctionList
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox  ; 0
-                        DW      Near Ptr ScreenHeader   ; 1
-                        DW      Near Ptr FillHeader     ; 2
-                        DW      Near Ptr KeyboardHeader ; 3
-                        DW      Near Ptr KeyboardBox1   ; 4
-                        DW      Near Ptr KeyboardBox2   ; 5
-                        DW      Near Ptr KeyboardText1  ; 6
-                        DW      Near Ptr KeyboardText2  ; 7
-                        DW      Near Ptr KBClearTableButton ; 8
-                        DW      Near Ptr KBDrawTables
-                        DW      Near Ptr SetHelpContext8
+                        DW      IdleKeyboardFunctionList
+                        DW      GlobalKeyList
+                        DW      FullScreenBox  ; 0
+                        DW      ScreenHeader   ; 1
+                        DW      FillHeader     ; 2
+                        DW      KeyboardHeader ; 3
+                        DW      KeyboardBox1   ; 4
+                        DW      KeyboardBox2   ; 5
+                        DW      KeyboardText1  ; 6
+                        DW      KeyboardText2  ; 7
+                        DW      KBClearTableButton ; 8
+                        DW      KBDrawTables
+                        DW      SetHelpContext8
                         DW      0
 
 IdleKeyboardFunctionList DD      DWord Ptr IdleUpdateInfoLine
@@ -5627,40 +5625,40 @@ KBClearTableButton      DW      2
 
 
 O1_InstrumentListGeneral DW     4
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr InstrumentGlobalKeyList
-                        DW      Near Ptr FullScreenBox  ; 0
-                        DW      Near Ptr ScreenHeader   ; 1
-                        DW      Near Ptr InstrumentListHeader   ; 2
-                        DW      Near Ptr InstrumentNameBox      ; 3
-                        DW      Near Ptr InstrumentWindow       ; 4
-                        DW      Near Ptr GInstrumentGeneralButton ; 5
-                        DW      Near Ptr GInstrumentVolumeButton ; 6
-                        DW      Near Ptr GInstrumentPanningButton ; 7
-                        DW      Near Ptr GInstrumentPitchButton  ; 8
-                        DW      Near Ptr InstrumentTranslateBox ; 9
-                        DW      Near Ptr InstrumentNoteWindow   ; 10
-                        DW      Near Ptr InstrumentFileDivision
-                        DW      Near Ptr InstrumentDCTDivision
-                        DW      Near Ptr InstrumentGeneralNNAText
-                        DW      Near Ptr InstrumentGeneralDCTText
-                        DW      Near Ptr InstrumentGeneralFileNameText ; 15
-                        DW      Near Ptr NNAButtonCut ; 16
-                        DW      Near Ptr NNAButtonContinue ; 17
-                        DW      Near Ptr NNAButtonOff ;18
-                        DW      Near Ptr NNAButtonFade ; 19
-                        DW      Near Ptr DCTButtonOff   ; 20
-                        DW      Near Ptr DCTButtonNote  ; 21
-                        DW      Near Ptr DCTButtonSample        ; 22
-                        DW      Near Ptr DCTButtonInstrument    ; 23
-                        DW      Near Ptr DCAButtonCut           ; 24
-                        DW      Near Ptr DCAButtonOff           ; 25
-                        DW      Near Ptr DCAButtonFade          ; 26
-                        DW      Near Ptr InstrumentFilenameBox  ; 27
-                        DW      Near Ptr InstrumentFilename     ; 28
-                        DW      Near Ptr InstrumentNNADivision
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr SetHelpContext7
+                        DW      IdleFunctionList
+                        DW      InstrumentGlobalKeyList
+                        DW      FullScreenBox  ; 0
+                        DW      ScreenHeader   ; 1
+                        DW      InstrumentListHeader   ; 2
+                        DW      InstrumentNameBox      ; 3
+                        DW      InstrumentWindow       ; 4
+                        DW      GInstrumentGeneralButton ; 5
+                        DW      GInstrumentVolumeButton ; 6
+                        DW      GInstrumentPanningButton ; 7
+                        DW      GInstrumentPitchButton  ; 8
+                        DW      InstrumentTranslateBox ; 9
+                        DW      InstrumentNoteWindow   ; 10
+                        DW      InstrumentFileDivision
+                        DW      InstrumentDCTDivision
+                        DW      InstrumentGeneralNNAText
+                        DW      InstrumentGeneralDCTText
+                        DW      InstrumentGeneralFileNameText ; 15
+                        DW      NNAButtonCut ; 16
+                        DW      NNAButtonContinue ; 17
+                        DW      NNAButtonOff ;18
+                        DW      NNAButtonFade ; 19
+                        DW      DCTButtonOff   ; 20
+                        DW      DCTButtonNote  ; 21
+                        DW      DCTButtonSample        ; 22
+                        DW      DCTButtonInstrument    ; 23
+                        DW      DCAButtonCut           ; 24
+                        DW      DCAButtonOff           ; 25
+                        DW      DCAButtonFade          ; 26
+                        DW      InstrumentFilenameBox  ; 27
+                        DW      InstrumentFilename     ; 28
+                        DW      InstrumentNNADivision
+                        DW      FillHeader
+                        DW      SetHelpContext7
                         DW      0
 
 InstrumentDCTDivision   DW      1
@@ -5894,41 +5892,41 @@ GInstrumentPitchButton   DW      2
 
 
 O1_InstrumentListVolume DW      4
-                        DW      Near Ptr IdleInstrumentList
-                        DW      Near Ptr InstrumentGlobalKeyList
-                        DW      Near Ptr FullScreenBox  ; 0
-                        DW      Near Ptr ScreenHeader   ; 1
-                        DW      Near Ptr InstrumentListHeader   ; 2
-                        DW      Near Ptr InstrumentNameBox      ; 3
-                        DW      Near Ptr InstrumentWindow       ; 4
-                        DW      Near Ptr VInstrumentGeneralButton ; 5
-                        DW      Near Ptr VInstrumentVolumeButton ; 6
-                        DW      Near Ptr VInstrumentPanningButton ; 7
-                        DW      Near Ptr VInstrumentPitchButton  ; 8
-                        DW      Near Ptr InstrumentEnvelopeBox   ; 9
-                        DW      Near Ptr InstrumentEnvelope     ; 10
-                        DW      Near Ptr InstrumentVEBox        ; 11
-                        DW      Near Ptr InstrumentVELBox       ; 12
-                        DW      Near Ptr InstrumentVESLBox      ; 13
-                        DW      Near Ptr InstrumentVEText       ; 14
-                        DW      Near Ptr InstrumentVELText      ; 15
-                        DW      Near Ptr InstrumentVESLText     ; 16
-                        DW      Near Ptr InstrumentVEToggle     ; 17
-                        DW      Near Ptr InstrumentVELToggle    ; 18
-                        DW      Near Ptr InstrumentVELBeg       ; 19
-                        DW      Near Ptr InstrumentVELEnd       ; 20
-                        DW      Near Ptr InstrumentVESLToggle   ; 21
-                        DW      Near Ptr InstrumentVESLBeg      ; 22
-                        DW      Near Ptr InstrumentVESLEnd      ; 23
-                        DW      Near Ptr InstrumentGlobalVolumeBox ; 24
-                        DW      Near Ptr InstrumentGlobalVolumeText ; 25
-                        DW      Near Ptr InstrumentVolume2      ; 26
-                        DW      Near Ptr InstrumentFadeOut2     ; 27
-                        DW      Near Ptr InstrumentRandomVolBox ; 28
-                        DW      Near Ptr InstrumentRandomVolBar ; 29
-                        DW      Near Ptr InstrumentVECToggle    ; 30
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr SetHelpContext7
+                        DW      IdleInstrumentList
+                        DW      InstrumentGlobalKeyList
+                        DW      FullScreenBox  ; 0
+                        DW      ScreenHeader   ; 1
+                        DW      InstrumentListHeader   ; 2
+                        DW      InstrumentNameBox      ; 3
+                        DW      InstrumentWindow       ; 4
+                        DW      VInstrumentGeneralButton ; 5
+                        DW      VInstrumentVolumeButton ; 6
+                        DW      VInstrumentPanningButton ; 7
+                        DW      VInstrumentPitchButton  ; 8
+                        DW      InstrumentEnvelopeBox   ; 9
+                        DW      InstrumentEnvelope     ; 10
+                        DW      InstrumentVEBox        ; 11
+                        DW      InstrumentVELBox       ; 12
+                        DW      InstrumentVESLBox      ; 13
+                        DW      InstrumentVEText       ; 14
+                        DW      InstrumentVELText      ; 15
+                        DW      InstrumentVESLText     ; 16
+                        DW      InstrumentVEToggle     ; 17
+                        DW      InstrumentVELToggle    ; 18
+                        DW      InstrumentVELBeg       ; 19
+                        DW      InstrumentVELEnd       ; 20
+                        DW      InstrumentVESLToggle   ; 21
+                        DW      InstrumentVESLBeg      ; 22
+                        DW      InstrumentVESLEnd      ; 23
+                        DW      InstrumentGlobalVolumeBox ; 24
+                        DW      InstrumentGlobalVolumeText ; 25
+                        DW      InstrumentVolume2      ; 26
+                        DW      InstrumentFadeOut2     ; 27
+                        DW      InstrumentRandomVolBox ; 28
+                        DW      InstrumentRandomVolBar ; 29
+                        DW      InstrumentVECToggle    ; 30
+                        DW      FillHeader
+                        DW      SetHelpContext7
                         DW      0
 
 InstrumentVEBox         DW      0
@@ -6105,43 +6103,43 @@ VInstrumentPitchButton   DW      2
                         DB      "  Pitch", 0
 
 O1_InstrumentListPanning DW     4
-                        DW      Near Ptr IdleInstrumentList
-                        DW      Near Ptr InstrumentGlobalKeyList
-                        DW      Near Ptr FullScreenBox  ; 0
-                        DW      Near Ptr ScreenHeader   ; 1
-                        DW      Near Ptr InstrumentListHeader   ; 2
-                        DW      Near Ptr InstrumentNameBox      ; 3
-                        DW      Near Ptr InstrumentWindow       ; 4
-                        DW      Near Ptr VInstrumentGeneralButton ; 5
-                        DW      Near Ptr VInstrumentVolumeButton ; 6
-                        DW      Near Ptr VInstrumentPanningButton ; 7
-                        DW      Near Ptr VInstrumentPitchButton  ; 8
-                        DW      Near Ptr InstrumentEnvelopeBox   ; 9
-                        DW      Near Ptr InstrumentEnvelope     ; 10
-                        DW      Near Ptr InstrumentVEBox        ; 11
-                        DW      Near Ptr InstrumentVELBox       ; 12
-                        DW      Near Ptr InstrumentVESLBox      ; 13
-                        DW      Near Ptr InstrumentPanText      ; 14
-                        DW      Near Ptr InstrumentVELText      ; 15
-                        DW      Near Ptr InstrumentVESLText     ; 16
-                        DW      Near Ptr InstrumentPanToggle    ; 17
-                        DW      Near Ptr InstrumentPanLToggle   ; 18
-                        DW      Near Ptr InstrumentPanLBeg      ; 19
-                        DW      Near Ptr InstrumentPanLEnd      ; 20
-                        DW      Near Ptr InstrumentPanSLToggle  ; 21
-                        DW      Near Ptr InstrumentPanSLBeg     ; 22
-                        DW      Near Ptr InstrumentPanSLEnd     ; 23
-                        DW      Near Ptr InstrumentDefaultPanBox ; 24
-                        DW      Near Ptr InstrumentDefaultPanText ; 25
-                        DW      Near Ptr InstrumentDefaultPanToggle ; 26
-                        DW      Near Ptr InstrumentDefaultPanValue ; 27
-                        DW      Near Ptr InstrumentPitchPanCenter  ; 28
-                        DW      Near Ptr InstrumentPitchPanSeparation ; 29
-                        DW      Near Ptr InstrumentPanSwing     ; 30
-                        DW      Near Ptr InstrumentPanBoxFiller
-                        DW      Near Ptr InstrumentPanCToggle   ; 32
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr SetHelpContext7
+                        DW      IdleInstrumentList
+                        DW      InstrumentGlobalKeyList
+                        DW      FullScreenBox  ; 0
+                        DW      ScreenHeader   ; 1
+                        DW      InstrumentListHeader   ; 2
+                        DW      InstrumentNameBox      ; 3
+                        DW      InstrumentWindow       ; 4
+                        DW      VInstrumentGeneralButton ; 5
+                        DW      VInstrumentVolumeButton ; 6
+                        DW      VInstrumentPanningButton ; 7
+                        DW      VInstrumentPitchButton  ; 8
+                        DW      InstrumentEnvelopeBox   ; 9
+                        DW      InstrumentEnvelope     ; 10
+                        DW      InstrumentVEBox        ; 11
+                        DW      InstrumentVELBox       ; 12
+                        DW      InstrumentVESLBox      ; 13
+                        DW      InstrumentPanText      ; 14
+                        DW      InstrumentVELText      ; 15
+                        DW      InstrumentVESLText     ; 16
+                        DW      InstrumentPanToggle    ; 17
+                        DW      InstrumentPanLToggle   ; 18
+                        DW      InstrumentPanLBeg      ; 19
+                        DW      InstrumentPanLEnd      ; 20
+                        DW      InstrumentPanSLToggle  ; 21
+                        DW      InstrumentPanSLBeg     ; 22
+                        DW      InstrumentPanSLEnd     ; 23
+                        DW      InstrumentDefaultPanBox ; 24
+                        DW      InstrumentDefaultPanText ; 25
+                        DW      InstrumentDefaultPanToggle ; 26
+                        DW      InstrumentDefaultPanValue ; 27
+                        DW      InstrumentPitchPanCenter  ; 28
+                        DW      InstrumentPitchPanSeparation ; 29
+                        DW      InstrumentPanSwing     ; 30
+                        DW      InstrumentPanBoxFiller
+                        DW      InstrumentPanCToggle   ; 32
+                        DW      FillHeader
+                        DW      SetHelpContext7
                         DW      0
 
 InstrumentPanBoxFiller  DW      1
@@ -6249,55 +6247,55 @@ InstrumentPanSwing      DW      9
                         DW      0FFFFh, 0FFFFh
 
 O1_InstrumentListPitch  DW      4
-                        DW      Near Ptr IdleInstrumentList
-                        DW      Near Ptr InstrumentGlobalKeyList
-                        DW      Near Ptr FullScreenBox  ; 0
-                        DW      Near Ptr ScreenHeader   ; 1
-                        DW      Near Ptr InstrumentListHeader   ; 2
-                        DW      Near Ptr InstrumentNameBox      ; 3
-                        DW      Near Ptr InstrumentWindow       ; 4
-                        DW      Near Ptr VInstrumentGeneralButton ; 5
-                        DW      Near Ptr VInstrumentVolumeButton ; 6
-                        DW      Near Ptr VInstrumentPanningButton ; 7
-                        DW      Near Ptr VInstrumentPitchButton  ; 8
-                        DW      Near Ptr InstrumentEnvelopeBox   ; 9
-                        DW      Near Ptr InstrumentEnvelope     ; 10
-                        DW      Near Ptr InstrumentVEBox        ; 11
-                        DW      Near Ptr InstrumentVELBox       ; 12
-                        DW      Near Ptr InstrumentVESLBox      ; 13
-                        DW      Near Ptr InstrumentPitchText    ; 14
-                        DW      Near Ptr InstrumentVELText      ; 15
-                        DW      Near Ptr InstrumentVESLText     ; 16
-                        DW      Near Ptr InstrumentPitchToggle  ; 17
-                        DW      Near Ptr InstrumentPitchLToggle ; 18
-                        DW      Near Ptr InstrumentPitchLBeg    ; 19
-                        DW      Near Ptr InstrumentPitchLEnd     ; 20
-                        DW      Near Ptr InstrumentPitchSLToggle ; 21
-                        DW      Near Ptr InstrumentPitchSLBeg    ; 22
-                        DW      Near Ptr InstrumentPitchSLEnd    ; 23
-                        DW      Near Ptr InstrumentMIDIBox1     ; 24
-                        DW      Near Ptr InstrumentMIDIChannel  ; 25
-                        DW      Near Ptr InstrumentMIDIProgram  ; 26
-                        DW      Near Ptr InstrumentMIDIBank1    ; 27
-                        DW      Near Ptr InstrumentMIDIBank2    ; 28
-                        DW      Near Ptr InstrumentPitchCToggle ; 29
-IF FILTERENVELOPES
-                        DW      Near Ptr InstrumentFilterCutoff ; 30
-                        DW      Near Ptr InstrumentFilterResonance ; 31
-ENDIF
-                        DW      Near Ptr InstrumentMIDIText
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr SetHelpContext7
+                        DW      IdleInstrumentList
+                        DW      InstrumentGlobalKeyList
+                        DW      FullScreenBox  ; 0
+                        DW      ScreenHeader   ; 1
+                        DW      InstrumentListHeader   ; 2
+                        DW      InstrumentNameBox      ; 3
+                        DW      InstrumentWindow       ; 4
+                        DW      VInstrumentGeneralButton ; 5
+                        DW      VInstrumentVolumeButton ; 6
+                        DW      VInstrumentPanningButton ; 7
+                        DW      VInstrumentPitchButton  ; 8
+                        DW      InstrumentEnvelopeBox   ; 9
+                        DW      InstrumentEnvelope     ; 10
+                        DW      InstrumentVEBox        ; 11
+                        DW      InstrumentVELBox       ; 12
+                        DW      InstrumentVESLBox      ; 13
+                        DW      InstrumentPitchText    ; 14
+                        DW      InstrumentVELText      ; 15
+                        DW      InstrumentVESLText     ; 16
+                        DW      InstrumentPitchToggle  ; 17
+                        DW      InstrumentPitchLToggle ; 18
+                        DW      InstrumentPitchLBeg    ; 19
+                        DW      InstrumentPitchLEnd     ; 20
+                        DW      InstrumentPitchSLToggle ; 21
+                        DW      InstrumentPitchSLBeg    ; 22
+                        DW      InstrumentPitchSLEnd    ; 23
+                        DW      InstrumentMIDIBox1     ; 24
+                        DW      InstrumentMIDIChannel  ; 25
+                        DW      InstrumentMIDIProgram  ; 26
+                        DW      InstrumentMIDIBank1    ; 27
+                        DW      InstrumentMIDIBank2    ; 28
+                        DW      InstrumentPitchCToggle ; 29
+%IF  FILTERENVELOPES
+                        DW      InstrumentFilterCutoff ; 30
+                        DW      InstrumentFilterResonance ; 31
+%ENDIF 
+                        DW      InstrumentMIDIText
+                        DW      FillHeader
+                        DW      SetHelpContext7
                         DW      0
 
 InstrumentMIDIText      DW      1
                         DB      36, 42
                         DB      20h
 
-IF FILTERENVELOPES
+%IF  FILTERENVELOPES
                         DB      "Default Cutoff", 13
                         DB      "Default Resonance", 13
-ENDIF
+%ENDIF 
                         DB      "MIDI Channel", 13
                         DB      "MIDI Program", 13
                         DB      "MIDI Bank Low", 13
@@ -6355,25 +6353,25 @@ InstrumentPitchSLEnd    DW      13
                         DB      54, 39
                         DW      0, 1D9h
                         DD      0
-IF FILTERENVELOPES
+%IF  FILTERENVELOPES
                         DW      22, 30, 4, 4
-ELSE
+%ELSE
                         DW      22, 25, 4, 4
-ENDIF
+%ENDIF 
 
 InstrumentMIDIChannel   DW      14
-IF FILTERENVELOPES
+%IF  FILTERENVELOPES
                         DB      54, 44
-ELSE
+%ELSE
                         DB      54, 42
-ENDIF
+%ENDIF 
                         DW      0, 17
                         DW      6, 3Ch
-IF FILTERENVELOPES
+%IF  FILTERENVELOPES
                         DW      30, 26, 4, 4
-ELSE
+%ELSE
                         DW      23, 26, 4, 4
-ENDIF
+%ENDIF 
 
                         DW      0FFFFh, 0FFFFh
                         DW      16
@@ -6395,11 +6393,11 @@ InstrumentFilterResonance DW      14
                         DW      16
 
 InstrumentMIDIProgram   DW      14
-IF FILTERENVELOPES
+%IF  FILTERENVELOPES
                         DB      54, 45
-ELSE
+%ELSE
                         DB      54, 43
-ENDIF
+%ENDIF 
                         DW      -1, 127
                         DW      6, 3Dh
                         DW      25, 27, 4, 4
@@ -6407,11 +6405,11 @@ ENDIF
                         DW      16
 
 InstrumentMIDIBank1     DW      14
-IF FILTERENVELOPES
+%IF  FILTERENVELOPES
                         DB      54, 46
-ELSE
+%ELSE
                         DB      54, 44
-ENDIF
+%ENDIF 
                         DW      -1, 127
                         DW      6, 3Eh
                         DW      26, 28, 4, 4
@@ -6419,11 +6417,11 @@ ENDIF
                         DW      16
 
 InstrumentMIDIBank2     DW      14
-IF FILTERENVELOPES
+%IF  FILTERENVELOPES
                         DB      54, 47
-ELSE
+%ELSE
                         DB      54, 45
-ENDIF
+%ENDIF 
                         DW      -1, 127
                         DW      6, 3Fh
                         DW      27, 0FFFFh, 4, 4
@@ -6442,11 +6440,11 @@ InstrumentTranslateBox  DW      0
                         DB      27
 
 InstrumentMIDIBox1      DW      0
-IF FILTERENVELOPES
+%IF  FILTERENVELOPES
                         DB      53, 41, 71, 48
-ELSE
+%ELSE
                         DB      53, 41, 71, 46
-ENDIF
+%ENDIF 
                         DB      27
 
 InstrumentWindow        DW      15
@@ -6460,11 +6458,11 @@ InstrumentNoteWindow    DW      15
                         DD      DWord Ptr I_PostNoteWindow
 
 InstrumentGlobalKeyList Label
-IF ENABLESOLO
+%IF  ENABLESOLO
                         DB      1
                         DW      '`'
                         DD      DWord Ptr Music_ToggleSoloInstrument
-ENDIF
+%ENDIF 
 
                         DB      3               ; Ctrl
                         DW      1C9h
@@ -6551,25 +6549,25 @@ ENDIF
                         DD      DWord Ptr I_PlayNote
 
                         DB      5
-                        DW      Offset GlobalKeyList
+                        DW      GlobalKeyList
 
 O1_DisplayList          DW      4
-                        DW      Near Ptr InfoPageIdleList
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox ; 0
-                        DW      Near Ptr ScreenHeader  ; 1
-                        DW      Near Ptr FillHeader    ; 2
-                        DW      Near Ptr DisplayHeader ; 3
-                        DW      Near Ptr DisplayObject ; 4
-                        DW      Near Ptr SetHelpContext9
+                        DW      InfoPageIdleList
+                        DW      GlobalKeyList
+                        DW      FullScreenBox ; 0
+                        DW      ScreenHeader  ; 1
+                        DW      FillHeader    ; 2
+                        DW      DisplayHeader ; 3
+                        DW      DisplayObject ; 4
+                        DW      SetHelpContext9
                         DW      0
 
 O1_FullDisplayList      DW      1
-                        DW      Near Ptr InfoPageIdleList
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox ; 0
-                        DW      Near Ptr DisplayObject ; 1
-                        DW      Near Ptr SetHelpContext9
+                        DW      InfoPageIdleList
+                        DW      GlobalKeyList
+                        DW      FullScreenBox ; 0
+                        DW      DisplayObject ; 1
+                        DW      SetHelpContext9
                         DW      0
 
 InfoPageIdleList        Label   DWord
@@ -6585,12 +6583,12 @@ DisplayObject           DW      15
                         DD      DWord Ptr PostDisplayData
 
 O1_ThumbStringList      DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESC&ReturnList
-                        DW      Near Ptr ThumbBox
-                        DW      Near Ptr ThumbInputText
-                        DW      Near Ptr ThumbInputBox
-                        DW      Near Ptr ThumbInput
+                        DW      IdleFunctionList
+                        DW      ESC&ReturnList
+                        DW      ThumbBox
+                        DW      ThumbInputText
+                        DW      ThumbInputBox
+                        DW      ThumbInput
                         DW      0
 
 ThumbBox                DW      0
@@ -6608,27 +6606,27 @@ ThumbInputBox           DW      0
 
 ThumbInput              DW      16
                         DB      44, 26
-                        DW      5, Offset ThumbStringEnter
+                        DW      5, ThumbStringEnter
                         DW      4
                         DD      0               ; No function
                         DW      0FFFFh, 0FFFFh, 0FFFFh, 0FFFFh
 
 O1_NewSongList          DW      11
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr NewSongBox             ; 0
-                        DW      Near Ptr NewSongText            ; 1
-                        DW      Near Ptr NewSongText2           ; 2
-                        DW      Near Ptr KeepPatternButton      ; 3
-                        DW      Near Ptr ClearPatternButton     ; 4
-                        DW      Near Ptr KeepSampleButton       ; 5
-                        DW      Near Ptr ClearSampleButton      ; 6
-                        DW      Near Ptr KeepInstrumentButton   ; 7
-                        DW      Near Ptr ClearInstrumentButton  ; 8
-                        DW      Near Ptr KeepOrderListButton    ; 9
-                        DW      Near Ptr ClearOrderListButton   ; 10
-                        DW      Near Ptr NewSongOKButton        ; 11
-                        DW      Near Ptr NewSongCancelButton    ; 12
+                        DW      IdleFunctionList
+                        DW      ESCReturnList
+                        DW      NewSongBox             ; 0
+                        DW      NewSongText            ; 1
+                        DW      NewSongText2           ; 2
+                        DW      KeepPatternButton      ; 3
+                        DW      ClearPatternButton     ; 4
+                        DW      KeepSampleButton       ; 5
+                        DW      ClearSampleButton      ; 6
+                        DW      KeepInstrumentButton   ; 7
+                        DW      ClearInstrumentButton  ; 8
+                        DW      KeepOrderListButton    ; 9
+                        DW      ClearOrderListButton   ; 10
+                        DW      NewSongOKButton        ; 11
+                        DW      NewSongCancelButton    ; 12
 
                         DW      0
 
@@ -6778,20 +6776,20 @@ NewSongCancelButton     DW      2
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 O1_MainMenu             DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr MainMenuBox1           ; 0
-                        DW      Near Ptr MainMenuBox2           ; 1
-                        DW      Near Ptr MainMenuText           ; 2
-                        DW      Near Ptr MainMenuFile           ; 3
-                        DW      Near Ptr MainMenuPlayBack       ; 4
-                        DW      Near Ptr MainMenuViewPatterns   ; 5
-                        DW      Near Ptr MainMenuViewSamples    ; 6
-                        DW      Near Ptr MainMenuViewInstruments; 7
-                        DW      Near Ptr MainMenuViewOrderPan   ; 8
-                        DW      Near Ptr MainMenuViewVariables  ; 9
-                        DW      Near Ptr MainMenuMessage
-                        DW      Near Ptr MainMenuHelp           ; 11
+                        DW      IdleFunctionList
+                        DW      ESCReturnList
+                        DW      MainMenuBox1           ; 0
+                        DW      MainMenuBox2           ; 1
+                        DW      MainMenuText           ; 2
+                        DW      MainMenuFile           ; 3
+                        DW      MainMenuPlayBack       ; 4
+                        DW      MainMenuViewPatterns   ; 5
+                        DW      MainMenuViewSamples    ; 6
+                        DW      MainMenuViewInstruments; 7
+                        DW      MainMenuViewOrderPan   ; 8
+                        DW      MainMenuViewVariables  ; 9
+                        DW      MainMenuMessage
+                        DW      MainMenuHelp           ; 11
 
                         DW      0
 
@@ -6917,17 +6915,17 @@ MainMenuHelp            DW      2
                         DB      " Help!                (F1)", 0
 
 O1_FileMenu             DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr FileBox1       ; 0
-                        DW      Near Ptr FileBox2       ; 1
-                        DW      Near Ptr FileMenuText   ; 2
-                        DW      Near Ptr FileLoad       ; 3
-                        DW      Near Ptr FileNew
-                        DW      Near Ptr FileSaveCurrent
-                        DW      Near Ptr FileSaveAs
-                        DW      Near Ptr FileDOSShell
-                        DW      Near Ptr FileQuit
+                        DW      IdleFunctionList
+                        DW      ESCReturnList
+                        DW      FileBox1       ; 0
+                        DW      FileBox2       ; 1
+                        DW      FileMenuText   ; 2
+                        DW      FileLoad       ; 3
+                        DW      FileNew
+                        DW      FileSaveCurrent
+                        DW      FileSaveAs
+                        DW      FileDOSShell
+                        DW      FileQuit
                         DW      0
 
 FileBox1                DW      0
@@ -7016,20 +7014,20 @@ FileQuit                DW      2
                         DB      " Quit          (Ctrl-Q)", 0
 
 O1_PlayBackMenu         DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr PlayBackBox1           ; 0
-                        DW      Near Ptr PlayBackBox2           ; 1
-                        DW      Near Ptr PlayBackText           ; 2
-                        DW      Near Ptr PlayBackShowInfoPage   ; 3
-                        DW      Near Ptr PlayBackSong           ; 4
-                        DW      Near Ptr PlayBackPattern        ; 5
-                        DW      Near Ptr PlayBackOrder          ; 6
-                        DW      Near Ptr PlayBackMark           ; 7
-                        DW      Near Ptr PlayBackStop           ; 8
-                        DW      Near Ptr PlayBackReinit         ; 9
-                        DW      Near Ptr PlayBackDriverScreen   ; 10
-                        DW      Near Ptr PlayBackCalculateLength ; 11
+                        DW      IdleFunctionList
+                        DW      ESCReturnList
+                        DW      PlayBackBox1           ; 0
+                        DW      PlayBackBox2           ; 1
+                        DW      PlayBackText           ; 2
+                        DW      PlayBackShowInfoPage   ; 3
+                        DW      PlayBackSong           ; 4
+                        DW      PlayBackPattern        ; 5
+                        DW      PlayBackOrder          ; 6
+                        DW      PlayBackMark           ; 7
+                        DW      PlayBackStop           ; 8
+                        DW      PlayBackReinit         ; 9
+                        DW      PlayBackDriverScreen   ; 10
+                        DW      PlayBackCalculateLength ; 11
                         DW      0
 
 PlayBackBox1            DW      0
@@ -7155,14 +7153,14 @@ PlayBackCalculateLength DW      2
 
 
 O1_SampleMenu           DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr SampleBox1           ; 0
-                        DW      Near Ptr SampleBox2           ; 1
-                        DW      Near Ptr SampleText           ; 2
-                        DW      Near Ptr SampleMenuList       ; 3
-                        DW      Near Ptr SampleLibrary        ; 4
-                        DW      Near Ptr ReloadGravis         ; 5
+                        DW      IdleFunctionList
+                        DW      ESCReturnList
+                        DW      SampleBox1           ; 0
+                        DW      SampleBox2           ; 1
+                        DW      SampleText           ; 2
+                        DW      SampleMenuList       ; 3
+                        DW      SampleLibrary        ; 4
+                        DW      ReloadGravis         ; 5
 
                         DW      0
 
@@ -7217,13 +7215,13 @@ ReloadGravis            DW      2
                         DB      " Reload Soundcard (Ctrl-G)", 0
 
 O1_InstrumentMenu       DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr InstrumentBox1       ; 0
-                        DW      Near Ptr InstrumentBox2       ; 1
-                        DW      Near Ptr InstrumentText       ; 2
-                        DW      Near Ptr InstrumentMenuList   ; 3
-                        DW      Near Ptr InstrumentLibrary    ; 4
+                        DW      IdleFunctionList
+                        DW      ESCReturnList
+                        DW      InstrumentBox1       ; 0
+                        DW      InstrumentBox2       ; 1
+                        DW      InstrumentText       ; 2
+                        DW      InstrumentMenuList   ; 3
+                        DW      InstrumentLibrary    ; 4
                         DW      0
 
 InstrumentBox1          DW      0
@@ -7290,27 +7288,27 @@ EditSampleNameInputBox  DW      0
 
 EditSampleNameInput     DW      16
                         DB      27, 29
-                        DW      0, Offset SampleName
+                        DW      0, SampleName
                         DW      26
                         DD      DWord Ptr F_Return1
                         DW      0FFFFh, 0FFFFh, 0FFFFh, 0FFFFh
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-IF MEMORYDEBUG
+%IF  MEMORYDEBUG
 
 O1_DebugList            DW      5
-                        DW      Near Ptr IdleDebugFunctionList
-                        DW      Near Ptr DebugKeyList
-                        DW      Near Ptr FullScreenBox
-                        DW      Near Ptr ScreenHeader
-                        DW      Near Ptr DebugBox
-                        DW      Near Ptr DebugText
-                        DW      Near Ptr DebugInputBox
-                        DW      Near Ptr DebugAddressInput
-                        DW      Near Ptr DebugInfo
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr DebugHeader
+                        DW      IdleDebugFunctionList
+                        DW      DebugKeyList
+                        DW      FullScreenBox
+                        DW      ScreenHeader
+                        DW      DebugBox
+                        DW      DebugText
+                        DW      DebugInputBox
+                        DW      DebugAddressInput
+                        DW      DebugInfo
+                        DW      FillHeader
+                        DW      DebugHeader
                         DW      0
 
 
@@ -7341,7 +7339,7 @@ DebugKeyList            Label
                         DD      DWord Ptr F_DebugPgDn
 
                         DB      5
-                        DW      Offset GlobalKeyList
+                        DW      GlobalKeyList
 
 
 DebugBox                DW      0
@@ -7359,7 +7357,7 @@ DebugInputBox           DW      0
 
 DebugAddressInput       DW      16
                         DB      12, 47
-                        DW      5, Offset AddressInput
+                        DW      5, AddressInput
                         DW      18
                         DD      DWord Ptr F_DebugStringInput
                         DW      0FFFFh, 0FFFFh, 0FFFFh, 0FFFFh
@@ -7367,122 +7365,122 @@ DebugAddressInput       DW      16
 DebugHeader             DW      10
                         DB      "Debug", 0
 
-ENDIF
+%ENDIF 
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 O1_ConfigurePaletteList DW      53
                         DW      IdleFunctionList
                         DW      GlobalKeyList
-                        DW      Near Ptr FullScreenBox ; 0
-                        DW      Near Ptr ScreenHeader  ; 1
-                        DW      Near Ptr FillHeader    ; 2
-                        DW      Near Ptr ConfigurePaletteHeader ; 3
-                        DW      Near Ptr SetHelpContext10
-                        DW      Near Ptr PaletteColourBorder1
-                        DW      Near Ptr PaletteColourBorder2
-                        DW      Near Ptr PaletteColourBorder3
-                        DW      Near Ptr PaletteColourBorder4
-                        DW      Near Ptr PaletteColourBorder5
-                        DW      Near Ptr PaletteColourBorder6   ; 10
-                        DW      Near Ptr PaletteColourBorder7
-                        DW      Near Ptr PaletteColourBorder8
-                        DW      Near Ptr PaletteColourBorder9
-                        DW      Near Ptr PaletteColourBorder10
-                        DW      Near Ptr PaletteColourBorder11
-                        DW      Near Ptr PaletteColourBorder12
-                        DW      Near Ptr PaletteColourBorder13
-                        DW      Near Ptr PaletteColourBorder14
-                        DW      Near Ptr PaletteColourBorder15
-                        DW      Near Ptr PaletteColourBorder16  ; 20
-                        DW      Near Ptr PaletteColourBox1
-                        DW      Near Ptr PaletteColourBox2
-                        DW      Near Ptr PaletteColourBox3
-                        DW      Near Ptr PaletteColourBox4
-                        DW      Near Ptr PaletteColourBox5
-                        DW      Near Ptr PaletteColourBox6
-                        DW      Near Ptr PaletteColourBox7
-                        DW      Near Ptr PaletteColourBox8
-                        DW      Near Ptr PaletteColourBox9
-                        DW      Near Ptr PaletteColourBox10     ; 30
-                        DW      Near Ptr PaletteColourBox11
-                        DW      Near Ptr PaletteColourBox12
-                        DW      Near Ptr PaletteColourBox13
-                        DW      Near Ptr PaletteColourBox14
-                        DW      Near Ptr PaletteColourBox15
-                        DW      Near Ptr PaletteColourBox16
-                        DW      Near Ptr PaletteInputBox1
-                        DW      Near Ptr PaletteInputBox2
-                        DW      Near Ptr PaletteInputBox3
-                        DW      Near Ptr PaletteInputBox4       ; 40
-                        DW      Near Ptr PaletteInputBox5
-                        DW      Near Ptr PaletteInputBox6
-                        DW      Near Ptr PaletteInputBox7
-                        DW      Near Ptr PaletteInputBox8
-                        DW      Near Ptr PaletteInputBox9
-                        DW      Near Ptr PaletteInputBox10
-                        DW      Near Ptr PaletteInputBox11
-                        DW      Near Ptr PaletteInputBox12
-                        DW      Near Ptr PaletteInputBox13
-                        DW      Near Ptr PaletteInputBox14      ; 50
-                        DW      Near Ptr PaletteInputBox15
-                        DW      Near Ptr PaletteInputBox16
-                        DW      Near Ptr Colour0RedInput        ; 53
-                        DW      Near Ptr Colour0GreenInput
-                        DW      Near Ptr Colour0BlueInput
-                        DW      Near Ptr Colour1RedInput        ; 56
-                        DW      Near Ptr Colour1GreenInput
-                        DW      Near Ptr Colour1BlueInput
-                        DW      Near Ptr Colour2RedInput
-                        DW      Near Ptr Colour2GreenInput      ; 60
-                        DW      Near Ptr Colour2BlueInput
-                        DW      Near Ptr Colour3RedInput
-                        DW      Near Ptr Colour3GreenInput
-                        DW      Near Ptr Colour3BlueInput
-                        DW      Near Ptr Colour4RedInput
-                        DW      Near Ptr Colour4GreenInput
-                        DW      Near Ptr Colour4BlueInput
-                        DW      Near Ptr Colour5RedInput
-                        DW      Near Ptr Colour5GreenInput
-                        DW      Near Ptr Colour5BlueInput       ; 70
-                        DW      Near Ptr Colour6RedInput
-                        DW      Near Ptr Colour6GreenInput
-                        DW      Near Ptr Colour6BlueInput
-                        DW      Near Ptr Colour7RedInput        ; 74
-                        DW      Near Ptr Colour7GreenInput
-                        DW      Near Ptr Colour7BlueInput
-                        DW      Near Ptr Colour8RedInput
-                        DW      Near Ptr Colour8GreenInput
-                        DW      Near Ptr Colour8BlueInput
-                        DW      Near Ptr Colour9RedInput        ; 80
-                        DW      Near Ptr Colour9GreenInput
-                        DW      Near Ptr Colour9BlueInput
-                        DW      Near Ptr Colour10RedInput
-                        DW      Near Ptr Colour10GreenInput
-                        DW      Near Ptr Colour10BlueInput
-                        DW      Near Ptr Colour11RedInput
-                        DW      Near Ptr Colour11GreenInput
-                        DW      Near Ptr Colour11BlueInput
-                        DW      Near Ptr Colour12RedInput
-                        DW      Near Ptr Colour12GreenInput     ; 90
-                        DW      Near Ptr Colour12BlueInput
-                        DW      Near Ptr Colour13RedInput
-                        DW      Near Ptr Colour13GreenInput
-                        DW      Near Ptr Colour13BlueInput
-                        DW      Near Ptr Colour14RedInput
-                        DW      Near Ptr Colour14GreenInput
-                        DW      Near Ptr Colour14BlueInput
-                        DW      Near Ptr Colour15RedInput
-                        DW      Near Ptr Colour15GreenInput
-                        DW      Near Ptr Colour15BlueInput      ; 100
-                        DW      Near Ptr PredefinedPaletteMsg
-                        DW      Near Ptr PredefinedPalette1
-                        DW      Near Ptr PredefinedPalette2
-                        DW      Near Ptr PredefinedPalette3
-                        DW      Near Ptr PredefinedPalette4
-                        DW      Near Ptr PredefinedPalette5
-                        DW      Near Ptr PredefinedPalette6
-                        DW      Near Ptr PredefinedPalette7
+                        DW      FullScreenBox ; 0
+                        DW      ScreenHeader  ; 1
+                        DW      FillHeader    ; 2
+                        DW      ConfigurePaletteHeader ; 3
+                        DW      SetHelpContext10
+                        DW      PaletteColourBorder1
+                        DW      PaletteColourBorder2
+                        DW      PaletteColourBorder3
+                        DW      PaletteColourBorder4
+                        DW      PaletteColourBorder5
+                        DW      PaletteColourBorder6   ; 10
+                        DW      PaletteColourBorder7
+                        DW      PaletteColourBorder8
+                        DW      PaletteColourBorder9
+                        DW      PaletteColourBorder10
+                        DW      PaletteColourBorder11
+                        DW      PaletteColourBorder12
+                        DW      PaletteColourBorder13
+                        DW      PaletteColourBorder14
+                        DW      PaletteColourBorder15
+                        DW      PaletteColourBorder16  ; 20
+                        DW      PaletteColourBox1
+                        DW      PaletteColourBox2
+                        DW      PaletteColourBox3
+                        DW      PaletteColourBox4
+                        DW      PaletteColourBox5
+                        DW      PaletteColourBox6
+                        DW      PaletteColourBox7
+                        DW      PaletteColourBox8
+                        DW      PaletteColourBox9
+                        DW      PaletteColourBox10     ; 30
+                        DW      PaletteColourBox11
+                        DW      PaletteColourBox12
+                        DW      PaletteColourBox13
+                        DW      PaletteColourBox14
+                        DW      PaletteColourBox15
+                        DW      PaletteColourBox16
+                        DW      PaletteInputBox1
+                        DW      PaletteInputBox2
+                        DW      PaletteInputBox3
+                        DW      PaletteInputBox4       ; 40
+                        DW      PaletteInputBox5
+                        DW      PaletteInputBox6
+                        DW      PaletteInputBox7
+                        DW      PaletteInputBox8
+                        DW      PaletteInputBox9
+                        DW      PaletteInputBox10
+                        DW      PaletteInputBox11
+                        DW      PaletteInputBox12
+                        DW      PaletteInputBox13
+                        DW      PaletteInputBox14      ; 50
+                        DW      PaletteInputBox15
+                        DW      PaletteInputBox16
+                        DW      Colour0RedInput        ; 53
+                        DW      Colour0GreenInput
+                        DW      Colour0BlueInput
+                        DW      Colour1RedInput        ; 56
+                        DW      Colour1GreenInput
+                        DW      Colour1BlueInput
+                        DW      Colour2RedInput
+                        DW      Colour2GreenInput      ; 60
+                        DW      Colour2BlueInput
+                        DW      Colour3RedInput
+                        DW      Colour3GreenInput
+                        DW      Colour3BlueInput
+                        DW      Colour4RedInput
+                        DW      Colour4GreenInput
+                        DW      Colour4BlueInput
+                        DW      Colour5RedInput
+                        DW      Colour5GreenInput
+                        DW      Colour5BlueInput       ; 70
+                        DW      Colour6RedInput
+                        DW      Colour6GreenInput
+                        DW      Colour6BlueInput
+                        DW      Colour7RedInput        ; 74
+                        DW      Colour7GreenInput
+                        DW      Colour7BlueInput
+                        DW      Colour8RedInput
+                        DW      Colour8GreenInput
+                        DW      Colour8BlueInput
+                        DW      Colour9RedInput        ; 80
+                        DW      Colour9GreenInput
+                        DW      Colour9BlueInput
+                        DW      Colour10RedInput
+                        DW      Colour10GreenInput
+                        DW      Colour10BlueInput
+                        DW      Colour11RedInput
+                        DW      Colour11GreenInput
+                        DW      Colour11BlueInput
+                        DW      Colour12RedInput
+                        DW      Colour12GreenInput     ; 90
+                        DW      Colour12BlueInput
+                        DW      Colour13RedInput
+                        DW      Colour13GreenInput
+                        DW      Colour13BlueInput
+                        DW      Colour14RedInput
+                        DW      Colour14GreenInput
+                        DW      Colour14BlueInput
+                        DW      Colour15RedInput
+                        DW      Colour15GreenInput
+                        DW      Colour15BlueInput      ; 100
+                        DW      PredefinedPaletteMsg
+                        DW      PredefinedPalette1
+                        DW      PredefinedPalette2
+                        DW      PredefinedPalette3
+                        DW      PredefinedPalette4
+                        DW      PredefinedPalette5
+                        DW      PredefinedPalette6
+                        DW      PredefinedPalette7
                         DW      0
 
 ConfigurePaletteHeader  DW      10
@@ -7731,289 +7729,289 @@ PaletteInputBox16       DW      0
 Colour0RedInput         DW      9
                         DB      10, 14
                         DW      0, 63
-                        DW      7, Offset PaletteDefs
+                        DW      7, PaletteDefs
                         DW      0FFFFh, 54, 74, 95, 0FFFFh, 56
 
 Colour0GreenInput       DW      9
                         DB      10, 15
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+1
+                        DW      7, PaletteDefs+1
                         DW      53, 55, 75, 96, 0FFFFh, 57
 
 Colour0BlueInput        DW      9
                         DB      10, 16
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+2
+                        DW      7, PaletteDefs+2
                         DW      54, 56, 76, 97, 0FFFFh, 58
 
 Colour1RedInput         DW      9
                         DB      10, 19
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+3
+                        DW      7, PaletteDefs+3
                         DW      55, 57, 77, 98, 53, 59
 
 Colour1GreenInput       DW      9
                         DB      10, 20
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+4
+                        DW      7, PaletteDefs+4
                         DW      56, 58, 78, 99, 54, 60
 
 Colour1BlueInput        DW      9
                         DB      10, 21
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+5
+                        DW      7, PaletteDefs+5
                         DW      57, 59, 79, 100, 55, 61
 
 Colour2RedInput         DW      9
                         DB      10, 24
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+6
+                        DW      7, PaletteDefs+6
                         DW      58, 60, 80, 0FFFFh, 56, 62
 
 Colour2GreenInput       DW      9
                         DB      10, 25
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+7
+                        DW      7, PaletteDefs+7
                         DW      59, 61, 81, 0FFFFh, 57, 63
 
 Colour2BlueInput        DW      9
                         DB      10, 26
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+8
+                        DW      7, PaletteDefs+8
                         DW      60, 62, 82, 0FFFFh, 58, 64
 
 Colour3RedInput         DW      9
                         DB      10, 29
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+9
+                        DW      7, PaletteDefs+9
                         DW      61, 63, 83, 0FFFFh, 59, 65
 
 Colour3GreenInput       DW      9
                         DB      10, 30
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+10
+                        DW      7, PaletteDefs+10
                         DW      62, 64, 84, 0FFFFh, 60, 66
 
 Colour3BlueInput        DW      9
                         DB      10, 31
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+11
+                        DW      7, PaletteDefs+11
                         DW      63, 65, 85, 0FFFFh, 61, 67
 
 Colour4RedInput         DW      9
                         DB      10, 34
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+12
+                        DW      7, PaletteDefs+12
                         DW      64, 66, 86, 0FFFFh, 62, 68
 
 Colour4GreenInput       DW      9
                         DB      10, 35
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+13
+                        DW      7, PaletteDefs+13
                         DW      65, 67, 87, 0FFFFh, 63, 69
 
 Colour4BlueInput        DW      9
                         DB      10, 36
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+14
+                        DW      7, PaletteDefs+14
                         DW      66, 68, 88, 0FFFFh, 64, 70
 
 Colour5RedInput         DW      9
                         DB      10, 39
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+15
+                        DW      7, PaletteDefs+15
                         DW      67, 69, 89, 0FFFFh, 65, 71
 
 Colour5GreenInput       DW      9
                         DB      10, 40
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+16
+                        DW      7, PaletteDefs+16
                         DW      68, 70, 90, 0FFFFh, 66, 72
 
 Colour5BlueInput        DW      9
                         DB      10, 41
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+17
+                        DW      7, PaletteDefs+17
                         DW      69, 71, 91, 0FFFFh, 67, 73
 
 Colour6RedInput         DW      9
                         DB      10, 44
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+18
+                        DW      7, PaletteDefs+18
                         DW      70, 72, 92, 0FFFFh, 68, 74
 
 Colour6GreenInput       DW      9
                         DB      10, 45
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+19
+                        DW      7, PaletteDefs+19
                         DW      71, 73, 93, 0FFFFh, 69, 75
 
 Colour6BlueInput        DW      9
                         DB      10, 46
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+20
+                        DW      7, PaletteDefs+20
                         DW      72, 74, 94, 0FFFFh, 70, 76
 
 Colour7RedInput         DW      9
                         DB      37, 14
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+21
+                        DW      7, PaletteDefs+21
                         DW      73, 75, 95, 53, 71, 77
 
 Colour7GreenInput       DW      9
                         DB      37, 15
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+22
+                        DW      7, PaletteDefs+22
                         DW      74, 76, 96, 54, 72, 78
 
 Colour7BlueInput        DW      9
                         DB      37, 16
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+23
+                        DW      7, PaletteDefs+23
                         DW      75, 77, 97, 55, 73, 79
 
 Colour8RedInput         DW      9
                         DB      37, 19
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+24
+                        DW      7, PaletteDefs+24
                         DW      76, 78, 98, 56, 74, 80
 
 Colour8GreenInput       DW      9
                         DB      37, 20
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+25
+                        DW      7, PaletteDefs+25
                         DW      77, 79, 99, 57, 75, 81
 
 Colour8BlueInput        DW      9
                         DB      37, 21
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+26
+                        DW      7, PaletteDefs+26
                         DW      78, 80, 100, 58, 76, 82
 
 Colour9RedInput         DW      9
                         DB      37, 24
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+27
+                        DW      7, PaletteDefs+27
                         DW      79, 81, 102, 59, 77, 83
 
 Colour9GreenInput       DW      9
                         DB      37, 25
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+28
+                        DW      7, PaletteDefs+28
                         DW      80, 82, 102, 60, 78, 84
 
 Colour9BlueInput        DW      9
                         DB      37, 26
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+29
+                        DW      7, PaletteDefs+29
                         DW      81, 83, 102, 61, 79, 85
 
 Colour10RedInput        DW      9
                         DB      37, 29
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+30
+                        DW      7, PaletteDefs+30
                         DW      82, 84, 102, 62, 80, 86
 
 Colour10GreenInput      DW      9
                         DB      37, 30
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+31
+                        DW      7, PaletteDefs+31
                         DW      83, 85, 102, 63, 81, 87
 
 Colour10BlueInput       DW      9
                         DB      37, 31
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+32
+                        DW      7, PaletteDefs+32
                         DW      84, 86, 102, 64, 82, 88
 
 Colour11RedInput        DW      9
                         DB      37, 34
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+33
+                        DW      7, PaletteDefs+33
                         DW      85, 87, 102, 65, 83, 89
 
 Colour11GreenInput      DW      9
                         DB      37, 35
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+34
+                        DW      7, PaletteDefs+34
                         DW      86, 88, 102, 66, 84, 90
 
 Colour11BlueInput       DW      9
                         DB      37, 36
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+35
+                        DW      7, PaletteDefs+35
                         DW      87, 89, 102, 67, 85, 91
 
 Colour12RedInput        DW      9
                         DB      37, 39
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+36
+                        DW      7, PaletteDefs+36
                         DW      88, 90, 102, 68, 86, 92
 
 Colour12GreenInput      DW      9
                         DB      37, 40
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+37
+                        DW      7, PaletteDefs+37
                         DW      89, 91, 102, 69, 87, 93
 
 Colour12BlueInput       DW      9
                         DB      37, 41
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+38
+                        DW      7, PaletteDefs+38
                         DW      90, 92, 102, 70, 88, 94
 
 Colour13RedInput        DW      9
                         DB      37, 44
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+39
+                        DW      7, PaletteDefs+39
                         DW      91, 93, 102, 71, 89, 95
 
 Colour13GreenInput      DW      9
                         DB      37, 45
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+40
+                        DW      7, PaletteDefs+40
                         DW      92, 94, 102, 72, 90, 96
 
 Colour13BlueInput       DW      9
                         DB      37, 46
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+41
+                        DW      7, PaletteDefs+41
                         DW      93, 95, 102, 73, 91, 97
 
 Colour14RedInput        DW      9
                         DB      64, 14
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+42
+                        DW      7, PaletteDefs+42
                         DW      94, 96, 53, 74, 92, 98
 
 Colour14GreenInput      DW      9
                         DB      64, 15
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+43
+                        DW      7, PaletteDefs+43
                         DW      95, 97, 54, 75, 93, 99
 
 Colour14BlueInput       DW      9
                         DB      64, 16
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+44
+                        DW      7, PaletteDefs+44
                         DW      96, 98, 55, 76, 94, 100
 
 Colour15RedInput        DW      9
                         DB      64, 19
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+45
+                        DW      7, PaletteDefs+45
                         DW      97, 99, 56, 77, 95, 102
 
 Colour15GreenInput      DW      9
                         DB      64, 20
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+46
+                        DW      7, PaletteDefs+46
                         DW      98, 100, 57, 78, 96, 102
 
 Colour15BlueInput       DW      9
                         DB      64, 21
                         DW      0, 63
-                        DW      7, Offset PaletteDefs+47
+                        DW      7, PaletteDefs+47
                         DW      99, 102, 58, 79, 97, 102
 
 PredefinedPaletteMsg    DW      1
@@ -8113,17 +8111,17 @@ PredefinedPalette7      DW      2
                         DB      "  Volcanic", 0
 
 O1_LoadInstrumentList   DW      5
-                        DW      Near Ptr InstrumentNameLoader   ; Idlekey
-                        DW      Near Ptr LoadInstrumentKeyList
-                        DW      Near Ptr FullScreenBox ; 0
-                        DW      Near Ptr ScreenHeader  ; 1
-                        DW      Near Ptr LoadInstrumentHeader   ; 2
-                        DW      Near Ptr FillHeader             ; 3
-                        DW      Near Ptr LoadInstrumentWindow
-                        DW      Near Ptr LoadInstrument         ; 5
-                        DW      Near Ptr LoadInstrumentDriveWindow
-                        DW      Near Ptr LoadInstrumentDrive
-                        DW      Near Ptr SetHelpContext11
+                        DW      InstrumentNameLoader   ; Idlekey
+                        DW      LoadInstrumentKeyList
+                        DW      FullScreenBox ; 0
+                        DW      ScreenHeader  ; 1
+                        DW      LoadInstrumentHeader   ; 2
+                        DW      FillHeader             ; 3
+                        DW      LoadInstrumentWindow
+                        DW      LoadInstrument         ; 5
+                        DW      LoadInstrumentDriveWindow
+                        DW      LoadInstrumentDrive
+                        DW      SetHelpContext11
                         DW      0
 
 LoadInstrumentDriveWindow DW    0
@@ -8136,17 +8134,17 @@ LoadInstrumentDrive     DW      15
                         DD      DWord Ptr D_LIPostDriveWindow
 
 O1_ViewInstrumentLibrary DW     5
-                        DW      Near Ptr InstrumentNameLoader   ; Idlekey
-                        DW      Near Ptr LoadInstrumentKeyList
-                        DW      Near Ptr FullScreenBox ; 0
-                        DW      Near Ptr ScreenHeader  ; 1
-                        DW      Near Ptr InstrumentLibraryHeader   ; 2
-                        DW      Near Ptr FillHeader             ; 3
-                        DW      Near Ptr LoadInstrumentWindow
-                        DW      Near Ptr ViewInstrument         ; 5
-                        DW      Near Ptr LoadInstrumentDriveWindow
-                        DW      Near Ptr LoadInstrumentDrive
-                        DW      Near Ptr SetHelpContext11
+                        DW      InstrumentNameLoader   ; Idlekey
+                        DW      LoadInstrumentKeyList
+                        DW      FullScreenBox ; 0
+                        DW      ScreenHeader  ; 1
+                        DW      InstrumentLibraryHeader   ; 2
+                        DW      FillHeader             ; 3
+                        DW      LoadInstrumentWindow
+                        DW      ViewInstrument         ; 5
+                        DW      LoadInstrumentDriveWindow
+                        DW      LoadInstrumentDrive
+                        DW      SetHelpContext11
                         DW      0
 
 LoadInstrumentHeader    DW      10
@@ -8174,12 +8172,12 @@ InstrumentNameLoader    DD      DWord Ptr D_LoadInstrumentNames
                         DD      0
 
 O1_UndoList             DW      3
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr ESCExitList
-                        DW      Near Ptr UndoBox1
-                        DW      Near Ptr UndoBox2
-                        DW      Near Ptr UndoText
-                        DW      Near Ptr UndoSelector
+                        DW      IdleFunctionList
+                        DW      ESCExitList
+                        DW      UndoBox1
+                        DW      UndoBox2
+                        DW      UndoText
+                        DW      UndoSelector
                         DW      0
 
 UndoBox1                DW      0
@@ -8203,15 +8201,15 @@ UndoSelector            DW      15
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 O1_MessageList          DW      4
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox
-                        DW      Near Ptr ScreenHeader
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr MessageBox
-                        DW      Near Ptr MessageObject
-                        DW      Near Ptr MessageHeader
-                        DW      Near Ptr SetHelpContext12
+                        DW      IdleFunctionList
+                        DW      GlobalKeyList
+                        DW      FullScreenBox
+                        DW      ScreenHeader
+                        DW      FillHeader
+                        DW      MessageBox
+                        DW      MessageObject
+                        DW      MessageHeader
+                        DW      SetHelpContext12
                         DW      0
 
 MessageBox              DW      0
@@ -8229,50 +8227,50 @@ MessageHeader           DW      10
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 O1_MIDIOutputScreen     DW      9
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr MIDIOutKeyList
-                        DW      Near Ptr FullScreenBox          ; 0
-                        DW      Near Ptr ScreenHeader
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr MIDIOutputHeader
-                        DW      Near Ptr MIDIOutputMainConfigText
-                        DW      Near Ptr MIDIOutputSFxConfigText
-                        DW      Near Ptr MIDIOutputMainConfigBox
-                        DW      Near Ptr MIDIOutputSFxConfigBox
-                        DW      Near Ptr MIDIOutputZxxConfigBox ; 8
-                        DW      Near Ptr MIDIStartInput         ; 9
-                        DW      Near Ptr MIDIStopInput          ; 10
-                        DW      Near Ptr MIDITickInput          ; 11
-                        DW      Near Ptr MIDINoteOnInput        ; 12
-                        DW      Near Ptr MIDINoteOffInput       ; 13
-                        DW      Near Ptr MIDIChangeVolumeInput  ; 14
-                        DW      Near Ptr MIDIChangePanInput     ; 15
-                        DW      Near Ptr MIDIBankSelectInput    ; 16
-                        DW      Near Ptr MIDIProgramChangeInput ; 17
-                        DW      Near Ptr MIDISF0Input
-                        DW      Near Ptr MIDISF1Input
-                        DW      Near Ptr MIDISF2Input
-                        DW      Near Ptr MIDISF3Input
-                        DW      Near Ptr MIDISF4Input
-                        DW      Near Ptr MIDISF5Input
-                        DW      Near Ptr MIDISF6Input
-                        DW      Near Ptr MIDISF7Input
-                        DW      Near Ptr MIDISF8Input
-                        DW      Near Ptr MIDISF9Input
-                        DW      Near Ptr MIDISFAInput
-                        DW      Near Ptr MIDISFBInput
-                        DW      Near Ptr MIDISFCInput
-                        DW      Near Ptr MIDISFDInput
-                        DW      Near Ptr MIDISFEInput
-                        DW      Near Ptr MIDISFFInput           ; 33
-                        DW      Near Ptr MIDIZ1Input
-                        DW      Near Ptr MIDIZ2Input
-                        DW      Near Ptr MIDIZ3Input
-                        DW      Near Ptr MIDIZ4Input
-                        DW      Near Ptr MIDIZ5Input
-                        DW      Near Ptr MIDIZ6Input
-                        DW      Near Ptr MIDIZ7Input
-                        DW      Near Ptr MIDIZxxNumbering
+                        DW      IdleFunctionList
+                        DW      MIDIOutKeyList
+                        DW      FullScreenBox          ; 0
+                        DW      ScreenHeader
+                        DW      FillHeader
+                        DW      MIDIOutputHeader
+                        DW      MIDIOutputMainConfigText
+                        DW      MIDIOutputSFxConfigText
+                        DW      MIDIOutputMainConfigBox
+                        DW      MIDIOutputSFxConfigBox
+                        DW      MIDIOutputZxxConfigBox ; 8
+                        DW      MIDIStartInput         ; 9
+                        DW      MIDIStopInput          ; 10
+                        DW      MIDITickInput          ; 11
+                        DW      MIDINoteOnInput        ; 12
+                        DW      MIDINoteOffInput       ; 13
+                        DW      MIDIChangeVolumeInput  ; 14
+                        DW      MIDIChangePanInput     ; 15
+                        DW      MIDIBankSelectInput    ; 16
+                        DW      MIDIProgramChangeInput ; 17
+                        DW      MIDISF0Input
+                        DW      MIDISF1Input
+                        DW      MIDISF2Input
+                        DW      MIDISF3Input
+                        DW      MIDISF4Input
+                        DW      MIDISF5Input
+                        DW      MIDISF6Input
+                        DW      MIDISF7Input
+                        DW      MIDISF8Input
+                        DW      MIDISF9Input
+                        DW      MIDISFAInput
+                        DW      MIDISFBInput
+                        DW      MIDISFCInput
+                        DW      MIDISFDInput
+                        DW      MIDISFEInput
+                        DW      MIDISFFInput           ; 33
+                        DW      MIDIZ1Input
+                        DW      MIDIZ2Input
+                        DW      MIDIZ3Input
+                        DW      MIDIZ4Input
+                        DW      MIDIZ5Input
+                        DW      MIDIZ6Input
+                        DW      MIDIZ7Input
+                        DW      MIDIZxxNumbering
                         DW      0
 
 MIDIOutputHeader        DW      10
@@ -8298,7 +8296,7 @@ MIDIOutKeyList          DB      0
                         DD      DWord Ptr F_MIDI_PgDn
 
                         DB      5
-                        DW      Offset GlobalKeyChain
+                        DW      GlobalKeyChain
 
 MIDIOutputMainConfigText DW     1
                         DB      2, 13
@@ -8575,32 +8573,32 @@ MIDIZ7Input             DW      16
                         DW      39, 0FFFFh, 0FFFFh, 0FFFFh
 
 O1_MIDIScreen           DW      7
-                        DW      Near Ptr MIDIIdleList
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox          ; 0
-                        DW      Near Ptr ScreenHeader
-                        DW      Near Ptr FillHeader
-                        DW      Near Ptr MIDIHeader
-                        DW      Near Ptr ShowMIDIInput
-                        DW      Near Ptr MIDIOptionsBox         ; 5
-                        DW      Near Ptr MIDIOptions            ; 6
-                        DW      Near Ptr ProgramChangeToggle    ; 7
-                        DW      Near Ptr Program1Toggle         ; 8
-                        DW      Near Ptr RecordNoteOffToggle    ; 9
-                        DW      Near Ptr RecordVelocityToggle   ; 10
-                        DW      Near Ptr RecordAfterTouchToggle ; 11
-                        DW      Near Ptr MIDITranslateBox       ; 12
-                        DW      Near Ptr MIDIAmplificationTB    ; 13
-                        DW      Near Ptr MIDICentralNoteTB      ; 14
-                        DW      Near Ptr MIDIOutputButton       ; 15
-                        DW      Near Ptr MIDISaveConfigButton   ; 16
-                        DW      Near Ptr MIDINoteOffCut         ; 17
-                        DW      Near Ptr MIDIPitchBox           ; 18
-                        DW      Near Ptr MIDIPitchToggle        ; 19
-                        DW      Near Ptr MIDIPWDInput           ; 20
-                        DW      Near Ptr MIDIEmbedBox
-                        DW      NEar Ptr MIDIEmbedToggle
-                        DW      Near Ptr SetHelpContext13
+                        DW      MIDIIdleList
+                        DW      GlobalKeyList
+                        DW      FullScreenBox          ; 0
+                        DW      ScreenHeader
+                        DW      FillHeader
+                        DW      MIDIHeader
+                        DW      ShowMIDIInput
+                        DW      MIDIOptionsBox         ; 5
+                        DW      MIDIOptions            ; 6
+                        DW      ProgramChangeToggle    ; 7
+                        DW      Program1Toggle         ; 8
+                        DW      RecordNoteOffToggle    ; 9
+                        DW      RecordVelocityToggle   ; 10
+                        DW      RecordAfterTouchToggle ; 11
+                        DW      MIDITranslateBox       ; 12
+                        DW      MIDIAmplificationTB    ; 13
+                        DW      MIDICentralNoteTB      ; 14
+                        DW      MIDIOutputButton       ; 15
+                        DW      MIDISaveConfigButton   ; 16
+                        DW      MIDINoteOffCut         ; 17
+                        DW      MIDIPitchBox           ; 18
+                        DW      MIDIPitchToggle        ; 19
+                        DW      MIDIPWDInput           ; 20
+                        DW      MIDIEmbedBox
+                        DW      MIDIEmbedToggle
+                        DW      SetHelpContext13
                         DW      0
 
 MIDIHeader              DW      10
@@ -8609,14 +8607,14 @@ MIDIHeader              DW      10
 MIDIPitchToggle         DW      17
                         DB      25, 27
                         DW      2
-                        DW      2Ch             ; Offset of 'Flags'
+                        DW      2Ch             ; of 'Flags'
                         DB      64
                         DW      14, 20, 0FFFFh, 0FFFFh
 
 MIDIEmbedToggle         DW      17
                         DB      25, 31
                         DW      2
-                        DW      2Ch             ; Offset of 'Flags'
+                        DW      2Ch             ; of 'Flags'
                         DB      128
                         DW      20, 15, 0FFFFh, 0FFFFh
 
@@ -8696,68 +8694,68 @@ MIDIOptions             DW      1
 
 ProgramChangeToggle     DW      17
                         DB      25, 15
-                        DW      1, Offset CentraliseCursor
+                        DW      1, CentraliseCursor
                         DB      8
                         DW      0FFFFh, 8, 0FFFFh, 0FFFFh, 0FFFFh, 0FFFFh
 
 Program1Toggle          DW      17
                         DB      25, 16
-                        DW      1, Offset CentraliseCursor
+                        DW      1, CentraliseCursor
                         DB      16
                         DW      7, 9, 0FFFFh, 0FFFFh, 0FFFFh, 0FFFFh
 
 RecordNoteOffToggle     DW      17
                         DB      25, 17
-                        DW      1, Offset CentraliseCursor
+                        DW      1, CentraliseCursor
                         DB      32
                         DW      8, 10, 0FFFFh, 0FFFFh, 0FFFFh, 0FFFFh
 
 RecordVelocityToggle    DW      17
                         DB      25, 18
-                        DW      1, Offset CentraliseCursor
+                        DW      1, CentraliseCursor
                         DB      64
                         DW      9, 11, 0FFFFh, 0FFFFh, 0FFFFh, 0FFFFh
 
 RecordAfterTouchToggle  DW      17
                         DB      25, 19
-                        DW      1, Offset CentraliseCursor
+                        DW      1, CentraliseCursor
                         DB      128
                         DW      10, 17, 0FFFFh, 0FFFFh, 0FFFFh, 0FFFFh
 
 MIDINoteOffCut          DW      17
                         DB      25, 20
-                        DW      1, Offset Flags
+                        DW      1, Flags
                         DB      2
                         DW      11, 13, 0FFFFh, 0FFFFh, 0FFFFh, 0FFFFh
 
 MIDIAmplificationTB     DW      9
                         DB      25, 23
                         DW      0, 200
-                        DW      1, Offset MIDIAmplification
+                        DW      1, MIDIAmplification
                         DW      17, 14, 0FFFFh, 0FFFFh, 0FFFFh, 0FFFFh
 
 MIDICentralNoteTB       DW      14
                         DB      25, 24
                         DW      0, 127
-                        DW      1, Offset MIDICentralNote
+                        DW      1, MIDICentralNote
                         DW      13, 19, 0FFFFh, 0FFFFh, 0FFFFh, 0FFFFh
                         DW      25
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-IF TIMERSCREEN
+%IF  TIMERSCREEN
 
 O1_TimerList            DW      5
-                        DW      Near Ptr InfoPageIdleList
-                        DW      Near Ptr GlobalKeyList
-                        DW      Near Ptr FullScreenBox  ; 0
-                        DW      Near Ptr ScreenHeader   ; 1
-                        DW      Near Ptr FillHeader     ; 2
-                        DW      Near Ptr TimerHeader
-                        DW      Near Ptr TimerText      ; 4
-                        DW      Near Ptr DrawTimer
-                        DW      Near Ptr Divider
-                        DW      Near Ptr SetHelpContext0
+                        DW      InfoPageIdleList
+                        DW      GlobalKeyList
+                        DW      FullScreenBox  ; 0
+                        DW      ScreenHeader   ; 1
+                        DW      FillHeader     ; 2
+                        DW      TimerHeader
+                        DW      TimerText      ; 4
+                        DW      DrawTimer
+                        DW      Divider
+                        DW      SetHelpContext0
                         DW      0
 
 TimerHeader             DW      10
@@ -8781,17 +8779,17 @@ Divider                 DW      1
                         DB      20h
                         DB      0FFh, 78, 09Ah, 0
 
-ENDIF
+%ENDIF 
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 O1_StereoSampleList     DW      2
-                        DW      Near Ptr IdleFunctionList
-                        DW      Near Ptr LRKeyList
-                        DW      Near Ptr StereoSampleBox        ; 0
-                        DW      Near Ptr StereoSampleText
-                        DW      Near Ptr StereoButtonLeft       ; 2
-                        DW      Near Ptr StereoButtonRight      ; 3
+                        DW      IdleFunctionList
+                        DW      LRKeyList
+                        DW      StereoSampleBox        ; 0
+                        DW      StereoSampleText
+                        DW      StereoButtonLeft       ; 2
+                        DW      StereoButtonRight      ; 3
                         DW      0
 
 LRKeyList               DB      8
@@ -8841,11 +8839,11 @@ StereoButtonRight       DW      2
 
 O1_ShowTime             DW      2
                         DW      0
-                        DW      Near Ptr ESCReturnList
-                        DW      Near Ptr NBMBox
-                        DW      Near Ptr ShowTime
-                        DW      Near Ptr OKButton
-                        DW      Near Ptr SongLengthText
+                        DW      ESCReturnList
+                        DW      NBMBox
+                        DW      ShowTime
+                        DW      OKButton
+                        DW      SongLengthText
                         DW      0
 
 SongLengthText          DW      1
@@ -8858,12 +8856,12 @@ ShowTime                DW      8
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-IF SPECTRUMANALYSER
+%IF  SPECTRUMANALYSER
 O1_FourierDisplay       DW      0
-;                        DW      Near Ptr FourierIdleList
-                        DW      Near Ptr InfoPageIdleList
-                        DW      Near Ptr FourierKeyList
-                        DW      Near Ptr FourierDisplay
+;                        DW      FourierIdleList
+                        DW      InfoPageIdleList
+                        DW      FourierKeyList
+                        DW      FourierDisplay
                         DW      0
 
 ;FourierIdleList         DD      DWord Ptr Fourier_IdleList
@@ -8886,17 +8884,15 @@ FourierKeyList          DB      1
                         DD      DWord Ptr Fourier_ChangePalette
 
                         DB      5
-                        DW      Near Ptr PlayCommandChain
+                        DW      PlayCommandChain
 
 FourierDisplay  DW      15
                 DD      DWord Ptr Fourier_PreDrawScreen
                 DD      DWord Ptr Fourier_DrawScreen
                 DD      DWord Ptr Fourier_PostFunction
 
-ENDIF
+%ENDIF 
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 EndS
-
-End

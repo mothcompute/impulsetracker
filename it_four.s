@@ -2,13 +2,9 @@
 ;³ Fast Fourier Transform Module                                               ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-                        Jumps
-                        .386P
-                        .387
+%include "switch.inc"
 
-include switch.inc
-
-IF SPECTRUMANALYSER
+%IF  SPECTRUMANALYSER
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Externals                                                                   ³
@@ -19,27 +15,27 @@ EndS
 Segment         DiskData PARA Public 'Data'
 EndS
 
-        Extrn   O1_FourierDisplay:Far
+        extern    O1_FourierDisplay:Far
 
-        Extrn   M_Object1List:Far
+        extern    M_Object1List:Far
 
-        Extrn   Music_GetWaveForm:Far
+        extern    Music_GetWaveForm:Far
 
-        Extrn   S_InitScreen:Far
-        Extrn   S_SetDirectMode:Far
+        extern    S_InitScreen:Far
+        extern    S_SetDirectMode:Far
 
         Global  MouseUpdateEnable:Far, MouseUpdateDisable:Far
-        Extrn   VESA_Detect:Far
-        Extrn   VESA_SetMode:Far
-        Extrn   VESA_SetBlock:Far
-        Extrn   InitMouse:Far, UnInitMouse:Far
-        Extrn   S_DefineSmallNumbers:Far
+        extern    VESA_Detect:Far
+        extern    VESA_SetMode:Far
+        extern    VESA_SetBlock:Far
+        extern    InitMouse:Far, UnInitMouse:Far
+        extern    S_DefineSmallNumbers:Far
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
 
 Segment                 Infopage BYTE Public 'Code' USE16
-                        Assume  CS:Infopage, DS:Nothing, ES:Nothing
+                        ;Assume  CS:Infopage, DS:Nothing, ES:Nothing
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Variables                                                                   ³
@@ -79,7 +75,7 @@ Fourier_CreateTable2:
 
         Ret
 
-EndP    Fourier_CreateTable
+;EndP    Fourier_CreateTable
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
@@ -226,7 +222,7 @@ Fourier_CalculateMagnitudes1:           ; Could be interleaved, but speed isn't
 
         Ret
 
-EndP    Fourier_Transform
+;EndP    Fourier_Transform
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
@@ -241,7 +237,7 @@ Public  Fourier_ChangePalette
         Mov     AX, 1
         Ret
 
-EndP    Fourier_ChangePalette
+;EndP    Fourier_ChangePalette
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
@@ -366,7 +362,7 @@ Fourier_PaletteB5:
 
         Ret
 
-EndP    Fourier_SetPalette
+;EndP    Fourier_SetPalette
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
@@ -421,7 +417,7 @@ Fourier_End:
 
         Ret
 
-EndP    Fourier_Start
+;EndP    Fourier_Start
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
@@ -430,7 +426,7 @@ Public  Fourier_PreDrawScreen
 
         Ret
 
-EndP    Fourier_PreDrawScreen
+;EndP    Fourier_PreDrawScreen
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
@@ -571,7 +567,7 @@ Fourier_DrawBars4:
 Fourier_DrawScreen1:
         Ret
 
-EndP    Fourier_DrawScreen
+;EndP    Fourier_DrawScreen
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
@@ -581,7 +577,7 @@ Public  Fourier_IdleList
         Mov     AX, 1
         Ret
 
-EndP    Fourier_IdleList
+;EndP    Fourier_IdleList
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
@@ -599,14 +595,14 @@ Fourier_PostFunction2:
         Mov     AX, 4
         Ret
 
-EndP    Fourier_PostFunction
+;EndP    Fourier_PostFunction
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
 
 EndS
 
-ENDIF
+%ENDIF 
 
 End
 

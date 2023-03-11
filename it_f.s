@@ -2,17 +2,14 @@
 ;³ Functions                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-                        Jumps
-                        .386
-
-include switch.inc
-include network.inc
+%include "switch.inc"
+%include "network.inc"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Externals                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-IF MEMORYDEBUG
+%IF  MEMORYDEBUG
 
 Segment         StartUp BYTE Public 'Code'
 EndS
@@ -41,23 +38,23 @@ EndS
 Segment         Main BYTE Public 'Code'
 EndS
 
-ENDIF
+%ENDIF 
 
 Segment         Pattern BYTE Public 'Code'
-                Extrn   PatternDataArea:Word
+                extern    PatternDataArea:Word
 EndS
 
 Segment         Inst BYTE Public 'Code'
-                Extrn   MaxNode:Word
+                extern    MaxNode:Word
 EndS
 
 Segment         Music BYTE Public 'Code'
-                Extrn   SongDataArea:Word
-                Extrn   MIDIDataArea:Word
+                extern    SongDataArea:Word
+                extern    MIDIDataArea:Word
 EndS
 
 Segment         Disk BYTE Public 'Code'
-                Extrn   DiskDataArea:Word
+                extern    DiskDataArea:Word
 EndS
 
 Segment         Screen BYTE Public 'Code'
@@ -68,107 +65,107 @@ EndS
 
 ;-------------------------------------------------------------------------------
 
-                Extrn   LastInstrument:Byte
+                extern    LastInstrument:Byte
 
-                Extrn   D_GetLoadSampleVars:Far
-                Extrn   D_ClearFileName:Far
-                Extrn   D_SaveSong:Far
-                Extrn   D_ResetTimer:Far
+                extern    D_GetLoadSampleVars:Far
+                extern    D_ClearFileName:Far
+                extern    D_SaveSong:Far
+                extern    D_ResetTimer:Far
 
-                Extrn   E_UnInitEMS:Far
-                Extrn   E_GetFreeEMS:Far
+                extern    E_UnInitEMS:Far
+                extern    E_GetFreeEMS:Far
 
-                Extrn   Glbl_F2_2:Far
-                Extrn   Glbl_F3:Far
-                Extrn   Glbl_Ctrl_F3:Far
-                Extrn   Glbl_Ctrl_F4:Far
-                Extrn   Glbl_F4:Far
-                Extrn   Glbl_F5:Far
-                Extrn   Glbl_Ctrl_F5:Far
-                Extrn   Glbl_F6:Far
-                Extrn   PE_F7:Far
-                Extrn   Glbl_Shift_F6:Far
-                Extrn   Glbl_Shift_F9:Far
-                Extrn   Glbl_F9:Far
-                Extrn   Glbl_F10:Far
-                Extrn   Glbl_F11_2:Far
-                Extrn   Glbl_F12:Far
+                extern    Glbl_F2_2:Far
+                extern    Glbl_F3:Far
+                extern    Glbl_Ctrl_F3:Far
+                extern    Glbl_Ctrl_F4:Far
+                extern    Glbl_F4:Far
+                extern    Glbl_F5:Far
+                extern    Glbl_Ctrl_F5:Far
+                extern    Glbl_F6:Far
+                extern    PE_F7:Far
+                extern    Glbl_Shift_F6:Far
+                extern    Glbl_Shift_F9:Far
+                extern    Glbl_F9:Far
+                extern    Glbl_F10:Far
+                extern    Glbl_F11_2:Far
+                extern    Glbl_F12:Far
 
-                Extrn   Glbl_GetHeaderMode:Far
+                extern    Glbl_GetHeaderMode:Far
 
-                Extrn   H_Help:Far
+                extern    H_Help:Far
 
-                Extrn   I_GetInstrumentOffset:Far
-                Extrn   I_GetSampleOffset:Far
+                extern    I_GetInstrumentOffset:Far
+                extern    I_GetSampleOffset:Far
 
-                Extrn   I_DrawWaveForm:Far
-                Extrn   I_MapEnvelope:Far
-                Extrn   D_DrawWaveForm:Far
+                extern    I_DrawWaveForm:Far
+                extern    I_MapEnvelope:Far
+                extern    D_DrawWaveForm:Far
 
-                Extrn   S_InitScreen:Far
-                Extrn   S_Set80x25Mode:Far
-                Extrn   S_SetPalette2:Far
-                Extrn   S_RedefineCharacters:Far
-                Extrn   S_UnInitScreen:Far
-                Extrn   S_DrawBox:Far
-                Extrn   S_UpdateScreen:Far
-                Extrn   S_OverrideVGADetection:Far
-                Extrn   S_SetDirectMode:Far
-                Extrn   S_DrawString:Far
-                Extrn   S_HiLight:Far
-                Extrn   S_GetDestination:Far
-                Extrn   S_SaveScreen:Far
-                Extrn   S_RestoreScreen:Far
+                extern    S_InitScreen:Far
+                extern    S_Set80x25Mode:Far
+                extern    S_SetPalette2:Far
+                extern    S_RedefineCharacters:Far
+                extern    S_UnInitScreen:Far
+                extern    S_DrawBox:Far
+                extern    S_UpdateScreen:Far
+                extern    S_OverrideVGADetection:Far
+                extern    S_SetDirectMode:Far
+                extern    S_DrawString:Far
+                extern    S_HiLight:Far
+                extern    S_GetDestination:Far
+                extern    S_SaveScreen:Far
+                extern    S_RestoreScreen:Far
 
 
-                Extrn   Music_GetSongSegment:Far
-                Extrn   Music_InitMixTable:Far
-                Extrn   Music_InitMuteTable:Far
-                Extrn   Music_ClearAllInstruments:Far
-                Extrn   Music_SetGlobalVolume:Far
-                Extrn   Music_InitStereo:Far
-                Extrn   Music_Stop:Far
+                extern    Music_GetSongSegment:Far
+                extern    Music_InitMixTable:Far
+                extern    Music_InitMuteTable:Far
+                extern    Music_ClearAllInstruments:Far
+                extern    Music_SetGlobalVolume:Far
+                extern    Music_InitStereo:Far
+                extern    Music_Stop:Far
 
-                Extrn   Music_RegetLoopInformation:Far
+                extern    Music_RegetLoopInformation:Far
 
-                Extrn   Music_ReleaseAllSamples:Far     ; For New Song Function
-                Extrn   Music_ReleaseAllPatterns:Far
-                Extrn   Music_ClearAllInstruments:Far
-                Extrn   Music_ClearAllSampleNames:Far
-                Extrn   Music_GetFreeSoundCardMemory:Far
-                Extrn   Music_SoundCardLoadAllSamples:Far
-                Extrn   Music_ReinitSoundCard:Far
-                Extrn   Music_TimeSong:Far
+                extern    Music_ReleaseAllSamples:Far     ; For New Song Function
+                extern    Music_ReleaseAllPatterns:Far
+                extern    Music_ClearAllInstruments:Far
+                extern    Music_ClearAllSampleNames:Far
+                extern    Music_GetFreeSoundCardMemory:Far
+                extern    Music_SoundCardLoadAllSamples:Far
+                extern    Music_ReinitSoundCard:Far
+                extern    Music_TimeSong:Far
 
-                Extrn   Glbl_DriverScreen:Far
-                Extrn   Music_GetDriverVariable:Far
-                Extrn   Music_SetDriverVariable:Far
+                extern    Glbl_DriverScreen:Far
+                extern    Music_GetDriverVariable:Far
+                extern    Music_SetDriverVariable:Far
 
-                Extrn   M_Object1List:Far
+                extern    M_Object1List:Far
 
-                Extrn   Msg_ResetMessage:Far
+                extern    Msg_ResetMessage:Far
 
-                Extrn   O1_EmptyList:Far
-                Extrn   O1_ThumbStringList:Far
-                Extrn   O1_InitialiseInstrumentList:Far
-                Extrn   O1_NewSongList:Far
+                extern    O1_EmptyList:Far
+                extern    O1_ThumbStringList:Far
+                extern    O1_InitialiseInstrumentList:Far
+                extern    O1_NewSongList:Far
 
-                Extrn   O1_MainMenu:Far
-                Extrn   O1_FileMenu:Far
-                Extrn   O1_PlaybackMenu:Far
-                Extrn   O1_SampleMenu:Far
-                Extrn   O1_InstrumentMenu:Far
+                extern    O1_MainMenu:Far
+                extern    O1_FileMenu:Far
+                extern    O1_PlaybackMenu:Far
+                extern    O1_SampleMenu:Far
+                extern    O1_InstrumentMenu:Far
 
-                Extrn   PE_ConvAX2Num:Far
-                Extrn   PE_ResetOrderPattern:Far
+                extern    PE_ConvAX2Num:Far
+                extern    PE_ResetOrderPattern:Far
 
-                Extrn   DOSShell:Far
-                Extrn   Quit:Far
+                extern    DOSShell:Far
+                extern    Quit:Far
 
-                Extrn   MouseAddEvent:Far, AddMouseQueue:Far, MouseClearEvents:Far
-                Extrn   SetKeyboardLock:Far, NewCharacterSet:Far
-                Extrn   MouseRemoveEvents:Far, MouseRestoreEvents:Far
-                Extrn   MultiChannelInfo:Byte
+                extern    MouseAddEvent:Far, AddMouseQueue:Far, MouseClearEvents:Far
+                extern    SetKeyboardLock:Far, NewCharacterSet:Far
+                extern    MouseRemoveEvents:Far, MouseRestoreEvents:Far
+                extern    MultiChannelInfo:Byte
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Globals                                                                     ³
@@ -277,7 +274,7 @@ EndS
                 Global  F_InstrumentList:Far
                 Global  F_InstrumentLibrary:Far
 
-IF MEMORYDEBUG
+%IF  MEMORYDEBUG
 
                 Global  F_DrawDebug:Far
                 Global  F_DebugUp:Far
@@ -287,7 +284,7 @@ IF MEMORYDEBUG
                 Global  F_DebugStringInput:Far
                 Public  F_PostDebug
 
-ENDIF
+%ENDIF 
 
                 Public  F_ShowMIDIZxxInput
                 Public  F_MIDI_Up
@@ -297,7 +294,7 @@ ENDIF
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
 Segment                 Functions BYTE Public 'Code' USE16
-                        Assume CS:Functions, DS:Nothing
+                        ;Assume CS:Functions, DS:Nothing
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Variables                                                                   ³
@@ -466,11 +463,11 @@ Set5NumValues           Label   Word
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 HeaderMsg1              Label   Byte
-IF SHOWVERSION
+%IF  SHOWVERSION
                         DB      0FFh, 9, ' ', "Impulse Tracker v2.14 Copyright (C) 1995-2000 Jeffrey Lim", 13
-ELSE
+%ELSE
                         DB      0FFh, 12, ' ', "Impulse Tracker Copyright (C) 1995-2000 Jeffrey Lim", 13
-ENDIF
+%ENDIF 
                         DB      0FFh, 9, ' ', 0FEh, 21h, 139, 0FFh, 25, 134, 138, 0FFh, 11, ' ', 139, 0FFh, 28, 134, 138, 13
                         DB      0FEh, 20h, "Song Name", 0FEh, 21h, 132, 0FEh, 5, 0FFh, 25, ' ', 0FEh, 23h, 131, 0FEh, 20h, 0
 
@@ -504,16 +501,16 @@ FilterMessage           DB      "Filter", 0
 ;³ Functions                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-Proc            F_Nothing Far
+Proc F_Nothing Far
 
                 Xor     AX, AX
                 Ret
 
-EndP            F_Nothing
+;EndP            F_Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_InstrumentButtonHandler Far
+Proc F_InstrumentButtonHandler Far
 
                 Test    AX, AX
                 JZ      F_InstrumentButtonHandler1
@@ -531,30 +528,30 @@ F_InstrumentButtonHandler1:
                 Add     DI, [SI+24]
                 Ret
 
-EndP            F_InstrumentButtonHandler
+;EndP            F_InstrumentButtonHandler
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_NothingNear
+Proc F_NothingNear
 
                 Xor     AX, AX
                 Ret
 
-EndP            F_NothingNear
+;EndP            F_NothingNear
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_CallFarPreFunction Far
+Proc F_CallFarPreFunction Far
 
                 Call    DWord Ptr [SI+6]
 
                 Ret
 
-EndP            F_CallFarPreFunction
+;EndP            F_CallFarPreFunction
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_CallFarPostFunction Far
+Proc F_CallFarPostFunction Far
 
                 Mov     SI, [BX]
 
@@ -562,21 +559,21 @@ Proc            F_CallFarPostFunction Far
 
                 Ret
 
-EndP            F_CallFarPostFunction
+;EndP            F_CallFarPostFunction
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_CallFarFunction Far
+Proc F_CallFarFunction Far
 
                 Call DWord Ptr [SI+2]
 
                 Ret
 
-EndP            F_CallFarFunction
+;EndP            F_CallFarFunction
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_DrawBoxObject Far
+Proc F_DrawBoxObject Far
 
                 LodsW
                 Xor     AH, AH
@@ -595,11 +592,11 @@ Proc            F_DrawBoxObject Far
 
                 Ret
 
-EndP            F_DrawBoxObject
+;EndP            F_DrawBoxObject
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_DrawTextObject Far
+Proc F_DrawTextObject Far
 
                 LodsW
 
@@ -645,11 +642,11 @@ F_DrawTextObject3:
 
                 Ret
 
-EndP            F_DrawTextObject
+;EndP            F_DrawTextObject
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_PostExitObject Far
+Proc F_PostExitObject Far
 
                 Xor     AX, AX
                 Test    CH, 1
@@ -662,11 +659,11 @@ Proc            F_PostExitObject Far
 F_PostExitObject1:
                 Ret
 
-EndP            F_PostExitObject
+;EndP            F_PostExitObject
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_SetDirectMode Far
+Proc F_SetDirectMode Far
 
                 LodsW
                 LodsB
@@ -674,11 +671,11 @@ Proc            F_SetDirectMode Far
 
                 Ret
 
-EndP            F_SetDirectMode
+;EndP            F_SetDirectMode
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_CharacterDefinitions Far
+Proc F_CharacterDefinitions Far
 
                 LodsW
                 LodsW
@@ -688,11 +685,11 @@ Proc            F_CharacterDefinitions Far
 
                 Ret
 
-EndP            F_CharacterDefinitions
+;EndP            F_CharacterDefinitions
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseButtonPress Far            ; Given CX, DX = coords
+Proc MouseButtonPress Far            ; Given CX, DX = coords
                                                 ; Given AX = Object number
                                                 ; DS:SI points to mouse obj
                 Mov     CX, 11Ch
@@ -708,11 +705,11 @@ Proc            MouseButtonPress Far            ; Given CX, DX = coords
                 Xor     AX, AX
                 Ret
 
-EndP            MouseButtonPress
+;EndP            MouseButtonPress
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseButtonRelease Far
+Proc MouseButtonRelease Far
 
                 Mov     CX, 01Ch
                 Xor     DX, DX
@@ -726,11 +723,11 @@ Proc            MouseButtonRelease Far
 
                 Ret
 
-EndP            MouseButtonRelease
+;EndP            MouseButtonRelease
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_DrawButtonObject Far  ; AX = object number
+Proc F_DrawButtonObject Far  ; AX = object number
                                         ; SI = object
 
                 Mov     [CS:MouseEventData+10], AX      ; Store object number
@@ -811,11 +808,11 @@ F_DrawButtonObject1:
 
                 Ret
 
-EndP            F_DrawButtonObject
+;EndP            F_DrawButtonObject
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_PreButtonObject Far
+Proc F_PreButtonObject Far
 
                 Add     SI, 28
                 Xor     AH, AH
@@ -850,11 +847,11 @@ Proc            F_PreButtonObject Far
 
                 Ret
 
-EndP            F_PreButtonObject
+;EndP            F_PreButtonObject
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_PostButtonObject Far
+Proc F_PostButtonObject Far
 
                 Mov     SI, [BX]
                 Push    SI
@@ -964,11 +961,11 @@ F_PostButtonObject6:                            ; Enter pressed
                 Add     BX, BX
                 Jmp     [CS:ButtonTypes+BX]
 
-EndP            F_PostButtonObject
+;EndP            F_PostButtonObject
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ButtonType0 Far
+Proc ButtonType0 Far
 
                 Pop     BX
 
@@ -993,11 +990,11 @@ ButtonType0_4:
 
                 Jmp     ButtonEffect
 
-EndP            ButtonType0
+;EndP            ButtonType0
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ButtonType1 Far
+Proc ButtonType1 Far
 
                 Pop     BX
 
@@ -1018,21 +1015,21 @@ ButtonType1_2:
 
                 Jmp     ButtonEffect
 
-EndP            ButtonType1
+;EndP            ButtonType1
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ButtonEffect Far
+Proc ButtonEffect Far
 
                 Mov     BX, [SI+16]
                 Add     BX, BX
                 Jmp     [CS:ButtonEffects+BX]
 
-EndP            ButtonEffect
+;EndP            ButtonEffect
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ButtonType2 Far
+Proc ButtonType2 Far
 
                 Pop     BX
 
@@ -1074,21 +1071,21 @@ ButtonType2_2:
                 Mov     AX, 1
                 Ret
 
-EndP            ButtonType2
+;EndP            ButtonType2
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ButtonEffect0 Far
+Proc ButtonEffect0 Far
 
                 Mov     DX, [SI+18]
                 Mov     AX, 4
                 Ret
 
-EndP            ButtonEffect0
+;EndP            ButtonEffect0
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ButtonEffect1 Far
+Proc ButtonEffect1 Far
 
                 Mov     CX, [SI+20]
                 Mov     DX, [SI+18]
@@ -1096,11 +1093,11 @@ Proc            ButtonEffect1 Far
                 Mov     SI, 1
                 Ret
 
-EndP            ButtonEffect1
+;EndP            ButtonEffect1
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ButtonEffect2 Far
+Proc ButtonEffect2 Far
 
                 Push    DS
                 Push    SI
@@ -1115,11 +1112,11 @@ Proc            ButtonEffect2 Far
 
                 Ret
 
-EndP            ButtonEffect2
+;EndP            ButtonEffect2
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ButtonEffect3 Far
+Proc ButtonEffect3 Far
 
                 Mov     BX, [SI+18]             ; Var number
                 Mov     AX, [SI+20]
@@ -1129,19 +1126,19 @@ Proc            ButtonEffect3 Far
                 Mov     AX, 1
                 Ret
 
-EndP            ButtonEffect3
+;EndP            ButtonEffect3
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ButtonEffect4 Far
+Proc ButtonEffect4 Far
 
                 Jmp     DWord Ptr [SI+18]
 
-EndP            ButtonEffect4
+;EndP            ButtonEffect4
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ButtonEffect5 Far
+Proc ButtonEffect5 Far
 
                 Mov     AX, 1
                 Call    DWord Ptr [SI+18]
@@ -1153,19 +1150,19 @@ Proc            ButtonEffect5 Far
                 Mov     AX, 1
                 Ret
 
-EndP            ButtonEffect5
+;EndP            ButtonEffect5
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ButtonEffect6 Far
+Proc ButtonEffect6 Far
 
                 Jmp    DWord Ptr [SI+24]
 
-EndP            ButtonEffect6
+;EndP            ButtonEffect6
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetPanning              ; DI = channel no.
+Proc GetPanning              ; DI = channel no.
 
                 Push    DS
 
@@ -1179,11 +1176,11 @@ Proc            GetPanning              ; DI = channel no.
 
                 Ret
 
-EndP            GetPanning
+;EndP            GetPanning
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetPEVariables
+Proc GetPEVariables
 
                 Push    DS
 
@@ -1196,11 +1193,11 @@ Proc            GetPEVariables
                 Pop     DS
                 Ret
 
-EndP            GetPEVariables
+;EndP            GetPEVariables
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetScreenVariables
+Proc GetScreenVariables
 
                 Push    DS
 
@@ -1212,11 +1209,11 @@ Proc            GetScreenVariables
                 Pop     DS
                 Ret
 
-EndP            GetScreenVariables
+;EndP            GetScreenVariables
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetScreenVariables
+Proc SetScreenVariables
 
                 Push    DS
                 Push    AX
@@ -1231,11 +1228,11 @@ Proc            SetScreenVariables
                 Pop     DS
                 Ret
 
-EndP            SetScreenVariables
+;EndP            SetScreenVariables
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetPanning
+Proc SetPanning
 
                 Push    DS
 
@@ -1247,20 +1244,20 @@ Proc            SetPanning
 
                 Mov     [DI], AL
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Mov     CX, 1
                 Mov     DX, DI
                 Call    Network_SendSongDataInformation
-ENDIF
+%ENDIF 
 
                 Pop     DS
                 Ret
 
-EndP            SetPanning
+;EndP            SetPanning
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetPEVariables
+Proc SetPEVariables
 
                 Push    DS
 
@@ -1275,11 +1272,11 @@ Proc            SetPEVariables
                 Pop     DS
                 Ret
 
-EndP            SetPEVariables
+;EndP            SetPEVariables
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetInstVariables
+Proc GetInstVariables
 
                 Push    DS
                 Push    AX
@@ -1324,12 +1321,12 @@ GetInstVariables2:
 
                 Ret
 
-EndP            GetInstVariables
-                Assume DS:Nothing
+;EndP            GetInstVariables
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetSampleVariables
+Proc GetSampleVariables
 
                 Push    DS
                 Push    AX
@@ -1351,12 +1348,12 @@ GetSampleVariables1:
 
                 Ret
 
-EndP            GetSampleVariables
-                Assume DS:Nothing
+;EndP            GetSampleVariables
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetMusicVariables
+Proc GetMusicVariables
 
                 Push    DS
 
@@ -1369,11 +1366,11 @@ Proc            GetMusicVariables
 
                 Ret
 
-EndP            GetMusicVariables
+;EndP            GetMusicVariables
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetInstrumentVariables
+Proc GetInstrumentVariables
 
                 Push    DS
 
@@ -1385,30 +1382,30 @@ Proc            GetInstrumentVariables
 
                 Ret
 
-EndP            GetInstrumentVariables
+;EndP            GetInstrumentVariables
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetDriverVariables
+Proc GetDriverVariables
 
                 Call    Music_GetDriverVariable
                 Mov     DX, AX
                 Ret
 
-EndP            GetDriverVariables
+;EndP            GetDriverVariables
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetDriverVariables
+Proc SetDriverVariables
 
                 Call    Music_SetDriverVariable
                 Ret
 
-EndP            SetDriverVariables
+;EndP            SetDriverVariables
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetLoadSampleVariables
+Proc GetLoadSampleVariables
 
                 Push    DS
                 Push    SI
@@ -1426,11 +1423,11 @@ Proc            GetLoadSampleVariables
 
                 Ret
 
-EndP            GetLoadSampleVariables
+;EndP            GetLoadSampleVariables
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetInstVariables
+Proc SetInstVariables
 
                 Push    DS
                 Push    BX
@@ -1440,16 +1437,16 @@ Proc            SetInstVariables
 
                 Pop     AX
 
-IF FILTERENVELOPES
+%IF  FILTERENVELOPES
                 Cmp     DI, 3Ah
                 JB      SetInstVariables3
                 Cmp     DI, 3Bh
                 JA      SetInstVariables3
 
                 Xor     AL, 80h
-ELSE
+%ELSE
                 And     Word Ptr [BX+3Ah], 7F7Fh
-ENDIF
+%ENDIF 
 
 SetInstVariables3:
                 Mov     [BX+DI], AL
@@ -1467,12 +1464,12 @@ SetInstVariables1:
 
                 Ret
 
-EndP            SetInstVariables
-                Assume DS:Nothing
+;EndP            SetInstVariables
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetSampleVariables
+Proc SetSampleVariables
 
                 Push    DS
                 Push    BX
@@ -1496,12 +1493,12 @@ SetSampleVariables1:
 
                 Ret
 
-EndP            SetSampleVariables
-                Assume DS:Nothing
+;EndP            SetSampleVariables
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetMusicVariables
+Proc SetMusicVariables
 
                 Push    DS
                 Push    AX
@@ -1512,11 +1509,11 @@ Proc            SetMusicVariables
                 Pop     AX
                 Mov     [DI], AL
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Mov     CX, 1
                 Mov     DX, DI
                 Call    Network_SendSongDataInformation
-ENDIF
+%ENDIF 
 
                 Cmp     DI, 31h
                 JNE     SetMusicVariables1
@@ -1537,11 +1534,11 @@ SetMusicVariablesEnd:
 
                 Ret
 
-EndP            SetMusicVariables
+;EndP            SetMusicVariables
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetInstrumentVariables
+Proc SetInstrumentVariables
 
                 Push    DS
                 Push    AX
@@ -1556,11 +1553,11 @@ Proc            SetInstrumentVariables
 
                 Ret
 
-EndP            SetInstrumentVariables
+;EndP            SetInstrumentVariables
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetLoadSampleVariables
+Proc SetLoadSampleVariables
 
                 Push    DS
                 Push    SI
@@ -1577,11 +1574,11 @@ Proc            SetLoadSampleVariables
 
                 Ret
 
-EndP            SetLoadSampleVariables
+;EndP            SetLoadSampleVariables
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MousePressThumbBar Far
+Proc MousePressThumbBar Far
 
                 Mov     DX, CX
                 Mov     CX, 8010h
@@ -1597,11 +1594,11 @@ Proc            MousePressThumbBar Far
 
                 Ret
 
-EndP            MousePressThumbBar
+;EndP            MousePressThumbBar
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseHeldThumbBar Far
+Proc MouseHeldThumbBar Far
 
                 Test    BH, 8
                 JNZ     MouseHeldThumbBar2
@@ -1624,11 +1621,11 @@ MouseHeldThumbBar2:
 
                 Ret
 
-EndP            MouseHeldThumbBar
+;EndP            MouseHeldThumbBar
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_DrawThumbBar Far
+Proc F_DrawThumbBar Far
 
                 Mov     [CS:MouseEventData+10], AX      ; Store object number
 
@@ -1722,7 +1719,7 @@ F_DrawThumbBar2:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Functions
+                        ;Assume DS:Functions
                 Mov     SI, Offset MouseEventData
                 Mov     Word Ptr [SI+8], 102h
                 Mov     Word Ptr [SI+12], Offset MousePressThumbBar
@@ -1730,12 +1727,12 @@ F_DrawThumbBar2:
 
                 Ret
 
-EndP            F_DrawThumbBar
-                Assume DS:Nothing
+;EndP            F_DrawThumbBar
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_DrawScalableThumbBar Far
+Proc F_DrawScalableThumbBar Far
 
                 Mov     [CS:MouseEventData+10], AX      ; Store object number
 
@@ -1835,7 +1832,7 @@ F_DrawScalableThumbBar2:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Functions
+                        ;Assume DS:Functions
                 Mov     SI, Offset MouseEventData
                 Mov     Word Ptr [SI+8], 102h
                 Mov     Word Ptr [SI+12], Offset MousePressThumbBar
@@ -1843,12 +1840,12 @@ F_DrawScalableThumbBar2:
 
                 Ret
 
-EndP            F_DrawScalableThumbBar
-                Assume DS:Nothing
+;EndP            F_DrawScalableThumbBar
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            HiLightPanning
+Proc HiLightPanning
 
                 Mov     AL, 80
                 Mul     Byte Ptr [SI+3]
@@ -1864,11 +1861,11 @@ Proc            HiLightPanning
 
                 Ret
 
-EndP            HiLightPanning
+;EndP            HiLightPanning
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_PreThumbBar Far
+Proc F_PreThumbBar Far
 
                 Call    S_GetDestination
 
@@ -1962,11 +1959,11 @@ F_PreThumbBar3:
                 Call    S_HiLight
                 Ret
 
-EndP            F_PreThumbBar
+;EndP            F_PreThumbBar
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_PreScalableThumbBar Far
+Proc F_PreScalableThumbBar Far
 
                 Call    S_GetDestination
 
@@ -2066,11 +2063,11 @@ F_PreScalableThumbBar3:
                 Call    S_HiLight
                 Ret
 
-EndP            F_PreScalableThumbBar
+;EndP            F_PreScalableThumbBar
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_PostScalableThumbBar Far
+Proc F_PostScalableThumbBar Far
 
                 Cmp     CX, 8010h
                 JE      F_PostScalableThumbBarMouse1
@@ -2118,11 +2115,11 @@ F_PostScalableThumbBarMouse3:
                 Mov     AX, 2
                 Ret
 
-EndP            F_PostScalableThumbBar
+;EndP            F_PostScalableThumbBar
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_PostThumbBar Far
+Proc F_PostThumbBar Far
 
                 Mov     SI, [BX]
 
@@ -2436,11 +2433,11 @@ F_PostThumbBar31:
                 Mov     AX, 1
                 Ret
 
-EndP            F_PostThumbBar
+;EndP            F_PostThumbBar
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_DrawInfoLine Far
+Proc F_DrawInfoLine Far
 
                 Push    ES
                 LodsW
@@ -2493,17 +2490,17 @@ F_DrawInfoLine3:
                 Pop     ES
                 Ret
 
-EndP            F_DrawInfoLine
+;EndP            F_DrawInfoLine
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_ShowChannels Far
+Proc F_ShowChannels Far
 
                 Push    DS
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Functions
+                        ;Assume DS:Functions
 
                 Mov     DI, (20+15*80)*2
                 Mov     CX, 32
@@ -2517,16 +2514,16 @@ Proc            F_ShowChannels Far
                 Call    F_ShowChannel1
 
                 Pop     DS
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
                 Ret
 
-EndP            F_ShowChannels
+;EndP            F_ShowChannels
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_ShowChannel1
+Proc F_ShowChannel1
 
-                        Assume DS:Functions
+                        ;Assume DS:Functions
 
 F_ShowChannel1_1:
                 Mov     SI, Offset ChannelMsg
@@ -2543,54 +2540,54 @@ F_ShowChannel1_2:
                 Add     DI, 140
                 Loop    F_ShowChannel1_1
 
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Ret
 
-EndP            F_ShowChannel1
+;EndP            F_ShowChannel1
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_RedrawScreen Far
+Proc F_RedrawScreen Far
 
                 Mov     AX, 1
                 Ret
 
-EndP            F_RedrawScreen
+;EndP            F_RedrawScreen
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_Return0 Far           ; ESC pressed on opening scrn
+Proc F_Return0 Far           ; ESC pressed on opening scrn
 
                 Xor     DX, DX
                 Mov     AX, 4
                 Ret
 
-EndP            F_Return0
+;EndP            F_Return0
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_Return64 Far
+Proc F_Return64 Far
 
                 Mov     DX, 64
                 Mov     AX, 4
                 Ret
 
-EndP            F_Return64
+;EndP            F_Return64
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_Return192 Far
+Proc F_Return192 Far
 
                 Mov     DX, 192
                 Mov     AX, 4
                 Ret
 
-EndP            F_Return192
+;EndP            F_Return192
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PanningKeys
+Proc PanningKeys
 
                 Push    AX
                 Mov     AX, DX
@@ -2655,11 +2652,11 @@ PanningKeysSpace:
 
                 Jmp     PanningKeys2
 
-EndP            PanningKeys
+;EndP            PanningKeys
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            FilterKeys
+Proc FilterKeys
 
                 Push    DI
                 Mov     DI, [SI+10]
@@ -2684,11 +2681,11 @@ FilterKeysEnd:
                 Pop     DI
                 Ret
 
-EndP            FilterKeys
+;EndP            FilterKeys
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DrawPanning
+Proc DrawPanning
 
                 Push    DS
                 Push    SI
@@ -2718,11 +2715,11 @@ DrawPanning1:
                 Pop     DS
                 Ret
 
-EndP            DrawPanning
+;EndP            DrawPanning
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DrawMIDIChannel
+Proc DrawMIDIChannel
 
                 Mov     AX, [SI+0Ah]
                 Cmp     AX, 3Fh
@@ -2770,21 +2767,21 @@ DrawMIDIChannel3:
 DrawMIDIChannel2:
                 Ret
 
-EndP            DrawMIDIChannel
+;EndP            DrawMIDIChannel
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_Return1 Far
+Proc F_Return1 Far
 
                 Mov     DX, 1
                 Mov     AX, 4
                 Ret
 
-EndP            F_Return1
+;EndP            F_Return1
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetSIOInstSegment
+Proc GetSIOInstSegment
 
                 Mov     SI, Inst
                 Mov     DS, SI
@@ -2792,11 +2789,11 @@ Proc            GetSIOInstSegment
 
                 Ret
 
-EndP            GetSIOInstSegment
+;EndP            GetSIOInstSegment
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetSIODiskSegment
+Proc GetSIODiskSegment
 
                 Mov     SI, Disk
                 Mov     DS, SI
@@ -2804,11 +2801,11 @@ Proc            GetSIODiskSegment
 
                 Ret
 
-EndP            GetSIODiskSegment
+;EndP            GetSIODiskSegment
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetLoadSampleString             ; Returns DS:SI
+Proc GetLoadSampleString             ; Returns DS:SI
 
                 Call    D_GetLoadSampleVars     ; Gets SI = currentsample offset
                                                 ; DS = DiskDataArea
@@ -2816,11 +2813,11 @@ Proc            GetLoadSampleString             ; Returns DS:SI
 
                 Ret
 
-EndP            GetLoadSampleString
+;EndP            GetLoadSampleString
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetMusicSegmentString
+Proc GetMusicSegmentString
 
                 Call    Music_GetSongSegment
                 Mov     DS, AX
@@ -2829,24 +2826,24 @@ Proc            GetMusicSegmentString
 
                 Ret
 
-EndP            GetMusicSegmentString
+;EndP            GetMusicSegmentString
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetMusicSegmentString
+Proc SetMusicSegmentString
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Mov     CX, 26
                 Mov     DX, 4
                 Call    Network_SendSongDataInformation
-ENDIF
+%ENDIF 
                 Ret
 
-EndP            SetMusicSegmentString
+;EndP            SetMusicSegmentString
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetPatternSegmentString
+Proc GetPatternSegmentString
 
                 Push    CS
                 Pop     DS
@@ -2855,11 +2852,11 @@ Proc            GetPatternSegmentString
 
                 Ret
 
-EndP            GetPatternSegmentString
+;EndP            GetPatternSegmentString
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetSampleString
+Proc GetSampleString
 
                 Call    I_GetSampleOffset
                 Mov     SI, BX
@@ -2867,21 +2864,21 @@ Proc            GetSampleString
 
                 Ret
 
-EndP            GetSampleString
+;EndP            GetSampleString
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetSampleString
+Proc SetSampleString
 
                 NetworkSendSample
 
                 Ret
 
-EndP            SetSampleString
+;EndP            SetSampleString
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetInstrumentString
+Proc GetInstrumentString
 
                 Call    I_GetInstrumentOffset
                 Mov     SI, BX
@@ -2889,29 +2886,29 @@ Proc            GetInstrumentString
 
                 Ret
 
-EndP            GetInstrumentString
+;EndP            GetInstrumentString
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetInstrumentString
+Proc SetInstrumentString
 
                 NetworkSendInstrument
                 Ret
 
-EndP            SetInstrumentString
+;EndP            SetInstrumentString
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 TopMIDIMacro    DW      80h
 
-Proc            GetMIDIString           ; CX = select2
+Proc GetMIDIString           ; CX = select2
 
                 Push    Music
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     DS, MIDIDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     SI, CX
                 Test    CX, CX
@@ -2925,11 +2922,11 @@ Proc            GetMIDIString           ; CX = select2
 GetMIDIString1:
                 Ret
 
-EndP            GetMIDIString
+;EndP            GetMIDIString
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseSelectString Far
+Proc MouseSelectString Far
 
                 Mov     CX, 8010h
                 Xor     DX, DX
@@ -2939,13 +2936,13 @@ Proc            MouseSelectString Far
 
                 Ret
 
-EndP            MouseSelectString
+;EndP            MouseSelectString
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 PostStringFunction      DW      0
 
-Proc            F_GetStringInputOffset
+Proc F_GetStringInputOffset
 
                 Mov     BX, [SI+4]
                 Mov     CX, [SI+6]
@@ -2970,11 +2967,11 @@ F_GetStringInputOffset1:
                 Mov     SI, CX
                 Ret
 
-EndP            F_GetStringInputOffset
+;EndP            F_GetStringInputOffset
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_DrawStringInput Far
+Proc F_DrawStringInput Far
 
                 Mov     [CS:MouseEventData+10], AX      ; Store object number
 
@@ -3031,7 +3028,7 @@ F_DrawStringInput2:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Functions
+                        ;Assume DS:Functions
 
                 Mov     SI, Offset MouseEventData
                 Mov     [MouseEventData+8], 102h
@@ -3041,12 +3038,12 @@ F_DrawStringInput2:
 
                 Ret
 
-EndP            F_DrawStringInput
-                Assume DS:Nothing
+;EndP            F_DrawStringInput
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_PreStringInput Far
+Proc F_PreStringInput Far
 
                 Mov     AL, 80
                 Mul     Byte Ptr [SI+3]
@@ -3072,11 +3069,11 @@ F_PreStringInput2:
                 StosB
                 Ret
 
-EndP            F_PreStringInput
+;EndP            F_PreStringInput
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_PostStringInput Far
+Proc F_PostStringInput Far
 
                 Test    CL, CL
                 JZ      F_PostStringInput9
@@ -3208,11 +3205,11 @@ F_PostStringInput9:
                 Xor     AX, AX
                 Ret
 
-EndP            F_PostStringInput
+;EndP            F_PostStringInput
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_GotoEmptyList Far
+Proc F_GotoEmptyList Far
 
                 Mov     AX, 5
                 Mov     SI, 1
@@ -3222,11 +3219,11 @@ Proc            F_GotoEmptyList Far
 
                 Ret
 
-EndP            F_GotoEmptyList
+;EndP            F_GotoEmptyList
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetSampleToggle
+Proc GetSampleToggle
 
                 Push    DS
 
@@ -3276,11 +3273,11 @@ GetSampleToggle1:
                 Pop     DS
                 Ret
 
-EndP            GetSampleToggle
+;EndP            GetSampleToggle
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetInstrumentToggle
+Proc GetInstrumentToggle
 
                 Push    DS
 
@@ -3328,11 +3325,11 @@ GetInstrumentToggle2:
                 Pop     DS
                 Ret
 
-EndP            GetInstrumentToggle
+;EndP            GetInstrumentToggle
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetLoadSampleToggle
+Proc GetLoadSampleToggle
 
                 Push    DS
                 Push    SI
@@ -3384,11 +3381,11 @@ GetLoadSampleToggle1:
                 Pop     DS
                 Ret
 
-EndP            GetLoadSampleToggle
+;EndP            GetLoadSampleToggle
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetPatternSegmentToggle
+Proc GetPatternSegmentToggle
 
                 Push    DS
 
@@ -3405,11 +3402,11 @@ GetPatternSegmentToggle1:
                 Pop     DS
                 Ret
 
-EndP            GetPatternSegmentToggle
+;EndP            GetPatternSegmentToggle
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetMusicSegmentToggle
+Proc GetMusicSegmentToggle
 
                 Push    DS
 
@@ -3426,11 +3423,11 @@ GetMusicSegmentToggle1:
                 Pop     DS
                 Ret
 
-EndP            GetMusicSegmentToggle
+;EndP            GetMusicSegmentToggle
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SampleToggle
+Proc SampleToggle
 
                 Push    DS
 
@@ -3511,17 +3508,17 @@ SampleToggleEnd:
                 Pop     DS
                 Ret
 
-EndP            SampleToggle
+;EndP            SampleToggle
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            InstrumentToggle
+Proc InstrumentToggle
 
                 Push    DS
 
                 Call    I_GetInstrumentOffset
 
-IF FILTERENVELOPES
+%IF  FILTERENVELOPES
                 Cmp     DI, 1D4h
                 JNE     InstrumentToggle2
                 Cmp     DL, 1
@@ -3536,9 +3533,9 @@ IF FILTERENVELOPES
                 And     Byte Ptr [BX+DI], 7Fh
 
 InstrumentToggle2:
-ELSE
+%ELSE
                 And     Byte Ptr [BX+1D4h], 7Fh
-ENDIF
+%ENDIF 
                 Xor     [BX+DI], DL
 
 InstrumentToggle3:
@@ -3549,11 +3546,11 @@ InstrumentToggle3:
                 Pop     DS
                 Ret
 
-EndP            InstrumentToggle
+;EndP            InstrumentToggle
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LoadSampleToggle
+Proc LoadSampleToggle
 
                 Push    DS
                 Push    SI
@@ -3625,16 +3622,16 @@ LoadSampleToggle1:
                 Pop     DS
                 Ret
 
-EndP            LoadSampleToggle
+;EndP            LoadSampleToggle
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PatternSegmentToggle
+Proc PatternSegmentToggle
 
                 Push    DS
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Xor     [DS:DI], DL
 
@@ -3652,12 +3649,12 @@ PatternSegmentToggle1:
                 Pop     DS
                 Ret
 
-EndP            PatternSegmentToggle
-                Assume DS:Nothing
+;EndP            PatternSegmentToggle
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MusicSegmentToggle
+Proc MusicSegmentToggle
 
                 Push    DS
                 Call    Music_GetSongSegment
@@ -3665,20 +3662,20 @@ Proc            MusicSegmentToggle
 
                 Xor     [DS:DI], DL
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Mov     CX, 1
                 Mov     DX, DI
                 Call    Network_SendSongDataInformation
-ENDIF
+%ENDIF 
 
                 Pop     DS
                 Ret
 
-EndP            MusicSegmentToggle
+;EndP            MusicSegmentToggle
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseToggle Far
+Proc MouseToggle Far
 
                 Mov     CX, 8010h
                 Mov     DX, ' '
@@ -3688,11 +3685,11 @@ Proc            MouseToggle Far
 
                 Ret
 
-EndP            MouseToggle
+;EndP            MouseToggle
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_DrawToggle Far
+Proc F_DrawToggle Far
 
                 Mov     [CS:MouseEventData+10], AX      ; Store object number
 
@@ -3741,7 +3738,7 @@ F_DrawToggle2:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Functions
+                        ;Assume DS:Functions
 
                 Mov     SI, Offset MouseEventData
                 Mov     [MouseEventData+8], 102h
@@ -3751,11 +3748,11 @@ F_DrawToggle2:
 
                 Ret
 
-EndP            F_DrawToggle
+;EndP            F_DrawToggle
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_PreToggle Far
+Proc F_PreToggle Far
 
                 Call    S_GetDestination
                 Mov     BX, [SI+4]              ; Segment no.
@@ -3780,11 +3777,11 @@ Proc            F_PreToggle Far
 
                 Ret
 
-EndP            F_PreToggle
+;EndP            F_PreToggle
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_PostToggle Far
+Proc F_PostToggle Far
 
                 Mov     SI, [BX]
 
@@ -3841,11 +3838,11 @@ F_PostToggle6:
                 Mov     AX, 1
                 Ret
 
-EndP            F_PostToggle
+;EndP            F_PostToggle
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetInstrument3Num
+Proc GetInstrument3Num
 
                 Push    DS
 
@@ -3857,11 +3854,11 @@ Proc            GetInstrument3Num
                 Pop     DS
                 Ret
 
-EndP            GetInstrument3Num
+;EndP            GetInstrument3Num
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetInstrument3Num               ; AX = value.
+Proc SetInstrument3Num               ; AX = value.
 
                 Push    DS
                 Push    SI
@@ -3869,11 +3866,11 @@ Proc            SetInstrument3Num               ; AX = value.
 
                 Mov     AX, Inst
                 Mov     DS, AX
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     CX, MaxNode
                 Dec     CL
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 
                 Call    I_GetInstrumentOffset
@@ -3922,11 +3919,11 @@ SetInstrument3Num2:
 SetInstrument3Num3:
                 RetN
 
-EndP            SetInstrument3Num
+;EndP            SetInstrument3Num
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetSample5Num
+Proc GetSample5Num
 
                 Push    DS
 
@@ -3937,11 +3934,11 @@ Proc            GetSample5Num
                 Pop     DS
                 Ret
 
-EndP            GetSample5Num
+;EndP            GetSample5Num
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetLoadSample5Num
+Proc GetLoadSample5Num
 
                 Push    DS
                 Push    SI
@@ -3956,11 +3953,11 @@ Proc            GetLoadSample5Num
 
                 Ret
 
-EndP            GetLoadSample5Num
+;EndP            GetLoadSample5Num
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetInst5Num
+Proc GetInst5Num
 
                 Push    DS
                 Mov     AX, Inst
@@ -3971,11 +3968,11 @@ Proc            GetInst5Num
                 Pop     DS
                 Ret
 
-EndP            GetInst5Num
+;EndP            GetInst5Num
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetSample5Num               ; AX = value.
+Proc SetSample5Num               ; AX = value.
 
                 Push    DS
                 Push    AX
@@ -3991,11 +3988,11 @@ Proc            SetSample5Num               ; AX = value.
 
                 Ret
 
-EndP            SetSample5Num
+;EndP            SetSample5Num
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetLoadSample5Num               ; AX = value.
+Proc SetLoadSample5Num               ; AX = value.
 
                 Push    DS
                 Push    SI
@@ -4009,11 +4006,11 @@ Proc            SetLoadSample5Num               ; AX = value.
                 Pop     DS
                 Ret
 
-EndP            SetLoadSample5Num
+;EndP            SetLoadSample5Num
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetInst5Num
+Proc SetInst5Num
 
                 Push    DS
 
@@ -4025,11 +4022,11 @@ Proc            SetInst5Num
 
                 Ret
 
-EndP            SetInst5Num
+;EndP            SetInst5Num
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseNumberDecrement Far
+Proc MouseNumberDecrement Far
 
                 Mov     CX, 8010h
                 Mov     DX, '-'
@@ -4039,11 +4036,11 @@ Proc            MouseNumberDecrement Far
 
                 Ret
 
-EndP            MouseNumberDecrement
+;EndP            MouseNumberDecrement
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseNumberIncrement Far
+Proc MouseNumberIncrement Far
 
                 Mov     CX, 8010h
                 Mov     DX, '+'
@@ -4053,11 +4050,11 @@ Proc            MouseNumberIncrement Far
 
                 Ret
 
-EndP            MouseNumberIncrement
+;EndP            MouseNumberIncrement
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_Draw3Num Far
+Proc F_Draw3Num Far
 
                 Mov     [CS:MouseEventData+10], AX      ; Store object number
 
@@ -4108,11 +4105,11 @@ Proc            F_Draw3Num Far
 
                 Ret
 
-EndP            F_Draw3Num
+;EndP            F_Draw3Num
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_Pre3Num Far
+Proc F_Pre3Num Far
 
                 Mov     AL, 80
                 Mul     Byte Ptr [SI+3]
@@ -4128,11 +4125,11 @@ Proc            F_Pre3Num Far
 
                 Ret
 
-EndP            F_Pre3Num
+;EndP            F_Pre3Num
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_Post3Num Far
+Proc F_Post3Num Far
 
                 Mov     SI, [BX]
                 Test    CL, CL
@@ -4304,11 +4301,11 @@ F_Post3Num21:
                 RetN
 
 
-EndP            F_Post3Num
+;EndP            F_Post3Num
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_ConvEAX2Num Far
+Proc F_ConvEAX2Num Far
 
                 Push    EAX                      ; CH = colour
                 Push    EBX                      ; DX:AX = number
@@ -4343,11 +4340,11 @@ F_ConvEAX2Num2:
 
                 Ret
 
-EndP            F_ConvEAX2Num
+;EndP            F_ConvEAX2Num
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_Draw5Num Far
+Proc F_Draw5Num Far
 
                 Mov     [CS:MouseEventData+10], AX
 
@@ -4398,11 +4395,11 @@ Proc            F_Draw5Num Far
 
                 Ret
 
-EndP            F_Draw5Num
+;EndP            F_Draw5Num
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_Pre5Num Far
+Proc F_Pre5Num Far
 
                 Mov     AL, 80
                 Mul     Byte Ptr [SI+3]
@@ -4418,11 +4415,11 @@ Proc            F_Pre5Num Far
 
                 Ret
 
-EndP            F_Pre5Num
+;EndP            F_Pre5Num
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_Post5Num Far
+Proc F_Post5Num Far
 
                 Mov     SI, [BX]
                 Test    CL, CL
@@ -4587,11 +4584,11 @@ F_Post5Num17:
 F_Post5Num21:
                 RetN
 
-EndP            F_Post5Num
+;EndP            F_Post5Num
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_DrawHeader Far
+Proc F_DrawHeader Far
 
 ;                Call    MouseClearEvents
 
@@ -4650,11 +4647,11 @@ F_DrawHeader1:
 F_DrawHeader2:
                 Ret
 
-EndP            F_DrawHeader
+;EndP            F_DrawHeader
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_DrawSMCChannels Far
+Proc F_DrawSMCChannels Far
 
 ;                Call    MouseClearEvents
 
@@ -4693,11 +4690,11 @@ F_DrawSMCChannels1:
 
                 Ret
 
-EndP            F_DrawSMCChannels
+;EndP            F_DrawSMCChannels
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_ConfigButtonSetup Far
+Proc F_ConfigButtonSetup Far
 
                 Call    Music_GetSongSegment
                 Mov     DS, AX                          ; OK... now check for
@@ -4761,12 +4758,12 @@ F_ConfigButtonSetup3:
 
                 Ret
 
-EndP            F_ConfigButtonSetup
+;EndP            F_ConfigButtonSetup
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-IF NETWORKENABLED
-Proc            F_SendSongFlags
+%IF  NETWORKENABLED
+Proc F_SendSongFlags
 
                 Push    CX
                 Push    DX
@@ -4780,19 +4777,19 @@ Proc            F_SendSongFlags
 
                 Ret
 
-EndP            F_SendSongFlags
+;EndP            F_SendSongFlags
 
 SendSongFlags   EQU     Call F_SendSongFlags
 
-ELSE
+%ELSE
 
 SendSongFlags   EQU     ;
 
-ENDIF
+%ENDIF 
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_SetControlSample Far
+Proc F_SetControlSample Far
 
                 Call    Music_GetSongSegment
                 Mov     DS, AX
@@ -4803,11 +4800,11 @@ Proc            F_SetControlSample Far
 
                 Ret
 
-EndP            F_SetControlSample
+;EndP            F_SetControlSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_SetControlInstrument Far
+Proc F_SetControlInstrument Far
 
                 Call    Music_GetSongSegment
                 Mov     DS, AX
@@ -4866,7 +4863,7 @@ F_SetControlInstrument4:
                 Loop    F_SetControlInstrument4
 
 F_SetControlInstrument2:
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Call    Network_GetSendQueue
                 JZ      F_SetControlInstrument5
 
@@ -4877,7 +4874,7 @@ IF NETWORKENABLED
 
 F_SetControlInstrument5:
                 Call    Network_FinishedSendQueue
-ENDIF
+%ENDIF 
                 Inc     DX
                 Cmp     DX, 99
                 JBE     F_SetControlInstrument1
@@ -4886,11 +4883,11 @@ F_SetControlInstrument3:
 
                 Ret
 
-EndP            F_SetControlInstrument
+;EndP            F_SetControlInstrument
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_SetStereo Far
+Proc F_SetStereo Far
 
                 Call    Music_GetSongSegment
                 Mov     DS, AX
@@ -4903,11 +4900,11 @@ Proc            F_SetStereo Far
 
                 Ret
 
-EndP            F_SetStereo
+;EndP            F_SetStereo
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_SetMono Far
+Proc F_SetMono Far
 
                 Call    Music_GetSongSegment
                 Mov     DS, AX
@@ -4920,11 +4917,11 @@ Proc            F_SetMono Far
 
                 Ret
 
-EndP            F_SetMono
+;EndP            F_SetMono
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_SetLinear Far
+Proc F_SetLinear Far
 
                 Call    Music_GetSongSegment
                 Mov     DS, AX
@@ -4935,11 +4932,11 @@ Proc            F_SetLinear Far
 
                 Ret
 
-EndP            F_SetLinear
+;EndP            F_SetLinear
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_SetAmiga Far
+Proc F_SetAmiga Far
 
                 Call    Music_GetSongSegment
                 Mov     DS, AX
@@ -4950,20 +4947,20 @@ Proc            F_SetAmiga Far
 
                 Ret
 
-EndP            F_SetAmiga
+;EndP            F_SetAmiga
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_Reset5NumInputPos Far
+Proc F_Reset5NumInputPos Far
 
                 Mov     CS:NumberPos, 0
                 Ret
 
-EndP            F_Reset5NumInputPos
+;EndP            F_Reset5NumInputPos
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_NewSong Far
+Proc F_NewSong Far
 
                 EnsureNoNetwork
 
@@ -5036,11 +5033,11 @@ F_NewSongEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            F_NewSong
+;EndP            F_NewSong
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_MainMenu Far
+Proc F_MainMenu Far
 
                 Call    S_SaveScreen
 
@@ -5053,62 +5050,62 @@ Proc            F_MainMenu Far
                 Mov     AX, 1
                 Ret
 
-EndP            F_MainMenu
+;EndP            F_MainMenu
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_ViewPattern Far
+Proc F_ViewPattern Far
 
                 Call    MouseRestoreEvents
                 Add     SP, 20
                 Jmp     Glbl_F2_2
 
-EndP            F_ViewPattern
+;EndP            F_ViewPattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_ViewVariables Far
+Proc F_ViewVariables Far
 
                 Call    MouseRestoreEvents
                 Add     SP, 20
                 Jmp     Glbl_F12
 
-EndP            F_ViewVariables
+;EndP            F_ViewVariables
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_ViewOrderPan Far
+Proc F_ViewOrderPan Far
 
                 Call    MouseRestoreEvents
                 Add     SP, 20
                 Jmp     Glbl_F11_2
 
-EndP            F_ViewOrderPan
+;EndP            F_ViewOrderPan
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_MessageEditor Far
+Proc F_MessageEditor Far
 
                 Call    MouseRestoreEvents
                 Add     SP, 20
                 Jmp     Glbl_Shift_F9
 
-EndP            F_MessageEditor
+;EndP            F_MessageEditor
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_Help Far
+Proc F_Help Far
 
                 Call    S_RestoreScreen
                 Call    MouseRestoreEvents
                 Add     SP, 20
                 Jmp     H_Help
 
-EndP            F_Help
+;EndP            F_Help
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_PlaybackMenu Far
+Proc F_PlaybackMenu Far
 
                 Mov     CX, 0FFFFh
                 Mov     DI, Offset O1_PlaybackMenu
@@ -5118,11 +5115,11 @@ Proc            F_PlaybackMenu Far
                 Mov     AX, 1
                 Ret
 
-EndP            F_PlaybackMenu
+;EndP            F_PlaybackMenu
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_InfoPage Far
+Proc F_InfoPage Far
 
                 Call    MouseRestoreEvents
                 Call    MouseRestoreEvents
@@ -5130,77 +5127,77 @@ Proc            F_InfoPage Far
                 Add     SP, 48
                 Jmp     Glbl_F5
 
-EndP            F_InfoPage
+;EndP            F_InfoPage
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_PlaySong Far
+Proc F_PlaySong Far
 
                 Call    MouseRestoreEvents
                 Call    MouseRestoreEvents
                 Add     SP, 48
                 Jmp     Glbl_Ctrl_F5
 
-EndP            F_PlaySong
+;EndP            F_PlaySong
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_PlayPattern Far
+Proc F_PlayPattern Far
 
                 Call    MouseRestoreEvents
                 Call    MouseRestoreEvents
                 Add     SP, 48
                 Jmp     Glbl_F6
 
-EndP            F_PlayPattern
+;EndP            F_PlayPattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_PlayOrder Far
+Proc F_PlayOrder Far
 
                 Call    MouseRestoreEvents
                 Call    MouseRestoreEvents
                 Add     SP, 48
                 Jmp     Glbl_Shift_F6
 
-EndP            F_PlayOrder
+;EndP            F_PlayOrder
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_PlayMark Far
+Proc F_PlayMark Far
 
                 Call    MouseRestoreEvents
                 Call    MouseRestoreEvents
                 Add     SP, 48
                 Jmp     PE_F7
 
-EndP            F_PlayMark
+;EndP            F_PlayMark
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_Stop Far
+Proc F_Stop Far
 
                 Call    MouseRestoreEvents
                 Call    MouseRestoreEvents
                 Add     SP, 48
                 Jmp     Music_Stop
 
-EndP            F_Stop
+;EndP            F_Stop
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_ReinitSoundCard Far
+Proc F_ReinitSoundCard Far
 
                 Call    MouseRestoreEvents
                 Call    MouseRestoreEvents
                 Add     SP, 48
                 Jmp     Music_ReinitSoundCard
 
-EndP            F_ReinitSoundCard
+;EndP            F_ReinitSoundCard
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_CalculateLength Far
+Proc F_CalculateLength Far
 
                 Call    S_RestoreScreen
                 Call    MouseRestoreEvents
@@ -5208,22 +5205,22 @@ Proc            F_CalculateLength Far
                 Add     SP, 48
                 Jmp     Music_TimeSong
 
-EndP            F_CalculateLEngth
+;EndP            F_CalculateLEngth
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_DriverScreen Far
+Proc F_DriverScreen Far
 
                 Call    MouseRestoreEvents
                 Call    MouseRestoreEvents
                 Add     SP, 48
                 Jmp     Glbl_DriverScreen
 
-EndP            F_DriverScreen
+;EndP            F_DriverScreen
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_SampleMenu Far
+Proc F_SampleMenu Far
 
                 Mov     CX, 0FFFFh
                 Mov     DI, Offset O1_SampleMenu
@@ -5233,11 +5230,11 @@ Proc            F_SampleMenu Far
                 Mov     AX, 1
                 Ret
 
-EndP            F_SampleMenu
+;EndP            F_SampleMenu
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_InstrumentMenu Far
+Proc F_InstrumentMenu Far
 
                 Mov     CX, 0FFFFh
                 Mov     DI, Offset O1_InstrumentMenu
@@ -5247,66 +5244,66 @@ Proc            F_InstrumentMenu Far
                 Mov     AX, 1
                 Ret
 
-EndP            F_InstrumentMenu
+;EndP            F_InstrumentMenu
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_SampleList Far
+Proc F_SampleList Far
 
                 Call    MouseRestoreEvents
                 Call    MouseRestoreEvents
                 Add     SP, 48
                 Jmp     Glbl_F3
 
-EndP            F_SampleList
+;EndP            F_SampleList
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_InstrumentList Far
+Proc F_InstrumentList Far
 
                 Call    MouseRestoreEvents
                 Call    MouseRestoreEvents
                 Add     SP, 48
                 Jmp     Glbl_F4
 
-EndP            F_InstrumentList
+;EndP            F_InstrumentList
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_InstrumentLibrary Far
+Proc F_InstrumentLibrary Far
 
                 Call    MouseRestoreEvents
                 Call    MouseRestoreEvents
                 Add     SP, 48
                 Jmp     Glbl_Ctrl_F4
 
-EndP            F_InstrumentLibrary
+;EndP            F_InstrumentLibrary
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_ReloadGravis Far
+Proc F_ReloadGravis Far
 
                 Call    MouseRestoreEvents
                 Call    MouseRestoreEvents
                 Add     SP, 48
                 Jmp     Music_SoundCardLoadAllSamples
 
-EndP            F_ReloadGravis
+;EndP            F_ReloadGravis
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_SampleLibrary Far
+Proc F_SampleLibrary Far
 
                 Call    MouseRestoreEvents
                 Call    MouseRestoreEvents
                 Add     SP, 48
                 Jmp     Glbl_Ctrl_F3
 
-EndP            F_SampleLibrary
+;EndP            F_SampleLibrary
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_FileMenu Far
+Proc F_FileMenu Far
 
                 Mov     CX, 0FFFFh
                 Mov     DI, Offset O1_FileMenu
@@ -5316,23 +5313,23 @@ Proc            F_FileMenu Far
                 Mov     AX, 1
                 Ret
 
-EndP            F_FileMenu
+;EndP            F_FileMenu
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_FileLoad Far
+Proc F_FileLoad Far
 
                 Call    MouseRestoreEvents
                 Call    MouseRestoreEvents
                 Add     SP, 48
                 Jmp     Glbl_F9
 
-EndP            F_FileLoad
+;EndP            F_FileLoad
 
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_FileNew Far
+Proc F_FileNew Far
 
                 Call    MouseRestoreEvents
                 Call    MouseRestoreEvents
@@ -5340,11 +5337,11 @@ Proc            F_FileNew Far
                 Add     SP, 48
                 Jmp     F_NewSong
 
-EndP            F_FileNew
+;EndP            F_FileNew
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_FileSaveCurrent Far
+Proc F_FileSaveCurrent Far
 
                 Call    MouseRestoreEvents
                 Call    MouseRestoreEvents
@@ -5352,22 +5349,22 @@ Proc            F_FileSaveCurrent Far
                 Add     SP, 48
                 Jmp     D_SaveSong
 
-EndP            F_FileSaveCurrent
+;EndP            F_FileSaveCurrent
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_FileSaveAs Far
+Proc F_FileSaveAs Far
 
                 Call    MouseRestoreEvents
                 Call    MouseRestoreEvents
                 Add     SP, 48
                 Jmp     Glbl_F10
 
-EndP            F_FileSaveAs
+;EndP            F_FileSaveAs
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_FileDOSShell Far
+Proc F_FileDOSShell Far
 
                 Call    MouseRestoreEvents
                 Call    MouseRestoreEvents
@@ -5375,11 +5372,11 @@ Proc            F_FileDOSShell Far
                 Add     SP, 48
                 Jmp     DOSShell
 
-EndP            F_FileDOSShell
+;EndP            F_FileDOSShell
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_FileQuit Far
+Proc F_FileQuit Far
 
                 Call    MouseRestoreEvents
                 Call    MouseRestoreEvents
@@ -5387,11 +5384,11 @@ Proc            F_FileQuit Far
                 Add     SP, 48
                 Jmp     Quit
 
-EndP            F_FileQuit
+;EndP            F_FileQuit
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-IF MEMORYDEBUG
+%IF  MEMORYDEBUG
 
 DebugOffset             DW      0
 DebugSegment            DW      0
@@ -5465,11 +5462,11 @@ DebugDX                 DW      0
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_DrawDebug Far
+Proc F_DrawDebug Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Functions
+                        ;Assume DS:Functions
 
                 Call    S_GetDestination
                 Mov     SI, Offset SegmentMsg
@@ -5522,7 +5519,7 @@ F_DrawDebug1:
                                                 ; Now to shove debug stuff.
                 Mov     SI, DebugOffset
                 Mov     DS, DebugSegment
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
                 Mov     DI, (10+15*80)*2
 
                 Mov     DX, 30
@@ -5591,12 +5588,12 @@ F_DrawDebug5:
                 Mov     AX, 1
                 Ret
 
-EndP            F_DrawDebug
-                Assume DS:Nothing
+;EndP            F_DrawDebug
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_PostDebug Far
+Proc F_PostDebug Far
 
                 Mov     CS:DebugCX, CX
                 Mov     CS:DebugDX, DX
@@ -5604,78 +5601,78 @@ Proc            F_PostDebug Far
                 Xor     AX, AX
                 Ret
 
-EndP            F_PostDebug
+;EndP            F_PostDebug
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_DebugUp Far
+Proc F_DebugUp Far
 
                 Sub     CS:DebugOffset, 16
 
                 Mov     AX, 1
                 Ret
 
-EndP            F_DebugUp
+;EndP            F_DebugUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_DebugDown Far
+Proc F_DebugDown Far
 
                 Add     CS:DebugOffset, 16
 
                 Mov     AX, 1
                 Ret
 
-EndP            F_DebugDown
+;EndP            F_DebugDown
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_DebugPgUp Far
+Proc F_DebugPgUp Far
 
                 Sub     CS:DebugOffset, 16*30
 
                 Mov     AX, 1
                 Ret
 
-EndP            F_DebugPgUp
+;EndP            F_DebugPgUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_DebugPgDn Far
+Proc F_DebugPgDn Far
 
                 Add     CS:DebugOffset, 16*30
 
                 Mov     AX, 1
                 Ret
 
-EndP            F_DebugPgDn
+;EndP            F_DebugPgDn
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_DebugStringInput Far
+Proc F_DebugStringInput Far
 
                 Mov     AX, Disk
                 Mov     DS, AX
-                        Assume DS:Disk
+                        ;Assume DS:Disk
                 Mov     DX, DiskDataArea
 
                 Xor     BP, BP                  ; BP = ':' count.
 
                 Mov     AX, Music
                 Mov     DS, AX
-                        Assume DS:Music
+                        ;Assume DS:Music
                 Mov     BX, SongDataArea
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
                 Mov     SI, PatternDataArea
 
                 Push    CS
                 Push    CS
                 Pop     DS
                 Pop     ES
-                        Assume DS:Functions ; ES = functions also.
+                        ;Assume DS:Functions ; ES = functions also.
 
                 Mov     DebugSongDataSegment, BX
                 Mov     DebugDiskDataSegment, DX
@@ -5833,17 +5830,17 @@ F_DebugStringInput19:
                 Mov     AX, 1
                 Ret
 
-EndP            F_DebugStringInput
+;EndP            F_DebugStringInput
 
-ENDIF
+%ENDIF 
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_ShowMIDIZxxInput Far
+Proc F_ShowMIDIZxxInput Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Functions
+                        ;Assume DS:Functions
 
                 Mov     SI, Offset ZxxString
                 Mov     AX, TopMIDIMacro
@@ -5867,12 +5864,12 @@ F_ShowMIDIZxxInput2:
 
                 Ret
 
-EndP            F_ShowMIDIZxxInput
-                Assume DS:Nothing
+;EndP            F_ShowMIDIZxxInput
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_MIDI_Up Far
+Proc F_MIDI_Up Far
 
                 Cmp     CS:TopMIDIMacro, 80h
                 JBE     F_MIDI_Up1
@@ -5887,11 +5884,11 @@ F_MIDI_Up2:
                 Mov     AX, 1
                 Ret
 
-EndP            F_MIDI_Up
+;EndP            F_MIDI_Up
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_MIDI_Down Far
+Proc F_MIDI_Down Far
 
                 Cmp     CS:TopMIDIMacro, 0F9h
                 JAE     F_MIDI_Down1
@@ -5902,11 +5899,11 @@ F_MIDI_Down1:
                 Mov     AX, 1
                 Ret
 
-EndP            F_MIDI_Down
+;EndP            F_MIDI_Down
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_MIDI_PgUp Far
+Proc F_MIDI_PgUp Far
 
                 Cmp     Word Ptr [ES:DI], 33
                 JBE     F_MIDI_PgUp1
@@ -5920,11 +5917,11 @@ F_MIDI_PgUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            F_MIDI_PgUp
+;EndP            F_MIDI_PgUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            F_MIDI_PgDn Far
+Proc F_MIDI_PgDn Far
 
                 Cmp     Word Ptr [ES:DI], 33
                 JBE     F_MIDI_PgDn1
@@ -5939,7 +5936,7 @@ F_MIDI_PgDn1:
                 Mov     AX, 1
                 Ret
 
-EndP            F_MIDI_PgDn
+;EndP            F_MIDI_PgDn
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 

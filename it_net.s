@@ -2,12 +2,9 @@
 ;³ Network Module                                                              ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-                        Jumps
-                        .386P
+%include "switch.inc"
 
-include switch.inc
-
-IF NETWORKENABLED
+%IF  NETWORKENABLED
 
 SHOWQUEUESIZE           EQU     0
 
@@ -28,61 +25,61 @@ NUMPROVIDEDFUNCTIONS  EQU 16    ; Number of functions (DW Offsets) provided by
 ;³ Externals                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-        Extrn   D_ClearFileName:Far
+        extern    D_ClearFileName:Far
 
-        Extrn   E_AllocateEMS:Far
-        Extrn   E_ReleaseEMS:Far
-        Extrn   E_MapEMSMemory:Far
-        Extrn   E_GetEMSPageFrame:Far
-        Extrn   E_GetEMSVersion:Far
-;        Extrn   E_SavePageFrame:Far
-;        Extrn   E_RestorePageFrame:Far
+        extern    E_AllocateEMS:Far
+        extern    E_ReleaseEMS:Far
+        extern    E_MapEMSMemory:Far
+        extern    E_GetEMSPageFrame:Far
+        extern    E_GetEMSVersion:Far
+;        extern    E_SavePageFrame:Far
+;        extern    E_RestorePageFrame:Far
 
-        Extrn   F_DrawHeader:Far
+        extern    F_DrawHeader:Far
 
-        Extrn   Glbl_SetCurrentMode:Far
-        Extrn   Glbl_GetCurrentMode:Far
+        extern    Glbl_SetCurrentMode:Far
+        extern    Glbl_GetCurrentMode:Far
 
-        Extrn   I_MapEnvelope:Far
+        extern    I_MapEnvelope:Far
 
-        Extrn   M_FunctionDivider:Far
-        Extrn   M_FunctionHandler:Far
-        Extrn   M_Object1List:Far
+        extern    M_FunctionDivider:Far
+        extern    M_FunctionHandler:Far
+        extern    M_Object1List:Far
 
-        Extrn   Music_GetPatternLocation:Far    ; Returns AX = handle
+        extern    Music_GetPatternLocation:Far    ; Returns AX = handle
                                                 ;        EBX = segment:offset
                                                 ;         DL = type.
                                                 ;         CX = pattern length
-        Extrn   Music_GetPatternLocationNoCount:Far    ; Returns AX = handle
+        extern    Music_GetPatternLocationNoCount:Far    ; Returns AX = handle
                                                 ;        EBX = segment:offset
                                                 ;         DL = type.
-        Extrn   Music_ReleasePattern:Far        ; Requires AX = pattern
-        Extrn   Music_AllocatePattern:Far       ; SI = pattern, DX = length
-        Extrn   Music_UpdatePatternOffset:Far
-        Extrn   Music_ReleaseAllSamples:Far
-        Extrn   Music_AllocateSample:Far
-        Extrn   Music_Stop:Far
-        Extrn   Music_ReleaseSample:Far
+        extern    Music_ReleasePattern:Far        ; Requires AX = pattern
+        extern    Music_AllocatePattern:Far       ; SI = pattern, DX = length
+        extern    Music_UpdatePatternOffset:Far
+        extern    Music_ReleaseAllSamples:Far
+        extern    Music_AllocateSample:Far
+        extern    Music_Stop:Far
+        extern    Music_ReleaseSample:Far
 
-        Extrn   IdleUpdateInfoLine:Far
-        Extrn   SetInfoLine:Far
-        Extrn   SetInfoLine2:Far
-        Extrn   GetTimerCounter:Far
+        extern    IdleUpdateInfoLine:Far
+        extern    SetInfoLine:Far
+        extern    SetInfoLine2:Far
+        extern    GetTimerCounter:Far
 
-        Extrn   O1_LoadNetworkDriver:Far
-        Extrn   O1_NetworkErrorList:Far
-        Extrn   GlobalKeyList
+        extern    O1_LoadNetworkDriver:Far
+        extern    O1_NetworkErrorList:Far
+        extern    GlobalKeyList
 
-        Extrn   PE_FillHeader:Far
-        Extrn   PE_NewPattern:Far
-        Extrn   PEFunction_OutOfMemoryMessage:Far
-        Extrn   PEFunction_StoreCurrentPattern:Far
-        Extrn   PE_GetLastInstrument:Far
+        extern    PE_FillHeader:Far
+        extern    PE_NewPattern:Far
+        extern    PEFunction_OutOfMemoryMessage:Far
+        extern    PEFunction_StoreCurrentPattern:Far
+        extern    PE_GetLastInstrument:Far
 
-        Extrn   S_GetDestination:Far
-        Extrn   S_DrawString:Far
-        Extrn   S_SaveScreen:Far
-        Extrn   S_RestoreScreen:Far
+        extern    S_GetDestination:Far
+        extern    S_DrawString:Far
+        extern    S_SaveScreen:Far
+        extern    S_RestoreScreen:Far
 
 Segment         Object1 BYTE Public 'Data'
 EndS
@@ -117,7 +114,7 @@ EndS
 ; Not used?
 ;
 ;Segment                 Network BYTE Public 'Code' USE16
-;                        Assume  CS:Network, DS:Nothing, ES:Nothing
+;                        ;Assume  CS:Network, DS:Nothing, ES:Nothing
 ;EndS
 ;
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
@@ -128,24 +125,24 @@ EndS
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
 Segment         Pattern BYTE Public 'Code' USE16
-        Extrn   PatternDataArea:Word
-        Extrn   PatternNumber:Word
-        Extrn   Modified:Byte
-        Extrn   PatternModified:Byte
-        Extrn   MaxRow:Word
+        extern    PatternDataArea:Word
+        extern    PatternNumber:Word
+        extern    Modified:Byte
+        extern    PatternModified:Byte
+        extern    MaxRow:Word
 EndS
 
 Segment         Music BYTE Public 'Code' USE16
-        Extrn   CurrentOrder:Word
-        Extrn   CurrentPattern:Word
-        Extrn   CurrentRow:Word
+        extern    CurrentOrder:Word
+        extern    CurrentPattern:Word
+        extern    CurrentRow:Word
 EndS
 
 Segment                 Disk DWORD Public 'Code' USE16
-                        Assume  CS:Disk, DS:Nothing, ES:Nothing
+                        ;Assume  CS:Disk, DS:Nothing, ES:Nothing
 
-        Extrn   DiskDataArea:Word
-        Extrn   D_GotoStartingDirectory:Far
+        extern    DiskDataArea:Word
+        extern    D_GotoStartingDirectory:Far
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
@@ -196,9 +193,9 @@ DriverMask              DB      "IT*.NET", 0
 NoDriverMsg             DB      "No Network Drivers Found", 0
 NetworkDriverUnloaded   DB      "Network driver unloaded", 0
 
-IF SHOWQUEUESIZE
+%IF  SHOWQUEUESIZE
 DebugMessage            DB      "SendQueueSize: ", 0FDh, "D", 0
-ENDIF
+%ENDIF 
 ; NetworkOverflowMessage  DB     "Network Overflow: Driver Unloaded", 0
 
 ALIGN 2
@@ -258,16 +255,16 @@ PatternModifiedTable    DB      200 Dup (0)      ; Bit field for 200 patterns
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_EmptyFunction Far
+Proc Network_EmptyFunction Far
 
                 Xor     AX, AX
                 Ret
 
-EndP            Network_EmptyFunction
+;EndP            Network_EmptyFunction
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_DriverScreen Far
+Proc Network_DriverScreen Far
 
 ; If no network driver loaded, show load screen
 ; If driver loaded, then call driver's screen interface
@@ -277,7 +274,7 @@ Proc            Network_DriverScreen Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Cmp     [DriverSegment], 0
                 JE      Network_DriverScreen1
@@ -388,15 +385,15 @@ Network_DriverScreenLoadFileNamesEnd:
                 Mov     DX, Offset O1_LoadNetworkDriver
                 Ret
 
-EndP            Network_DriverScreen
+;EndP            Network_DriverScreen
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_DrawDriverScreen Far
+Proc Network_DrawDriverScreen Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Call    S_GetDestination        ; Gets ES
 
@@ -447,7 +444,7 @@ Network_DrawDriverScreenClip2:
 
                 ShL     SI, 7
                 Mov     DS, [DiskDataArea]
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Cmp     DX, 36
                 JB      Network_DrawDriverScreenClip
@@ -482,16 +479,16 @@ Network_DrawDriverScreenDriverName:
 Network_DrawDriverScreenEnd:
                 Ret
 
-EndP            Network_DrawDriverScreen
-                Assume DS:Nothing
+;EndP            Network_DrawDriverScreen
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_PreDriverScreen Far
+Proc Network_PreDriverScreen Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Cmp     [NumDrivers], 0
                 JE      Network_PreDriverScreenEnd
@@ -522,13 +519,13 @@ Network_PreDriverScreen2:
 Network_PreDriverScreenEnd:
                 Ret
 
-EndP            Network_PreDriverScreen
-                Assume DS:Nothing
+;EndP            Network_PreDriverScreen
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_Up Far
-                Assume DS:Disk
+Proc Network_Up Far
+                ;Assume DS:Disk
 
                 Sub     [CurrentDriver], 1
                 AdC     [CurrentDriver], 0
@@ -536,12 +533,12 @@ Proc            Network_Up Far
                 Mov     AX, 1
                 Ret
 
-EndP            Network_Up
-                Assume DS:Nothing
+;EndP            Network_Up
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_Down Far
+Proc Network_Down Far
 
                 Mov     AX, [CurrentDriver]
                 Inc     AX
@@ -554,17 +551,17 @@ Network_Down1:
                 Mov     AX, 1
                 Ret
 
-EndP            Network_Down
+;EndP            Network_Down
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_PostDriverScreen Far
+Proc Network_PostDriverScreen Far
 
 ; Has to handle up, down, Enter.
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset NetworkKeys
                 Call    M_FunctionDivider
@@ -576,12 +573,12 @@ Network_PostDriverScreen1:
                 Xor     AX, AX
                 Ret
 
-EndP            Network_PostDriverScreen
+;EndP            Network_PostDriverScreen
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_LoadDriver Far
-                Assume DS:Disk
+Proc Network_LoadDriver Far
+                ;Assume DS:Disk
 
 ; Allocate EMS memory buffers first
 
@@ -643,7 +640,7 @@ Network_LoadDriverMemoryAlreadyAllocated2:
 Network_LoadDriver1:
                 ShL     DX, 7
                 Mov     DS, [DiskDataArea]
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
                 Mov     DI, DX
 
 ; Try allocating memory first.
@@ -680,7 +677,7 @@ Network_LoadDriver2:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     AH, 3Fh
                 Mov     CX, NUMPROVIDEDVARIABLES
@@ -732,7 +729,7 @@ Network_InitialiseBuffers1:
 ; Should jump to network initialise function now.
 
                 Jmp     NetworkDriver_Initialise
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 Network_LoadDriver4:
                 Mov     AH, 3Eh
@@ -741,18 +738,18 @@ Network_LoadDriver4:
 Network_LoadDriver3:
                 Jmp     Network_UnloadDriver
 
-EndP            Network_LoadDriver
-                Assume DS:Nothing
+;EndP            Network_LoadDriver
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_UnloadDriver Far
+Proc Network_UnloadDriver Far
 
                 Push    CS
                 Push    CS
                 Pop     DS
                 Pop     ES
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset NetworkDriverUnloaded
                 Call    SetInfoLine
@@ -781,14 +778,14 @@ Proc            Network_UnloadDriver Far
 
                 Jmp     Network_DriverScreen
 
-EndP            Network_UnloadDriver
-                Assume DS:Nothing
+;EndP            Network_UnloadDriver
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 ; PatternCycle    DW      0
 
-Proc            Network_Poll Far
+Proc Network_Poll Far
 
 Comment ~
                 Mov     AX, CS:PatternCycle
@@ -805,11 +802,11 @@ Network_Poll1:
 ~
                 Jmp     NetworkDriver_Update
 
-EndP            Network_Poll
+;EndP            Network_Poll
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_DecodeUserName Far      ; Given DS:SI = name
+Proc Network_DecodeUserName Far      ; Given DS:SI = name
                                                 ; CX = count (including key)
 
                 Test    CX, CX
@@ -847,11 +844,11 @@ Network_DecodeUserName3:
 Network_DecodeUserNameEnd:
                 Ret
 
-EndP            Network_DecodeUserName
+;EndP            Network_DecodeUserName
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_Shutdown Far
+Proc Network_Shutdown Far
 
                 Mov     AX, CS:NetworkEMSHandle
                 Test    AX, AX
@@ -869,7 +866,7 @@ Network_Shutdown1:
 Network_Shutdown2:
                 Jmp     NetworkDriver_Shutdown
 
-EndP            Network_Shutdown
+;EndP            Network_Shutdown
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 ;
@@ -919,7 +916,7 @@ EndP            Network_Shutdown
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_CalculateCRC
+Proc Network_CalculateCRC
                 ; Calculates CRC and appends 6 byte header
 
                 ; Given ES = EMSSegment
@@ -961,11 +958,11 @@ Network_CalculateCRC1:
 
                 Ret
 
-EndP            Network_CalculateCRC
+;EndP            Network_CalculateCRC
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_GetSendBufferPage Near
+Proc Network_GetSendBufferPage Near
                 ; Returns AX = EMSPageFrame
 
                 Push    CX
@@ -981,7 +978,7 @@ Proc            Network_GetSendBufferPage Near
 
                 Ret
 
-EndP            Network_GetSendBufferPage
+;EndP            Network_GetSendBufferPage
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
@@ -1034,7 +1031,7 @@ InterpretObjectTypes    DW      Offset ReceiveNetworkBlock0
 ;
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SendNetworkBlock0 Near
+Proc SendNetworkBlock0 Near
 
 ; Block type 0
 ; Offset 0: Pattern Number
@@ -1056,7 +1053,7 @@ Proc            SendNetworkBlock0 Near
 
                 Push    Pattern
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Cmp     DL, Byte Ptr PatternNumber ; Still editing the pattern?
                 JE      SendNetworkBlock0_0
@@ -1069,7 +1066,7 @@ Proc            SendNetworkBlock0 Near
 SendNetworkBlock0_0:
                 StosW
                 Mov     DS, PatternDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     AL, 64
                 Mul     CH
@@ -1178,16 +1175,16 @@ SendNetworkBlock0_9:
 
                 Ret
 
-EndP            SendNetworkBlock0
-                Assume DS:Nothing
+;EndP            SendNetworkBlock0
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ReceiveNetworkBlock0 Near
+Proc ReceiveNetworkBlock0 Near
 
                 Push    Pattern
                 Pop     ES
-                        Assume ES:Pattern
+                        ;Assume ES:Pattern
 
                 Mov     [Word Ptr ES:Modified], 101h
 
@@ -1197,7 +1194,7 @@ Proc            ReceiveNetworkBlock0 Near
                 JNE     ReceiveNetworkBlock0_1
 
                 Mov     ES, [ES:PatternDataArea]
-                        Assume ES:Nothing
+                        ;Assume ES:Nothing
 
                 Mov     CX, [DS:08h]    ; CL = Channel, CH = Row
                 Mov     BX, [DS:0Ah]    ; BL = Width, BH = Height
@@ -1315,12 +1312,12 @@ ReceiveNetworkBlock0_1:         ; Not the same, or zero width -> mark modified
 ReceiveNetworkBlock0_2:
                 Ret
 
-EndP            ReceiveNetworkBlock0
-                Assume ES:Nothing
+;EndP            ReceiveNetworkBlock0
+                ;Assume ES:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SendNetworkBlock1
+Proc SendNetworkBlock1
 
 ; Block type 1
 ;  Offset 0: Pattern number
@@ -1329,7 +1326,7 @@ Proc            SendNetworkBlock1
 
                 Push    Pattern
                 Pop     FS
-                        Assume FS:Pattern
+                        ;Assume FS:Pattern
 
                 LodsB
                 Mov     CS:SendDataQueueHead, SI
@@ -1377,7 +1374,7 @@ SendNetworkBlock1_0:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Add     CX, 8
 ; Setup EMS transfer
@@ -1408,18 +1405,18 @@ SendNetworkBlock1_2:
 
                 Ret
 
-EndP            SendNetworkBlock1
-                Assume DS:Nothing, FS:Nothing
+;EndP            SendNetworkBlock1
+                ;Assume DS:Nothing, FS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ReceiveNetworkBlock1
+Proc ReceiveNetworkBlock1
 
                 Push    FS
 
                 Push    Music
                 Pop     FS
-                        Assume FS:Music
+                        ;Assume FS:Music
 
                 Mov     EDX, [DS:8]
                 Mov     AL, [DS:7]
@@ -1451,7 +1448,7 @@ Proc            ReceiveNetworkBlock1
 ; Setup EMS transfer
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     DestinationType, 1
                 Mov     DestinationHandle, AX
@@ -1484,7 +1481,7 @@ ReceiveNetworkBlock1_1:
 
                 Push    Pattern
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Cmp     AL, [Byte Ptr DS:PatternNumber]
                 JNE     ReceiveNetworkBlock1_0
@@ -1501,22 +1498,22 @@ ReceiveNetworkBlock1_2:
                 Pop     FS
                 Ret
 
-EndP            ReceiveNetworkBlock1
-                Assume DS:Nothing
+;EndP            ReceiveNetworkBlock1
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SendNetworkBlock2
+Proc SendNetworkBlock2
 
                 MovsB
                 Mov     CS:SendDataQueueHead, SI
                 Ret
 
-EndP            SendNetworkBlock2
+;EndP            SendNetworkBlock2
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ReceiveNetworkBlock2
+Proc ReceiveNetworkBlock2
 
                 Mov     AH, [DS:7]      ; AH = pattern
                 Mov     AL, 1           ; NETWORK_ENTIREPATTERNOBJECT
@@ -1530,11 +1527,11 @@ Proc            ReceiveNetworkBlock2
 ReceiveNetworkBlock2_1:
                 Ret
 
-EndP            ReceiveNetworkBlock2
+;EndP            ReceiveNetworkBlock2
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SendNetworkBlock3
+Proc SendNetworkBlock3
 
                 LodsW                   ; Length
                 StosW
@@ -1551,11 +1548,11 @@ Proc            SendNetworkBlock3
 
                 Ret
 
-EndP            SendNetworkBlock3
+;EndP            SendNetworkBlock3
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ReceiveNetworkBlock3
+Proc ReceiveNetworkBlock3
 
                 Push    SongData
                 Pop     ES
@@ -1576,11 +1573,11 @@ Proc            ReceiveNetworkBlock3
 ReceiveNetworkBlock3_1:
                 Ret
 
-EndP            ReceiveNetworkBlock3
+;EndP            ReceiveNetworkBlock3
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SendNetworkBlock4
+Proc SendNetworkBlock4
 
                 LodsB
                 StosB
@@ -1599,11 +1596,11 @@ Proc            SendNetworkBlock4
 SendNetworkBlock4_1:
                 Ret
 
-EndP            SendNetworkBlock4
+;EndP            SendNetworkBlock4
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ReceiveNetworkBlock4
+Proc ReceiveNetworkBlock4
 
                 Mov     DI, [DS:7]
                 And     DI, 0FFh
@@ -1637,11 +1634,11 @@ ReceiveNetworkBlock4_1:
 
                 Ret
 
-EndP            ReceiveNetworkBlock4
+;EndP            ReceiveNetworkBlock4
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SendNetworkBlock5               ; Does not send length or
+Proc SendNetworkBlock5               ; Does not send length or
                                                 ; sample pointer.
 
                 LodsB
@@ -1669,11 +1666,11 @@ Proc            SendNetworkBlock5               ; Does not send length or
 
                 Ret
 
-EndP            SendNetworkBlock5
+;EndP            SendNetworkBlock5
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ReceiveNetworkBlock5
+Proc ReceiveNetworkBlock5
 
                 Mov     DI, [DS:7]
                 And     DI, 0FFh
@@ -1704,28 +1701,28 @@ Proc            ReceiveNetworkBlock5
 ReceiveNetworkBlock5_1:
                 Ret
 
-EndP            ReceiveNetworkBlock5
+;EndP            ReceiveNetworkBlock5
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SendNetworkBlock6
+Proc SendNetworkBlock6
 
                 MovsW
                 Mov     CS:SendDataQueueHead, SI
 
                 Ret
 
-EndP            SendNetworkBlock6
+;EndP            SendNetworkBlock6
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ReceiveNetworkBlock6
+Proc ReceiveNetworkBlock6
 
                 Mov     AX, [DS:7]      ; AL = pattern number, AH = numrows
 
                 Push    Pattern
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Cmp     AL, [Byte Ptr PatternNumber]
                 JNE     ReceiveNetworkBlock6_1
@@ -1741,22 +1738,22 @@ ReceiveNetworkBlock6_2:
 ReceiveNetworkBlock6_1:
                 Jmp     ReceiveNetworkBlock0_1  ; Marks pattern as modified.
 
-EndP            ReceiveNetworkBlock6
-                Assume DS:Nothing
+;EndP            ReceiveNetworkBlock6
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SendNetworkBlock7
+Proc SendNetworkBlock7
 
                 MovsB
                 Mov     CS:SendDataQueueHead, SI
                 Ret
 
-EndP            SendNetworkBlock7
+;EndP            SendNetworkBlock7
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ReceiveNetworkBlock7
+Proc ReceiveNetworkBlock7
 
                 Mov     AL, [DS:7]
                 Mov     AH, 1
@@ -1769,11 +1766,11 @@ Proc            ReceiveNetworkBlock7
 ReceiveNetworkBlock7_1:
                 Ret
 
-EndP            ReceiveNetworkBlock7
+;EndP            ReceiveNetworkBlock7
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SendNetworkBlock8               ; New sample
+Proc SendNetworkBlock8               ; New sample
 
                 MovsB
                 MovsD
@@ -1781,11 +1778,11 @@ Proc            SendNetworkBlock8               ; New sample
 
                 Ret
 
-EndP            SendNetworkBlock8
+;EndP            SendNetworkBlock8
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ReceiveNetworkBlock8            ; New sample
+Proc ReceiveNetworkBlock8            ; New sample
 
 ;                Call    Music_Stop
 
@@ -1818,11 +1815,11 @@ ReceiveNetworkBlock8_1:
 ReceiveNetworkBlock8_2:
                 Ret
 
-EndP            ReceiveNetworkBlock8
+;EndP            ReceiveNetworkBlock8
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetSampleLocation       ; Given BX = EMS transfer structure
+Proc GetSampleLocation       ; Given BX = EMS transfer structure
                                         ; Given DX = sample number
                                         ; Given ECX = offset
                                         ; Returns carry if problem.
@@ -1891,11 +1888,11 @@ GetSampleLocation5:
 
                 Ret
 
-EndP            GetSampleLocation
+;EndP            GetSampleLocation
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SendNetworkBlock9
+Proc SendNetworkBlock9
 
                 LodsB
                 StosB
@@ -1912,7 +1909,7 @@ Proc            SendNetworkBlock9
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     AX, NetworkSendEMSHandle
                 Mov     DestinationType, 1
@@ -1934,12 +1931,12 @@ SendNetworkBlock9_1:
 
                 Ret
 
-EndP            SendNetworkBlock9
-                Assume DS:Nothing
+;EndP            SendNetworkBlock9
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ReceiveNetworkBlock9
+Proc ReceiveNetworkBlock9
 
                 Mov     DX, [DS:7]
                 Mov     ECX, [DS:8]
@@ -1957,7 +1954,7 @@ Proc            ReceiveNetworkBlock9
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 ShR     SI, 8
                 Mov     SourceType, 1
@@ -1973,12 +1970,12 @@ Proc            ReceiveNetworkBlock9
 ReceiveNetworkBlock9_1:
                 Ret
 
-EndP            ReceiveNetworkBlock9
-                Assume DS:Nothing
+;EndP            ReceiveNetworkBlock9
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_SendData Far
+Proc Network_SendData Far
 ; Called by driver when it is able to send data
 ;
 ; Provided: AX    = number of bytes it can send.
@@ -2024,7 +2021,7 @@ Network_SendData3:
                 JZ      Network_SendDataEnd
 
                 Mov     DS, SendQueueSegment
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Push    AX
                 Push    BX
@@ -2124,7 +2121,7 @@ Network_SendDataError:
                 Xor     DX, DX
                 Ret
 
-EndP            Network_SendData
+;EndP            Network_SendData
 
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
@@ -2135,7 +2132,7 @@ ReceiveToBlock  DB      0, 8, 16
 ;  EMS:65532: Check word
 ;  EMS:65534: Buffer Offset
 
-Proc            Network_ReceiveData Far
+Proc Network_ReceiveData Far
 ; Called by driver when data is received
 ;
 ; Provided: DS:SI = data block received
@@ -2181,7 +2178,7 @@ Proc            Network_ReceiveData Far
 Network_ReceiveData1:
                 Mov     DX, [ES:65532]
 
-; Assume OK.. now place data into buffer, updating check word.
+; ;Assume OK.. now place data into buffer, updating check word.
 Network_ReceiveData2:
                 LodsB
                 Add     DL, AL
@@ -2250,11 +2247,11 @@ Network_ReceiveData3:
 
                 Ret
 
-EndP            Network_ReceiveData
+;EndP            Network_ReceiveData
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_GetSendQueue Far
+Proc Network_GetSendQueue Far
 
                 PushAD
                 PushF
@@ -2275,7 +2272,7 @@ Proc            Network_GetSendQueue Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
 Comment ~
                 This code is incomplete
@@ -2303,12 +2300,12 @@ Network_GetSendQueue1:
 
                 Ret
 
-EndP            Network_GetSendQueue
-                Assume DS:Nothing
+;EndP            Network_GetSendQueue
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_FinishedSendQueue Far
+Proc Network_FinishedSendQueue Far
 
                 Cmp     DI, 16384-16  ; 16 bytes slack area
                 JB      Network_FinishedSendQueue1
@@ -2321,14 +2318,14 @@ Network_FinishedSendQueue1:
                 Pop     EAX
                 Mov     [BP+42], EAX
 
-IF SHOWQUEUESIZE
+%IF  SHOWQUEUESIZE
                 Push    CS
                 Pop     DS
                 Mov     AX, SendDataQueueTail
                 Sub     AX, SendDataQueueHead
                 Mov     SI, Offset DebugMessage
                 Call    SetInfoLine
-ENDIF
+%ENDIF 
 
                 Pop     ES
                 Pop     DS
@@ -2337,11 +2334,11 @@ ENDIF
 
                 Ret
 
-EndP            Network_FinishedSendQueue
+;EndP            Network_FinishedSendQueue
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_NewConnection Far       ; Called when this computer
+Proc Network_NewConnection Far       ; Called when this computer
                                                 ; joins a group
 
                 PushA
@@ -2364,11 +2361,11 @@ Proc            Network_NewConnection Far       ; Called when this computer
                 Ret
 
 
-EndP            Network_NewConnection
+;EndP            Network_NewConnection
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ResetDI
+Proc ResetDI
 
                 Cmp     DI, 16384-16
                 JB      ResetDI1
@@ -2378,11 +2375,11 @@ Proc            ResetDI
 ResetDI1:
                 Ret
 
-EndP            ResetDI
+;EndP            ResetDI
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_QueueSampleData Far     ; Given CX = Sample number, 0 base
+Proc Network_QueueSampleData Far     ; Given CX = Sample number, 0 base
                                                 ; DL = ConnectionID
 
                 Push    EAX
@@ -2452,11 +2449,11 @@ Network_QueueSampleData2:
 
                 Ret
 
-EndP            Network_QueueSampleData
+;EndP            Network_QueueSampleData
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_EstablishConnection Far ; Called when a connection is
+Proc Network_EstablishConnection Far ; Called when a connection is
                                                 ; made to this computer
 ; Called when a successful connection is made
 ; Given AL = new connection number
@@ -2562,11 +2559,11 @@ Network_EstablishConnection6:
 
                 Ret
 
-EndP            Network_EstablishConnection
+;EndP            Network_EstablishConnection
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_AddWordToQueue Far      ; Given AX, broadcasts to all
+Proc Network_AddWordToQueue Far      ; Given AX, broadcasts to all
 
                 Call    Network_GetSendQueue
                 JZ      Network_AddWordToQueue0
@@ -2581,11 +2578,11 @@ Network_AddWordToQueue0:
                 Call    Network_FinishedSendQueue
                 Ret
 
-EndP            Network_AddWordToQueue
+;EndP            Network_AddWordToQueue
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_UpdatePatternIfIdle Far
+Proc Network_UpdatePatternIfIdle Far
 
                 Cmp     CS:SendQueueSegment, 0
                 JE      Network_UpdatePatternEnd
@@ -2596,7 +2593,7 @@ Proc            Network_UpdatePatternIfIdle Far
                 Pop     AX
                 JNE     Network_UpdatePatternEnd
 
-Proc            Network_UpdatePattern Far
+Proc Network_UpdatePattern Far
 
                 PushA
                                 ; AX = pattern number
@@ -2629,13 +2626,13 @@ Network_UpdatePattern1:
 Network_UpdatePatternEnd:
                 Ret
 
-EndP            Network_UpdatePattern
+;EndP            Network_UpdatePattern
 
-EndP            Network_UpdatePatternIfIdle
+;EndP            Network_UpdatePatternIfIdle
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_EnsureNoNetwork Far
+Proc Network_EnsureNoNetwork Far
 
                 Push    AX
                 Call    [CS:NetworkDriver_ConnectionStatus]
@@ -2653,11 +2650,11 @@ Proc            Network_EnsureNoNetwork Far
 Network_EnsureNoNetwork1:
                 Ret
 
-EndP            Network_EnsureNoNetwork
+;EndP            Network_EnsureNoNetwork
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_SendSampleHeader Far
+Proc Network_SendSampleHeader Far
 
                 Call    Network_GetSendQueue
                 JZ      Network_SendSampleHeader1
@@ -2672,11 +2669,11 @@ Network_SendSampleHeader1:
                 Call    Network_FinishedSendQueue
                 Ret
 
-EndP            Network_SendSampleHeader
+;EndP            Network_SendSampleHeader
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_SendInstrumentHeader Far
+Proc Network_SendInstrumentHeader Far
 
                 Call    Network_GetSendQueue
                 JZ      Network_SendInstrumentHeader1
@@ -2691,11 +2688,11 @@ Network_SendInstrumentHeader1:
                 Call    Network_FinishedSendQueue
                 Ret
 
-EndP            Network_SendInstrumentHeader
+;EndP            Network_SendInstrumentHeader
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Network_SendSongDataInformation Far     ; CX = Count, DX = offset
+Proc Network_SendSongDataInformation Far     ; CX = Count, DX = offset
 
                 Call    Network_GetSendQueue
                 JZ      Network_SendSongDataInformation1
@@ -2711,12 +2708,12 @@ Network_SendSongDataInformation1:
                 Call    Network_FinishedSendQueue
                 Ret
 
-EndP            Network_SendSongDataInformation
+;EndP            Network_SendSongDataInformation
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 EndS
 
-ENDIF
+%ENDIF 
 
 End

@@ -2,109 +2,106 @@
 ;³ Instrument List module                                                      ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-                        Jumps
-                        .386
-
-include switch.inc
-include network.inc
+%include "switch.inc"
+%include "network.inc"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Externals                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
 Segment         Object1 BYTE Public 'Data'
-                Extrn   SampleFrequency:Word
+                extern    SampleFrequency:Word
 EndS
 
 Segment         DiskData PARA Public 'Data'
 EndS
 
 Segment         Pattern BYTE Public 'Code'
-                Extrn   BaseOctave:Byte
-                Extrn   LastInstrument:Byte
+                extern    BaseOctave:Byte
+                extern    LastInstrument:Byte
 EndS
 
-                Extrn   F_Reset5NumInputPos:Far
-                Extrn   Glbl_F4_2:Far
+                extern    F_Reset5NumInputPos:Far
+                extern    Glbl_F4_2:Far
 
-                Extrn   Glbl_GetCurrentMode:Far
-                Extrn   S_GetDestination:Far
-                Extrn   S_SaveScreen:Far
-                Extrn   S_RestoreScreen:Far
-                Extrn   S_DrawString:Far
-                Extrn   M_FunctionDivider:Far
-                Extrn   M_Object1List:Far
-                Extrn   M_Object1ListDefault:Far
-                Extrn   Music_GetSongSegment:Far
-                Extrn   Music_ReleaseSample:Far
-                Extrn   Music_ClearSampleName:Far
-                Extrn   Music_PlaySample:Far
-                Extrn   Music_GetInstrumentMode:Far
-;                Extrn   Music_UpdateSampleLocation:Far
+                extern    Glbl_GetCurrentMode:Far
+                extern    S_GetDestination:Far
+                extern    S_SaveScreen:Far
+                extern    S_RestoreScreen:Far
+                extern    S_DrawString:Far
+                extern    M_FunctionDivider:Far
+                extern    M_Object1List:Far
+                extern    M_Object1ListDefault:Far
+                extern    Music_GetSongSegment:Far
+                extern    Music_ReleaseSample:Far
+                extern    Music_ClearSampleName:Far
+                extern    Music_PlaySample:Far
+                extern    Music_GetInstrumentMode:Far
+;                extern    Music_UpdateSampleLocation:Far
 
-                Extrn   S_GetGenerationTableOffset:Far
-                Extrn   S_GenerateCharacters:Far
-                Extrn   S_SetDirectMode:Far
-                Extrn   S_DrawBox:Far
-                Extrn   S_DrawSmallBox:Far
+                extern    S_GetGenerationTableOffset:Far
+                extern    S_GenerateCharacters:Far
+                extern    S_SetDirectMode:Far
+                extern    S_DrawBox:Far
+                extern    S_DrawSmallBox:Far
 
-                Extrn   O1_ConfirmDeleteSample:Far
-                Extrn   O1_ConfirmConvertList:Far
-                Extrn   O1_ConfirmConvert2List:Far
-                Extrn   O1_ConfirmCutSample:Far
-                Extrn   O1_ExchangeSampleList:Far
-                Extrn   O1_ExchangeInstrumentList:Far
-                Extrn   O1_SwapSampleList:Far
-                Extrn   O1_SwapInstrumentList:Far
-                Extrn   O1_ReplaceSampleList:Far
-                Extrn   O1_ReplaceInstrumentList:Far
-                Extrn   O1_ResizeSampleList:Far
-                Extrn   O1_ShowSampleFrequencyList:Far
-                Extrn   O1_FrequencyIndeterminedList:Far
-                Extrn   O1_ConfirmDeleteInstrument:Far
-                Extrn   O1_SampleAmplificationList:Far
-                Extrn   O1_CopyInstrumentList:Far
-                Extrn   O1_SampleCenterList:Far
+                extern    O1_ConfirmDeleteSample:Far
+                extern    O1_ConfirmConvertList:Far
+                extern    O1_ConfirmConvert2List:Far
+                extern    O1_ConfirmCutSample:Far
+                extern    O1_ExchangeSampleList:Far
+                extern    O1_ExchangeInstrumentList:Far
+                extern    O1_SwapSampleList:Far
+                extern    O1_SwapInstrumentList:Far
+                extern    O1_ReplaceSampleList:Far
+                extern    O1_ReplaceInstrumentList:Far
+                extern    O1_ResizeSampleList:Far
+                extern    O1_ShowSampleFrequencyList:Far
+                extern    O1_FrequencyIndeterminedList:Far
+                extern    O1_ConfirmDeleteInstrument:Far
+                extern    O1_SampleAmplificationList:Far
+                extern    O1_CopyInstrumentList:Far
+                extern    O1_SampleCenterList:Far
 
-                Extrn   O1_InstrumentListGeneral:Far
-                Extrn   O1_InstrumentListVolume:Far
-                Extrn   O1_InstrumentListPanning:Far
-                Extrn   O1_InstrumentListPitch:Far
-                Extrn   O1_C5FrequencyList:Far
-                Extrn   O1_GetInstrumentAmpList:Far
+                extern    O1_InstrumentListGeneral:Far
+                extern    O1_InstrumentListVolume:Far
+                extern    O1_InstrumentListPanning:Far
+                extern    O1_InstrumentListPitch:Far
+                extern    O1_C5FrequencyList:Far
+                extern    O1_GetInstrumentAmpList:Far
 
-                Extrn   PE_GetLastInstrument:Far
-                Extrn   PE_SwapInstruments:Far
-                Extrn   PE_UpdateInstruments:Far
-                Extrn   PEFunction_OutOfMemoryMessage:Far
-                Extrn   PE_TranslateMIDI:Far, PE_RestoreMIDINote:Far
-                Extrn   PE_InsertInstrument:Far
-                Extrn   PE_DeleteInstrument:Far
+                extern    PE_GetLastInstrument:Far
+                extern    PE_SwapInstruments:Far
+                extern    PE_UpdateInstruments:Far
+                extern    PEFunction_OutOfMemoryMessage:Far
+                extern    PE_TranslateMIDI:Far, PE_RestoreMIDINote:Far
+                extern    PE_InsertInstrument:Far
+                extern    PE_DeleteInstrument:Far
 
-                Extrn   Music_PlayPattern:Far
-                Extrn   Music_Stop:Far
-                Extrn   Music_PlaySong:Far
-                Extrn   Music_PlayNote:Far
-                Extrn   Music_ToggleChannel:Far
-                Extrn   Music_SoloChannel:Far
-                Extrn   Music_GetSampleLocation:Far
-                Extrn   Music_ClearInstrument:Far
-                Extrn   Music_GetInstrumentMode:Far
-                Extrn   Music_AllocateSample:Far
-                Extrn   Music_GetSlaveChannelInformationTable:Far
-                Extrn   Music_SoundCardLoadAllSamples:Far
-                Extrn   Music_GetNumChannels:Far
+                extern    Music_PlayPattern:Far
+                extern    Music_Stop:Far
+                extern    Music_PlaySong:Far
+                extern    Music_PlayNote:Far
+                extern    Music_ToggleChannel:Far
+                extern    Music_SoloChannel:Far
+                extern    Music_GetSampleLocation:Far
+                extern    Music_ClearInstrument:Far
+                extern    Music_GetInstrumentMode:Far
+                extern    Music_AllocateSample:Far
+                extern    Music_GetSlaveChannelInformationTable:Far
+                extern    Music_SoundCardLoadAllSamples:Far
+                extern    Music_GetNumChannels:Far
 
-                Extrn   Music_RegetLoopInformation:Far
+                extern    Music_RegetLoopInformation:Far
 
-                Extrn   SetInfoLine:Far
+                extern    SetInfoLine:Far
 
-                Extrn   MouseAddEvent:Far, AddMouseQueue:Far, MouseClearEvents:Far
-                Extrn   SetKeyboardLock:Far, MouseSetXY:Far
-                Extrn   MouseRemoveEvents:Far, MouseGetStatus:Far
-                Extrn   SetMouseCursorType:Far
+                extern    MouseAddEvent:Far, AddMouseQueue:Far, MouseClearEvents:Far
+                extern    SetKeyboardLock:Far, MouseSetXY:Far
+                extern    MouseRemoveEvents:Far, MouseGetStatus:Far
+                extern    SetMouseCursorType:Far
 
-                Extrn   Fourier_Transform:Far, Fourier_CreateTable:Far
+                extern    Fourier_Transform:Far, Fourier_CreateTable:Far
 
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
@@ -219,7 +216,7 @@ EndS
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
 Segment                 Inst WORD Public 'Code' USE16
-                        Assume CS:Inst, DS:Nothing
+                        ;Assume CS:Inst, DS:Nothing
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Variables                                                                   ³
@@ -810,7 +807,7 @@ PitchPanCenterKeys      Label
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_GetInstrumentScreen Far
+Proc I_GetInstrumentScreen Far
 
                 Push    CS
                 Pop     ES
@@ -818,11 +815,11 @@ Proc            I_GetInstrumentScreen Far
 
                 Ret
 
-EndP            I_GetInstrumentScreen
+;EndP            I_GetInstrumentScreen
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_GetInstrumentOffset Far
+Proc I_GetInstrumentOffset Far
 
                 Call    PE_GetLastInstrument
                 Add     BX, BX
@@ -832,11 +829,11 @@ Proc            I_GetInstrumentOffset Far
 
                 Ret
 
-EndP            I_GetInstrumentOffset
+;EndP            I_GetInstrumentOffset
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_GetSampleOffset Far
+Proc I_GetSampleOffset Far
 
                 Call    PE_GetLastInstrument
                 Add     BX, BX
@@ -846,11 +843,11 @@ Proc            I_GetSampleOffset Far
 
                 Ret
 
-EndP            I_GetSampleOffset
+;EndP            I_GetSampleOffset
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_GetEnvelopeOffset             ; Returns DS:SI
+Proc I_GetEnvelopeOffset             ; Returns DS:SI
 
                 Push    AX
                 Call    I_GetInstrumentOffset   ; Returns DS:BX
@@ -862,17 +859,17 @@ Proc            I_GetEnvelopeOffset             ; Returns DS:SI
 
                 Ret
 
-EndP            I_GetEnvelopeOffset
+;EndP            I_GetEnvelopeOffset
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SelectScreen Far
+Proc I_SelectScreen Far
 
                 Mov     BX, [SI+22]
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     InstrumentScreen, BX
 
@@ -884,11 +881,11 @@ Proc            I_SelectScreen Far
 
                 Jmp     Glbl_F4_2
 
-EndP            I_SelectScreen
+;EndP            I_SelectScreen
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseSelectOff Far
+Proc MouseSelectOff Far
 
                 Mov     Word Ptr [SI-16+8], 102h
                 Mov     CS:SampleMouseCondition, 102h
@@ -896,22 +893,22 @@ Proc            MouseSelectOff Far
 
                 Ret
 
-EndP            MouseSelectOff
+;EndP            MouseSelectOff
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseSelectNoteOff Far
+Proc MouseSelectNoteOff Far
 
                 Mov     Word Ptr [SI-16+8], 102h
                 Mov     CS:NoteMouseCondition, 102h
                 Mov     AX, 1
                 Ret
 
-EndP            MouseSelectNoteOff
+;EndP            MouseSelectNoteOff
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseSelectNote Far
+Proc MouseSelectNote Far
 
                 Mov     CS:NoteMouseCondition, 1107h
 
@@ -937,11 +934,11 @@ MouseSelectNote2:
                 Xor     AX, AX
                 Ret
 
-EndP            MouseSelectNote
+;EndP            MouseSelectNote
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseSelectInst Far
+Proc MouseSelectInst Far
 
                 Mov     CS:MouseX, CX
 
@@ -974,11 +971,11 @@ MouseSelectInst3:
                 Xor     AX, AX
                 Ret
 
-EndP            MouseSelectInst
+;EndP            MouseSelectInst
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            AddSelectEvent
+Proc AddSelectEvent
 
                 Call    MouseGetStatus
                 Test    AL, 6
@@ -991,17 +988,17 @@ AddSelectEvent1:
 
                 Ret
 
-EndP            AddSelectEvent
+;EndP            AddSelectEvent
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_DrawSampleList Far
+Proc I_DrawSampleList Far
 
                 Call    S_GetDestination
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AL, LastInstrument
 
@@ -1014,7 +1011,7 @@ Proc            I_DrawSampleList Far
 I_DrawSampleList1:
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     BX, TopSample
                 Cmp     BL, AL
@@ -1060,7 +1057,7 @@ I_DrawSampleList4:
 
                 Call    Music_GetSongSegment
                 Mov     DS, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     CX, 35
                 Mov     DI, (5+13*80)*2
@@ -1117,7 +1114,7 @@ I_DrawSampleList8:
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AL, LastInstrument
                 Xor     AH, AH
@@ -1141,7 +1138,7 @@ I_DrawSampleList7:
                                 ; Add on pointer...
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     SI, Offset SampleMouseEvent
                 Mov     Word Ptr [SI+4], 35*8-1
@@ -1153,17 +1150,17 @@ I_DrawSampleList7:
 
                 Ret
 
-EndP            I_DrawSampleList
-                Assume DS:Nothing
+;EndP            I_DrawSampleList
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_PreSampleList Far
+Proc I_PreSampleList Far
 
                 Call    S_GetDestination
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AL, LastInstrument
                 Xor     AH, AH
@@ -1181,7 +1178,7 @@ Proc            I_PreSampleList Far
 
                 Call    Music_GetSongSegment
                 Mov     DS, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Dec     SI
                 Add     SI, SI
@@ -1212,15 +1209,15 @@ I_PreSampleList1:
                 StosB
                 Ret
 
-EndP            I_PreSampleList
+;EndP            I_PreSampleList
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_PostSampleList Far
+Proc I_PostSampleList Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     SI, Offset SampleListKeys
                 Call    M_FunctionDivider
@@ -1232,7 +1229,7 @@ I_PostSampleList7:
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AL, LastInstrument
                 Xor     AH, AH
@@ -1246,7 +1243,7 @@ I_PostSampleList7:
                 Mov     BX, AX                  ; BX = Pos. SI = LastInst
                 Call    Music_GetSongSegment
                 Mov     DS, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Add     SI, SI
                 Mov     SI, [64912+SI]          ; SI = sample offset.
@@ -1350,7 +1347,7 @@ I_PostSampleList8:
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                                Assume DS:Pattern
+                                ;Assume DS:Pattern
 
                 Mov     AL, 12
                 Mul     BaseOctave
@@ -1359,7 +1356,7 @@ I_PostSampleList8:
 
                 Push    CS
                 Pop     DS
-                                Assume DS:Inst
+                                ;Assume DS:Inst
 
                 Call    UpdateMultiChannel
 
@@ -1380,11 +1377,11 @@ I_PostSampleList9:
                 Xor     AX, AX
                 Ret
 
-EndP            I_PostSampleList
+;EndP            I_PostSampleList
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SampleLeft Far
+Proc I_SampleLeft Far
 
                 Mov     AX, SamplePos
                 Dec     AX
@@ -1396,11 +1393,11 @@ I_SampleLeft1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_SampleLeft
+;EndP            I_SampleLeft
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SampleRight Far
+Proc I_SampleRight Far
 
                 Mov     AX, SamplePos
                 Inc     AX
@@ -1413,11 +1410,11 @@ I_SampleRight1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_SampleRight
+;EndP            I_SampleRight
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_RedrawWave
+Proc I_RedrawWave
 
                 Call    Glbl_GetCurrentMode
 
@@ -1435,12 +1432,12 @@ I_RedrawWave1:
 I_RedrawWave2:
                 Ret
 
-EndP            I_RedrawWave
+;EndP            I_RedrawWave
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SelectInstrument2
-                Assume DS:Inst
+Proc I_SelectInstrument2
+                ;Assume DS:Inst
 
                                 ; Set Instrument pos...
                 Mov     AX, MouseX
@@ -1462,7 +1459,7 @@ I_SelectInstrument7:
                 Add     DX, TopInstrument
                 Jmp     I_SelectInstrument4
 
-Proc            I_SelectInstrument Far
+Proc I_SelectInstrument Far
 
                 Mov     AX, MouseX
                 Sub     AX, 40
@@ -1492,7 +1489,7 @@ I_SelectInstrument1:
 I_SelectInstrument3:
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Cmp     DL, LastInstrument
                 Mov     LastInstrument, DL
@@ -1504,18 +1501,18 @@ I_SelectInstrument5:
                 Mov     AX, 1
                 Ret
 
-EndP            I_SelectInstrument
+;EndP            I_SelectInstrument
 
-EndP            I_SelectInstrument2
-                Assume DS:Nothing
+;EndP            I_SelectInstrument2
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SampleDown Far
+Proc I_SampleDown Far
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AL, LastInstrument
 
@@ -1531,16 +1528,16 @@ I_SampleDown1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_SampleDown
-                Assume DS:Nothing
+;EndP            I_SampleDown
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SampleUp Far
+Proc I_SampleUp Far
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AL, LastInstrument
 
@@ -1554,16 +1551,16 @@ I_SampleUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_SampleUp
-                Assume DS:Nothing
+;EndP            I_SampleUp
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SamplePgUp Far
+Proc I_SamplePgUp Far
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AL, LastInstrument
 
@@ -1585,16 +1582,16 @@ I_SamplePgUp3:
                 Mov     AX, 1
                 Ret
 
-EndP            I_SamplePgUp
-                Assume DS:Nothing
+;EndP            I_SamplePgUp
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SamplePgDn Far
+Proc I_SamplePgDn Far
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AL, LastInstrument
                 Cmp     AL, 99
@@ -1614,16 +1611,16 @@ I_SamplePgDn2:
                 Mov     AX, 1
                 Ret
 
-EndP            I_SamplePgDn
-                Assume DS:Nothing
+;EndP            I_SamplePgDn
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SampleCtrlPgUp Far
+Proc I_SampleCtrlPgUp Far
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     LastInstrument, 1
                 Call    I_RedrawWave
@@ -1631,15 +1628,15 @@ Proc            I_SampleCtrlPgUp Far
                 Mov     AX, 1
                 Ret
 
-EndP            I_SampleCtrlPgUp
+;EndP            I_SampleCtrlPgUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SampleCtrlPgDn Far
+Proc I_SampleCtrlPgDn Far
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     LastInstrument, 99
                 Call    I_RedrawWave
@@ -1647,44 +1644,44 @@ Proc            I_SampleCtrlPgDn Far
                 Mov     AX, 1
                 Ret
 
-EndP            I_SampleCtrlPgDn
+;EndP            I_SampleCtrlPgDn
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SampleEnd Far
+Proc I_SampleEnd Far
 
                 Mov     SamplePos, 25
 
                 Mov     AX, 1
                 Ret
 
-EndP            I_SampleEnd
+;EndP            I_SampleEnd
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SampleHome Far
+Proc I_SampleHome Far
 
                 Mov     SamplePos, 0
 
                 Mov     AX, 1
                 Ret
 
-EndP            I_SampleHome
+;EndP            I_SampleHome
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SampleTab Far
+Proc I_SampleTab Far
 
                 Mov     Word Ptr [ES:DI], 7
 
                 Mov     AX, 1
                 Ret
 
-EndP            I_SampleTab
+;EndP            I_SampleTab
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_ShowSampleInfo Far
+Proc I_ShowSampleInfo Far
 
                 Call    I_GetSampleOffset
 
@@ -1694,7 +1691,7 @@ Proc            I_ShowSampleInfo Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     SI, Offset NoSampleMsg
 
@@ -1721,11 +1718,11 @@ I_ShowSampleInfo2:
 
                 Ret
 
-EndP            I_ShowSampleInfo
+;EndP            I_ShowSampleInfo
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_VibratoButtonSelect Far
+Proc I_VibratoButtonSelect Far
 
                 Call    I_GetSampleOffset
                 Mov     AL, [BX+04Fh]           ; AL = type.
@@ -1737,7 +1734,7 @@ Proc            I_VibratoButtonSelect Far
 I_VibratoButtonSelect1:
                 Mov     SI, [ES:DI]
 
-                Mov     CH, AH                  ; Assume up
+                Mov     CH, AH                  ; ;Assume up
                 Cmp     AL, CL
                 JNE     I_VibratoButtonSelect2
 
@@ -1754,11 +1751,11 @@ I_VibratoButtonSelect2:
 
                 Ret
 
-EndP            I_VibratoButtonSelect
+;EndP            I_VibratoButtonSelect
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SetVibratoWaveform Far                ; AH = waveform.
+Proc I_SetVibratoWaveform Far                ; AH = waveform.
 
                 Mov     AX, [SI+24]
                 Push    AX
@@ -1769,11 +1766,11 @@ Proc            I_SetVibratoWaveform Far                ; AH = waveform.
 
                 Ret
 
-EndP            I_SetVibratoWaveform
+;EndP            I_SetVibratoWaveform
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_CheckLoopValues Far
+Proc I_CheckLoopValues Far
 
                 Call    I_GetSampleOffset
 
@@ -1804,11 +1801,11 @@ I_CheckLoopValues1:
                 Call    I_DrawWaveForm
                 Ret
 
-EndP            I_CheckLoopValues
+;EndP            I_CheckLoopValues
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_CheckSusLoopValues Far
+Proc I_CheckSusLoopValues Far
 
                 Call    I_GetSampleOffset
 
@@ -1839,11 +1836,11 @@ I_CheckSusLoopValues1:
                 Call    I_DrawWaveForm
                 Ret
 
-EndP            I_CheckSusLoopValues
+;EndP            I_CheckSusLoopValues
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_DrawWaveForm Far
+Proc I_DrawWaveForm Far
 
                 Mov     [CS:LastWaveformValues], 7f80h
 
@@ -1856,7 +1853,7 @@ Proc            I_DrawWaveForm Far
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AL, LastInstrument
                 And     AL, AL
@@ -1869,7 +1866,7 @@ I_DrawWaveForm1:
                 Xor     AH, AH
                 Xor     CX, CX
                 Call    Music_GetSampleLocation
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 JC      I_DrawWaveFormEnd
 
@@ -2109,11 +2106,11 @@ I_DrawWaveFormEnd:
 
                 Ret
 
-EndP            I_DrawWaveForm
+;EndP            I_DrawWaveForm
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_DeleteSample Far
+Proc I_DeleteSample Far
 
                 Mov     DI, Offset O1_ConfirmDeleteSample
                 Mov     CX, 4
@@ -2126,7 +2123,7 @@ Proc            I_DeleteSample Far
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AL, LastInstrument
                 Dec     AX
@@ -2141,14 +2138,14 @@ I_DeleteSample1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_DeleteSample
-                Assume DS:Nothing
+;EndP            I_DeleteSample
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 C5Speed         DD      0
 
-Proc            I_CalculateC5Speed Far
+Proc I_CalculateC5Speed Far
 
                 Mov     AX, 1
                 Ret
@@ -2305,15 +2302,15 @@ I_CalculateC5SpeedEnd:
                 Ret
 !
 
-EndP            I_CalculateC5Speed
+;EndP            I_CalculateC5Speed
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_PrintC5Frequency Far
+Proc I_PrintC5Frequency Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Push    C5Speed
 
@@ -2327,12 +2324,12 @@ Proc            I_PrintC5Frequency Far
 
                 Ret
 
-EndP            I_PrintC5Frequency
-                Assume DS:Nothing
+;EndP            I_PrintC5Frequency
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_DeleteInstrument Far
+Proc I_DeleteInstrument Far
 
                 Mov     DI, Offset O1_ConfirmDeleteInstrument
                 Mov     CX, 4
@@ -2376,11 +2373,11 @@ I_DeleteInstrument1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_DeleteInstrument
+;EndP            I_DeleteInstrument
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_ConvertSample Far             ; Signed/Unsigned
+Proc I_ConvertSample Far             ; Signed/Unsigned
 
                 EnsureNoNetwork
 
@@ -2439,11 +2436,11 @@ I_ConvertSample3:
                 Int     3
                 Jmp     I_ConvertSample4
 
-EndP            I_ConvertSample
+;EndP            I_ConvertSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_InvertSample Far             ; Signed/Unsigned
+Proc I_InvertSample Far             ; Signed/Unsigned
 
                 EnsureNoNetwork
 
@@ -2501,11 +2498,11 @@ I_InvertSample_16Bit2:
                 Int     3
                 Jmp     I_InvertSample_16Bit1
 
-EndP            I_InvertSample
+;EndP            I_InvertSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_CutSampleBeforeLoopUpdateLoop Near
+Proc I_CutSampleBeforeLoopUpdateLoop Near
 
                 Sub     [DS:BX+DI], EDX
                 JNC     I_CutSampleBeforeLoopUpdateLoop1
@@ -2516,11 +2513,11 @@ I_CutSampleBeforeLoopUpdateLoop1:
                 Add     DI, 4
                 Ret
 
-EndP            I_CutSampleBeforeLoopUpdateLoop
+;EndP            I_CutSampleBeforeLoopUpdateLoop
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_CutSampleBeforeLoop Far
+Proc I_CutSampleBeforeLoop Far
 
                 EnsureNoNetwork
 
@@ -2581,7 +2578,7 @@ I_CutSampleBeforeLoop6:
                                                 ; To diskdata segment first.
                 Mov     AX, DiskData
                 Mov     ES, AX
-                        Assume ES:Nothing
+                        ;Assume ES:Nothing
 
                 Xor     EDI, EDI
 
@@ -2651,11 +2648,11 @@ I_CutSampleBeforeLoop10:
                 Int     3
                 Jmp     I_CutSampleBeforeLoop11
 
-EndP            I_CutSampleBeforeLoop
+;EndP            I_CutSampleBeforeLoop
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_CutSample Far
+Proc I_CutSample Far
 
                 EnsureNoNetwork
 
@@ -2696,7 +2693,7 @@ I_CutSample1:
                 Mov     AX, 1
                 Ret
 
-Proc            I_CutSampleCheckValue Near
+Proc I_CutSampleCheckValue Near
 
                 Cmp     DWord Ptr [DS:BX+DI], EAX
                 JBE     I_CutSampleCheckValue1
@@ -2706,14 +2703,14 @@ Proc            I_CutSampleCheckValue Near
 I_CutSampleCheckValue1:
                 Ret
 
-EndP            I_CutSampleCheckValue
+;EndP            I_CutSampleCheckValue
 
-EndP            I_CutSample
+;EndP            I_CutSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_ClearSampleName Far
-                Assume DS:Inst
+Proc I_ClearSampleName Far
+                ;Assume DS:Inst
 
                 Mov     SamplePos, 0
 
@@ -2741,12 +2738,12 @@ I_ClearSampleName3:
                 Inc     AX
                 Ret
 
-EndP            I_ClearSampleName
-                Assume DS:Nothing
+;EndP            I_ClearSampleName
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_InsertSample Far
+Proc I_InsertSample Far
 
                 EnsureNoNetwork
 
@@ -2840,11 +2837,11 @@ I_InsertSampleEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            I_InsertSample
+;EndP            I_InsertSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_RemoveSample Far
+Proc I_RemoveSample Far
 
                 EnsureNoNetwork
 
@@ -2928,11 +2925,11 @@ I_RemoveSampleEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            I_RemoveSample
+;EndP            I_RemoveSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_InsertInstrument Far
+Proc I_InsertInstrument Far
 
                 EnsureNoNetwork
 
@@ -2981,11 +2978,11 @@ I_InsertInstrumentEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            I_InsertInstrument
+;EndP            I_InsertInstrument
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_RemoveInstrument Far
+Proc I_RemoveInstrument Far
 
                 EnsureNoNetwork
 
@@ -3029,11 +3026,11 @@ I_RemoveInstrumentEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            I_RemoveInstrument
+;EndP            I_RemoveInstrument
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetSampleNumber                         ; Carry if not a num.
+Proc GetSampleNumber                         ; Carry if not a num.
                                                         ; DX otherwise,
                 Push    CS
                 Pop     DS
@@ -3070,11 +3067,11 @@ GetSampleNumber2:
 ;                ClC
                 Ret
 
-EndP            GetSampleNumber
+;EndP            GetSampleNumber
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetNumberInput          ; DI = Offset of list.
+Proc GetNumberInput          ; DI = Offset of list.
                                         ; Returns DX with sample number.
 
                 Push    DI
@@ -3110,11 +3107,11 @@ GetNumberInput1:
                 Mov     AX, 1
                 RetF
 
-EndP            GetNumberInput
+;EndP            GetNumberInput
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_ExchangeSamples Far
+Proc I_ExchangeSamples Far
 
                         ; Clear input...
 
@@ -3156,11 +3153,11 @@ I_ExchangeSamples1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_ExchangeSamples
+;EndP            I_ExchangeSamples
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SwapSamples Far
+Proc I_SwapSamples Far
 
                         ; Clear input...
 
@@ -3252,11 +3249,11 @@ I_SwapSamples1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_SwapSamples
+;EndP            I_SwapSamples
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_ReplaceSample Far
+Proc I_ReplaceSample Far
 
                 EnsureNoNetwork
 
@@ -3321,12 +3318,12 @@ I_ReplaceSample1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_ReplaceSample
+;EndP            I_ReplaceSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_ReMix
-                Assume DS:Nothing
+Proc I_ReMix
+                ;Assume DS:Nothing
 
                 EnsureNoNetwork
 
@@ -3368,7 +3365,7 @@ I_ReMixNoMix:
 I_ReMixEnoughMem:
                 Mov     AX, DiskData
                 Mov     ES, AX
-                        Assume ES:Nothing
+                        ;Assume ES:Nothing
 
                 Call    PE_GetLastInstrument            ; Into BX
                 Mov     AX, BX
@@ -3666,21 +3663,21 @@ I_ReMix7:
 I_ReMixEnd:
                 Ret
 
-EndP            I_ReMix
-                Assume DS:Nothing
+;EndP            I_ReMix
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_ResizeSample Far
+Proc I_ResizeSample Far
 
                 Mov     CS:Interpolate, 1
                 Jmp     I_ResizeJumpPoint
 
-EndP            I_ResizeSample
+;EndP            I_ResizeSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_ResizeSampleNoInt Far
+Proc I_ResizeSampleNoInt Far
 
                 Mov     CS:Interpolate, 0
 
@@ -3715,7 +3712,7 @@ I_ResizeJumpPoint:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     EDX, NewSampleSize
                 And     EDX, EDX
@@ -3727,12 +3724,12 @@ I_ResizeSampleNoInt1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_ResizeSampleNoInt
-                Assume DS:Nothing
+;EndP            I_ResizeSampleNoInt
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_CenterSample Far
+Proc I_CenterSample Far
 
                 EnsureNoNetwork
 
@@ -3887,11 +3884,11 @@ I_CenterSampleEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            I_CenterSample
+;EndP            I_CenterSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_AmplifySample Far
+Proc I_AmplifySample Far
 
                 EnsureNoNetwork
 
@@ -4093,11 +4090,11 @@ I_AmplifySampleEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            I_AmplifySample
+;EndP            I_AmplifySample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_ReverseSample Far
+Proc I_ReverseSample Far
 
                 EnsureNoNetwork
 
@@ -4131,7 +4128,7 @@ Proc            I_ReverseSample Far
 
                 Mov     AX, DiskData
                 Mov     ES, AX
-                        Assume ES:Nothing
+                        ;Assume ES:Nothing
 
                 Xor     EDI, EDI
 
@@ -4209,7 +4206,7 @@ I_ReverseSample10:
 
                 Mov     AX, DiskData
                 Mov     ES, AX
-                        Assume ES:Nothing
+                        ;Assume ES:Nothing
 
                 Xor     EDI, EDI
 
@@ -4320,11 +4317,11 @@ I_ReverseSample1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_ReverseSample
+;EndP            I_ReverseSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SwapMemoryAllocation
+Proc I_SwapMemoryAllocation
 
                 Call    I_GetSampleOffset       ; Gets DS:BX
                 Mov     SI, [DS:64912+99*2]
@@ -4337,11 +4334,11 @@ Proc            I_SwapMemoryAllocation
 
                 Ret
 
-EndP            I_SwapMemoryAllocation
+;EndP            I_SwapMemoryAllocation
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_RepositionSample
+Proc I_RepositionSample
 
 
                 Push    AX
@@ -4363,11 +4360,11 @@ Proc            I_RepositionSample
                 Pop     AX
                 Ret
 
-EndP            I_RepositionSample
+;EndP            I_RepositionSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_ToggleSampleQuality Far
+Proc I_ToggleSampleQuality Far
 
                 EnsureNoNetwork
 
@@ -4428,7 +4425,7 @@ I_ConvertTo8Bit:
 
                 Mov     AX, DiskData
                 Mov     ES, AX
-                        Assume ES:Nothing
+                        ;Assume ES:Nothing
 
                 Xor     EDI, EDI
 
@@ -4560,7 +4557,7 @@ I_ConvertTo16Bit:
 
                 Mov     AX, DiskData
                 Mov     ES, AX
-                        Assume ES:Nothing
+                        ;Assume ES:Nothing
 
                 Xor     EDI, EDI
 
@@ -4646,17 +4643,17 @@ I_ToggleSampleQuality1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_ToggleSampleQuality
+;EndP            I_ToggleSampleQuality
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_DrawInstrumentWindow Far
+Proc I_DrawInstrumentWindow Far
 
                 Call    S_GetDestination
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AL, LastInstrument
                 Test    AL, AL
@@ -4670,7 +4667,7 @@ I_DrawInstrumentWindow1:                        ; AL = last instrument
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     BX, TopInstrument
                 Cmp     AX, BX
@@ -4716,7 +4713,7 @@ I_DrawInstrumentWindow4:
 
                 Call    Music_GetSongSegment
                 Mov     DS, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     DX, 35
                 Mov     DI, (5+13*80)*2
@@ -4774,17 +4771,17 @@ I_DrawInstrumentNoMouse:
 
                 Ret
 
-EndP            I_DrawInstrumentWindow
-                Assume DS:Nothing
+;EndP            I_DrawInstrumentWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_PreInstrumentWindow Far
+Proc I_PreInstrumentWindow Far
 
                 Call    S_GetDestination
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AL, LastInstrument
                 Xor     AH, AH
@@ -4816,12 +4813,12 @@ I_PreInstrumentWindow2:
 
                 Ret
 
-EndP            I_PreInstrumentWindow
-                Assume DS:Nothing
+;EndP            I_PreInstrumentWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MIDI_AllocateChannel Far   ; Given AX = Base channel, DL = note
+Proc MIDI_AllocateChannel Far   ; Given AX = Base channel, DL = note
                                            ; Finds physical channel, returns AX
                                            ; if no channel available, then
                                            ; overtakes channel at base channel
@@ -4832,7 +4829,7 @@ Proc            MIDI_AllocateChannel Far   ; Given AX = Base channel, DL = note
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     DX, AX
                 Mov     BX, AX
@@ -4877,22 +4874,22 @@ MIDI_AllocateChannelEnd:
                 Pop     DS SI DX CX BX
                 Ret
 
-EndP            MIDI_AllocateChannel
+;EndP            MIDI_AllocateChannel
 
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MIDI_GetChannel Far
+Proc MIDI_GetChannel Far
 
                 Xor     AX, AX
                 Mov     AL, [CS:MIDITable+BX]
                 Ret
 
-EndP            MIDI_GetChannel
+;EndP            MIDI_GetChannel
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MIDI_FindChannel Far    ; Given BX = Note, returns AX = channel
+Proc MIDI_FindChannel Far    ; Given BX = Note, returns AX = channel
                                         ; number, cleans up table, AL = 0FFh =
                                         ; note not present
 
@@ -4902,11 +4899,11 @@ Proc            MIDI_FindChannel Far    ; Given BX = Note, returns AX = channel
 
                 Ret
 
-EndP            MIDI_FindChannel
+;EndP            MIDI_FindChannel
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MIDI_ClearTable Far
+Proc MIDI_ClearTable Far
 
                 Push    AX CX ES DI
 
@@ -4922,15 +4919,15 @@ Proc            MIDI_ClearTable Far
 
                 Ret
 
-EndP            MIDI_ClearTable
+;EndP            MIDI_ClearTable
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MIDI_NoteOff Far
+Proc MIDI_NoteOff Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                         ; DL = note
 MIDI_NoteOff2:
@@ -4957,16 +4954,16 @@ MIDI_NoteOff1:
 ;                Xor     AX, AX
                 Ret
 
-EndP            MIDI_NoteOff
-                Assume DS:Nothing
+;EndP            MIDI_NoteOff
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MIDI_PlayNote Far
+Proc MIDI_PlayNote Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Call    PE_TranslateMIDI
                 JC      MIDI_PlayNote1
@@ -5000,16 +4997,16 @@ MIDI_PlayNote1:
                 Ret
 
 
-EndP            MIDI_PlayNote
-                Assume DS:Nothing
+;EndP            MIDI_PlayNote
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_PlayNote Far
+Proc I_PlayNote Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Test    CH, Not 1
                 JNZ     I_PlayNote5
@@ -5037,7 +5034,7 @@ I_PlayNote1:
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AL, 12
                 Mul     BaseOctave
@@ -5098,13 +5095,13 @@ I_PlayNote5:
                 Xor     AX, AX
                 Ret
 
-EndP            I_PlayNote
-                Assume DS:Nothing
+;EndP            I_PlayNote
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_PostInstrumentWindow Far
-                        Assume DS:Inst
+Proc I_PostInstrumentWindow Far
+                        ;Assume DS:Inst
 
                 Push    CS
                 Pop     DS
@@ -5134,7 +5131,7 @@ I_PostInstrumentWindow13:
                                                 ; BX = Pos, SI = LastInst
                 Call    Music_GetSongSegment
                 Mov     DS, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Add     SI, SI
                 Mov     SI, [64712+SI]          ; SI = instrument offset.
@@ -5194,7 +5191,7 @@ I_PostInstrumentWindow12:
                 Ret
 
 I_PostInstrumentWindow5:
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Cmp     CX, 1D3h                        ; Delete...
                 JNE     I_PostInstrumentWindow6
@@ -5209,7 +5206,7 @@ I_PostInstrumentWindow6:
                 Ret
 
 I_PostInstrumentWindow7:
-                        Assume DS:Inst
+                        ;Assume DS:Inst
                 Cmp     DX, ' '                         ; Spacebar
                 JNE     I_PostInstrumentWindow14
 
@@ -5223,14 +5220,14 @@ I_PostInstrumentWindow14:
                 Xor     AX, AX
                 Ret
 
-EndP            I_PostInstrumentWindow
-                Assume DS:Nothing
+;EndP            I_PostInstrumentWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_InstrumentLeft Far
+Proc I_InstrumentLeft Far
 
-                Assume DS:Inst
+                ;Assume DS:Inst
 
                 Cmp     InstrumentEdit, 0
                 JE      I_InstrumentLeft2
@@ -5248,14 +5245,14 @@ I_InstrumentLeft1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_InstrumentLeft
-                Assume DS:Nothing
+;EndP            I_InstrumentLeft
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_InstrumentRight Far
+Proc I_InstrumentRight Far
 
-                Assume DS:Inst
+                ;Assume DS:Inst
 
                 Cmp     InstrumentEdit, 0
                 JE      I_InstrumentRight2
@@ -5274,62 +5271,62 @@ I_InstrumentRight1:
                 Ret
 
 
-EndP            I_InstrumentRight
-                Assume DS:Nothing
+;EndP            I_InstrumentRight
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_InstrumentHome Far
+Proc I_InstrumentHome Far
 
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     InstrumentPos, 0
 
                 Mov     AX, 1
                 Ret
 
-EndP            I_InstrumentHome
-                Assume DS:Nothing
+;EndP            I_InstrumentHome
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_InstrumentEnd Far
+Proc I_InstrumentEnd Far
 
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     InstrumentPos, 24
 
                 Mov     AX, 1
                 Ret
 
-EndP            I_InstrumentEnd
-                Assume DS:Nothing
+;EndP            I_InstrumentEnd
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_InstrumentTab Far
+Proc I_InstrumentTab Far
 
                 Mov     Word Ptr [ES:DI], 5
 
                 Mov     AX, 1
                 Ret
 
-EndP            I_InstrumentTab
+;EndP            I_InstrumentTab
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_InstrumentShiftTab Far
+Proc I_InstrumentShiftTab Far
 
                 Mov     Word Ptr [ES:DI], 8
 
                 Mov     AX, 1
                 Ret
 
-EndP            I_InstrumentShiftTab
+;EndP            I_InstrumentShiftTab
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_InstrumentNameClear Far
+Proc I_InstrumentNameClear Far
 
                 Call    I_GetInstrumentOffset
                 Push    DS
@@ -5350,11 +5347,11 @@ Proc            I_InstrumentNameClear Far
                 Inc     AX
                 Ret
 
-EndP            I_InstrumentNameClear
+;EndP            I_InstrumentNameClear
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_InstrumentClear Far
+Proc I_InstrumentClear Far
 
                 Call    PE_GetLastInstrument
                 Mov     AX, BX
@@ -5367,15 +5364,15 @@ Proc            I_InstrumentClear Far
                 Mov     AX, 1
                 Ret
 
-EndP            I_InstrumentClear
+;EndP            I_InstrumentClear
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_DrawNoteWindow Far
+Proc I_DrawNoteWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     SI, Offset NoteMouseEvent
                 Call    AddSelectEvent
@@ -5497,15 +5494,15 @@ I_DrawNoteWindow6:
 
                 Ret
 
-EndP            I_DrawNoteWindow
+;EndP            I_DrawNoteWindow
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_PreNoteWindow Far
+Proc I_PreNoteWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Call    S_GetDestination
                 Mov     AX, CurrentNote
@@ -5538,16 +5535,16 @@ I_PreNoteWindow1:
 
                 Ret
 
-EndP            I_PreNoteWindow
-                Assume DS:Nothing
+;EndP            I_PreNoteWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_PostNoteWindow Far
+Proc I_PostNoteWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     SI, Offset NoteListKeys
                 Call    M_FunctionDivider
@@ -5577,14 +5574,14 @@ I_PostNoteWindow2:
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                                Assume DS:Pattern
+                                ;Assume DS:Pattern
 
                 Mov     AL, 12
                 Mul     BaseOctave
 
                 Push    CS
                 Pop     DS
-                                Assume DS:Inst
+                                ;Assume DS:Inst
                 Mov     SI, CurrentNote
                 Add     SI, SI
 
@@ -5634,7 +5631,7 @@ I_PostNoteWindow5:
                 Add     SI, SI
 
                 Call    I_GetInstrumentOffset
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
                                                          ; DS:BX points to inst.
                 Add     BX, 40h
 
@@ -5660,7 +5657,7 @@ I_PostNoteWindow6:
                 Add     SI, SI
 
                 Call    I_GetInstrumentOffset
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
                 Add     BX, SI
                 Add     BX, 41h
                 Mov     Byte Ptr [BX], 0
@@ -5725,13 +5722,13 @@ I_PostNoteWindowEnd:
                 NetworkSendInstrument
                 Jmp     I_NoteDown
 
-EndP            I_PostNoteWindow
-                Assume DS:Nothing
+;EndP            I_PostNoteWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SelectNoteMouse Far
-                Assume DS:Inst
+Proc I_SelectNoteMouse Far
+                ;Assume DS:Inst
 
                 ShR     DX, 3
                 Add     DX, TopNote
@@ -5752,14 +5749,14 @@ I_SelectNoteMouse2:
                 Mov     AX, 1
                 Ret
 
-EndP            I_SelectNoteMouse
-                Assume DS:Nothing
+;EndP            I_SelectNoteMouse
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NoteUp Far
+Proc I_NoteUp Far
 
-                Assume DS:Inst
+                ;Assume DS:Inst
 
                 Mov     AX, CurrentNote
                 Dec     AX
@@ -5775,16 +5772,16 @@ I_NoteUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_NoteUp
-                Assume DS:Nothing
+;EndP            I_NoteUp
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NoteDown Far
+Proc I_NoteDown Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     AX, CurrentNote
                 Inc     AX
@@ -5797,14 +5794,14 @@ I_NoteDown1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_NoteDown
-                Assume DS:Nothing
+;EndP            I_NoteDown
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NotePgUp Far
+Proc I_NotePgUp Far
 
-                Assume DS:Inst
+                ;Assume DS:Inst
 
                 Mov     AX, CurrentNote
                 Sub     AX, 12
@@ -5818,14 +5815,14 @@ I_NotePgUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_NotePgUp
-                Assume DS:Nothing
+;EndP            I_NotePgUp
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NotePgDn Far
+Proc I_NotePgDn Far
 
-                Assume DS:Inst
+                ;Assume DS:Inst
 
                 Mov     AX, CurrentNote
                 Add     AX, 12
@@ -5840,16 +5837,16 @@ I_NotePgDn1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_NotePgDn
-                Assume DS:Nothing
+;EndP            I_NotePgDn
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NoteRight Far
+Proc I_NoteRight Far
 
                 Push    CS
                 Pop     DS
-                Assume DS:Inst
+                ;Assume DS:Inst
 
                 Mov     AX, NotePos
                 Inc     AX
@@ -5864,14 +5861,14 @@ I_NoteRight1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_NoteRight
-                Assume DS:Nothing
+;EndP            I_NoteRight
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NoteLeft Far
+Proc I_NoteLeft Far
 
-                Assume DS:Inst
+                ;Assume DS:Inst
                 Mov     AX, NotePos
                 Dec     AX
                 JS      I_NoteLeft1
@@ -5882,64 +5879,64 @@ I_NoteLeft1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_NoteLeft
-                Assume DS:Nothing
+;EndP            I_NoteLeft
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NoteHome Far
-                Assume DS:Inst
+Proc I_NoteHome Far
+                ;Assume DS:Inst
 
                 Mov     CurrentNote, 0
 
                 Mov     AX, 1
                 Ret
 
-EndP            I_NoteHome
-                Assume  DS:Nothing
+;EndP            I_NoteHome
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NoteEnd Far
-                Assume DS:Inst
+Proc I_NoteEnd Far
+                ;Assume DS:Inst
 
                 Mov     CurrentNote, 119
 
                 Mov     AX, 1
                 Ret
 
-EndP            I_NoteEnd
-                Assume  DS:Nothing
+;EndP            I_NoteEnd
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NoteTab Far
+Proc I_NoteTab Far
 
                 Mov     Word Ptr [ES:DI], 16
 
                 Mov     AX, 1
                 Ret
 
-EndP            I_NoteTab
-                Assume DS:Nothing
+;EndP            I_NoteTab
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NoteShiftTab Far
+Proc I_NoteShiftTab Far
 
                 Mov     Word Ptr [ES:DI], 4
 
                 Mov     AX, 1
                 Ret
 
-EndP            I_NoteShiftTab
-                Assume DS:Nothing
+;EndP            I_NoteShiftTab
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NoteSampleIncrease Far
+Proc I_NoteSampleIncrease Far
 
-                Assume  DS:Inst
+                ;Assume  DS:Inst
 
                 Mov     AL, SampleNumber
                 Inc     AX
@@ -5952,14 +5949,14 @@ I_NoteSampleIncrease1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_NoteSampleIncrease
-                Assume DS:Nothing
+;EndP            I_NoteSampleIncrease
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NoteSampleDecrease Far
+Proc I_NoteSampleDecrease Far
 
-                Assume  DS:Inst
+                ;Assume  DS:Inst
 
                 Mov     AL, SampleNumber
                 Dec     AL
@@ -5971,14 +5968,14 @@ I_NoteSampleDecrease1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_NoteSampleDecrease
-                Assume DS:Nothing
+;EndP            I_NoteSampleDecrease
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NoteSamplePickUp Far
+Proc I_NoteSamplePickUp Far
 
-                Assume DS:Nothing
+                ;Assume DS:Nothing
 
                 Call    I_GetInstrumentOffset
 
@@ -5994,19 +5991,19 @@ Proc            I_NoteSamplePickUp Far
                 Mov     AX, 1
                 Ret
 
-EndP            I_NoteSamplePickUp
+;EndP            I_NoteSamplePickUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NoteNext Far
-                Assume DS:Inst
+Proc I_NoteNext Far
+                ;Assume DS:Inst
 
                 Mov     SI, CurrentNote
                 Add     SI, SI
                 JZ      I_NoteNext1
 
                 Call    I_GetInstrumentOffset
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Add     BX, SI
                 Add     BX, 40h
@@ -6025,13 +6022,13 @@ I_NoteNext1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_NoteNext
-                Assume DS:Nothing
+;EndP            I_NoteNext
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NotePrevious Far
-                Assume DS:Inst
+Proc I_NotePrevious Far
+                ;Assume DS:Inst
 
                 Mov     SI, CurrentNote
                 Cmp     SI, 119
@@ -6040,7 +6037,7 @@ Proc            I_NotePrevious Far
                 Add     SI, SI
 
                 Call    I_GetInstrumentOffset
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Add     BX, SI
                 Add     BX, 40h
@@ -6054,7 +6051,7 @@ Proc            I_NotePrevious Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     AX, CurrentNote
                 Dec     AX
@@ -6068,14 +6065,14 @@ I_NotePrevious1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_NotePrevious
-                Assume DS:Nothing
+;EndP            I_NotePrevious
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NoteAll Far
+Proc I_NoteAll Far
 
-                Assume  DS:Nothing
+                ;Assume  DS:Nothing
 
                 Call    I_GetInstrumentOffset
                 Push    DS
@@ -6111,14 +6108,14 @@ I_NoteAll2:
                 Mov     AX, 1
                 Ret
 
-EndP            I_NoteAll
-                Assume DS:Nothing
+;EndP            I_NoteAll
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NoteInsert Far
+Proc I_NoteInsert Far
 
-                Assume  DS:Nothing
+                ;Assume  DS:Nothing
 
                 Call    I_GetInstrumentOffset
                 Push    DS
@@ -6137,13 +6134,13 @@ Proc            I_NoteInsert Far
                 Mov     AX, 1
                 Ret
 
-EndP            I_NoteInsert
+;EndP            I_NoteInsert
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NoteDelete Far
+Proc I_NoteDelete Far
 
-                Assume  DS:Nothing
+                ;Assume  DS:Nothing
 
                 Call    I_GetInstrumentOffset
                 Push    DS
@@ -6161,13 +6158,13 @@ Proc            I_NoteDelete Far
                 Mov     AX, 1
                 Ret
 
-EndP            I_NoteDelete
+;EndP            I_NoteDelete
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NoteTransposeUp Far
+Proc I_NoteTransposeUp Far
 
-                Assume  DS:Nothing
+                ;Assume  DS:Nothing
 
                 Call    I_GetInstrumentOffset
                 Push    DS
@@ -6194,14 +6191,14 @@ I_NoteTransposeUp2:
                 Mov     AX, 1
                 Ret
 
-EndP            I_NoteTransposeUp
-                Assume DS:Nothing
+;EndP            I_NoteTransposeUp
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NoteTransposeDown Far
+Proc I_NoteTransposeDown Far
 
-                Assume  DS:Nothing
+                ;Assume  DS:Nothing
 
                 Call    I_GetInstrumentOffset
                 Push    DS
@@ -6224,14 +6221,14 @@ I_NoteTransposeDown1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_NoteTransposeDown
-                Assume DS:Nothing
+;EndP            I_NoteTransposeDown
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_NoteSpace Far
+Proc I_NoteSpace Far
 
-                Assume DS:Inst
+                ;Assume DS:Inst
                 Cmp     NotePos, 2
                 JB      I_NoteSpace1
 
@@ -6239,7 +6236,7 @@ Proc            I_NoteSpace Far
                 Add     SI, SI
 
                 Call    I_GetInstrumentOffset
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
                 Mov     AL, SampleNumber
                 Mov     [BX+SI+41h], AL
 
@@ -6250,12 +6247,12 @@ I_NoteSpace1:
                 Xor     AX, AX
                 Ret
 
-EndP            I_NoteSpace
-                Assume DS:Nothing
+;EndP            I_NoteSpace
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_ExchangeInstruments Far
+Proc I_ExchangeInstruments Far
 
                 EnsureNoNetwork
 
@@ -6294,11 +6291,11 @@ I_ExchangeInstruments1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_ExchangeInstruments
+;EndP            I_ExchangeInstruments
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_DoubleSampleSpeed Far
+Proc I_DoubleSampleSpeed Far
 
                 Call    I_GetSampleOffset
                 Mov     EAX, [BX+3Ch]
@@ -6314,11 +6311,11 @@ I_DoubleSampleSpeed1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_DoubleSampleSpeed
+;EndP            I_DoubleSampleSpeed
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_HalveSampleSpeed Far
+Proc I_HalveSampleSpeed Far
 
                 Call    I_GetSampleOffset
                 ShR     DWord Ptr [BX+3Ch], 1
@@ -6328,11 +6325,11 @@ Proc            I_HalveSampleSpeed Far
                 Mov     AX, 1
                 Ret
 
-EndP            I_HalveSampleSpeed
+;EndP            I_HalveSampleSpeed
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SampleSpeedSemiUp Far
+Proc I_SampleSpeedSemiUp Far
 
                 Call    I_GetSampleOffset
 
@@ -6350,11 +6347,11 @@ I_SampleSpeedSemiUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_SampleSpeedSemiUp
+;EndP            I_SampleSpeedSemiUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SampleSpeedSemiDown Far
+Proc I_SampleSpeedSemiDown Far
 
                 Call    I_GetSampleOffset
 
@@ -6367,11 +6364,11 @@ Proc            I_SampleSpeedSemiDown Far
                 Mov     AX, 1
                 Ret
 
-EndP            I_SampleSpeedSemiDown
+;EndP            I_SampleSpeedSemiDown
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_ReplaceInstrument Far
+Proc I_ReplaceInstrument Far
 
                 EnsureNoNetwork
 
@@ -6396,11 +6393,11 @@ I_ReplaceInstrument1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_ReplaceInstrument
+;EndP            I_ReplaceInstrument
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_ScaleSampleVolumes Far
+Proc I_ScaleSampleVolumes Far
 
                 EnsureNoNetwork
 
@@ -6441,11 +6438,11 @@ I_ScaleSampleVolumesEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            I_ScaleSampleVolumes
+;EndP            I_ScaleSampleVolumes
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_ScaleInstrumentVolumes Far
+Proc I_ScaleInstrumentVolumes Far
 
                 EnsureNoNetwork
 
@@ -6486,11 +6483,11 @@ I_ScaleInstrumentVolumesEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            I_ScaleInstrumentVolumes
+;EndP            I_ScaleInstrumentVolumes
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_CopyInstrument Far
+Proc I_CopyInstrument Far
 
                 Mov     DI, Offset O1_CopyInstrumentList
                 Call    GetNumberInput
@@ -6515,11 +6512,11 @@ Proc            I_CopyInstrument Far
                 Mov     AX, 1
                 Ret
 
-EndP            I_CopyInstrument
+;EndP            I_CopyInstrument
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SwapInstruments Far
+Proc I_SwapInstruments Far
 
                 EnsureNoNetwork
 
@@ -6568,11 +6565,11 @@ I_SwapInstruments1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_SwapInstruments
+;EndP            I_SwapInstruments
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_UpdateInstrument Far
+Proc I_UpdateInstrument Far
 
                 EnsureNoNetwork
 
@@ -6591,11 +6588,11 @@ Proc            I_UpdateInstrument Far
                 Mov     AX, 1
                 Ret
 
-EndP            I_UpdateInstrument
+;EndP            I_UpdateInstrument
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseEnvelopeEvent1 Far
+Proc MouseEnvelopeEvent1 Far
 
                 Mov     CS:MouseX, CX
                 Mov     CS:MouseY, DX
@@ -6606,11 +6603,11 @@ Proc            MouseEnvelopeEvent1 Far
                 Xor     AX, AX
                 Ret
 
-EndP            MouseEnvelopeEvent1
+;EndP            MouseEnvelopeEvent1
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseEnvelopeEvent4 Far ; Delete node
+Proc MouseEnvelopeEvent4 Far ; Delete node
 
                 Test    BH, 6
                 JNZ     MouseEnvelopeEvent4_1
@@ -6625,11 +6622,11 @@ MouseEnvelopeEvent4_1:
                 Xor     AX, AX
                 Ret
 
-EndP            MouseEnvelopeEvent4
+;EndP            MouseEnvelopeEvent4
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseEnvelopeEvent2 Far ; Envelope drag
+Proc MouseEnvelopeEvent2 Far ; Envelope drag
 
                 Mov     CS:MouseX, CX
                 Mov     CS:MouseY, DX
@@ -6640,11 +6637,11 @@ Proc            MouseEnvelopeEvent2 Far ; Envelope drag
                 Xor     AX, AX
                 Ret
 
-EndP            MouseEnvelopeEvent2
+;EndP            MouseEnvelopeEvent2
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MouseEnvelopeEvent3 Far ; Release envelope
+Proc MouseEnvelopeEvent3 Far ; Release envelope
 
                 Mov     CX, 8002h
                 Call    AddMouseQueue
@@ -6652,12 +6649,12 @@ Proc            MouseEnvelopeEvent3 Far ; Release envelope
                 Xor     AX, AX
                 Ret
 
-EndP            MouseEnvelopeEvent3
+;EndP            MouseEnvelopeEvent3
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DrawEnvelopeHeader      ; AH = colour, DS = inst
-                Assume DS:Inst
+Proc DrawEnvelopeHeader      ; AH = colour, DS = inst
+                ;Assume DS:Inst
 
                 Mov     SI, InstrumentScreen    ; 1-3
                 Add     SI, SI                  ; 2-6
@@ -6670,16 +6667,16 @@ Proc            DrawEnvelopeHeader      ; AH = colour, DS = inst
 
                 Ret
 
-EndP            DrawEnvelopeHeader
-                Assume DS:Nothing
+;EndP            DrawEnvelopeHeader
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_DrawEnvelope Far
+Proc I_DrawEnvelope Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     AH, 20h
                 Call    DrawEnvelopeHeader
@@ -6758,12 +6755,12 @@ I_DrawEnvelope4:
 
                 Ret
 
-EndP            I_DrawEnvelope
-                Assume DS:Nothing
+;EndP            I_DrawEnvelope
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_PreEnvelope Far
+Proc I_PreEnvelope Far
 
                 Push    CS
                 Pop     DS
@@ -6773,16 +6770,16 @@ Proc            I_PreEnvelope Far
 
                 Ret
 
-EndP            I_PreEnvelope
-                Assume DS:Nothing
+;EndP            I_PreEnvelope
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_PostEnvelope Far
+Proc I_PostEnvelope Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     SI, Offset VolumeEnvelopeNodeKeys
 
@@ -6798,7 +6795,7 @@ I_PostEnvelope2:
                 Jmp     [SI]
 
 I_PostEnvelope1:
-IF ENABLEPRESETENVELOPES
+%IF  ENABLEPRESETENVELOPES
 
                 Cmp     DX, '0'
                 JB      I_PostEnvelopeNoPreset
@@ -6885,19 +6882,19 @@ I_PostEnvelopeSet1:
                 Ret
 
 I_PostEnvelopeNoSet:
-ENDIF                                           ; PRESETENVELOPES
+%ENDIF                                            ; PRESETENVELOPES
                 Xor     AX, AX
                 Ret
 
-EndP            I_PostEnvelope
+;EndP            I_PostEnvelope
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_MapEnvelope Far
+Proc I_MapEnvelope Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Cmp     InstrumentScreen, 0
                 JNE     I_MapEnvelope1
@@ -6930,7 +6927,7 @@ I_MapEnvelopeYAxis1:
                 Push    DI
 
                 Call    I_GetEnvelopeOffset ; DS:SI points to envelope
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     AL, 32
 
@@ -7225,7 +7222,7 @@ I_MapEnvelopeError:
 
                 Call    Music_GetSlaveChannelInformationTable
                         ; Returns DS:SI, CX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 I_MapEnvelopePlaying1:
                 Cmp     [SI+33h], BL
@@ -7285,12 +7282,12 @@ I_MapEnvelopeEnd:
 
                 Ret
 
-EndP            I_MapEnvelope
-                Assume DS:Nothing
+;EndP            I_MapEnvelope
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_GetMouseNode               ; Returns DI, carry if none
+Proc I_GetMouseNode               ; Returns DI, carry if none
 
                 Call    I_GetEnvelopeOffset
                                         ; Returns DS:SI to envelope
@@ -7350,11 +7347,11 @@ I_GetMouseNode2:
                 StC
                 Ret
 
-EndP            I_GetMouseNode
+;EndP            I_GetMouseNode
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_MouseEnvelopeDelete Far
+Proc I_MouseEnvelopeDelete Far
 
                 Call    I_GetMouseNode
                 JC      I_MouseEnvelopeDelete1
@@ -7368,12 +7365,12 @@ I_MouseEnvelopeDelete1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_MouseEnvelopeDelete
+;EndP            I_MouseEnvelopeDelete
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_MouseEnvelopePress Far
-                Assume DS:Nothing
+Proc I_MouseEnvelopePress Far
+                ;Assume DS:Nothing
                                         ; If on top of node, then pick up this
                                         ; node, ;  MouseNodeHeld = 1
                                         ; If NOT near node, and nodes < 25,
@@ -7551,13 +7548,13 @@ I_MouseEnvelopePressError:
                 Mov     AX, 1
                 Ret
 
-EndP            I_MouseEnvelopePress
-                Assume DS:Nothing
+;EndP            I_MouseEnvelopePress
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_MouseEnvelopeDrag Far
-                Assume DS:Nothing
+Proc I_MouseEnvelopeDrag Far
+                ;Assume DS:Nothing
                                         ; CurrentNode update
 
                 Call    I_GetEnvelopeOffset
@@ -7664,13 +7661,13 @@ I_GetMousePositionEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            I_MouseEnvelopeDrag
-                Assume DS:Nothing
+;EndP            I_MouseEnvelopeDrag
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_MouseEnvelopeReleased Far
-                Assume DS:Inst
+Proc I_MouseEnvelopeReleased Far
+                ;Assume DS:Inst
                                         ; MouseNodeHeld = 0
 
                 Xor     BX, BX
@@ -7685,14 +7682,14 @@ Proc            I_MouseEnvelopeReleased Far
                 Mov     AX, 1
                 Ret
 
-EndP            I_MouseEnvelopeReleased
-                Assume DS:Nothing
+;EndP            I_MouseEnvelopeReleased
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_VolumeEnvelopeRight Far
+Proc I_VolumeEnvelopeRight Far
 
-                        Assume  DS:Inst
+                        ;Assume  DS:Inst
 
                 Mov     AX, CurrentNode
                 Inc     AX
@@ -7706,14 +7703,14 @@ I_VolumeEnvelopeRight1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_VolumeEnvelopeRight
-                Assume  DS:Nothing
+;EndP            I_VolumeEnvelopeRight
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_VolumeEnvelopeLeft Far
+Proc I_VolumeEnvelopeLeft Far
 
-                        Assume  DS:Inst
+                        ;Assume  DS:Inst
 
                 Cmp     CurrentNode, 0
                 JE      I_VolumeEnvelopeLeft1
@@ -7725,41 +7722,41 @@ I_VolumeEnvelopeLeft1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_VolumeEnvelopeLeft
-                Assume  DS:Nothing
+;EndP            I_VolumeEnvelopeLeft
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_VolumeEnvelopeUp Far
+Proc I_VolumeEnvelopeUp Far
 
                 Mov     Word Ptr [ES:DI], 5
 
                 Mov     AX, 1
                 Ret
 
-EndP            I_VolumeEnvelopeUp
+;EndP            I_VolumeEnvelopeUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_VolumeEnvelopeDown Far
+Proc I_VolumeEnvelopeDown Far
 
                 Mov     Word Ptr [ES:DI], 17
 
                 Mov     AX, 1
                 Ret
 
-EndP            I_VolumeEnvelopeDown
+;EndP            I_VolumeEnvelopeDown
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_VolumeEnvelopeHeldUp Far
+Proc I_VolumeEnvelopeHeldUp Far
 
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     CX, CurrentNode
 
                 Call    I_GetEnvelopeOffset
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Add     SI, CX
                 Add     SI, CX
@@ -7781,19 +7778,19 @@ I_VolumeEnvelopeHeldUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_VolumeEnvelopeHeldUp
-                Assume  DS:Nothing
+;EndP            I_VolumeEnvelopeHeldUp
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_VolumeEnvelopeHeldDown Far
+Proc I_VolumeEnvelopeHeldDown Far
 
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     CX, CurrentNode
 
                 Call    I_GetEnvelopeOffset
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Add     SI, CX
                 Add     SI, CX
@@ -7814,14 +7811,14 @@ I_VolumeEnvelopeHeldDown1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_VolumeEnvelopeHeldDown
-                Assume  DS:Nothing
+;EndP            I_VolumeEnvelopeHeldDown
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_VolumeEnvelopeHeldLeft Far
+Proc I_VolumeEnvelopeHeldLeft Far
 
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     CX, CurrentNode
                 Mov     DX, CX
@@ -7829,7 +7826,7 @@ Proc            I_VolumeEnvelopeHeldLeft Far
                 JZ      I_VolumeEnvelopeHeldLeft1
 
                 Call    I_GetEnvelopeOffset
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Add     SI, CX
                 Add     SI, DX
@@ -7850,14 +7847,14 @@ I_VolumeEnvelopeHeldLeft1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_VolumeEnvelopeHeldLeft
-                Assume  DS:Nothing
+;EndP            I_VolumeEnvelopeHeldLeft
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_VolumeEnvelopeHeldLeftFast Far
+Proc I_VolumeEnvelopeHeldLeftFast Far
 
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     CX, CurrentNode
                 Mov     DX, CX
@@ -7865,7 +7862,7 @@ Proc            I_VolumeEnvelopeHeldLeftFast Far
                 JZ      I_VolumeEnvelopeHeldLeftFast2
 
                 Call    I_GetEnvelopeOffset
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Add     SI, CX
                 Add     SI, DX
@@ -7895,14 +7892,14 @@ I_VolumeEnvelopeHeldLeftFast2:
                 Mov     AX, 1
                 Ret
 
-EndP            I_VolumeEnvelopeHeldLeftFast
-                Assume  DS:Nothing
+;EndP            I_VolumeEnvelopeHeldLeftFast
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_VolumeEnvelopeHeldHome Far
+Proc I_VolumeEnvelopeHeldHome Far
 
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     CX, CurrentNode
                 Mov     DX, CX
@@ -7910,7 +7907,7 @@ Proc            I_VolumeEnvelopeHeldHome Far
                 JZ      I_VolumeEnvelopeHeldHome1
 
                 Call    I_GetEnvelopeOffset
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Add     SI, CX
                 Add     SI, DX
@@ -7927,14 +7924,14 @@ I_VolumeEnvelopeHeldHome1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_VolumeEnvelopeHeldHome
-                Assume  DS:Nothing
+;EndP            I_VolumeEnvelopeHeldHome
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_VolumeEnvelopeHeldRight Far
+Proc I_VolumeEnvelopeHeldRight Far
 
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     CX, CurrentNode
                 Mov     DX, CX
@@ -7942,7 +7939,7 @@ Proc            I_VolumeEnvelopeHeldRight Far
                 JZ      I_VolumeEnvelopeHeldRight1
 
                 Call    I_GetEnvelopeOffset
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Add     SI, CX
                 Add     SI, DX
@@ -7970,14 +7967,14 @@ I_VolumeEnvelopeHeldRight1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_VolumeEnvelopeHeldRight
-                Assume  DS:Nothing
+;EndP            I_VolumeEnvelopeHeldRight
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_VolumeEnvelopeHeldEnd Far
+Proc I_VolumeEnvelopeHeldEnd Far
 
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     CX, CurrentNode
                 Mov     DX, CX
@@ -7985,7 +7982,7 @@ Proc            I_VolumeEnvelopeHeldEnd Far
                 JZ      I_VolumeEnvelopeHeldEnd1
 
                 Call    I_GetEnvelopeOffset
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Add     SI, CX
                 Add     SI, DX
@@ -8010,14 +8007,14 @@ I_VolumeEnvelopeHeldEnd1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_VolumeEnvelopeHeldEnd
-                Assume  DS:Nothing
+;EndP            I_VolumeEnvelopeHeldEnd
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_VolumeEnvelopeHeldRightFast Far
+Proc I_VolumeEnvelopeHeldRightFast Far
 
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     CX, CurrentNode
                 Mov     DX, CX
@@ -8025,7 +8022,7 @@ Proc            I_VolumeEnvelopeHeldRightFast Far
                 JZ      I_VolumeEnvelopeHeldRightFast1
 
                 Call    I_GetEnvelopeOffset
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Add     SI, CX
                 Add     SI, DX
@@ -8060,20 +8057,20 @@ I_VolumeEnvelopeHeldRightFast1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_VolumeEnvelopeHeldRightFast
-                Assume  DS:Nothing
+;EndP            I_VolumeEnvelopeHeldRightFast
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_VolumeEnvelopeHeldPgDn Far
+Proc I_VolumeEnvelopeHeldPgDn Far
 
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     CX, CurrentNode
                 Mov     AH, AmplitudeCompensate
 
                 Call    I_GetEnvelopeOffset
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Add     SI, CX
                 Add     SI, CX
@@ -8097,20 +8094,20 @@ I_VolumeEnvelopeHeldPgDn1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_VolumeEnvelopeHeldPgDn
-                Assume  DS:Nothing
+;EndP            I_VolumeEnvelopeHeldPgDn
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_VolumeEnvelopeHeldPgUp Far
+Proc I_VolumeEnvelopeHeldPgUp Far
 
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     CX, CurrentNode
                 Mov     AH, AmplitudeCompensate
 
                 Call    I_GetEnvelopeOffset
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Add     SI, CX
                 Add     SI, CX
@@ -8135,13 +8132,13 @@ I_VolumeEnvelopeHeldPgUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_VolumeEnvelopeHeldPgUp
-                Assume  DS:Nothing
+;EndP            I_VolumeEnvelopeHeldPgUp
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_VolumeEnvelopeInsert Far
-                        Assume DS:Inst
+Proc I_VolumeEnvelopeInsert Far
+                        ;Assume DS:Inst
 
                 Mov     DX, CurrentNode
 
@@ -8157,7 +8154,7 @@ Proc            I_VolumeEnvelopeInsert Far
                 JE      I_VolumeEnvelopeInsert1
 
                 Call    I_GetEnvelopeOffset     ; DS:SI
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 LEA     BX, [SI+6]
                 Add     BX, DX
@@ -8234,14 +8231,14 @@ I_VolumeEnvelopeInsert1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_VolumeEnvelopeInsert
-                Assume DS:Nothing
+;EndP            I_VolumeEnvelopeInsert
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_VolumeEnvelopeDelete Far
+Proc I_VolumeEnvelopeDelete Far
 
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     DX, CurrentNode
                 Mov     DI, DX
@@ -8254,7 +8251,7 @@ Proc            I_VolumeEnvelopeDelete Far
                 JBE     I_VolumeEnvelopeDelete1
 
                 Call    I_GetEnvelopeOffset     ; Returns DS:SI
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 ClI
 
@@ -8342,15 +8339,15 @@ I_VolumeEnvelopeDelete1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_VolumeEnvelopeDelete
+;EndP            I_VolumeEnvelopeDelete
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_EnvelopeSelected
+Proc I_EnvelopeSelected
 
                 Call    I_GetEnvelopeOffset     ; Returns DS:SI
 
-IF FILTERENVELOPES
+%IF  FILTERENVELOPES
                 Cmp     CS:InstrumentScreen, 3
                 JNE     I_MouseEnvelopeNoFilter
 
@@ -8360,21 +8357,21 @@ IF FILTERENVELOPES
                 Or      Byte Ptr [SI], 80h
 
 I_MouseEnvelopeNoFilter:
-ELSE
+%ELSE
                 And     Byte Ptr [SI], 7Fh      ; Turn of filters.
 
-ENDIF
+%ENDIF 
 
                 Or      Byte Ptr [SI], 1        ; Turn on envelope
                 Ret
 
-EndP            I_EnvelopeSelected
+;EndP            I_EnvelopeSelected
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_VolumeEnvelopeEnter Far
+Proc I_VolumeEnvelopeEnter Far
 
-                        Assume  DS:Inst
+                        ;Assume  DS:Inst
 
                 Xor     NodeHeld, 1
                 JZ      I_VolumeEnvelopeEnter1
@@ -8385,16 +8382,16 @@ I_VolumeEnvelopeEnter1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_VolumeEnvelopeEnter
-                Assume  DS:Nothing
+;EndP            I_VolumeEnvelopeEnter
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_InstrumentListSpace Far
+Proc I_InstrumentListSpace Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Cmp     NoteReleased, 1
                 JNE     I_InstrumentSpace1
@@ -8414,16 +8411,16 @@ I_InstrumentSpace1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_InstrumentListSpace
-                Assume DS:Nothing
+;EndP            I_InstrumentListSpace
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_InstrumentListNoteOff Far
+Proc I_InstrumentListNoteOff Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     NoteReleased, 1
                 Mov     SI, Offset NoteData
@@ -8435,12 +8432,12 @@ Proc            I_InstrumentListNoteOff Far
                 Mov     AX, 1
                 Ret
 
-EndP            I_InstrumentListNoteOff
-                Assume DS:Nothing
+;EndP            I_InstrumentListNoteOff
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_ShowSamplePlay Far
+Proc I_ShowSamplePlay Far
                                         ; Clear table first.
 
                 Push    CS
@@ -8491,11 +8488,11 @@ I_ShowSamplePlay2:
 
                 Jmp     I_ShowInstrumentPlay5
 
-EndP            I_ShowSamplePlay
+;EndP            I_ShowSamplePlay
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_ShowInstrumentPlay Far
+Proc I_ShowInstrumentPlay Far
                                         ; Clear table first.
 
                 Call    Music_GetInstrumentMode
@@ -8583,11 +8580,11 @@ I_ShowInstrumentPlayEnd:
                 Ret
 
 
-EndP            I_ShowInstrumentPlay
+;EndP            I_ShowInstrumentPlay
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_ClearTables Far
+Proc I_ClearTables Far
 
                 Push    CS
                 Pop     ES
@@ -8600,33 +8597,33 @@ Proc            I_ClearTables Far
 
                 Ret
 
-EndP            I_ClearTables
+;EndP            I_ClearTables
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_TagInstrument Far
+Proc I_TagInstrument Far
 
                 Mov     Byte Ptr [CS:InstrumentPlayTable+BX], 4
                 Ret
 
-EndP            I_TagInstrument
+;EndP            I_TagInstrument
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_TagSample Far
+Proc I_TagSample Far
 
                 Mov     Byte Ptr [CS:SamplePlayTable+BX], 4
                 Ret
 
-EndP            I_TagSample
+;EndP            I_TagSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MIDI_PlaySample Far
+Proc MIDI_PlaySample Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Test    DH, DH
                 JNZ     MIDI_PlaySample1
@@ -8650,15 +8647,15 @@ MIDI_PlaySample2:
                 Mov     AX, 1
                 Ret
 
-EndP            MIDI_PlaySample
+;EndP            MIDI_PlaySample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_PlaySample Far
+Proc I_PlaySample Far
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AH, LastInstrument
                 Mov     AL, CS:LastPlaySample
@@ -8669,16 +8666,16 @@ Proc            I_PlaySample Far
                 Xor     AX, AX
                 Ret
 
-EndP            I_PlaySample
-                Assume DS:Nothing
+;EndP            I_PlaySample
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_IncreasePlayChannel Far
+Proc I_IncreasePlayChannel Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     AX, PlayChannel
                 Cmp     AX, 63
@@ -8697,16 +8694,16 @@ I_IncreasePlayChannel1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_IncreasePlayChannel
-                Assume DS:Nothing
+;EndP            I_IncreasePlayChannel
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_DecreasePlayChannel Far
+Proc I_DecreasePlayChannel Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     AX, PlayChannel
                 And     AX, AX
@@ -8725,12 +8722,12 @@ I_DecreasePlayChannel1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_DecreasePlayChannel
-                Assume DS:Nothing
+;EndP            I_DecreasePlayChannel
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            UpdateMultiChannel
+Proc UpdateMultiChannel
 
                 Cmp     CS:MultiChannel, 0
                 JE      UpdateMultiChannel1
@@ -8739,7 +8736,7 @@ Proc            UpdateMultiChannel
                 Push    BX
                 Push    DS
                 Push    SI
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Push    CS
                 Pop     DS
@@ -8768,16 +8765,16 @@ UpdateMultiChannel2:
 UpdateMultiChannel1:
                 Ret
 
-EndP            UpdateMultiChannel
-                Assume DS:Nothing
+;EndP            UpdateMultiChannel
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_ToggleMultiChannel Far
+Proc I_ToggleMultiChannel Far
 
                 Push    CS
                 Pop     DS
-                Assume DS:Inst
+                ;Assume DS:Inst
 
                 Mov     SI, Offset MultiChannelEnabledMsg
                 Xor     MultiChannel, 1
@@ -8791,12 +8788,12 @@ I_ToggleMultiChannel1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_ToggleMultiChannel
-                Assume DS:Nothing
+;EndP            I_ToggleMultiChannel
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_DrawPitchPanCenter Far
+Proc I_DrawPitchPanCenter Far
 
                 Call    S_GetDestination
                 Call    I_GetInstrumentOffset   ; Returns DS:BX
@@ -8824,11 +8821,11 @@ Proc            I_DrawPitchPanCenter Far
 
                 Ret
 
-EndP            I_DrawPitchPanCenter
+;EndP            I_DrawPitchPanCenter
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_PrePitchPanCenter Far
+Proc I_PrePitchPanCenter Far
 
                 Call    S_GetDestination
                 Mov     AL, 3h
@@ -8841,15 +8838,15 @@ Proc            I_PrePitchPanCenter Far
 
                 Ret
 
-EndP            I_PrePitchPanCenter
+;EndP            I_PrePitchPanCenter
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_PostPitchPanCenter Far
+Proc I_PostPitchPanCenter Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Mov     SI, Offset PitchPanCenterKeys
                 Call    M_FunctionDivider
@@ -8861,31 +8858,31 @@ I_PostPitchPanCenter1:
                 Xor     AX, AX
                 Ret
 
-EndP            I_PostPitchPanCenter
+;EndP            I_PostPitchPanCenter
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_PitchPanCenterUp Far
+Proc I_PitchPanCenterUp Far
 
                 Mov     Word Ptr [ES:DI], 27
                 Mov     AX, 1
                 Ret
 
-EndP            I_PitchPanCenterUp
+;EndP            I_PitchPanCenterUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_PitchPanCenterDown Far
+Proc I_PitchPanCenterDown Far
 
                 Mov     Word Ptr [ES:DI], 29
                 Mov     AX, 1
                 Ret
 
-EndP            I_PitchPanCenterDown
+;EndP            I_PitchPanCenterDown
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_PitchPanCenterSemiUp Far
+Proc I_PitchPanCenterSemiUp Far
 
                 Call    I_GetInstrumentOffset
                 Mov     AL, [BX+17h]
@@ -8902,11 +8899,11 @@ I_PitchPanCenterSemiUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_PitchPanCenterSemiUp
+;EndP            I_PitchPanCenterSemiUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_PitchPanCenterSemiDown Far
+Proc I_PitchPanCenterSemiDown Far
 
                 Call    I_GetInstrumentOffset
                 Mov     AL, [BX+17h]
@@ -8922,15 +8919,15 @@ I_PitchPanCenterSemiDown1:
                 Mov     AX, 1
                 Ret
 
-EndP            I_PitchPanCenterSemiDown
+;EndP            I_PitchPanCenterSemiDown
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_IdleUpdateEnvelope Far
+Proc I_IdleUpdateEnvelope Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Cmp     UpdateInstrumentScreen, 0
                 JNE     I_IdleUpdateEnvelope2
@@ -8943,7 +8940,7 @@ Proc            I_IdleUpdateEnvelope Far
                 Call    PE_GetLastInstrument            ; Gets BX
                 Inc     BX
                 Call    Music_GetSlaveChannelInformationTable
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 I_IdleUpdateEnvelope1:
                 Cmp     Byte Ptr [SI+33h], BL
@@ -8967,20 +8964,20 @@ I_IdleUpdateEnvelope3:
                 Xor     AX, AX
                 Ret
 
-EndP            I_IdleUpdateEnvelope
+;EndP            I_IdleUpdateEnvelope
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            UpdateWAVEForm Far
+Proc UpdateWAVEForm Far
 
                 Call    I_RedrawWave
                 Ret
 
-EndP            UpdateWAVEForm
+;EndP            UpdateWAVEForm
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_SampleButtonHandler Far
+Proc I_SampleButtonHandler Far
 
                 Test    AX, AX
                 JZ      I_SampleButtonHandler1
@@ -9000,11 +8997,11 @@ I_SampleButtonHandler1:
 
                 Ret
 
-EndP            I_SampleButtonHandler
+;EndP            I_SampleButtonHandler
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            I_GetPresetEnvelopeOffset Far
+Proc I_GetPresetEnvelopeOffset Far
 
                 Push    CS
                 Pop     DS
@@ -9012,7 +9009,7 @@ Proc            I_GetPresetEnvelopeOffset Far
 
                 Ret
 
-EndP            I_GetPresetEnvelopeOffset
+;EndP            I_GetPresetEnvelopeOffset
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 

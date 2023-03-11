@@ -2,71 +2,68 @@
 ;³ Music Module                                                                ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-                        .386
-                        .387
-
-include switch.inc
-include network.inc
+%include "switch.inc"
+%include "network.inc"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Externals                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-        Extrn   D_GotoStartingDirectory:Far
-        Extrn   D_SetDriveDirectoryFar:Far
-        Extrn   D_GetFileName:Far
-        Extrn   D_Showtime:Far
+        extern    D_GotoStartingDirectory:Far
+        extern    D_SetDriveDirectoryFar:Far
+        extern    D_GetFileName:Far
+        extern    D_Showtime:Far
 
-        Extrn   E_EMSAvailable:Far
-        Extrn   E_SaveEMSPageFrame:Far
-        Extrn   E_RestoreEMSPageFrame:Far
-        Extrn   E_UnInitEMS:Far
-        Extrn   E_AllocateEMS:Far
-        Extrn   E_MapEMSMemory:Far
-        Extrn   E_GetEMSPageFrame:Far
-        Extrn   E_ReleaseEMS:Far
-        Extrn   E_AllocateBlockEMS:Far, E_ReleaseBlockEMS:Far
-        Extrn   E_MapAlignedBlockEMS:Far
-        Extrn   E_GetInternalEMSHandle:Far
+        extern    E_EMSAvailable:Far
+        extern    E_SaveEMSPageFrame:Far
+        extern    E_RestoreEMSPageFrame:Far
+        extern    E_UnInitEMS:Far
+        extern    E_AllocateEMS:Far
+        extern    E_MapEMSMemory:Far
+        extern    E_GetEMSPageFrame:Far
+        extern    E_ReleaseEMS:Far
+        extern    E_AllocateBlockEMS:Far, E_ReleaseBlockEMS:Far
+        extern    E_MapAlignedBlockEMS:Far
+        extern    E_GetInternalEMSHandle:Far
 
-        Extrn   I_TagInstrument:Far
-        Extrn   I_TagSample:Far
+        extern    I_TagInstrument:Far
+        extern    I_TagSample:Far
 
-        Extrn   O1_OutOfSoundCardMemoryList:Far
+        extern    O1_OutOfSoundCardMemoryList:Far
 
-        Extrn   M_FunctionHandler:Far
-        Extrn   M_Object1List:Far
+        extern    M_FunctionHandler:Far
+        extern    M_Object1List:Far
 
-        Extrn   Network_UpdatePatternIfIdle:Far
+        extern    Network_UpdatePatternIfIdle:Far
 
-        Extrn   PE_GetCurrentPattern:Far
-        Extrn   PE_FillHeader:Far
-        Extrn   S_GetDestination:Far
-        Extrn   S_UnInitScreen:Far
-        Extrn   S_DirectDrawString:Far
-        Extrn   S_DrawString:Far
-        Extrn   S_SetDirectMode:Far
-        Extrn   S_SaveScreen:Far
-        Extrn   S_RestoreScreen:Far
-        Extrn   S_DrawBox:Far
-        Extrn   S_DrawString:Far
-        Extrn   S_UpdateScreen:Far
-        Extrn   S_DrawSmallBox:Far
-        Extrn   F_DrawHeader:Far
+        extern    PE_GetCurrentPattern:Far
+        extern    PE_FillHeader:Far
+        extern    S_GetDestination:Far
+        extern    S_UnInitScreen:Far
+        extern    S_DirectDrawString:Far
+        extern    S_DrawString:Far
+        extern    S_SetDirectMode:Far
+        extern    S_SaveScreen:Far
+        extern    S_RestoreScreen:Far
+        extern    S_DrawBox:Far
+        extern    S_DrawString:Far
+        extern    S_UpdateScreen:Far
+        extern    S_DrawSmallBox:Far
+        extern    F_DrawHeader:Far
 
-        Extrn   K_GetKey:Far
-        Extrn   StartClock:Far
-        Extrn   SetInfoLine:Far, SetInfoLine2:Far
-        Extrn   M_Object1List:Far
+        extern    K_GetKey:Far
+        extern    StartClock:Far
+        extern    SetInfoLine:Far, SetInfoLine2:Far
+        extern    M_Object1List:Far
 
-        Extrn   MaxRow
+        extern    MaxRow
 
-        Extrn   IdleUpdateInfoLine:Far
-        Extrn   GlobalKeyList:Far
-        Extrn   GetEnvironment:Far
+        extern    IdleUpdateInfoLine:Far
+        extern    GlobalKeyList:Far
+        extern    GetEnvironment:Far
 
-        Extrn   MIDIBufferEmpty:Far, MIDISend:Far, MIDI_ClearTable:Far
-        Extrn   O1_ShowTime
+        extern    MIDIBufferEmpty:Far, MIDISend:Far, MIDI_ClearTable:Far
+        extern    O1_ShowTime
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Globals                                                                     ³
@@ -170,7 +167,7 @@ include network.inc
 
         Public  Music_ToggleSoloInstrument, Music_ToggleSoloSample
 
-        Extrn   PE_GetLastInstrument:Far
+        extern    PE_GetLastInstrument:Far
         Public  CurrentPattern
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
@@ -188,10 +185,10 @@ Segment         SongData PARA Public 'Data'
 EndS
 
 Segment                 Music DWORD Public 'Code' USE16
-                        Assume CS:Music
+                        ;Assume CS:Music
 
 CREATENEWLOGFILE        EQU     0
-include debug.inc
+%include "debug.inc"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Variables                                                                   ³
@@ -390,14 +387,14 @@ UnsoloMsg               DB      "Solo disabled", 0
 SoloSampleMsg           DB      "Solo sample ", 0FDh, "D", 0
 SoloInstrumentMsg       DB      "Solo instrument ", 0FDh, "D", 0
 
-IFDEF DEBUG
+%IF DEF DEBUG
 
 LoadDriverMessage       DB      "Loading driver:", 0
 UnableToReadFileMessage DB      "Unable to read file", 0
 DetectingMessage        DB      "Testing driver", 0
 ScreenOffset            DW      0
 
-ENDIF
+%ENDIF 
 
 PCSpeakerDriver         DB      "ITPCSPKR.DRV", 0
 SBDriver                DB      "ITSB.DRV", 0
@@ -482,7 +479,7 @@ PitchTable              Label   DWord
    DW      0, 32,     59167, 33, 60214, 35, 3580, 38,  20806, 40, 46850, 42
    DW      16701, 45, 61986, 47, 52221, 50, 53567, 53, 1148, 57,  26736, 60
 
-IF USEFPUCODE
+%IF  USEFPUCODE
 
 FPSave          DB      128 Dup (0)
 
@@ -491,7 +488,7 @@ Const1_On_768   DD      3AAAAAABh
 SlideValue      DW      0
 NewControlWord  DW      7Fh
 
-ELSE
+%ELSE
 
 FineLinearSlideUpTable  Label
         DW      0, 1,     59, 1,    118, 1,   178, 1,   237, 1    ; 0->4
@@ -592,7 +589,7 @@ LinearSlideDownTable    Label
         DW      26770, 26674, 26577, 26482, 26386, 26291, 26196, 26102 ;248->255
         DW      26008                                                  ; 256
 
-ENDIF ; USEFPUCODE
+%ENDIF  ; USEFPUCODE
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
@@ -650,11 +647,11 @@ RetrigOffsets           Label
 ;³ Sound Driver Data                                                           ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-IF OLDDRIVER
+%IF  OLDDRIVER
  DriverID                DB      "Impulse Tracker Sound Driver"
-ELSE
+%ELSE
  DriverID                DB      "Impulse Tracker Advanced Sound Driver"
-ENDIF
+%ENDIF 
 
 ALIGN 2
 SoundDriverSegment      DW      0
@@ -669,11 +666,11 @@ DriverFlags             DW      0       ; Bit 1 = MIDI Out supported
                                         ; Bit 2 = Hiqual
                                         ; Bit 3 = Output waveform data available
 
-IF OLDDRIVER
+%IF  OLDDRIVER
                         DB      64 - ($ - DriverVariableTable) Dup (0)
-ELSE
+%ELSE
                         DB      16 - ($ - DriverVariableTable) Dup (0)
-ENDIF
+%ENDIF 
 
 
 ALIGN 4
@@ -704,11 +701,11 @@ DriverGetWaveform       DD      0
 
 EndDriverFunctions      Label
 
-IF OLDDRIVER
+%IF  OLDDRIVER
         DD      63-(EndDriverFunctions-StartDriverFunctions)/4 Dup (0)
-ELSE
+%ELSE
         DD      31-(EndDriverFunctions-StartDriverFunctions)/4 Dup (0)
-ENDIF
+%ENDIF 
         DW      0
 
 DriverLength    DW      0
@@ -755,7 +752,7 @@ DriverRequiredFunctions Label
 ;³    Registers for use: AX, BX, DX, ES, SI                                    ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-Proc            RecalculateAllVolumes Far
+Proc RecalculateAllVolumes Far
 
                 Mov     CX, NumChannels
                 Mov     SI, Offset SlaveChannelInformationTable
@@ -769,11 +766,11 @@ RecalculateAllVolumes1:
 
                 Ret
 
-EndP            RecalculateAllVolumes
+;EndP            RecalculateAllVolumes
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            InitPlayInstrument              ; BX = instrument offset
+Proc InitPlayInstrument              ; BX = instrument offset
 
                 Push    ECX
 
@@ -985,11 +982,11 @@ InitPlayInstrumentNoSample:
 
                 Ret
 
-EndP            InitPlayInstrument
+;EndP            InitPlayInstrument
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ApplyRandomValues
+Proc ApplyRandomValues
 
                 Mov     SI, [DI+24h]
                 Mov     BX, [SI+30h]
@@ -1063,13 +1060,13 @@ RandomPan1:
 RandomPanEnd:
                 Ret
 
-EndP            ApplyRandomValues
+;EndP            ApplyRandomValues
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 LastMIDIByte    DB      0FFh
 
-Proc            MIDISendFilter
+Proc MIDISendFilter
 
                 Test    CS:DriverFlags, 1
                 JZ      MIDISendFilter2
@@ -1090,12 +1087,12 @@ MIDISendFilter1:
 MIDISendFilter2:
                 Ret
 
-EndP            MIDISendFilter
-                Assume DS:Nothing
+;EndP            MIDISendFilter
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetFilterCutoff ; Given BL = filtervalue.
+Proc SetFilterCutoff ; Given BL = filtervalue.
                                 ; Assumes that channel is non-disowned
 
                 Push    DI
@@ -1114,11 +1111,11 @@ Proc            SetFilterCutoff ; Given BL = filtervalue.
                 Pop     DI
                 Ret
 
-EndP            SetFilterCutoff
+;EndP            SetFilterCutoff
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetFilterResonance      ; Given BL = filtervalue.
+Proc SetFilterResonance      ; Given BL = filtervalue.
                                         ; Assumes that channel is non-disowned
 
                 Push    DI
@@ -1137,17 +1134,17 @@ Proc            SetFilterResonance      ; Given BL = filtervalue.
                 Pop     DI
                 Ret
 
-EndP            SetFilterResonance
+;EndP            SetFilterResonance
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 MIDIPitchDepthSent      DW      0
 
-Proc            MIDITranslate         ; Assumes DS:SI points to slave
+Proc MIDITranslate         ; Assumes DS:SI points to slave
                                       ; And DS:DI points to host.
                                       ; BX = offset of MIDI command to interpret
 
-                Assume DS:Music
+                ;Assume DS:Music
 
                 Test    DriverFlags, 1
                 JZ      MIDITranslateEnd
@@ -1174,19 +1171,19 @@ Proc            MIDITranslate         ; Assumes DS:SI points to slave
 
                 Mov     DWord Ptr [ChannelCountTable+200], EAX ; scratch area
 
-IFE USEFPUCODE  ; If FPU code is being used, FP registers are already saved
+%IF E USEFPUCODE  ; If FPU code is being used, FP registers are already saved
                 FNSave  [ChannelCountTable]     ; Scratch area
                 FNInit
-ENDIF
+%ENDIF 
                 FLd     [PitchDepthConstant]
                 FIDiv   DWord Ptr [ChannelCountTable+200]
                 FILd    DWord Ptr [SI+10h]      ; Current pitch
                 FIDiv   DWord Ptr [SI+1Ch]      ; Original pitch
                 FYL2X
                 FIStP   DWord Ptr [ChannelCountTable+200]
-IFE USEFPUCODE
+%IF E USEFPUCODE
                 FRstor  [ChannelCountTable]
-ENDIF
+%ENDIF 
 
 ; OK.. [ChannelCountTable] contains pitch depth.
 ; Have to check:
@@ -1484,13 +1481,13 @@ MIDITranslate3:
 MIDITranslateEnd:
                 Ret
 
-EndP            MIDITranslate
-                Assume DS:Nothing
+;EndP            MIDITranslate
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            AllocateChannel         ; Returns SI. Carry set if problems
-                Assume DS:Music
+Proc AllocateChannel         ; Returns SI. Carry set if problems
+                ;Assume DS:Music
 
                 Push    CX
                 Mov     LastSlaveChannel, 0
@@ -2189,15 +2186,15 @@ AllocateChannelInstrument2:
                 StC
                 Ret
 
-EndP            AllocateChannel
-                Assume DS:Nothing
+;EndP            AllocateChannel
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 Seed1           DW      1234h
 Seed2           DW      5678h
 
-Proc            Random
+Proc Random
 
                 Push    BX
                 Push    CX
@@ -2226,11 +2223,11 @@ Proc            Random
 
                 Ret
 
-EndP            Random
+;EndP            Random
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetLoopInformation
+Proc GetLoopInformation
                                 ; Destroys AX, BX, CX, DX
                 Mov     BX, [SI+34h]            ; ES:BX points to sample header
                 Mov     AL, [ES:BX+12h]         ; AL = sample flags
@@ -2292,32 +2289,32 @@ GetLoopInformation6:
 
                 Ret
 
-EndP            GetLoopInformation
+;EndP            GetLoopInformation
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-include it_m_eff.inc
+%include "it_m_eff.inc"
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PitchSlideDown          ; Expects SI to slave
+Proc PitchSlideDown          ; Expects SI to slave
                                         ; BX = slide value
-                Assume  DS:Music
+                ;Assume  DS:Music
 
-IF USEFPUCODE
+%IF  USEFPUCODE
                 Neg     BX
 
-EndP            PitchSlideDown  ; EndP for PitchSlideDown
+;EndP            PitchSlideDown  ; EndP for PitchSlideDown
 
-ELSE
+%ELSE
                 Test    Byte Ptr [ES:2Ch], 8
                 JNZ     PitchSlideDownLinear
                                                 ; Go on to amiga slide down.
-EndP            PitchSlideDown
+;EndP            PitchSlideDown
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PitchSlideDownAmiga
+Proc PitchSlideDownAmiga
 
                 Or      Byte Ptr [SI], 32       ; recalculate pitch!
 
@@ -2363,11 +2360,11 @@ PitchSlideDownAmiga4:
 PitchSlideDownAmiga3:
                 Ret
 
-EndP            PitchSlideDownAmiga
+;EndP            PitchSlideDownAmiga
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PitchSlideDownLinear
+Proc PitchSlideDownLinear
 ; Given BX = slide down value = 0->1024
 
                 Or      Byte Ptr [SI], 32       ; recalculate pitch!
@@ -2396,25 +2393,25 @@ PitchSlideDownLinear2:
                 Pop     DI
                 Ret
 
-EndP            PitchSlideDownLinear
+;EndP            PitchSlideDownLinear
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-ENDIF   ; USEFPUCODE
+%ENDIF    ; USEFPUCODE
 
-Proc            PitchSlideUp            ; Expects SI to slave
+Proc PitchSlideUp            ; Expects SI to slave
                                         ; BX = slide value
                 Test    Byte Ptr [ES:2Ch], 8
                 JZ      PitchSlideUpAmiga
                                                 ; Go on to linear slide
 
-EndP            PitchSlideUp
+;EndP            PitchSlideUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PitchSlideUpLinear
+Proc PitchSlideUpLinear
 
-IF USEFPUCODE
+%IF  USEFPUCODE
                 Mov     [CS:SlideValue], BX
                 FILD    Word Ptr [CS:SlideValue]
                 FMul    [CS:Const1_On_768]      ; Have SlideValue/768.0
@@ -2439,7 +2436,7 @@ PitchSlideUpFPUFreqCheck:
 PitchSlideUpLinear1:                                    ; Turn off channel
                 Or      Word Ptr [SI], 200h
                 And     Byte Ptr [DI], Not 4
-ELSE
+%ELSE
 
                 Or      Byte Ptr [SI], 32       ; recalculate pitch!
 
@@ -2477,18 +2474,18 @@ PitchSlideUpLinear1:                                    ; Turn off channel
 ;                Or      Byte Ptr [SI+1], 2              ; Cut!
 ;                And     Byte Ptr [DI], Not 4
 
-ENDIF
+%ENDIF 
 
                 Ret
 
-EndP            PitchSlideUpLinear
-                Assume DS:Nothing
+;EndP            PitchSlideUpLinear
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PitchSlideUpAmiga
+Proc PitchSlideUpAmiga
 
-IF USEFPUCODE
+%IF  USEFPUCODE
                 Mov     [CS:SlideValue], BX
                 FILD    Word Ptr [CS:SlideValue]
                 FILD    DWord Ptr [SI+10h]      ; InitFreq, Cmd
@@ -2500,7 +2497,7 @@ IF USEFPUCODE
                 FIStP   DWord Ptr [SI+10h]
                 Jmp     PitchSlideUpFPUFreqCheck
 
-ELSE
+%ELSE
                 Or      Byte Ptr [SI], 32       ; recalculate pitch!
 
                 Mov     EAX, [SI+10h]
@@ -2534,13 +2531,13 @@ PitchSlideUpAmiga1:                                    ; Turn off channel
 ;                And     Byte Ptr [DI], Not 4
 
                 Ret
-ENDIF
+%ENDIF 
 
-EndP            PitchSlideUpAmiga
+;EndP            PitchSlideUpAmiga
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetWaveForm Far
+Proc Music_GetWaveForm Far
 
                 Test    Byte Ptr CS:DriverFlags, 4
                 JZ      Music_GetWaveForm1
@@ -2553,22 +2550,22 @@ Music_GetWaveForm1:
                 StC
                 Ret
 
-EndP            Music_GetWaveForm
+;EndP            Music_GetWaveForm
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_Poll Far
+Proc Music_Poll Far
 
                 Mov     AX, CS:PlayMode
                 Mov     BX, CS:CurrentPattern
                 Jmp     [DriverPoll]
 
-EndP            Music_Poll
-                Assume DS:Nothing
+;EndP            Music_Poll
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_InitTempo Far
+Proc Music_InitTempo Far
 
                 PushA
                 Call    Music_GetTempo
@@ -2577,18 +2574,18 @@ Proc            Music_InitTempo Far
 
                 Ret
 
-EndP            Music_InitTempo
+;EndP            Music_InitTempo
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetChannels     ; Returns min of NumChannels & DriverMaxChannels
+Proc GetChannels     ; Returns min of NumChannels & DriverMaxChannels
                                 ; Also uses default channels if num channels
                                 ; = 0ffffh
                 Push    DS
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     AX, CmdLineNumChannels
                 Cmp     AX, 0FFFFh
@@ -2614,30 +2611,30 @@ GetChannels3:                                   ; MC4
                 Pop     DS
                 Ret
 
-EndP            GetChannels
-                Assume DS:Nothing
+;EndP            GetChannels
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_ReinitSoundCard Far
+Proc Music_ReinitSoundCard Far
 
                 Call    GetChannels
                 Call    [DriverReinitSound]
                 Jmp     Music_SoundCardLoadAllSamples
 
-EndP            Music_ReinitSoundCard
+;EndP            Music_ReinitSoundCard
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_UnInitSoundCard Far
+Proc Music_UnInitSoundCard Far
 
                 Jmp     [DriverUninitSound]
 
-EndP            Music_UnInitSoundCard
+;EndP            Music_UnInitSoundCard
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_InitMusic Far
+Proc Music_InitMusic Far
 
                 PushAD
                 Push    DS
@@ -2648,10 +2645,10 @@ Proc            Music_InitMusic Far
                 Mov     AX, CS
                 ShL     EAX, 16
                 Mov     AX, Offset Music_UpdateSampleLocation
-IF ENABLEINT3
-ELSE
+%IF  ENABLEINT3
+%ELSE
                 Mov     [DS:0Ch], EAX
-ENDIF
+%ENDIF 
 
                 Trace   " - Initialising SoundDriver Tables"
 
@@ -2661,7 +2658,7 @@ ENDIF
                 Push    CS
                 Pop     DS
 
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Trace   " - Loading MIDI configuration"
 
@@ -2690,15 +2687,15 @@ Music_InitMusic1:
                 Pop     ES
                 Pop     DS
                 PopAD
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Ret
 
-EndP            Music_InitMusic
+;EndP            Music_InitMusic
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_ReleasePattern Far        ; AX = pattern number
+Proc Music_ReleasePattern Far        ; AX = pattern number
 
                 Push    AX
                 Push    DS
@@ -2747,11 +2744,11 @@ Music_ReleasePattern1:
 
                 Ret
 
-EndP            Music_ReleasePattern
+;EndP            Music_ReleasePattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetPattern Far    ; AX = pattern number
+Proc Music_GetPattern Far    ; AX = pattern number
                                         ; Returns DS:SI points to pattern data.
 
                 Push    AX
@@ -2810,11 +2807,11 @@ Music_GetPattern3:
                 Pop     AX
                 Ret
 
-EndP            Music_GetPattern
+;EndP            Music_GetPattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetPatternLocation Far    ; AX = pattern number
+Proc Music_GetPatternLocation Far    ; AX = pattern number
                                                 ; Returns AX = handle
                                                 ;         EBX = page/offset or
                                                 ;               seg/offset
@@ -2824,7 +2821,7 @@ Proc            Music_GetPatternLocation Far    ; AX = pattern number
                 Mov     CX, [SI]
                 Add     CX, 8                   ; CX = size of data including header
 
-Proc            Music_GetPatternLocationNoCount Far
+Proc Music_GetPatternLocationNoCount Far
 
                 LEA     SI, [63912+EAX*4]
 
@@ -2878,13 +2875,13 @@ Music_GetPatternLocation3:
 
                 Ret
 
-EndP            Music_GetPatternLocationNoCount
+;EndP            Music_GetPatternLocationNoCount
 
-EndP            Music_GetPatternLocation
+;EndP            Music_GetPatternLocation
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_AllocatePattern Far       ; DX = length.
+Proc Music_AllocatePattern Far       ; DX = length.
                                                 ; SI = Pattern
                                                 ; ES:DI points to pattern area
                 Cmp     CS:PatternStorage, 1
@@ -3001,11 +2998,11 @@ Music_AllocatePattern2:
 
                 Ret
 
-EndP            Music_AllocatePattern
+;EndP            Music_AllocatePattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_AllocateSample Far        ; AX = Sample number, 0 based
+Proc Music_AllocateSample Far        ; AX = Sample number, 0 based
                                                 ; EDX = length
                                                 ; Returns ES:DI, ES = 0 if not.
                 Push    EAX
@@ -3103,11 +3100,11 @@ Music_AllocateSample3:
                 Pop     EAX
                 Ret
 
-EndP            Music_AllocateSample
+;EndP            Music_AllocateSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_ReleaseSample Far         ; AX = sample number, 0 based
+Proc Music_ReleaseSample Far         ; AX = sample number, 0 based
                                                 ; AH = 1 = called from network
                                                 ;    = 2 = called from allocate
 
@@ -3158,11 +3155,11 @@ Music_ReleaseSample1:
                 JA      Music_ReleaseSample5
                 JE      Music_ReleaseSample6
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Mov     AH, DL
                 Mov     AL, NETWORK_DELETESAMPLEOBJECT
                 Call    Network_AddWordToQueue
-ENDIF
+%ENDIF 
 
 Music_ReleaseSample6:
                 Push    DS
@@ -3179,11 +3176,11 @@ Music_ReleaseSample5:
                 PopAD
                 Ret
 
-EndP            Music_ReleaseSample
+;EndP            Music_ReleaseSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_ClearSampleName Far       ; AX = Sample number (0 based)
+Proc Music_ClearSampleName Far       ; AX = Sample number (0 based)
 
                 Push    CX
                 Push    DS
@@ -3210,11 +3207,11 @@ Proc            Music_ClearSampleName Far       ; AX = Sample number (0 based)
                 Pop     CX
                 Ret
 
-EndP            Music_ClearSampleName
+;EndP            Music_ClearSampleName
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_ClearAllSampleNames Far
+Proc Music_ClearAllSampleNames Far
 
                 Push    AX
                 Push    CX
@@ -3233,11 +3230,11 @@ Music_ClearAllSampleNames1:
 
                 Ret
 
-EndP            Music_ClearAllSampleNames
+;EndP            Music_ClearAllSampleNames
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_ReleaseAllSamples Far
+Proc Music_ReleaseAllSamples Far
 
                 Push    AX
                 Push    CX
@@ -3255,11 +3252,11 @@ Music_ReleaseAllSamples1:
                 Pop     AX
                 Ret
 
-EndP            Music_ReleaseAllSamples
+;EndP            Music_ReleaseAllSamples
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_ReleaseAllPatterns Far
+Proc Music_ReleaseAllPatterns Far
 
                 Push    AX
                 Push    CX
@@ -3276,11 +3273,11 @@ Music_ReleaseAllPatterns1:
                 Pop     AX
                 Ret
 
-EndP            Music_ReleaseAllPatterns
+;EndP            Music_ReleaseAllPatterns
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_ClearInstrument Far               ; AX = Instrument number
+Proc Music_ClearInstrument Far               ; AX = Instrument number
                                                         ; (0 based)
 
                 Push    CX
@@ -3291,7 +3288,7 @@ Proc            Music_ClearInstrument Far               ; AX = Instrument number
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     DI, AX
                 Add     DI, DI
@@ -3308,12 +3305,12 @@ Proc            Music_ClearInstrument Far               ; AX = Instrument number
                 Pop     CX
                 Ret
 
-EndP            Music_ClearInstrument
-                Assume DS:Nothing
+;EndP            Music_ClearInstrument
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_ClearAllInstruments Far
+Proc Music_ClearAllInstruments Far
 
                 Mov     AX, 99
 
@@ -3324,11 +3321,11 @@ Music_ClearAllInstruments1:
 
                 Ret
 
-EndP            Music_ClearAllInstruments
+;EndP            Music_ClearAllInstruments
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_UnInitMusic Far
+Proc Music_UnInitMusic Far
 
                 Call    Music_UnInitSoundCard
                 Call    Music_UnloadDriver
@@ -3346,20 +3343,20 @@ Music_UnInitMusic1:
 
                 Ret
 
-EndP            Music_UnInitMusic
+;EndP            Music_UnInitMusic
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetSongSegment Far
+Proc Music_GetSongSegment Far
 
                 Mov     AX, CS:SongDataArea
                 Ret
 
-EndP            Music_GetSongSegment
+;EndP            Music_GetSongSegment
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_UnloadDriver
+Proc Music_UnloadDriver
 
                 Xor     AX, AX
                 XChg    AX, CS:SoundDriverSegment
@@ -3373,29 +3370,29 @@ Proc            Music_UnloadDriver
 Music_UnloadDriver1:
                 Ret
 
-EndP            Music_UnloadDriver
+;EndP            Music_UnloadDriver
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            NoFunction2
+Proc NoFunction2
 
                 Push    CS
                 Pop     DS
                 Mov     SI, Offset NoSoundCardMsg
 
-Proc            NoFunction Far
+Proc NoFunction Far
 
                 Xor     AX, AX
                 StC
                 Ret
 
-EndP            NoFunction
+;EndP            NoFunction
 
-EndP            NoFunction2
+;EndP            NoFunction2
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_ClearDriverTables
+Proc Music_ClearDriverTables
                                         ; Makes all of them point to
                                         ; Xor AX, AX, StC, RetF
                 Mov     AX, CS
@@ -3408,11 +3405,11 @@ Proc            Music_ClearDriverTables
                 StosD
 
                 Mov     AX, Offset NoFunction
-IF OLDDRIVER
+%IF  OLDDRIVER
                 Mov     CX, 61
-ELSE
+%ELSE
                 Mov     CX, 29
-ENDIF
+%ENDIF 
                 Rep     StosD
 
                 Xor     EAX, EAX
@@ -3422,14 +3419,14 @@ ENDIF
 
                 Ret
 
-EndP            Music_ClearDriverTables
+;EndP            Music_ClearDriverTables
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_LoadDriver        ; Given DS:DX = filename
-                Assume DS:Nothing
+Proc Music_LoadDriver        ; Given DS:DX = filename
+                ;Assume DS:Nothing
 
-IFDEF DEBUG
+%IF DEF DEBUG
 
                 PushA
                 Push    ES
@@ -3440,7 +3437,7 @@ IFDEF DEBUG
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     DI, [ScreenOffset]
                 Mov     SI, Offset LoadDriverMessage
@@ -3453,7 +3450,7 @@ LoadDriverMessage1:
                 JNZ     LoadDriverMessage1
 
                 Pop     DS
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     SI, DX
 
@@ -3468,14 +3465,14 @@ LoadDriverMessage2:
                 Pop     ES
                 PopA
 
-ENDIF
+%ENDIF 
 
                 Mov     AX, 3D00h
                 Int     21h
                 ClD
                 JNC     Music_LoadDriver2
 
-IFDEF DEBUG
+%IF DEF DEBUG
 
                 PushA
                 Push    DS
@@ -3483,7 +3480,7 @@ IFDEF DEBUG
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     DI, 0B800h
                 Mov     ES, DI
@@ -3503,9 +3500,9 @@ UnableToReadFileLoop:
                 Pop     ES
                 Pop     DS
                 PopA
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
-ENDIF
+%ENDIF 
 
                 Jmp     Music_LoadDriverNoClose
 
@@ -3528,17 +3525,17 @@ Music_LoadDriver2:
                 Mov     BX, AX          ; BX = file handle
                 Mov     AH, 3Fh         ; Read file
 
-IF OLDDRIVER
+%IF  OLDDRIVER
                 Mov     CX, 256
-ELSE
+%ELSE
                 Mov     CX, 128
-ENDIF
+%ENDIF 
 
                 Push    CS
                 Push    CS
                 Pop     DS
                 Pop     ES
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     DX, Offset StartDriverFunctions
                 Mov     SI, DX
@@ -3547,11 +3544,11 @@ ENDIF
                 Cmp     AX, CX
                 JNE     Music_LoadDriverError
 
-IF OLDDRIVER
+%IF  OLDDRIVER
                 Mov     CX, 28
-ELSE
+%ELSE
                 Mov     CX, 37          ; Length of ID
-ENDIF
+%ENDIF 
 
                 Mov     DI, Offset DriverID
                 RepE    CmpsB
@@ -3572,7 +3569,7 @@ ENDIF
                 Mov     CX, DriverLength
                 Mov     SoundDriverSegment, AX
                 Mov     DS, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     DI, AX                  ; DI = segment of driver...
 
@@ -3582,27 +3579,27 @@ ENDIF
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     AH, 3Fh
                 Mov     DX, Offset DriverVariableTable
 
-IF OLDDRIVER
+%IF  OLDDRIVER
                 Mov     CX, 64
-ELSE
+%ELSE
                 Mov     CX, 16
-ENDIF
+%ENDIF 
                 Int     21h
 
                 Mov     AH, 3Fh
 
-IF OLDDRIVER
+%IF  OLDDRIVER
                 Mov     CX, 128
                 Mov     DX, Offset StartDriverFunctions+128
-ELSE
+%ELSE
                 Mov     CX, 64
                 Mov     DX, Offset StartDriverFunctions+64
-ENDIF
+%ENDIF 
                 Mov     SI, DX
                 Int     21h
                 JC      Music_LoadDriverError
@@ -3617,11 +3614,11 @@ ENDIF
                                                 ; segment...
                 Mov     DI, Offset StartDriverFunctions
 
-IF OLDDRIVER
+%IF  OLDDRIVER
                 Mov     CX, 64
-ELSE
+%ELSE
                 Mov     CX, 32
-ENDIF
+%ENDIF 
 
 DriverFunctionLoop1:
                 LodsW
@@ -3632,24 +3629,24 @@ DriverFunctionLoop1:
                 Mov     ES, SoundDriverSegment
                 Xor     DI, DI
 
-IF OLDDRIVER
+%IF  OLDDRIVER
                 Mov     CX, 256
-ELSE
+%ELSE
                 Mov     CX, 16
-ENDIF
+%ENDIF 
                 Mov     SI, Offset DriverRequiredVariables
                 Rep     MovsB
 
                 Mov     SI, Offset DriverRequiredFunctions
 
-IF OLDDRIVER
+%IF  OLDDRIVER
                 Mov     CX, 128
-ELSE
+%ELSE
                 Mov     CX, 32
-ENDIF
+%ENDIF 
                 Rep     MovsD
 
-IFDEF DEBUG
+%IF DEF DEBUG
 
                 PushA
                 Push    DS
@@ -3657,7 +3654,7 @@ IFDEF DEBUG
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     DI, 0B800h
                 Mov     ES, DI
@@ -3677,14 +3674,14 @@ DetectingMessageLoop:
                 Pop     ES
                 Pop     DS
                 PopA
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
-ENDIF
+%ENDIF 
                 ClC
 
                 Ret
 
-EndP            Music_LoadDriver
+;EndP            Music_LoadDriver
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
@@ -3692,7 +3689,7 @@ ADSCParams      DW      7 Dup (0)
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_AutoDetectSoundCard Far
+Proc Music_AutoDetectSoundCard Far
                                 ; Returns DS:SI = string
                                 ; AX, BX, CX, DX, DI = parameters
 
@@ -3732,7 +3729,7 @@ Music_AutoDetectSoundCard1:
                 Push    SI
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     Word Ptr [DriverName+2], DS
 
@@ -3776,7 +3773,7 @@ Music_AutoDetectSoundCard4:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     [ADSCParams], SI
                 Mov     [ADSCParams+12], DI
@@ -3791,16 +3788,16 @@ Music_AutoDetectSoundCard4:
 
                 Ret
 
-EndP            Music_AutoDetectSoundCard
-                Assume DS:Nothing
+;EndP            Music_AutoDetectSoundCard
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_ShowAutoDetectSoundCard Far
+Proc Music_ShowAutoDetectSoundCard Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Push    DWord Ptr [ADSCParams+10]
                 Push    DWord Ptr [ADSCParams+6]
@@ -3815,12 +3812,12 @@ Proc            Music_ShowAutoDetectSoundCard Far
                 Add     SP, 10
                 Ret
 
-EndP            Music_ShowAutoDetectSoundCard
-                Assume DS:Nothing
+;EndP            Music_ShowAutoDetectSoundCard
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetInstrumentMode Far
+Proc Music_GetInstrumentMode Far
 
                 Push    DS
                 Mov     DS, CS:SongDataArea
@@ -3831,14 +3828,14 @@ Proc            Music_GetInstrumentMode Far
 
                 Ret
 
-EndP            Music_GetInstrumentMode
+;EndP            Music_GetInstrumentMode
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            UpdateGOTONote                  ; Get offset & arrayed flag.
+Proc UpdateGOTONote                  ; Get offset & arrayed flag.
 
                 Push    DS
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Call    PE_GetCurrentPattern
                         ; AX = Pattern number
@@ -3851,7 +3848,7 @@ Proc            UpdateGOTONote                  ; Get offset & arrayed flag.
                 Mov     CS:PatternSegment, DS
 
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
                 Mov     NumberOfRows, BX
                 Mov     AX, ProcessRow
                 Cmp     AX, BX
@@ -3875,15 +3872,15 @@ UpdateGOTONote2:
 
 UpdateGOTONote1:
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     AX, CurrentPattern
                 Mov     DecodeExpectedPattern, AX
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Call    Network_UpdatePatternIfIdle
-ENDIF
+%ENDIF 
                 Call    Music_GetPattern
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
                                                 ; DS:SI points to pattern.
 
                 LodsW
@@ -3970,26 +3967,26 @@ UpdateGOTONote9:
 UpdateGOTONote5:
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     PatternOffset, SI
                 Mov     PatternArray, 0
 
                 Ret
 
-EndP            UpdateGOTONote
-                Assume DS:Nothing
+;EndP            UpdateGOTONote
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PreInitCommand
+Proc PreInitCommand
 
                 Push    DS
                 Push    SI
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Test    Byte Ptr [DI+2], 33h
                 JZ      PreInitCommandEnd
@@ -4068,12 +4065,12 @@ PreInitCommand4:
                 Pop     DS
                 Ret
 
-EndP            PreInitCommand
+;EndP            PreInitCommand
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            UpdateNoteData
-                        Assume DS:Music
+Proc UpdateNoteData
+                        ;Assume DS:Music
 
                 Mov     PatternLooping, 0
 
@@ -4109,14 +4106,14 @@ UpdateNoteCompressed1:
                 Push    DS
 
                 Mov     AX, CurrentPattern
-IF NETWORKENABLED
+%IF  NETWORKENABLED
 ;               Call    Network_UpdatePatternIfIdle
-ENDIF
+%ENDIF 
                 Call    Music_GetPattern        ; Gets DS
 
                 Mov     SI, CS:PatternOffset
 ;                Mov     DS, PatternSegment
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 UpdateNoteCompressed2:
                 LodsB
@@ -4186,20 +4183,20 @@ UpdateNoteCompressed13:
 
 UpdateNoteCompressed3:
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     PatternOffset, SI
 
                 Ret
 
 UpdateNoteArrayed:
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Push    DS
 
                 Mov     SI, PatternOffset
                 Mov     DS, PatternSegment
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 ;                Mov     CX, 64                  ; 64 channels
 ;                Mov     DI, Offset HostChannelInformationTable
@@ -4252,7 +4249,7 @@ UpdateNoteArrayed5:
                 Call    PreInitCommand
 
                 Pop     CX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 
 UpdateNoteArrayed6:
@@ -4261,18 +4258,18 @@ UpdateNoteArrayed6:
                 JNZ     UpdateNoteArrayed1
 
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     PatternOffset, SI
 
                 Ret
 
-EndP            UpdateNoteData
-                Assume DS:Nothing
+;EndP            UpdateNoteData
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            UpdateVibrato   ; DS:SI points to slavechannelstruct.
+Proc UpdateVibrato   ; DS:SI points to slavechannelstruct.
 
                 Mov     BX, [SI+34h]    ; ES:BX points to sample
                 Mov     DL, [ES:BX+4Dh] ; Vibrato depth
@@ -4318,9 +4315,9 @@ UpdateVibrato3:
                 SAL     AX, 2
                 MovSX   BX, AH
 
-IFE USEFPUCODE
+%IF E USEFPUCODE
                 JS      UpdateVibrato4
-ENDIF
+%ENDIF 
                 JZ      UpdateVibrato1
 
                 Push    DI
@@ -4328,32 +4325,32 @@ ENDIF
                 Call    PitchSlideUpLinear
                 Pop     DI
 
-IFE USEFPUCODE
+%IF E USEFPUCODE
                 Jmp     UpdateVibrato1
 
 UpdateVibrato4:
                 Neg     BX
                 Call    PitchSlideDownLinear
-ENDIF
+%ENDIF 
 
 UpdateVibrato1:
                 Ret
 
-EndP            UpdateVibrato
+;EndP            UpdateVibrato
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Update Far
+Proc Update Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
-IF USEFPUCODE
+%IF  USEFPUCODE
                 FNSave  FPSave
                 FNInit
                 FLdCW   [NewControlWord]
-ENDIF
+%ENDIF 
 
                 Mov     CX, MAXSLAVECHANNELS
                 Mov     SI, Offset SlaveChannelInformationTable
@@ -4404,19 +4401,19 @@ UpdateEnd:
                 Mov     SI, Offset SlaveChannelInformationTable
                 Mov     AX, PlayMode
 
-IF USEFPUCODE
+%IF  USEFPUCODE
                 FRstor  FPSave
-ENDIF
+%ENDIF 
                 Ret
 
 
-EndP            Update
+;EndP            Update
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            UpdateSamples
+Proc UpdateSamples
 
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     CX, NumChannels
                 Mov     SI, Offset SlaveChannelInformationTable
@@ -4506,12 +4503,12 @@ UpdateSamples2:
 
                 Ret
 
-EndP            UpdateSamples
-                Assume DS:Nothing
+;EndP            UpdateSamples
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            UpdateEnvelope          ; Returns Carry if envelope needs
+Proc UpdateEnvelope          ; Returns Carry if envelope needs
                                         ; to be turned off
                         ; Reqs ES:DI points to envelope
                         ; DS:SI points to slave channel envelope structure
@@ -4634,7 +4631,7 @@ UpdateEnvelope6:
                 ClC
                 Ret
 
-EndP            UpdateEnvelope
+;EndP            UpdateEnvelope
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
@@ -4647,8 +4644,8 @@ MIDIPitch       DW      16 Dup (2000h)
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            UpdateMIDI
-                Assume DS:Music
+Proc UpdateMIDI
+                ;Assume DS:Music
 
 ; Stop cycle
 
@@ -4806,13 +4803,13 @@ UpdateMIDI4:
 
                 Ret
 
-EndP            UpdateMIDI
-                Assume DS:Nothing
+;EndP            UpdateMIDI
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            UpdateInstruments
-                        Assume DS:Music ; Things to update:
+Proc UpdateInstruments
+                        ;Assume DS:Music ; Things to update:
                                         ;  1) Volume envelope
                                         ;  2) Fadeout
                                         ;  3) FinalVolume
@@ -4904,9 +4901,9 @@ UpdatePitchEnvelopePitch:
                 Mov     BX, [SI+71h]
                 SAR     BX, 3
                 JZ      UpdatePanEnvelope
-IFE USEFPUCODE
+%IF E USEFPUCODE
                 JS      UpdatePitchEnvDown
-ENDIF
+%ENDIF 
 
                 Push    DI
                 Mov     DI, [SI+38h]
@@ -4915,7 +4912,7 @@ ENDIF
                                                 ; DS:DI points to host channel
                                                 ; BX = magnintude
                 Pop     DI
-IFE USEFPUCODE
+%IF E USEFPUCODE
                 Jmp     UpdatePostPitchEnvelope
 
 UpdatePitchEnvDown:
@@ -4923,7 +4920,7 @@ UpdatePitchEnvDown:
                 Call    PitchSlideDownLinear
 
 UpdatePostPitchEnvelope:
-ENDIF
+%ENDIF 
                 Or      CL, 32          ; Recalculate freq
 
 UpdatePanEnvelope:
@@ -5135,14 +5132,14 @@ UpdateInstrumentsNoMIDI:
 
                 Jmp     UpdateInstruments2
 
-EndP            UpdateInstruments
-                Assume DS:Nothing
+;EndP            UpdateInstruments
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            UpdateData
+Proc UpdateData
 
-                                Assume DS:Music
+                                ;Assume DS:Music
 
                 Mov     CX, 64
                 Mov     AX, PlayMode
@@ -5410,12 +5407,12 @@ UpdateData_Song1:
                 Call    UpdateNoteData
                 Ret
 
-EndP            UpdateData
-                Assume DS:Nothing
+;EndP            UpdateData
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetNumberOfSamples Far            ; Returns AX
+Proc Music_GetNumberOfSamples Far            ; Returns AX
 
                 Push    CX
                 Push    DS
@@ -5425,7 +5422,7 @@ Proc            Music_GetNumberOfSamples Far            ; Returns AX
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     ES, SongDataArea
                 Mov     DI, 63912-160
@@ -5452,12 +5449,12 @@ Music_GetNumberOfSamples2:
 
                 Ret
 
-EndP            Music_GetNumberOfSamples
-                Assume DS:Nothing
+;EndP            Music_GetNumberOfSamples
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetNumberOfInstruments Far            ; Returns AX
+Proc Music_GetNumberOfInstruments Far            ; Returns AX
 
                 Push    CX
                 Push    DS
@@ -5467,7 +5464,7 @@ Proc            Music_GetNumberOfInstruments Far            ; Returns AX
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     ES, SongDataArea
                 Mov     DI, 55912-554*2
@@ -5494,12 +5491,12 @@ Music_GetNumberOfInstruments2:
 
                 Ret
 
-EndP            Music_GetNumberOfInstruments
-                Assume DS:Nothing
+;EndP            Music_GetNumberOfInstruments
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetSampleHeader Far               ; AX = sample, 1 based
+Proc Music_GetSampleHeader Far               ; AX = sample, 1 based
 
                 Mov     SI, AX
                 Mov     DS, CS:SongDataArea
@@ -5509,12 +5506,12 @@ Proc            Music_GetSampleHeader Far               ; AX = sample, 1 based
 
                 Ret
 
-EndP            Music_GetSampleHeader
+;EndP            Music_GetSampleHeader
                         ; Returns DS:SI
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetSampleLocation Far             ; AX = sample (1based)
+Proc Music_GetSampleLocation Far             ; AX = sample (1based)
                                                         ; CH = page.
                                                         ; Returns DS:ESI
                                                         ;   ECX = length
@@ -5578,12 +5575,12 @@ Music_GetSampleLocationEnd2:
 
                 Ret
 
-EndP            Music_GetSampleLocation
+;EndP            Music_GetSampleLocation
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 ; Accessed via Int 3
-Proc            Music_UpdateSampleLocation Far          ; Reqs ESI.
+Proc Music_UpdateSampleLocation Far          ; Reqs ESI.
 
                 PushAD
 
@@ -5597,11 +5594,11 @@ Proc            Music_UpdateSampleLocation Far          ; Reqs ESI.
                 PopAD
                 IRet
 
-EndP            Music_UpdateSampleLocation
+;EndP            Music_UpdateSampleLocation
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_FarUpdateSampleLocation Far
+Proc Music_FarUpdateSampleLocation Far
 
                 PushF
 
@@ -5613,17 +5610,17 @@ Proc            Music_FarUpdateSampleLocation Far
 
                 Ret
 
-EndP            Music_FarUpdateSampleLocation
+;EndP            Music_FarUpdateSampleLocation
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetPlayMode Far
+Proc Music_GetPlayMode Far
 
                 Push    DS
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     AX, PlayMode
                 Mov     BX, CurrentRow
@@ -5634,19 +5631,19 @@ Proc            Music_GetPlayMode Far
                 Pop     DS
 
                 Ret
-                Assume DS:Nothing
+                ;Assume DS:Nothing
 
-EndP            Music_GetPlayMode
+;EndP            Music_GetPlayMode
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetPlayMode2 Far
+Proc Music_GetPlayMode2 Far
 
                 Push    DS
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     AX, PlayMode
                 Mov     EBX, DWord Ptr CurrentOrder
@@ -5657,12 +5654,12 @@ Proc            Music_GetPlayMode2 Far
                 Pop     DS
                 Ret
 
-EndP            Music_GetPlayMode2
-                Assume DS:Nothing
+;EndP            Music_GetPlayMode2
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_PlayPattern Far   ; AX = pattern, BX = number of rows
+Proc Music_PlayPattern Far   ; AX = pattern, BX = number of rows
                                         ; CX = row to start
 
                 Push    DS
@@ -5671,7 +5668,7 @@ Proc            Music_PlayPattern Far   ; AX = pattern, BX = number of rows
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     MIDIPitchDepthSent, 0
                 Mov     LastMIDIByte, 0FFh
@@ -5687,12 +5684,12 @@ Proc            Music_PlayPattern Far   ; AX = pattern, BX = number of rows
 
                 Ret
 
-EndP            Music_PlayPattern
-                Assume DS:Nothing
+;EndP            Music_PlayPattern
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_PlaySong Far      ; AX = Order
+Proc Music_PlaySong Far      ; AX = Order
 
                 PushA
                 Push    DS
@@ -5701,7 +5698,7 @@ Proc            Music_PlaySong Far      ; AX = Order
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     MIDIPitchDepthSent, 0
                 Mov     LastMIDIByte, 0FFh
@@ -5722,11 +5719,11 @@ Proc            Music_PlaySong Far      ; AX = Order
                 PopA
                 Ret
 
-EndP            Music_PlaySong
+;EndP            Music_PlaySong
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_PlayPartSong Far          ; AX = order, BX = row.
+Proc Music_PlayPartSong Far          ; AX = order, BX = row.
 
                 Push    AX
                 Push    BX
@@ -5756,11 +5753,11 @@ Proc            Music_PlayPartSong Far          ; AX = order, BX = row.
                 Pop     AX
                 Ret
 
-EndP            Music_PlayPartSong
+;EndP            Music_PlayPartSong
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_KBPlaySong Far
+Proc Music_KBPlaySong Far
 
                 Xor     AX, AX
                 Cmp     CS:PlayMode, 2
@@ -5768,11 +5765,11 @@ Proc            Music_KBPlaySong Far
 
                 Ret
 
-EndP            Music_KBPlaySong
+;EndP            Music_KBPlaySong
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_StopChannels
+Proc Music_StopChannels
 
                 Push    CX
                 Push    DS
@@ -5781,7 +5778,7 @@ Proc            Music_StopChannels
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     CX, 64
                 Mov     SI, Offset HostChannelInformationTable
@@ -5821,11 +5818,11 @@ Music_StopChannelsNoMIDI:
 
                 Ret
 
-EndP            Music_StopChannels
+;EndP            Music_StopChannels
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_Stop Far
+Proc Music_Stop Far
 
                 PushA
                 PushF
@@ -5836,7 +5833,7 @@ Proc            Music_Stop Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
 ; Turn off MIDI channels first.
 
@@ -5893,7 +5890,7 @@ Music_StopNoMIDI:
 
                 Mov     DI, Offset HostChannelInformationTable
                 Mov     DS, SongDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     SI, 40h
                 Mov     DX, 040h
@@ -5940,7 +5937,7 @@ Music_Clear2:
                 Pop     SI
                 Pop     DS
                 Pop     CX
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     AX, [ES:32h]            ; AL = speed, AH = tempo
                 Mov     BX, [ES:30h]            ; BL = globalvol
@@ -5962,22 +5959,22 @@ Music_Clear2:
 
                 Ret
 
-EndP            Music_Stop
-                Assume DS:Nothing, ES:Nothing
+;EndP            Music_Stop
+                ;Assume DS:Nothing, ES:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_UpdatePatternOffset Far
+Proc Music_UpdatePatternOffset Far
 
                 Mov     CS:DecodeExpectedPattern, 0FFFEh
 
                 Ret
 
-EndP            Music_UpdatePatternOffset
+;EndP            Music_UpdatePatternOffset
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_PlayNote Far              ; DS:SI points to 5-note struct
+Proc Music_PlayNote Far              ; DS:SI points to 5-note struct
                                                 ; AX = channel
                                                 ; DH = +32 means ignore mute
                                                 ;      settings
@@ -6031,7 +6028,7 @@ Music_PlayNote3:
 Music_PlayNote4:
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
                         
                 Push    DX
 
@@ -6069,12 +6066,12 @@ Music_PlayNote5:
 
                 Ret
 
-EndP            Music_PlayNote
-                Assume DS:Nothing
+;EndP            Music_PlayNote
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_PlaySample Far
+Proc Music_PlaySample Far
                                                         ; AL = Note
                                                         ; AH = sample number
                                                         ; CX = channel.
@@ -6085,7 +6082,7 @@ Proc            Music_PlaySample Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     ES, SongDataArea
 
@@ -6131,48 +6128,48 @@ Music_PlaySample1:
 
                 Ret
 
-EndP            Music_PlaySample
+;EndP            Music_PlaySample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetHostChannelInformationTable Far
+Proc Music_GetHostChannelInformationTable Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     SI, Offset HostChannelInformationTable
 
                 Ret
 
-EndP            Music_GetHostChannelInformationTable
-                Assume DS:Nothing
+;EndP            Music_GetHostChannelInformationTable
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetSlaveChannelInformationTable Far
+Proc Music_GetSlaveChannelInformationTable Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     SI, Offset SlaveChannelInformationTable
                 Mov     CX, MAXSLAVECHANNELS
 
                 Ret
 
-EndP            Music_GetSlaveChannelInformationTable
-                Assume DS:Nothing
+;EndP            Music_GetSlaveChannelInformationTable
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_NextOrder Far
+Proc Music_NextOrder Far
 
                 Push    DS
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Cmp     PlayMode, 2
                 JNE     Music_NextOrder1
@@ -6188,18 +6185,18 @@ Music_NextOrder1:
                 Pop     DS
                 Ret
 
-EndP            Music_NextOrder
-                Assume DS:Nothing
+;EndP            Music_NextOrder
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_LastOrder Far
+Proc Music_LastOrder Far
 
                 Push    DS
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Cmp     PlayMode, 2
                 JNE     Music_NextOrder1
@@ -6225,12 +6222,12 @@ Music_LastOrder1:
                 Pop     DS
                 Ret
 
-EndP            Music_LastOrder
-                Assume DS:Nothing
+;EndP            Music_LastOrder
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_SetGlobalVolume Far
+Proc Music_SetGlobalVolume Far
 
                 Push    CX
                 Push    DS
@@ -6238,7 +6235,7 @@ Proc            Music_SetGlobalVolume Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     GlobalVolume, AL
                 Call    RecalculateAllVolumes
@@ -6248,12 +6245,12 @@ Proc            Music_SetGlobalVolume Far
                 Pop     CX
                 Ret
 
-EndP            Music_SetGlobalVolume
-                Assume DS:Nothing
+;EndP            Music_SetGlobalVolume
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_MuteChannel Far           ; AX = channel number
+Proc Music_MuteChannel Far           ; AX = channel number
 
                 Push    AX
                 Push    CX
@@ -6263,7 +6260,7 @@ Proc            Music_MuteChannel Far           ; AX = channel number
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     CX, NumChannels
                 Mov     SI, Offset SlaveChannelInformationTable
@@ -6290,12 +6287,12 @@ Music_MuteChannel2:
                 Pop     AX
                 Ret
 
-EndP            Music_MuteChannel
-                Assume DS:Nothing
+;EndP            Music_MuteChannel
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_UnmuteChannel Far           ; AX = channel number
+Proc Music_UnmuteChannel Far           ; AX = channel number
 
                 Push    AX
                 Push    CX
@@ -6305,7 +6302,7 @@ Proc            Music_UnmuteChannel Far           ; AX = channel number
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     CX, NumChannels
                 Mov     Word Ptr [SoloSample], 0FFFFh
@@ -6351,12 +6348,12 @@ Music_UnmuteChannel2:
                 Pop     AX
                 Ret
 
-EndP            Music_UnmuteChannel
-                Assume DS:Nothing
+;EndP            Music_UnmuteChannel
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_ToggleChannel Far         ; AX = channel number.
+Proc Music_ToggleChannel Far         ; AX = channel number.
 
                 Push    BX
                 Push    DS
@@ -6385,11 +6382,11 @@ Music_ToggleChannel1:                   ; Mute channel
                 Pop     BX
                 Ret
 
-EndP            Music_ToggleChannel
+;EndP            Music_ToggleChannel
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_UnmuteAll Far
+Proc Music_UnmuteAll Far
 
                 Push    BX
                 Push    CX
@@ -6400,7 +6397,7 @@ Proc            Music_UnmuteAll Far
                 Jmp     Music_SoloChannel3
 
 
-Proc            Music_SoloChannel Far           ; AX = channel
+Proc Music_SoloChannel Far           ; AX = channel
 
                 Push    BX
                 Push    CX
@@ -6480,12 +6477,12 @@ Music_SoloChannel11:
 
                 Ret
 
-EndP            Music_SoloChannel
-EndP            Music_UnmuteAll
+;EndP            Music_SoloChannel
+;EndP            Music_UnmuteAll
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_InitMuteTable Far
+Proc Music_InitMuteTable Far
 
                 Push    AX
                 Push    CX
@@ -6509,11 +6506,11 @@ Proc            Music_InitMuteTable Far
 
                 Ret
 
-EndP            Music_InitMuteTable
+;EndP            Music_InitMuteTable
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_InitStereo Far
+Proc Music_InitStereo Far
 
                 Push    DS
 
@@ -6530,11 +6527,11 @@ Proc            Music_InitStereo Far
                 Pop     DS
                 Ret
 
-EndP            Music_InitStereo
+;EndP            Music_InitStereo
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_IncreaseSpeed Far ; Returns AX = speed
+Proc Music_IncreaseSpeed Far ; Returns AX = speed
 
                 Mov     AX, CS:CurrentSpeed
                 Cmp     AX, 1
@@ -6552,11 +6549,11 @@ Proc            Music_IncreaseSpeed Far ; Returns AX = speed
 Music_IncreaseSpeed1:
                 Ret
 
-EndP            Music_IncreaseSpeed
+;EndP            Music_IncreaseSpeed
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_DecreaseSpeed Far
+Proc Music_DecreaseSpeed Far
 
                 Mov     AX, CS:CurrentSpeed
                 Cmp     AX, 0FFh
@@ -6575,11 +6572,11 @@ Proc            Music_DecreaseSpeed Far
 Music_DecreaseSpeed1:
                 Ret
 
-EndP            Music_DecreaseSpeed
+;EndP            Music_DecreaseSpeed
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_SetSoundCard Far          ; AL contains sound card num
+Proc Music_SetSoundCard Far          ; AL contains sound card num
 
                 Xor     AH, AH
 
@@ -6599,65 +6596,65 @@ Proc            Music_SetSoundCard Far          ; AL contains sound card num
 
                 Ret
 
-EndP            Music_SetSoundCard
+;EndP            Music_SetSoundCard
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_SetSoundCardDriver Far
+Proc Music_SetSoundCardDriver Far
 
                 Mov     Word Ptr [CS:DriverName], SI
                 Mov     Word Ptr [CS:DriverName+2], DS
 
                 Ret
 
-EndP            Music_SetSoundCardDriver
+;EndP            Music_SetSoundCardDriver
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_SetDMA Far
+Proc Music_SetDMA Far
 
                 Xor     AH, AH
                 Mov     DMA, AX
 
                 Ret
 
-EndP            Music_SetDMA
+;EndP            Music_SetDMA
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_SetMixSpeed Far
-                Assume DS:Nothing
+Proc Music_SetMixSpeed Far
+                ;Assume DS:Nothing
 
                 Mov     CmdLineMixSpeed, CX
 
                 Ret
 
-EndP            Music_SetMixSpeed
+;EndP            Music_SetMixSpeed
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_SetIRQ Far
-                Assume DS:Nothing
+Proc Music_SetIRQ Far
+                ;Assume DS:Nothing
 
                 Mov     IRQ, CX
 
                 Ret
 
-EndP            Music_SetIRQ
+;EndP            Music_SetIRQ
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_SetAddress Far
+Proc Music_SetAddress Far
 
                 Mov     BasePort, DX
 
                 Ret
 
-EndP            Music_SetAddress
+;EndP            Music_SetAddress
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetDisplayVariables Far
+Proc Music_GetDisplayVariables Far
 
                 Mov     AX, CS:CurrentSpeed
                 MovZX   BX, CS:Tempo
@@ -6665,18 +6662,18 @@ Proc            Music_GetDisplayVariables Far
 
                 Ret
 
-EndP            Music_GetDisplayVariables
+;EndP            Music_GetDisplayVariables
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_AssignSampleToInstrument Far           ; BX = sample num
+Proc Music_AssignSampleToInstrument Far           ; BX = sample num
                                                              ; returns AX
 
                 Push    CX DX DS SI ES DI
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     ES, SongDataArea
 
@@ -6722,7 +6719,7 @@ Music_AssignSampleToInstrument2:
                 Pop     CX              ; Clear the stack
 
 Music_AssignSampleToInstrument4:
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Call    Network_GetSendQueue
                 JZ      Music_AssignSampleNetwork
 
@@ -6735,7 +6732,7 @@ IF NETWORKENABLED
 
 Music_AssignSampleNetwork:
                 Call    Network_FinishedSendQueue
-ENDIF
+%ENDIF 
 
                 Push    ES
                 Pop     DS
@@ -6763,30 +6760,30 @@ Music_AssignSampleToInstrument3:
                 ClC
                 Jmp     Music_AssignSampleToInstrumentEnd
 
-EndP            Music_AssignSampleToInstrument
-                Assume DS:Nothing
+;EndP            Music_AssignSampleToInstrument
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_SetLimit Far
+Proc Music_SetLimit Far
 
                 Mov     CS:CmdLineNumChannels, CX
                 Ret
 
-EndP            Music_SetLimit
+;EndP            Music_SetLimit
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_ReverseChannels Far
+Proc Music_ReverseChannels Far
 
                 Mov     CS:ReverseChannels, 1
                 Ret
 
-EndP            Music_ReverseChannels
+;EndP            Music_ReverseChannels
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_IncreaseVolume Far
+Proc Music_IncreaseVolume Far
 
                 Push    CX
                 Push    DS
@@ -6794,7 +6791,7 @@ Proc            Music_IncreaseVolume Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     AL, GlobalVolume
                 And     AX, 0FFh
@@ -6812,12 +6809,12 @@ Music_IncreaseVolume1:
 
                 Ret
 
-EndP            Music_IncreaseVolume
-                Assume DS:Nothing
+;EndP            Music_IncreaseVolume
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_DecreaseVolume Far
+Proc Music_DecreaseVolume Far
 
                 Push    CX
                 Push    DS
@@ -6825,7 +6822,7 @@ Proc            Music_DecreaseVolume Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     AL, GlobalVolume
                 And     AX, 0FFh
@@ -6842,12 +6839,12 @@ Music_DecreaseVolume1:
 
                 Ret
 
-EndP            Music_DecreaseVolume
-                Assume DS:Nothing
+;EndP            Music_DecreaseVolume
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_RegetLoopInformation Far
+Proc Music_RegetLoopInformation Far
 
                 Push    AX
                 Push    BX
@@ -6860,7 +6857,7 @@ Proc            Music_RegetLoopInformation Far
 
                 Push    CS
                 Pop     DS                      ; DS setup
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     ES, SongDataArea
 
@@ -6898,20 +6895,20 @@ Music_RegetLoopInformation2:
 
                 Ret
 
-EndP            Music_RegetLoopInformation
-                Assume DS:Nothing
+;EndP            Music_RegetLoopInformation
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ResetSoundCardMemory Far
+Proc ResetSoundCardMemory Far
 
                 Jmp     [DriverResetMemory]
 
-EndP            ResetSoundCardMemory
+;EndP            ResetSoundCardMemory
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_SoundCardLoadSample Far           ; AX = sample number
+Proc Music_SoundCardLoadSample Far           ; AX = sample number
                                                         ; (1 based)
                                                         ; Carry set if insuf mem
                 PushA
@@ -6929,11 +6926,11 @@ Music_SoundCardLoadSample1:
                 PopA
                 Ret
 
-EndP            Music_SoundCardLoadSample
+;EndP            Music_SoundCardLoadSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_SoundCardLoadAllSamples Far
+Proc Music_SoundCardLoadAllSamples Far
 
                 PushAD
                 Push    DS
@@ -6981,31 +6978,31 @@ Music_SoundCardLoadAllSamples2:
                 Mov     AX, 1
                 Ret
 
-EndP            Music_SoundCardLoadAllSamples
-                Assume DS:Nothing
+;EndP            Music_SoundCardLoadAllSamples
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetFreeSoundCardMemory Far
+Proc Music_GetFreeSoundCardMemory Far
 
                 Call    [DriverGetStatus]
                 Ret
 
-EndP            Music_GetFreeSoundCardMemory
+;EndP            Music_GetFreeSoundCardMemory
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetNumChannels Far
+Proc Music_GetNumChannels Far
 
                 Mov     AX, CS:NumChannels
 
                 Ret
 
-EndP            Music_GetNumChannels
+;EndP            Music_GetNumChannels
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetPitchTable Far ; Returns ES:DI to pitch table
+Proc Music_GetPitchTable Far ; Returns ES:DI to pitch table
 
                 Push    CS
                 Pop     ES
@@ -7013,15 +7010,15 @@ Proc            Music_GetPitchTable Far ; Returns ES:DI to pitch table
 
                 Ret
 
-EndP            Music_GetPitchTable
+;EndP            Music_GetPitchTable
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_ToggleReverse Far
+Proc Music_ToggleReverse Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Xor     ReverseChannels, 1
                 Call    ReCalculateAllVolumes
@@ -7030,21 +7027,21 @@ Proc            Music_ToggleReverse Far
 
                 Ret
 
-EndP            Music_ToggleReverse
-                Assume DS:Nothing
+;EndP            Music_ToggleReverse
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_PatternStorage Far
+Proc Music_PatternStorage Far
 
                 Mov     CS:PatternStorage, AL
                 Ret
 
-EndP            Music_PatternStorage
+;EndP            Music_PatternStorage
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_InitMixTable Far
+Proc Music_InitMixTable Far
 
                 Push    AX
                 Push    DS
@@ -7059,22 +7056,22 @@ Proc            Music_InitMixTable Far
                 Pop     AX
                 Ret
 
-EndP            Music_InitMixTable
+;EndP            Music_InitMixTable
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetTempo Far
+Proc Music_GetTempo Far
 
                 Xor     BH, BH
                 Mov     BL, CS:Tempo
 
                 Ret
 
-EndP            Music_GetTempo
+;EndP            Music_GetTempo
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetLastChannel Far        ; Returns AX
+Proc Music_GetLastChannel Far        ; Returns AX
 
                 Push    DS
 
@@ -7100,46 +7097,46 @@ Music_GetLastChannel2:
                 Pop     DS
                 Ret
 
-EndP            Music_GetLastChannel
+;EndP            Music_GetLastChannel
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetDriverScreen Far
+Proc Music_GetDriverScreen Far
 
                 Jmp     [DriverSoundCardScreen]
 
-EndP            Music_GetDriverScreen
+;EndP            Music_GetDriverScreen
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetDriverVariable Far
+Proc Music_GetDriverVariable Far
 
                 Jmp     [DriverGetVariable]
 
-EndP            Music_GetDriverVariable
+;EndP            Music_GetDriverVariable
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_SetDriverVariable Far
+Proc Music_SetDriverVariable Far
 
                 Jmp     [DriverSetVariable]
 
-EndP            Music_SetDriverVariable
+;EndP            Music_SetDriverVariable
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_SetNextOrder Far
+Proc Music_SetNextOrder Far
 
                 Dec     AX
                 Mov     CS:ProcessOrder, AX
 
                 Ret
 
-EndP            Music_SetNextOrder
+;EndP            Music_SetNextOrder
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetDelay Far
+Proc Music_GetDelay Far
 
                 ClI
 
@@ -7175,7 +7172,7 @@ Music_GetDelay2:
                 StI
                 Ret
 
-EndP            Music_GetDelay
+;EndP            Music_GetDelay
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
@@ -7186,7 +7183,7 @@ TotalTimer      DD      0
 TotalTimerHigh  DD      0
 PleaseWaitMsg   DB      "Please Wait...", 0
 
-Proc            InternalTimer Far
+Proc InternalTimer Far
 
                 PushAD
 
@@ -7199,15 +7196,15 @@ Proc            InternalTimer Far
                 PopAD
                 Ret
 
-EndP            InternalTimer
+;EndP            InternalTimer
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_TimeSong Far              ; Time song!
+Proc Music_TimeSong Far              ; Time song!
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Call    S_SaveScreen
 
@@ -7261,7 +7258,7 @@ Music_TimeSong1:
                 Call    Music_PlaySong
 
 Music_TimeSong3:
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
                 Call    Update
 
                 Cmp     CS:StopSong, 0
@@ -7300,11 +7297,11 @@ Music_TimeSong4:
                 Mov     AX, 1
                 Ret
 
-EndP            Music_TimeSong
+;EndP            Music_TimeSong
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_ShowTime Far
+Proc Music_ShowTime Far
 
                 Call    S_GetDestination
 
@@ -7318,26 +7315,26 @@ Proc            Music_ShowTime Far
 
                 Ret
 
-EndP            Music_ShowTime
+;EndP            Music_ShowTime
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetPatternLength Far
+Proc Music_GetPatternLength Far
 
                 Mov     AX, CS:NumberOfRows
                 Ret
 
-EndP            Music_GetPatternLength
+;EndP            Music_GetPatternLength
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_SaveMIDIConfig Far
+Proc Music_SaveMIDIConfig Far
 
                 Call    D_GotoStartingDirectory
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     AH, 3Ch
                 Xor     CX, CX
@@ -7360,25 +7357,25 @@ Music_SaveMIDIConfig1:
                 Xor     AX, AX
                 Ret
 
-EndP            Music_SaveMIDIConfig
-                Assume DS:Nothing
+;EndP            Music_SaveMIDIConfig
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_GetMIDIDataArea Far
+Proc Music_GetMIDIDataArea Far
 
                 Mov     DS, CS:MIDIDataArea
                 Ret
 
-EndP            Music_GetMIDIDataArea
+;EndP            Music_GetMIDIDataArea
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_ToggleOrderUpdate Far
+Proc Music_ToggleOrderUpdate Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Mov     SI, Offset OrderUpdateEnabledMsg
                 Xor     OrderLockFlag, 1
@@ -7391,37 +7388,37 @@ Music_ToggleOrderUpdate1:
 
                 Ret
 
-EndP            Music_ToggleOrderUpdate
-                Assume DS:Nothing
+;EndP            Music_ToggleOrderUpdate
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_ToggleSoloInstrument Far
+Proc Music_ToggleSoloInstrument Far
 
                 Mov     SI, Offset SoloInstrumentMsg
                 Mov     DI, Offset SoloInstrument
                 Mov     BP, 1
                 Jmp     Music_ToggleSolo
 
-EndP            Music_ToggleSoloInstrument
+;EndP            Music_ToggleSoloInstrument
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_ToggleSoloSample Far
+Proc Music_ToggleSoloSample Far
 
                 Mov     SI, Offset SoloSampleMsg
                 Mov     DI, Offset SoloSample
                 Xor     BP, BP
 
-EndP            Music_ToggleSoloSample
+;EndP            Music_ToggleSoloSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Music_ToggleSolo Far
+Proc Music_ToggleSolo Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Music
+                        ;Assume DS:Music
 
                 Call    PE_GetLastInstrument            ; Returns BX
 
@@ -7468,8 +7465,8 @@ Music_ToggleSolo4:
                 Mov     AX, 1
                 Ret
 
-EndP            Music_ToggleSolo
-                Assume DS:Nothing
+;EndP            Music_ToggleSolo
+                ;Assume DS:Nothing
 
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ

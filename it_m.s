@@ -2,10 +2,7 @@
 ;³ Main Module                                                                 ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-                        Jumps
-                        .386
-
-include switch.inc
+%include "switch.inc"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Externals                                                                   ³
@@ -15,65 +12,65 @@ Segment         Object1 BYTE Public 'Data' USE16
 EndS
 
 
-                Extrn   F_DrawStringInput:Far
-                Extrn   F_PreStringInput:Far
-                Extrn   F_PostStringInput:Far
-                Extrn   F_Nothing:Far
-                Extrn   F_DrawBoxObject:Far
-                Extrn   F_DrawTextObject:Far
-                Extrn   F_PostExitObject:Far
-                Extrn   F_SetDirectMode:Far
-                Extrn   F_CharacterDefinitions:Far
-                Extrn   F_DrawButtonObject:Far
-                Extrn   F_PreButtonObject:Far
-                Extrn   F_PostButtonObject:Far
-                Extrn   F_CallFarFunction:Far
-                Extrn   F_DrawThumbBar:Far
-                Extrn   F_DrawScalableThumbBar:Far
-                Extrn   F_PreThumbBar:Far
-                Extrn   F_PreScalableThumbBar:Far
-                Extrn   F_PostThumbBar:Far
-                Extrn   F_PostScalableThumbBar:Far
-                Extrn   F_DrawInfoLine:Far
-                Extrn   F_CallFarPreFunction:Far
-                Extrn   F_CallFarPostFunction:Far
-                Extrn   F_DrawToggle:Far
-                Extrn   F_PreToggle:Far
-                Extrn   F_PostToggle:Far
+                extern    F_DrawStringInput:Far
+                extern    F_PreStringInput:Far
+                extern    F_PostStringInput:Far
+                extern    F_Nothing:Far
+                extern    F_DrawBoxObject:Far
+                extern    F_DrawTextObject:Far
+                extern    F_PostExitObject:Far
+                extern    F_SetDirectMode:Far
+                extern    F_CharacterDefinitions:Far
+                extern    F_DrawButtonObject:Far
+                extern    F_PreButtonObject:Far
+                extern    F_PostButtonObject:Far
+                extern    F_CallFarFunction:Far
+                extern    F_DrawThumbBar:Far
+                extern    F_DrawScalableThumbBar:Far
+                extern    F_PreThumbBar:Far
+                extern    F_PreScalableThumbBar:Far
+                extern    F_PostThumbBar:Far
+                extern    F_PostScalableThumbBar:Far
+                extern    F_DrawInfoLine:Far
+                extern    F_CallFarPreFunction:Far
+                extern    F_CallFarPostFunction:Far
+                extern    F_DrawToggle:Far
+                extern    F_PreToggle:Far
+                extern    F_PostToggle:Far
 
-                Extrn   F_Draw5Num:Far
-                Extrn   F_Pre5Num:Far
-                Extrn   F_Post5Num:Far
+                extern    F_Draw5Num:Far
+                extern    F_Pre5Num:Far
+                extern    F_Post5Num:Far
 
-                Extrn   F_Draw3Num:Far
-                Extrn   F_Pre3Num:Far
-                Extrn   F_Post3Num:Far
+                extern    F_Draw3Num:Far
+                extern    F_Pre3Num:Far
+                extern    F_Post3Num:Far
 
-                Extrn   Glbl_TutorialHandler:Far
+                extern    Glbl_TutorialHandler:Far
 
-                Extrn   H_SetHelpContext:Far
+                extern    H_SetHelpContext:Far
 
-                Extrn   K_GetKey:Far
-                Extrn   K_InitKeyBoard:Far
-                Extrn   K_UnInitKeyBoard:Far
-                Extrn   K_IsKeyWaiting:Far
-                Extrn   K_IsAnyKeyDown:Far
+                extern    K_GetKey:Far
+                extern    K_InitKeyBoard:Far
+                extern    K_UnInitKeyBoard:Far
+                extern    K_IsKeyWaiting:Far
+                extern    K_IsAnyKeyDown:Far
 
-                Extrn   PE_DrawOrderList:Far
-                Extrn   PE_PreOrderList:Far
-                Extrn   PE_PostOrderList:Far
+                extern    PE_DrawOrderList:Far
+                extern    PE_PreOrderList:Far
+                extern    PE_PostOrderList:Far
 
-                Extrn   S_Set80x25Mode:Far
-                Extrn   S_SetPalette:Far
-                Extrn   S_RedefineCharacters:Far
-                Extrn   S_DrawBox:Far
-                Extrn   S_ClearScreen:Far
-                Extrn   S_UpdateScreen:Far
+                extern    S_Set80x25Mode:Far
+                extern    S_SetPalette:Far
+                extern    S_RedefineCharacters:Far
+                extern    S_DrawBox:Far
+                extern    S_ClearScreen:Far
+                extern    S_UpdateScreen:Far
 
-;                Extrn   MouseDirectEnable:Far, MouseDirectDisable:Far
-                Extrn   MouseSaveEvents:Far, MouseRestoreEvents:Far
-                Extrn   MouseInput:Far, MouseClearEvents:Far
-                Extrn   GetKeyboardLock:Far, MIDIBufferEmpty:Far
+;                extern    MouseDirectEnable:Far, MouseDirectDisable:Far
+                extern    MouseSaveEvents:Far, MouseRestoreEvents:Far
+                extern    MouseInput:Far, MouseClearEvents:Far
+                extern    GetKeyboardLock:Far, MIDIBufferEmpty:Far
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Globals                                                                     ³
@@ -88,7 +85,7 @@ EndS
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
 Segment                 Main DWORD Public 'Code' USE16
-                        Assume CS:Main, DS:Nothing
+                        ;Assume CS:Main, DS:Nothing
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Variables                                                                   ³
@@ -165,7 +162,7 @@ ReleaseTimeSlice        DB      0
 ;³ Functions                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-Proc            M_FunctionDivider Far           ; Given DS:SI points to list
+M_FunctionDivider:;:;Far           ; Given DS:SI points to list
                                                 ; Carry set if none found
                 Push    BX
 
@@ -264,11 +261,11 @@ M_FunctionDivider4:             ;
 
                 Ret
 
-EndP            M_FunctionDivider
+;EndP            M_FunctionDivider
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            M_FunctionHandler Far
+M_FunctionHandler:;:;Far
                 ARG     ObjectList:DWord
 
                 Push    BP
@@ -333,9 +330,9 @@ M_FunctionHandler20:
 
 M_FunctionHandler21:
 
-IF TUTORIAL
+%IF  TUTORIAL
                 Call    Glbl_TutorialHandler
-ENDIF
+%ENDIF 
 
                 Call    S_UpdateScreen
 
@@ -627,15 +624,15 @@ M_FunctionHandler15:
                 Add     Word Ptr CS:GlobalKeyList, 7
                 Jmp     M_FunctionHandler10
 
-EndP            M_FunctionHandler
+;EndP            M_FunctionHandler
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            M_Object1ListDefault Far        ; Reqs: DI = offset of list
+M_Object1ListDefault:;:;Far        ; Reqs: DI = offset of list
 
                 Mov     CX, 0FFFFh
 
-Proc            M_Object1List Far       ; Reqs.. CX = inital object.
+M_Object1List:;:;Far       ; Reqs.. CX = inital object.
                                         ; Reqs.. DI = offset of list
 
                 Mov     AX, Object1
@@ -652,13 +649,9 @@ M_Object1List1:
 
                 Ret
 
-EndP            M_Object1List
-EndP            M_Object1ListDefault
+;EndP            M_Object1List
+;EndP            M_Object1ListDefault
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
 EndS
-
-;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
-
-End

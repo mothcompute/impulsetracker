@@ -1,0 +1,6 @@
+for i in *.s; do echo -e $(nasm -felf32 -o /tmp/test.o $i 2>&1 | wc -l)'\t'$i; done | sort -n
+
+echo -e '\nct. in source:'
+for i in '^EndP' '^EndM' '^Proc'; do
+	echo -e $i'\t'$(grep -RE $i 2>/dev/null | wc -l)
+done

@@ -2,39 +2,36 @@
 ;³ Info Line Module - Playing info updates / other messages                    ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-                        Jumps
-                        .386
-
-include switch.inc
+%include "switch.inc"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Externals                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
 Segment         Glbl BYTE Public 'Code'
-                Extrn   CurrentMode:Byte
+                extern    CurrentMode:Byte
 EndS
 
-                Extrn   I_ShowSamplePlay:Far
-                Extrn   I_ShowInstrumentPlay:Far
+                extern    I_ShowSamplePlay:Far
+                extern    I_ShowInstrumentPlay:Far
 
-                Extrn   S_UpdateScreen:Far
-                Extrn   S_DrawString:Far
-                Extrn   S_SetDirectMode:Far
-                Extrn   S_GetDestination:Far
+                extern    S_UpdateScreen:Far
+                extern    S_DrawString:Far
+                extern    S_SetDirectMode:Far
+                extern    S_GetDestination:Far
 
-                Extrn   Music_GetPlayMode:Far
-                Extrn   Music_Poll:Far
-                Extrn   Music_GetSlaveChannelInformationTable:Far
+                extern    Music_GetPlayMode:Far
+                extern    Music_Poll:Far
+                extern    Music_GetSlaveChannelInformationTable:Far
 
-IF NETWORKENABLED
-                Extrn   Network_Poll:Far
-ENDIF
+%IF  NETWORKENABLED
+                extern    Network_Poll:Far
+%ENDIF 
 
-                Extrn   PE_ShowOrder:Far
-                Extrn   PE_FillSpeedTempo:Far
-                Extrn   PE_GetMaxOrder:Far
-                Extrn   Glbl_TutorialHandler:Far
+                extern    PE_ShowOrder:Far
+                extern    PE_FillSpeedTempo:Far
+                extern    PE_GetMaxOrder:Far
+                extern    Glbl_TutorialHandler:Far
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Globals                                                                     ³
@@ -54,10 +51,10 @@ ENDIF
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
 Segment                 InfoLine DWORD Public 'Code' USE16
-                        Assume CS:InfoLine, DS:InfoLine
+                        ;Assume CS:InfoLine, DS:InfoLine
 
 CREATENEWLOGFILE        EQU     0
-include debug.inc
+%include "debug.inc"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Variables                                                                   ³
@@ -93,7 +90,7 @@ ShowUsageTime           DB      1
 ;³ Functions                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-Proc            TimerInterruptHandler
+Proc TimerInterruptHandler
 
                 Sub     CS:InfoLineDelay, 1
                 AdC     CS:InfoLineDelay, 0
@@ -101,11 +98,11 @@ Proc            TimerInterruptHandler
                 Inc     CS:TimerCounter
                 Jmp     [CS:OldTimerHandler]
 
-EndP            TimerInterruptHandler
+;EndP            TimerInterruptHandler
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            InitTimerHandler Far
+Proc InitTimerHandler Far
 
                 Push    DS
 
@@ -126,11 +123,11 @@ Proc            InitTimerHandler Far
                 Pop     DS
                 Ret
 
-EndP            InitTimerHandler
+;EndP            InitTimerHandler
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            UninitTimerHandler Far
+Proc UninitTimerHandler Far
 
                 Push    DS
 
@@ -145,11 +142,11 @@ Proc            UninitTimerHandler Far
                 Pop     DS
                 Ret
 
-EndP            UninitTimerHandler
+;EndP            UninitTimerHandler
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            FillToEOL
+Proc FillToEOL
 
                 Push    ES
                 Mov     AX, ' ' + 2000h
@@ -166,18 +163,18 @@ UpdateInfoLineEOL2:
                 Pop     ES
                 Ret
 
-EndP            FillToEOL
+;EndP            FillToEOL
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            UpdateInfoLine Far
+Proc UpdateInfoLine Far
 
                 Push    DS
                 Push    SI
 
                 Push    Glbl
                 Pop     DS
-                        Assume DS:Glbl
+                        ;Assume DS:Glbl
 
                 Cmp     CurrentMode, 200
                 JAE     UpdateInfoLineEnd2
@@ -322,56 +319,56 @@ UpdateInfoLine7:
                 Mov     AX, 1
                 Ret
 
-EndP            UpdateInfoLine
-                Assume DS:Nothing
+;EndP            UpdateInfoLine
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            IdleUpdateInfoLine Far
+Proc IdleUpdateInfoLine Far
 
                 Call    Music_Poll
 
-IF TUTORIAL
-ELSE
+%IF  TUTORIAL
+%ELSE
                 Mov     AL, 1
                 Call    S_SetDirectMode
-ENDIF
+%ENDIF 
 
                 Call    UpdateInfoLine
 
-IF TUTORIAL
+%IF  TUTORIAL
                 Call    Glbl_TutorialHandler
-ENDIF
+%ENDIF 
 
-IF TUTORIAL
+%IF  TUTORIAL
                 Call    S_UpdateScreen
-ELSE
+%ELSE
                 Mov     AL, 0
                 Call    S_SetDirectMode
-ENDIF
+%ENDIF 
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Jmp     Network_Poll
-ELSE
+%ELSE
                 Xor     AX, AX
                 Ret
-ENDIF
+%ENDIF 
 
-EndP            IdleUpdateInfoLine
+;EndP            IdleUpdateInfoLine
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ClearInfoLine Far
+Proc ClearInfoLine Far
 
                 Mov     DWord Ptr [CS:InfoLineText], 0
 
                 Ret
 
-EndP            ClearInfoLine
+;EndP            ClearInfoLine
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetInfoLine Far                         ; DS:SI points to msg.
+Proc SetInfoLine Far                         ; DS:SI points to msg.
 
                 Mov     CS:InfoLineDelay, 20
 
@@ -382,24 +379,24 @@ SetInfoLineChain:
 
                 Ret
 
-EndP            SetInfoLine
+;EndP            SetInfoLine
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SetInfoLine2 Far                         ; DS:SI points to msg.
+Proc SetInfoLine2 Far                         ; DS:SI points to msg.
 
                 Mov     CS:InfoLineDelay, BX
                 Jmp     SetInfoLineChain
 
-EndP            SetInfoLine2
+;EndP            SetInfoLine2
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            UpdatePointers                  ; BX = row, CX = pattern
+Proc UpdatePointers                  ; BX = row, CX = pattern
 
                 Mov     SI, Glbl
                 Mov     DS, SI
-                        Assume DS:Glbl
+                        ;Assume DS:Glbl
 
                 Mov     AH, CurrentMode
 
@@ -459,19 +456,19 @@ UpdatePointers5:
 UpdatePointersEnd:
                 Ret
 
-EndP            UpdatePointers
-                Assume DS:Nothing
+;EndP            UpdatePointers
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ShowTime
+Proc ShowTime
 
                 PushA
                 Push    DS
 
                 Push    CS
                 Pop     DS
-                        Assume DS:InfoLine
+                        ;Assume DS:InfoLine
 
                 Cmp     AX, 2
                 Mov     EAX, [TimerCounter]
@@ -525,12 +522,12 @@ ShowTime2:
 
                 Ret
 
-EndP            ShowTime
-                Assume DS:Nothing
+;EndP            ShowTime
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            StartClock Far
+Proc StartClock Far
 
                 Push    EAX
                 Mov     EAX, CS:TimerCounter
@@ -539,16 +536,16 @@ Proc            StartClock Far
 
                 Ret
 
-EndP            StartClock
+;EndP            StartClock
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetTimerCounter Far
+Proc GetTimerCounter Far
 
                 Mov     EAX, [CS:TimerCounter]
                 Ret
 
-EndP            GetTimerCounter
+;EndP            GetTimerCounter
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 

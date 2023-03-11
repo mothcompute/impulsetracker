@@ -2,20 +2,17 @@
 ;³ Screen Module                                                               ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-include switch.inc
-
-                        Jumps
-                        .386
+%include "switch.inc"
 
 Segment         Mouse BYTE Public 'Code'
-                Extrn   MouseCharacterGenerationOffset:Word
+                extern    MouseCharacterGenerationOffset:Word
 EndS
 
-                Extrn   E_UnInitEMS:Far
-                Extrn   DrawMouse:Far, RestoreMouse:Far, ForceMouseRestore:Far
-                Extrn   RestoreMouseGraphics:Far, NewCharacterSet:Far
-                Extrn   MouseSecondSetEnable:Far, MouseSecondSetDisable:Far
-                Extrn   MouseUpdateEnable:Far, MouseUpdateDisable:Far
+                extern    E_UnInitEMS:Far
+                extern    DrawMouse:Far, RestoreMouse:Far, ForceMouseRestore:Far
+                extern    RestoreMouseGraphics:Far, NewCharacterSet:Far
+                extern    MouseSecondSetEnable:Far, MouseSecondSetDisable:Far
+                extern    MouseUpdateEnable:Far, MouseUpdateDisable:Far
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Globals                                                                     ³
@@ -56,10 +53,10 @@ EndS
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
 Segment                 Screen BYTE Public 'Code' USE16
-                        Assume  CS:Screen, DS:Screen
+                        ;Assume  CS:Screen, DS:Screen
 
 CREATENEWLOGFILE        EQU     0
-include debug.inc
+%include "debug.inc"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Variables                                                                   ³
@@ -292,9 +289,9 @@ BoxDefinitions          Label   Byte
   DB      153,21h,148,21h,152,21h,146,21h,32, 3h,145,23h,151,21h,143,23h,150,23h ; 27
   DB      128,23h,129,23h,141,21h,131,23h,32,23h,132,21h,140,21h,134,21h,135,21h
   DB      128,21h,129,21h,141,21h,131,21h,32,23h,132,23h,140,21h,134,23h,135,23h
-IF TUTORIAL
+%IF  TUTORIAL
   DB      128,13h,129,13h,130,13h,131,13h,32,13h,132,13h,133,13h,134,13h,135,13h
-ENDIF
+%ENDIF 
 
 CharacterGenerationOffset       DW      512*32
 VGAFlags                DB      0       ; Bit 0 = override VGA detection
@@ -313,13 +310,13 @@ TestBytes               DB      '®CHARACTERúTEST¯'
 ;            - Defines basic characters (128->163)
 ;            - AX returns non-zero if error occurs
 
-Proc            S_InitScreen Far
+Proc S_InitScreen Far
 
                 Push    DS
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Screen
+                        ;Assume DS:Screen
 
                 Mov     DirectVideo, 0
 
@@ -375,10 +372,10 @@ S_InitScreen5:
 
                 Push    Mouse
                 Pop     FS
-                        Assume FS:Mouse
+                        ;Assume FS:Mouse
 
                 Mov     FS:MouseCharacterGenerationOffset, 2000h
-                        Assume FS:Nothing
+                        ;Assume FS:Nothing
 
 S_InitScreen8:
                 Call    S_ResetSequencer
@@ -432,12 +429,12 @@ S_InitScreen6:
                 Pop     DS
                 Ret
 
-EndP            S_InitScreen
-                Assume DS:Nothing
+;EndP            S_InitScreen
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_SaveScreen Far
+Proc S_SaveScreen Far
 
                 PushF
                 PushAD
@@ -452,13 +449,13 @@ Proc            S_SaveScreen Far
                 Xor     SI, SI
                 Xor     DI, DI
 
-IF USE32BITSCREENCOPY
+%IF  USE32BITSCREENCOPY
                 Mov     CX, 2000
                 Rep     MovsD
-ELSE
+%ELSE
                 Mov     CX, 4000
                 Rep     MovsW
-ENDIF
+%ENDIF 
 
                 Call    ForceMouseRestore
 
@@ -469,11 +466,11 @@ ENDIF
 
                 Ret
 
-EndP            S_SaveScreen
+;EndP            S_SaveScreen
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_RestoreScreen Far
+Proc S_RestoreScreen Far
 
                 PushF
                 PushAD
@@ -488,13 +485,13 @@ Proc            S_RestoreScreen Far
                 Pop     DS
                 Xor     SI, SI
                 Xor     DI, DI
-IF USE32BITSCREENCOPY
+%IF  USE32BITSCREENCOPY
                 Mov     CX, 2000
                 Rep     MovsD
-ELSE
+%ELSE
                 Mov     CX, 4000
                 Rep     MovsW
-ENDIF
+%ENDIF 
 
                 Call    ForceMouseRestore
 
@@ -507,11 +504,11 @@ ENDIF
 
                 Ret
 
-EndP            S_RestoreScreen
+;EndP            S_RestoreScreen
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_Set80x50Mode Far
+Proc S_Set80x50Mode Far
 
                 Push    AX
                 Push    DX
@@ -562,22 +559,22 @@ S_Set80x50Mode1:
 
                 Ret
 
-EndP            S_Set80x50Mode
+;EndP            S_Set80x50Mode
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_SetPalette2 Far
+Proc S_SetPalette2 Far
 
                 PushA
                 Push    DS
 
                 Jmp     SP3
 
-EndP            S_SetPalette2
+;EndP            S_SetPalette2
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_SetPalette Far
+Proc S_SetPalette Far
 
                 PushA
                 Push    DS
@@ -606,7 +603,7 @@ SP3:
                 Push    CS
                 Pop     DS
 
-                        Assume  DS:Screen
+                        ;Assume  DS:Screen
                 Mov     SI, Offset PaletteDefs
 
 SP2:
@@ -616,18 +613,18 @@ SP2:
 
                 Pop     DS
 
-                        Assume  DS:Nothing
+                        ;Assume  DS:Nothing
                 PopA
 
                 Ret
 
-EndP            S_SetPalette
+;EndP            S_SetPalette
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 SequencerSemaphore      DB      0FFh
 
-Proc            S_SetSequencer Far
+Proc S_SetSequencer Far
 
                 Inc     [CS:SequencerSemaphore]
                 JNZ     S_SetSequencer1
@@ -656,11 +653,11 @@ Proc            S_SetSequencer Far
 S_SetSequencer1:
                 Ret
 
-EndP            S_SetSequencer
+;EndP            S_SetSequencer
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_ResetSequencer Far
+Proc S_ResetSequencer Far
 
                 Dec     [CS:SequencerSemaphore]
                 JNS     S_ResetSequencer1
@@ -688,11 +685,11 @@ Proc            S_ResetSequencer Far
 S_ResetSequencer1:
                 Ret
 
-EndP            S_ResetSequencer
+;EndP            S_ResetSequencer
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_RedefineCharacters Far
+Proc S_RedefineCharacters Far
                                         ; DS:SI = Offset to characterdefs
                                         ; BX = Number of characters
                                         ; AX = First character
@@ -740,11 +737,11 @@ RedefineCharacters1:
 
                 Ret
 
-EndP            S_RedefineCharacters
+;EndP            S_RedefineCharacters
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_DefineSmallNumbers Far
+Proc S_DefineSmallNumbers Far
 
                 Push    DS
                 Push    SI
@@ -841,11 +838,11 @@ S_DefineSmallNumbers5:
 
                 Ret
 
-EndP            S_DefineSmallNumbers
+;EndP            S_DefineSmallNumbers
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_UnInitScreen Far
+Proc S_UnInitScreen Far
 
                 Push    ES
 
@@ -860,11 +857,11 @@ Proc            S_UnInitScreen Far
 
                 Ret
 
-EndP            S_UnInitScreen
+;EndP            S_UnInitScreen
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_GetDestination Far
+Proc S_GetDestination Far
 
                 Mov     ES, CS:ScreenDataArea
 
@@ -879,42 +876,42 @@ Proc            S_GetDestination Far
 S_GetDestination1:
                 Ret
 
-EndP            S_GetDestination
+;EndP            S_GetDestination
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_ClearScreen Far
+Proc S_ClearScreen Far
 
                 Push    CX
                 Push    ES
                 Push    DI
 
                 Call    S_GetDestination
-IF USE32BITSCREENCOPY
+%IF  USE32BITSCREENCOPY
                 Mov     CX, 2000
                 Mov     EAX, 03000300h
                 Xor     DI, DI
                 Rep     StosD
-ELSE
+%ELSE
                 Mov     CX, 4000
                 Mov     AX, 300h
                 Xor     DI, DI
                 Rep     StosW
-ENDIF
+%ENDIF 
                 Pop     DI
                 Pop     ES
                 Pop     CX
 
                 Ret
 
-EndP            S_ClearScreen
+;EndP            S_ClearScreen
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 ; Style - Low byte: Box style number
 ;       - High byte: Flags - Bit 0: Filled box/empty box; on = don't fill
 
-Proc            S_DrawBox Far
+Proc S_DrawBox Far
                 ARG Style, Bottom, Right, Top, Left
 
                 Push    BP
@@ -1007,11 +1004,11 @@ DrawBox3:
                 Pop     BP
                 Ret
 
-EndP            S_DrawBox
+;EndP            S_DrawBox
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_UpdateScreen Far
+Proc S_UpdateScreen Far
 
                 Cmp     CS:DirectVideo, 0
                 JNE     S_UpdateScreen1
@@ -1047,13 +1044,13 @@ S_UpdateScreen2:
                 Mov     DS, CS:ScreenDataArea
                 Mov     CX, 0B800h
                 Mov     ES, CX
-IF USE32BITSCREENCOPY
+%IF  USE32BITSCREENCOPY
                 Mov     CX, 2000
                 Rep     MovsD
-ELSE
+%ELSE
                 Mov     CX, 4000
                 Rep     MovsW
-ENDIF
+%ENDIF 
 
                 Mov     ES, CS:ScreenDataArea
                 Call    RestoreMouse
@@ -1067,11 +1064,11 @@ ENDIF
 S_UpdateScreen1:
                 Ret
 
-EndP            S_UpdateScreen
+;EndP            S_UpdateScreen
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_SetDirectMode Far
+Proc S_SetDirectMode Far
 
                 Cmp     CS:DirectVideo, AL
                 JE      S_SetDirectMode2
@@ -1094,13 +1091,13 @@ S_SetDirectMode1:
                 Mov     DS, CX
                 Xor     SI, SI
                 Xor     DI, DI
-IF USE32BITSCREENCOPY
+%IF  USE32BITSCREENCOPY
                 Mov     CX, 2000
                 Rep     MovsD
-ELSE
+%ELSE
                 Mov     CX, 4000
                 Rep     MovsW
-ENDIF
+%ENDIF 
 
                 Call    RestoreMouse
 
@@ -1114,11 +1111,11 @@ S_SetDirectMode2:
                 Mov     CS:DirectVideo, AL
                 Ret
 
-EndP            S_SetDirectMode
+;EndP            S_SetDirectMode
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_HiLight Far                   ; DI points to offset
+Proc S_HiLight Far                   ; DI points to offset
                                                 ; AL = colour
                                                 ; CX = number of characters
                 Push    ES
@@ -1138,11 +1135,11 @@ HiLight1:
 
                 Ret
 
-EndP            S_HiLight
+;EndP            S_HiLight
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_DirectDrawString Far
+Proc S_DirectDrawString Far
 
                 Push    BP
                 Mov     BP, SP
@@ -1161,11 +1158,11 @@ Proc            S_DirectDrawString Far
 
                 Jmp     DrawString001
 
-EndP            S_DirectDrawString
+;EndP            S_DirectDrawString
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_DrawString Far                ; DS:SI points to string
+Proc S_DrawString Far                ; DS:SI points to string
                                                 ; DI points to offset
                                                 ; AH = colour
 
@@ -1412,22 +1409,22 @@ DrawString018:
                 Jmp     DrawString001
 
 
-EndP            S_DrawString
+;EndP            S_DrawString
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_GetGenerationTableOffset Far          ; returns ES:DI
+Proc S_GetGenerationTableOffset Far          ; returns ES:DI
 
                 Mov     ES, CS:ScreenDataArea
                 Mov     DI, 8000
 
                 Ret
 
-EndP            S_GetGenerationTableOffset
+;EndP            S_GetGenerationTableOffset
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_GenerateCharacters Far                ; AX = starting char.
+Proc S_GenerateCharacters Far                ; AX = starting char.
                                                         ; BX = chars per row.
                                                         ; CX = number of rows.
                 PushAD
@@ -1523,11 +1520,11 @@ S_GenerateCharacters2:
 
                 Ret
 
-EndP            S_GenerateCharacters
+;EndP            S_GenerateCharacters
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_DrawSmallBox Far
+Proc S_DrawSmallBox Far
 
                 Mov     AX, 30
                 Push    AX
@@ -1544,11 +1541,11 @@ Proc            S_DrawSmallBox Far
 
                 Ret
 
-EndP            S_DrawSmallBox
+;EndP            S_DrawSmallBox
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_GetPaletteOffset Far
+Proc S_GetPaletteOffset Far
 
                 Push    CS
                 Pop     DS
@@ -1556,11 +1553,11 @@ Proc            S_GetPaletteOffset Far
 
                 Ret
 
-EndP            S_GetPaletteOffset
+;EndP            S_GetPaletteOffset
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_UsePresetPalette Far
+Proc S_UsePresetPalette Far
 
                 Mov     AL, 48
                 Mul     Byte Ptr [DS:SI+22]
@@ -1569,7 +1566,7 @@ Proc            S_UsePresetPalette Far
                 Mov     AX, CS
                 Mov     DS, AX
                 Mov     ES, AX
-                        Assume DS:Screen
+                        ;Assume DS:Screen
 
                 Add     SI, Offset PresetPalettes
                 Mov     DI, Offset PaletteDefs
@@ -1581,12 +1578,12 @@ Proc            S_UsePresetPalette Far
                 Mov     AX, 1
                 Ret
 
-EndP            S_UsePresetPalette
-                Assume DS:Nothing
+;EndP            S_UsePresetPalette
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_DefineHiASCII Far
+Proc S_DefineHiASCII Far
 
                 Call    MouseUpdateDisable
 
@@ -1626,11 +1623,11 @@ S_DefineHIASCII1:
 
                 Ret
 
-EndP            S_DefineHiASCII
+;EndP            S_DefineHiASCII
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            S_InvertCursor Far              ; AL = char, AH = mask.
+Proc S_InvertCursor Far              ; AL = char, AH = mask.
 
                 PushA
                 Push    DS
@@ -1668,7 +1665,7 @@ S_InvertCursor1:
                 PopA
                 Ret
 
-EndP            S_InvertCursor
+;EndP            S_InvertCursor
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 

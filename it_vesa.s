@@ -27,12 +27,9 @@
 ;ณ                                                                             ณ
 ;ภฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู
 
-                        Jumps
-                        .386P
+%include "switch.inc"
 
-include switch.inc
-
-IF SPECTRUMANALYSER
+%IF SPECTRUMANALYSER
 
 ;ฺฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ
 ;ณ Externals                                                                   ณ
@@ -46,14 +43,15 @@ IF SPECTRUMANALYSER
 
 ;อออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
 
-Segment                 Vesa BYTE Public 'Code' USE16
-                        Assume CS:Vesa, DS:Nothing
+;Segment                 Vesa BYTE Public 'Code' USE16
+%warning "USE16"
+section .text
 
 ;ฺฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ
 ;ณ Variables                                                                   ณ
 ;ภฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู
 
-VESAInformationTable    Label
+VESAInformationTable:;    Label
 VESASignature           DB      4 Dup (0)
 VESAVersion             DW      0
 VESAOEMStringPrt        DD      0
@@ -62,7 +60,7 @@ VESAVideoModePtr        DD      0
 VESATotalMemory         DW      0
                         DB      256-($-VESAInformationTable) Dup(0)
 
-VESAModeInformationTable Label
+VESAModeInformationTable:; Label
                         DB      256-($-VESAModeInformationTable) Dup (0)
 
 ModeInformationStructure        Struc
@@ -103,8 +101,8 @@ ModeInformationStructure        EndS
 ;ณ Functions                                                                   ณ
 ;ภฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู
 
-Proc            VESA_Detect Far
-Public          VESA_Detect
+VESA_Detect:; Far
+global          VESA_Detect
 
                 PushA
                 Push    ES
@@ -129,12 +127,12 @@ DetectVESA1:
                 PopA
                 Ret
 
-EndP            VESA_Detect
+;EndP            VESA_Detect
 
 ;ฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤ
 
-Proc            VESA_SetMode Far
-Public          VESA_SetMode
+VESA_SetMode:; Far
+global          VESA_SetMode
 
                 PushA
                 Push    DS
@@ -161,12 +159,12 @@ VESA_SetMode3:
 
                 Ret
 
-EndP            VESA_SetMode
+;EndP            VESA_SetMode
 
 ;ฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤ
 
-Proc            VESA_GetInfo
-Public          VESA_GetInfo
+VESA_GetInfo:
+global          VESA_GetInfo
 
                 Push    AX
                 Push    CX
@@ -190,12 +188,12 @@ VESA_GetInfo1:
 
                 Ret
 
-EndP            VESA_GetInfo
+;EndP            VESA_GetInfo
 
 ;ฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤ
 
-Proc            VESA_SetBlock Far       ; Gives access to a 64kb block
-Public          VESA_SetBlock           ; Given AX = block number.
+VESA_SetBlock:; Far       ; Gives access to a 64kb block
+global          VESA_SetBlock           ; Given AX = block number.
 
                 PushA
                 Push    AX
@@ -213,14 +211,6 @@ Public          VESA_SetBlock           ; Given AX = block number.
                 PopA
                 Ret
 
-EndP            VESA_SetBlock
+;EndP            VESA_SetBlock
 
-;อออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
-
-EndS
-
-;อออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
-
-ENDIF
-
-End
+%ENDIF

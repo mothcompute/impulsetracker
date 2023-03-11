@@ -4,17 +4,17 @@
 
                         .386
 
-include switch.inc
+%include "switch.inc"
 
 ;ฺฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ
 ;ณ Externals                                                                   ณ
 ;ภฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู
 
-                Extrn   E_AllocateEMS:Far
-                Extrn   E_GetEMSPageFrame:Far
-                Extrn   E_ReleaseEMS:Far
-                Extrn   E_MapEMSMemory:Far
-                Extrn   Music_Stop:Far
+                extern    E_AllocateEMS:Far
+                extern    E_GetEMSPageFrame:Far
+                extern    E_ReleaseEMS:Far
+                extern    E_MapEMSMemory:Far
+                extern    Music_Stop:Far
 
 ;ฺฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ
 ;ณ Globals                                                                     ณ
@@ -26,10 +26,10 @@ include switch.inc
 ;อออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
 
 Segment                 MMTSR PARA Public USE16 'Code'
-                        Assume CS:MMTSR, DS:MMTSR
+                        ;Assume CS:MMTSR, DS:MMTSR
 
 CREATENEWLOGFILE        EQU     0
-include debug.inc
+%include "debug.inc"
 
 ;ฺฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ
 ;ณ Variables                                                                   ณ
@@ -117,11 +117,11 @@ Proc    MMTSR_InstallMMTSR Far
 @error0:                                        ; print message at offset DS:DX onto screen
         Ret
 
-EndP            MMTSR_InstallMMTSR
+;EndP            MMTSR_InstallMMTSR
 
 ;อออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
 
-Proc            MMTSR_UninstallMMTSR Far
+Proc MMTSR_UninstallMMTSR Far
 
                 Push    CS
                 Pop     DS
@@ -140,7 +140,7 @@ Proc            MMTSR_UninstallMMTSR Far
 MMTSR_UninstallMMTSR1:
                 Ret
 
-EndP            MMTSR_UninstallMMTSR
+;EndP            MMTSR_UninstallMMTSR
 
 ;อออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ
 

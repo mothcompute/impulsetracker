@@ -2,28 +2,25 @@
 ;³ Keyboard Module                                                             ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-                        Jumps
-                        .386
-
-include switch.inc
+%include "switch.inc"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Externals                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-                Extrn   D_GotoStartingDirectory:Far
+                extern    D_GotoStartingDirectory:Far
 
-                Extrn   E_UnInitEMS:Far
-                Extrn   S_GetDestination:Far
-                Extrn   Music_Stop:Far
-                Extrn   Music_KBPlaySong:Far
-                Extrn   Music_IncreaseVolume:Far
-                Extrn   Music_DecreaseVolume:Far
-                Extrn   S_DrawString:Far
-                Extrn   CrashRecovery:Far
+                extern    E_UnInitEMS:Far
+                extern    S_GetDestination:Far
+                extern    Music_Stop:Far
+                extern    Music_KBPlaySong:Far
+                extern    Music_IncreaseVolume:Far
+                extern    Music_DecreaseVolume:Far
+                extern    S_DrawString:Far
+                extern    CrashRecovery:Far
 
-                Extrn   IsStartupKeyList:Far
-                Extrn   GetStartupKeyList:Far
+                extern    IsStartupKeyList:Far
+                extern    GetStartupKeyList:Far
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Globals                                                                     ³
@@ -54,10 +51,10 @@ include switch.inc
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
 Segment                 KeyBoard BYTE Public 'Code' USE16
-                        Assume CS:KeyBoard, DS:KeyBoard
+                        ;Assume CS:KeyBoard, DS:KeyBoard
 
 CREATENEWLOGFILE        EQU     0
-include debug.inc
+%include "debug.inc"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Variables                                                                   ³
@@ -653,7 +650,7 @@ USKeyboardTable    Label Byte
 Alt             DB      0
 Ctrl            DB      0
 
-Proc            K_KBHandler
+Proc K_KBHandler
 
                 Push    AX
                 Push    BX
@@ -744,11 +741,11 @@ K_KBHandler2:
                 Pop     AX
                 IRet
 
-EndP            K_KBHandler
+;EndP            K_KBHandler
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            K_DOSKBHandler Far
+Proc K_DOSKBHandler Far
 
                 Push    AX
 
@@ -813,11 +810,11 @@ K_DOSKBHandler6:
                 Pop     AX
                 IRet
 
-EndP            K_DOSKBHandler
+;EndP            K_DOSKBHandler
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            K_SetKeyBoardLights             ; Reqs: DS:KeyBoard
+Proc K_SetKeyBoardLights             ; Reqs: DS:KeyBoard
                                                 ; Sets keyboard lights (duh!)
                 Push    AX
                 Mov     AL, 0EDh
@@ -848,11 +845,11 @@ K_SetKeyBoardLights3:
 
                 Ret
 
-EndP            K_SetKeyBoardLights
+;EndP            K_SetKeyBoardLights
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            K_InitKeyBoard Far            ; Raises key repeat rate
+Proc K_InitKeyBoard Far            ; Raises key repeat rate
                                               ; to 30 char/s,
                                               ; delay before second char=0.25s
                                               ; Gets old IRQ handler
@@ -933,11 +930,11 @@ K_InitKeyBoard3:                                ; Chained to from K_UnInstallDOS
 
                 Ret
 
-EndP            K_InitKeyBoard
+;EndP            K_InitKeyBoard
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            K_UnInitKeyBoard Far
+Proc K_UnInitKeyBoard Far
 
                 Push    AX
                 Push    DS
@@ -987,11 +984,11 @@ K_UnInitKeyBoard1:
 
                 Ret
 
-EndP            K_UnInitKeyBoard
+;EndP            K_UnInitKeyBoard
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            K_InstallDOSHandler Far
+Proc K_InstallDOSHandler Far
 
                 Push    AX
                 Push    DS
@@ -1017,11 +1014,11 @@ Proc            K_InstallDOSHandler Far
 
                 Jmp     K_UnInitKeyBoard3
 
-EndP            K_InstallDOSHandler
+;EndP            K_InstallDOSHandler
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            K_UnInstallDOSHandler Far
+Proc K_UnInstallDOSHandler Far
 
                 Push    AX
                 Push    DS
@@ -1045,11 +1042,11 @@ Proc            K_UnInstallDOSHandler Far
 
                 Jmp     K_InitKeyBoard3
 
-EndP            K_UnInstallDOSHandler
+;EndP            K_UnInstallDOSHandler
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            K_GetNextKeyByte
+Proc K_GetNextKeyByte
 
                 Inc     BX
                 And     BX, 0FFh
@@ -1057,11 +1054,11 @@ Proc            K_GetNextKeyByte
 
                 Ret
 
-EndP            K_GetNextKeyByte
+;EndP            K_GetNextKeyByte
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            K_IsKeyWaiting Far      ; Returns 1 in AX if key is ready
+Proc K_IsKeyWaiting Far      ; Returns 1 in AX if key is ready
                                         ;         0 in AX if no key is ready
 
                 Push    DS
@@ -1101,11 +1098,11 @@ K_IsKeyWaiting1:
                 Pop     DS
                 Ret
 
-EndP            K_IsKeyWaiting
+;EndP            K_IsKeyWaiting
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            K_GetKey Far                    ; CX/DX = input/translated
+Proc K_GetKey Far                    ; CX/DX = input/translated
 
                 Push    AX
                 Push    BX
@@ -1272,7 +1269,7 @@ K_TranslateAltRelease:
 
 K_TranslateKeyPress:
                 LDS     SI, TranslationTable
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 K_TranslateKey1:
                 LodsB
@@ -1438,11 +1435,11 @@ K_GetKey20:
                 Ret
 
 
-EndP            K_GetKey
+;EndP            K_GetKey
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            K_ClearKeyBoardQueue Far
+Proc K_ClearKeyBoardQueue Far
 
                 Push    AX
 
@@ -1457,11 +1454,11 @@ K_ClearKeyBoardQueue2:
                 Pop     AX
                 Ret
 
-EndP            K_ClearKeyBoardQueue
+;EndP            K_ClearKeyBoardQueue
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            K_IsAnyKeyDown Far              ; Returns AL = 1 if key is down.
+Proc K_IsAnyKeyDown Far              ; Returns AL = 1 if key is down.
 
                 Push    CX
                 Push    DS
@@ -1469,7 +1466,7 @@ Proc            K_IsAnyKeyDown Far              ; Returns AL = 1 if key is down.
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Keyboard
+                        ;Assume DS:Keyboard
 
                 Mov     SI, Offset KeyBoardTable
                 Mov     CX, 256
@@ -1490,20 +1487,20 @@ K_IsAnyKeyDown2:
 
                 Ret
 
-EndP            K_IsAnyKeyDown
+;EndP            K_IsAnyKeyDown
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            K_IsKeyDown Far         ; BX = key to test
+Proc K_IsKeyDown Far         ; BX = key to test
 
                 Cmp     [CS:KeyboardTable+BX], 0
                 Ret
 
-EndP            K_IsKeyDown
+;EndP            K_IsKeyDown
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            K_ResetKeyboardTables Far
+Proc K_ResetKeyboardTables Far
 
                 Push    CS
                 Pop     ES
@@ -1515,18 +1512,18 @@ Proc            K_ResetKeyboardTables Far
                 Mov     AX, 1
                 Ret
 
-EndP            K_ResetKeyboardTables
+;EndP            K_ResetKeyboardTables
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            K_DrawTables Far
+Proc K_DrawTables Far
 
                 Call    S_GetDestination
                 Mov     DI, (2+15*80)*2
 
                 Push    CS
                 Pop     DS
-                        Assume DS:KeyBoard
+                        ;Assume DS:KeyBoard
                 Mov     SI, Offset KeyboardBuffer
 
                 Mov     CX, 2004h               ; CH = row count, CL = ShR
@@ -1616,16 +1613,16 @@ K_DrawTable7:
                 Xor     AX, AX
                 Ret
 
-EndP            K_DrawTables
-                Assume DS:Nothing
+;EndP            K_DrawTables
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            K_ShowMIDIInput Far
+Proc K_ShowMIDIInput Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Keyboard
+                        ;Assume DS:Keyboard
 
                                 ; Now to shove the MIDI input info.
                 Xor     AX, AX
@@ -1646,18 +1643,18 @@ Proc            K_ShowMIDIInput Far
                 Xor     AX, AX
                 Ret
 
-EndP            K_ShowMIDIInput
-                Assume DS:Nothing
+;EndP            K_ShowMIDIInput
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            K_InstallKeyboardType Far
+Proc K_InstallKeyboardType Far
 
                 Call    D_GotoStartingDirectory
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Keyboard
+                        ;Assume DS:Keyboard
 
                 Mov     AX, 3D00h
                 Mov     DX, Offset KeyboardFile
@@ -1715,15 +1712,15 @@ K_InstallKeyboardType1:
 K_InstallKeyboardType2:
                 Ret
 
-EndP            K_InstallKeyboardType
+;EndP            K_InstallKeyboardType
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            K_RemoveKeyboardType Far
+Proc K_RemoveKeyboardType Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Keyboard
+                        ;Assume DS:Keyboard
 
                 Mov     AX, TranslationTableSegment
                 Mov     BX, CS
@@ -1737,11 +1734,11 @@ Proc            K_RemoveKeyboardType Far
 K_RemoveKeyboardType1:
                 Ret
 
-EndP            K_RemoveKeyboardType
+;EndP            K_RemoveKeyboardType
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            K_SetScrollLock Far
+Proc K_SetScrollLock Far
 
                 Push    CS
                 Pop     DS
@@ -1749,27 +1746,27 @@ Proc            K_SetScrollLock Far
                 Call    K_SetKeyboardLights
                 Ret
 
-EndP            K_SetScrollLock
+;EndP            K_SetScrollLock
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MIDIBufferEmpty Far     ; Returns carry set if input OK.
+Proc MIDIBufferEmpty Far     ; Returns carry set if input OK.
                                         ; Returns carry CLEAR if input full.
 
                 Cmp     [CS:MIDIDataInput], 2
                 Ret
 
-EndP            MIDIBufferEmpty
+;EndP            MIDIBufferEmpty
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MIDISend Far            ; Given AL = data byte.
+Proc MIDISend Far            ; Given AL = data byte.
 
                 Push    DS
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Keyboard
+                        ;Assume DS:Keyboard
 
                 Test    AL, AL          ; Status byte?
                 JNS     MIDISend1
@@ -1800,8 +1797,8 @@ MIDISendEnd:
                 Pop     DS
                 Ret
 
-EndP            MIDISend
-                Assume DS:Nothing
+;EndP            MIDISend
+                ;Assume DS:Nothing
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 

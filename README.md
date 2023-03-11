@@ -1,7 +1,7 @@
 Impulse Tracker
 ===============
 
-Eventually, maybe, a version of IT for modern systems
+Eventually, maybe, a version of IT for modern x86\_64 systems
 
 Pre-Requisite Software
 ----------------------

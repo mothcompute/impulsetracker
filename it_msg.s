@@ -9,11 +9,11 @@
 ;³ Externals                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-                Extrn   M_FunctionDivider:Far
-                Extrn   M_Object1List:Far
-                Extrn   S_GetDestination:Far
-                Extrn   O1_LongMessageList:Far
-                Extrn   O1_ConfirmClearMessage:Far
+                extern    M_FunctionDivider:Far
+                extern    M_Object1List:Far
+                extern    S_GetDestination:Far
+                extern    O1_LongMessageList:Far
+                extern    O1_ConfirmClearMessage:Far
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Globals                                                                     ³
@@ -29,7 +29,7 @@
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
 Segment                 Message BYTE Public 'Code' USE16
-                        Assume CS:Message, DS:Nothing
+                        ;Assume CS:Message, DS:Nothing
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Variables                                                                   ³
@@ -154,7 +154,7 @@ EditMsgKeys             Label
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_ResetMessage Far
+Proc Msg_ResetMessage Far
 
                 Push    CS
                 Pop     ES
@@ -168,17 +168,17 @@ Proc            Msg_ResetMessage Far
 
                 Ret
 
-EndP            Msg_ResetMessage
+;EndP            Msg_ResetMessage
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_DrawMessage Far
+Proc Msg_DrawMessage Far
 
                 Call    S_GetDestination
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Message
+                        ;Assume DS:Message
 
                 Cmp     Edit, 0
                 JE      Msg_DrawMessage7
@@ -302,16 +302,16 @@ Msg_DrawMessage13:
 Msg_DrawMessageEnd:
                 Ret
 
-EndP            Msg_DrawMessage
-                Assume DS:Nothing
+;EndP            Msg_DrawMessage
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_PreMessage Far
+Proc Msg_PreMessage Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Message
+                        ;Assume DS:Message
 
                 Cmp     Edit, 0
                 JE      Msg_PreMessage1
@@ -331,12 +331,12 @@ Proc            Msg_PreMessage Far
 Msg_PreMessage1:
                 Ret
 
-EndP            Msg_PreMessage
-                Assume DS:Nothing
+;EndP            Msg_PreMessage
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_PostMessage Far
+Proc Msg_PostMessage Far
 
                 Push    CS
                 Pop     DS
@@ -393,12 +393,12 @@ Msg_PostMessage5:
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_PostMessage
-                Assume DS:Nothing
+;EndP            Msg_PostMessage
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_Tab Far
+Proc Msg_Tab Far
 
                 Mov     CX, 8
 
@@ -412,12 +412,12 @@ Msg_Tab1:
                 Ret
 
 
-EndP            Msg_Tab
+;EndP            Msg_Tab
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_ViewMsgUp Far
-                Assume DS:Message
+Proc Msg_ViewMsgUp Far
+                ;Assume DS:Message
 
                 Mov     AX, TopLine
                 Sub     AX, 1
@@ -427,13 +427,13 @@ Proc            Msg_ViewMsgUp Far
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_ViewMsgUp
-                Assume DS:Nothing
+;EndP            Msg_ViewMsgUp
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_ViewMsgDown Far
-                Assume DS:Message
+Proc Msg_ViewMsgDown Far
+                ;Assume DS:Message
 
                 Mov     AX, TopLine
                 Inc     AX
@@ -448,13 +448,13 @@ Msg_ViewMsgDown1:
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_ViewMsgDown
-                Assume DS:Nothing
+;EndP            Msg_ViewMsgDown
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_ViewMsgPgUp Far
-                Assume DS:Message
+Proc Msg_ViewMsgPgUp Far
+                ;Assume DS:Message
 
                 Mov     AX, TopLine
                 Sub     AX, 35
@@ -468,13 +468,13 @@ Msg_ViewMsgPgUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_ViewMsgPgUp
-                Assume DS:Nothing
+;EndP            Msg_ViewMsgPgUp
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_ViewMsgPgDn Far
-                Assume DS:Message
+Proc Msg_ViewMsgPgDn Far
+                ;Assume DS:Message
 
                 Mov     AX, TopLine
                 Add     AX, 35
@@ -489,13 +489,13 @@ Msg_ViewMsgPgDn1:
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_ViewMsgPgDn
-                Assume DS:Nothing
+;EndP            Msg_ViewMsgPgDn
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_ViewMsgEdit Far
-                Assume DS:Message
+Proc Msg_ViewMsgEdit Far
+                ;Assume DS:Message
 
                 Mov     TopLine, 0
                 Mov     CurrentLine, 0
@@ -505,26 +505,26 @@ Proc            Msg_ViewMsgEdit Far
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_ViewMsgEdit
-                Assume DS:Nothing
+;EndP            Msg_ViewMsgEdit
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_EditMsgView Far
-                Assume DS:Message
+Proc Msg_EditMsgView Far
+                ;Assume DS:Message
 
                 Mov     Edit, 0
 
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_EditMsgView
-                Assume DS:Nothing
+;EndP            Msg_EditMsgView
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_EditMsgLeft Far
-                Assume DS:Message
+Proc Msg_EditMsgLeft Far
+                ;Assume DS:Message
 
                 Sub     CurrentPosition, 1
                 AdC     CurrentPosition, 0
@@ -532,13 +532,13 @@ Proc            Msg_EditMsgLeft Far
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_EditMsgLeft
-                Assume DS:Nothing
+;EndP            Msg_EditMsgLeft
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_EditMsgRight Far
-                Assume DS:Message
+Proc Msg_EditMsgRight Far
+                ;Assume DS:Message
 
                 Mov     SI, CurrentPosition
                 Cmp     SI, MESSAGELENGTH-2
@@ -553,13 +553,13 @@ Msg_EditMsgRight1:
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_EditMsgRight
-                Assume DS:Nothing
+;EndP            Msg_EditMsgRight
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_EditMsgUp Far
-                Assume DS:Message
+Proc Msg_EditMsgUp Far
+                ;Assume DS:Message
 
                 Mov     SI, CurrentPosition             ; Need to search back
                                                         ; twice...
@@ -590,12 +590,12 @@ Msg_EditMsgUpEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_EditMsgUp
-                Assume DS:Nothing
+;EndP            Msg_EditMsgUp
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_EditMsgPgUp Far
+Proc Msg_EditMsgPgUp Far
 
                 Mov     CX, 35
 
@@ -608,12 +608,12 @@ Msg_EditMsgPgUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_EditMsgPgUp
+;EndP            Msg_EditMsgPgUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_EditMsgDown Far
-                Assume DS:Message
+Proc Msg_EditMsgDown Far
+                ;Assume DS:Message
                                         ; Search for enter
                 Mov     SI, CurrentPosition
 
@@ -650,12 +650,12 @@ Msg_EditMsgDownEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_EditMsgDown
-                Assume DS:Nothing
+;EndP            Msg_EditMsgDown
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_EditMsgPgDn Far
+Proc Msg_EditMsgPgDn Far
 
                 Mov     CX, 35
 
@@ -668,12 +668,12 @@ Msg_EditMsgPgDn1:
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_EditMsgPgDn
+;EndP            Msg_EditMsgPgDn
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_EditMsgDelete Far
-                Assume DS:Message
+Proc Msg_EditMsgDelete Far
+                ;Assume DS:Message
 
                 Mov     SI, CurrentPosition
                 Mov     DX, 1
@@ -683,12 +683,12 @@ Proc            Msg_EditMsgDelete Far
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_EditMsgDelete
-                Assume DS:Nothing
+;EndP            Msg_EditMsgDelete
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_EditMsgInsert Far
+Proc Msg_EditMsgInsert Far
 
                 Mov     SI, CurrentPosition
                 Mov     DX, 1
@@ -702,12 +702,12 @@ Msg_EditMsgInsert1:
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_EditMsgInsert
+;EndP            Msg_EditMsgInsert
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_EditMsgBackspace Far
-                Assume DS:Message
+Proc Msg_EditMsgBackspace Far
+                ;Assume DS:Message
 
                 Mov     SI, CurrentPosition
                 And     SI, SI
@@ -720,13 +720,13 @@ Msg_EditMsgBackspace1:
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_EditMsgBackspace
-                Assume DS:Nothing
+;EndP            Msg_EditMsgBackspace
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_EditMsgDeleteLine Far
-                Assume DS:Message
+Proc Msg_EditMsgDeleteLine Far
+                ;Assume DS:Message
 
                 Mov     SI, CurrentPosition             ; Search back for
                                                         ; start of line..
@@ -753,12 +753,12 @@ Msg_EditMsgDeleteLine4:
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_EditMsgDeleteLine
-                Assume DS:Nothing
+;EndP            Msg_EditMsgDeleteLine
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_ClearMessage Far
+Proc Msg_ClearMessage Far
 
                 Mov     DI, Offset O1_ConfirmClearMessage
                 Mov     CX, 4
@@ -773,12 +773,12 @@ Msg_ClearMessage1:
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_ClearMessage
+;EndP            Msg_ClearMessage
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_EditMsgHome Far
-                Assume DS:Message
+Proc Msg_EditMsgHome Far
+                ;Assume DS:Message
 
                 Mov     SI, CurrentPosition
                 Call    FindStart
@@ -787,13 +787,13 @@ Proc            Msg_EditMsgHome Far
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_EditMsgHome
-                Assume DS:Nothing
+;EndP            Msg_EditMsgHome
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_EditMsgEnd Far
-                Assume DS:Message
+Proc Msg_EditMsgEnd Far
+                ;Assume DS:Message
 
                 Mov     SI, CurrentPosition
 
@@ -815,12 +815,12 @@ Msg_EditMsgEnd1:
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_EditMsgEnd
-                Assume DS:Nothing
+;EndP            Msg_EditMsgEnd
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            FindStart
+Proc FindStart
 
 FindStart1:
                 Sub     SI, 1
@@ -833,11 +833,11 @@ FindStart2:
                 Inc     SI
                 Ret
 
-EndP            FindStart
+;EndP            FindStart
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            InsertData                      ; SI = pos, DX = length.
+Proc InsertData                      ; SI = pos, DX = length.
 
                 Push    CX
                 Push    DX
@@ -881,12 +881,12 @@ InsertDataEnd:
                 Pop     CX
                 Ret
 
-EndP            InsertData
+;EndP            InsertData
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DeleteData                      ; SI = pos, DX = length
-                                                ; Assume DS:Message
+Proc DeleteData                      ; SI = pos, DX = length
+                                                ; ;Assume DS:Message
 
                 Push    CX
                 Push    DX
@@ -916,11 +916,11 @@ DeleteData1:
                 Pop     CX
                 Ret
 
-EndP            DeleteData
+;EndP            DeleteData
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            CheckWordWrap                   ; Check current line only.
+Proc CheckWordWrap                   ; Check current line only.
 
                 Mov     SI, CurrentPosition
                 Call    FindStart
@@ -969,11 +969,11 @@ CheckWordWrap7:                         ; Insert an enter
 CheckWordWrap8:
                 Ret
 
-EndP            CheckWordWrap
+;EndP            CheckWordWrap
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_GetMessageLength Far                ; Returns AX
+Proc Msg_GetMessageLength Far                ; Returns AX
 
                 Push    DS
                 Push    SI
@@ -995,11 +995,11 @@ Msg_GetMessageLength1:
                 Pop     DS
                 Ret
 
-EndP            Msg_GetMessageLength
+;EndP            Msg_GetMessageLength
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_GetMessageOffset Far
+Proc Msg_GetMessageOffset Far
 
                 Push    CS
                 Pop     DS
@@ -1007,20 +1007,20 @@ Proc            Msg_GetMessageOffset Far
                 Mov     DX, Offset MessageData
                 Ret
 
-EndP            Msg_GetMessageOffset
+;EndP            Msg_GetMessageOffset
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Msg_ToggleCharacterSet Far
-                Assume DS:Message
+Proc Msg_ToggleCharacterSet Far
+                ;Assume DS:Message
 
                 Xor     CharacterColour, 6 xor 12
 
                 Mov     AX, 1
                 Ret
 
-EndP            Msg_ToggleCharacterSet
-                Assume DS:Nothing
+;EndP            Msg_ToggleCharacterSet
+                ;Assume DS:Nothing
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 

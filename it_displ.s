@@ -2,67 +2,64 @@
 ;³ Display Module!!                                                            ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-                        Jumps
-                        .386
-
-include switch.inc
+%include "switch.inc"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Externals                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
 Segment         Pattern WORD Public 'Code' USE16
-                Extrn   Order:Word
+                extern    Order:Word
 EndS
 
 Segment         Object1 BYTE Public 'Data' USE16
 EndS
 
 Segment         Glbl BYTE Public 'Code' USE16
-                Extrn   CurrentMode:Byte
+                extern    CurrentMode:Byte
 EndS
 
-IF SPECTRUMANALYSER
-                Extrn   Fourier_Start:Far
-ENDIF
-                Extrn   S_GetDestination:Far
-                Extrn   S_DrawBox:Far
-                Extrn   S_DrawString:Far
-                Extrn   Music_GetOutputWaveform:Far
-                Extrn   Music_GetInstrumentMode:Far
-                Extrn   Music_GetSongSegment:Far
-                Extrn   Music_GetSampleLocation:Far
-                Extrn   Music_GetHostChannelInformationTable:Far
-                Extrn   Music_GetSlaveChannelInformationTable:Far
-                Extrn   Music_NextOrder:Far
-                Extrn   Music_LastOrder:Far
-                Extrn   Music_GetPlayMode:Far
-                Extrn   Music_GetPlayMode2:Far
-                Extrn   Music_GetPattern:Far
-                Extrn   Music_ToggleChannel:Far
-                Extrn   Music_SoloChannel:Far
-                Extrn   Music_GetDisplayVariables:Far
-                Extrn   Music_InitStereo:Far
-;                Extrn   Music_UpdateSampleLocation:Far
-                Extrn   Music_Poll:Far
-                Extrn   Music_ToggleReverse:Far
-                Extrn   Music_GetLastChannel:far
-                Extrn   Music_GetPatternLength:Far
+%IF  SPECTRUMANALYSER
+                extern    Fourier_Start:Far
+%ENDIF 
+                extern    S_GetDestination:Far
+                extern    S_DrawBox:Far
+                extern    S_DrawString:Far
+                extern    Music_GetOutputWaveform:Far
+                extern    Music_GetInstrumentMode:Far
+                extern    Music_GetSongSegment:Far
+                extern    Music_GetSampleLocation:Far
+                extern    Music_GetHostChannelInformationTable:Far
+                extern    Music_GetSlaveChannelInformationTable:Far
+                extern    Music_NextOrder:Far
+                extern    Music_LastOrder:Far
+                extern    Music_GetPlayMode:Far
+                extern    Music_GetPlayMode2:Far
+                extern    Music_GetPattern:Far
+                extern    Music_ToggleChannel:Far
+                extern    Music_SoloChannel:Far
+                extern    Music_GetDisplayVariables:Far
+                extern    Music_InitStereo:Far
+;                extern    Music_UpdateSampleLocation:Far
+                extern    Music_Poll:Far
+                extern    Music_ToggleReverse:Far
+                extern    Music_GetLastChannel:far
+                extern    Music_GetPatternLength:Far
 
-                Extrn   M_FunctionDivider:Far
+                extern    M_FunctionDivider:Far
 
-IF NETWORKENABLED
-                Extrn   Network_Poll:Far
-ENDIF
+%IF  NETWORKENABLED
+                extern    Network_Poll:Far
+%ENDIF 
 
-                Extrn   O1_DisplayList, O1_FullDisplayList
+                extern    O1_DisplayList, O1_FullDisplayList
 
-                Extrn   PE_GetCurrentPattern:Far
-                Extrn   PE_ConvAX2Num:Far
+                extern    PE_GetCurrentPattern:Far
+                extern    PE_ConvAX2Num:Far
 
-                Extrn   PE_GotoPattern:Far
+                extern    PE_GotoPattern:Far
 
-                Extrn   SetInfoLine:Far
+                extern    SetInfoLine:Far
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Globals                                                                     ³
@@ -79,7 +76,7 @@ ENDIF
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
 Segment                 InfoPage BYTE Public 'Code' USE16
-                        Assume CS:InfoPage, DS:InfoPage
+                        ;Assume CS:InfoPage, DS:InfoPage
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Variables                                                                   ³
@@ -331,11 +328,11 @@ DisplayListKeys         Label
                         DW      6               ; Ctrl F
                         DW      Offset Display_FullScreen
 
-IF SPECTRUMANALYSER
+%IF  SPECTRUMANALYSER
                         DB      2               ; Alt..
                         DW      158h            ; F12
                         DW      Offset Display_FourierStart
-ENDIF
+%ENDIF 
 
                         DB      0FFh            ; End of list
 
@@ -343,7 +340,7 @@ ENDIF
 ;³ Functions                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-Proc            GetChannelColour                ; Gets AH
+Proc GetChannelColour                ; Gets AH
 
                 Push    DS
                 Push    BX
@@ -380,11 +377,11 @@ GetChannelColour1:                              ; Muted colours
 GetChannelColourEnd:
                 Ret
 
-EndP            GetChannelColour
+;EndP            GetChannelColour
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DrawChannelNumbers
+Proc DrawChannelNumbers
 
                 Mov     CH, 0Ah
                 Mov     CL, [CS:BP+4]
@@ -394,7 +391,7 @@ Proc            DrawChannelNumbers
 
                 Call    Music_GetSongSegment
                 Mov     DS, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 Display_HostChannel3:
                 Push    CX
@@ -446,11 +443,11 @@ Display_HostChannel21:
 
                 Ret
 
-EndP            DrawChannelNumbers
+;EndP            DrawChannelNumbers
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DrawHexAL
+Proc DrawHexAL
 
                 Cmp     AL, 10
                 SBB     AL, 69h
@@ -459,13 +456,13 @@ Proc            DrawHexAL
                 StosW
                 Ret
 
-EndP            DrawHexAL
+;EndP            DrawHexAL
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Display_HostChannel
+Proc Display_HostChannel
                                                 ; Draw boxes first.
-                                Assume DS:InfoPage
+                                ;Assume DS:InfoPage
 
                 Mov     ES, Destination
 
@@ -531,7 +528,7 @@ Display_HostChannel22:
                 Mov     AL, 80          ; HostChannelSize
                 Mul     Byte Ptr [CS:BP+2]
                 Call    Music_GetHostChannelInformationTable
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
                 Add     SI, AX
                 Mov     DI, [CS:BP+6]
                 Add     DI, (31+1*80)*2
@@ -911,12 +908,12 @@ Display_HostChannel6:
 
                 Ret
 
-EndP            Display_HostChannel
-                Assume DS:Nothing
+;EndP            Display_HostChannel
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Draw10Num
+Proc Draw10Num
 
                 Mov     CX, 10
                 Mov     EBP, 10
@@ -938,11 +935,11 @@ Draw10Num1:
 
                 Ret
 
-EndP            Draw10Num
+;EndP            Draw10Num
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Draw2Num
+Proc Draw2Num
 
                 Xor     AH, AH
                 Mov     DL, 10
@@ -959,11 +956,11 @@ Proc            Draw2Num
 
                 Ret
 
-EndP            Draw2Num
+;EndP            Draw2Num
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Draw3Num
+Proc Draw3Num
 
                 Cmp     AH, 10
                 JB      Draw3Num1
@@ -991,13 +988,13 @@ Draw3Num1:
 
                 Ret
 
-EndP            Draw3Num
+;EndP            Draw3Num
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Display_Details
+Proc Display_Details
                                                 ; Draw boxes first.
-                                Assume DS:InfoPage
+                                ;Assume DS:InfoPage
 
                 Mov     ES, Destination
 
@@ -1079,7 +1076,7 @@ Display_Details22:
 
                 Call    Music_GetSongSegment
                 Mov     DS, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 Display_Details3:
                 Push    CX
@@ -1132,7 +1129,7 @@ Display_Details21:
                 Mov     AL, 80          ; HostChannelSize
                 Mul     Byte Ptr [CS:BP+2]
                 Call    Music_GetHostChannelInformationTable
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
                 Add     SI, AX
                 Mov     DI, [CS:BP+6]
                 Add     DI, (15+2*80)*2
@@ -1302,13 +1299,13 @@ Display_Details8:
 
                 Ret
 
-EndP            Display_Details
-                Assume DS:Nothing
+;EndP            Display_Details
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LoadNextData            ; Returns DS:SI to data. (unpacked)
-                Assume DS:InfoPage
+Proc LoadNextData            ; Returns DS:SI to data. (unpacked)
+                ;Assume DS:InfoPage
 
                 Mov     BX, DecodePattern
                 Cmp     BX, PatternArrayNumber
@@ -1341,7 +1338,7 @@ LoadNextData2:
                                                 ; OK... time to decode.
                 Mov     SI, DecodeOffset
                 Mov     DS, DecodeSegment
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 LoadNextData4:
                 LodsB
@@ -1442,7 +1439,7 @@ LoadNextData16:
 LoadNextData5:
                 Push    CS
                 Pop     DS
-                        Assume DS:InfoPage
+                        ;Assume DS:InfoPage
 
                 Mov     DecodeOffset, SI
 
@@ -1455,15 +1452,15 @@ LoadNextData1:
                 Mov     SI, DecodeOffset
                 Add     DecodeOffset, 320
                 Mov     DS, PatternSegment
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Ret
 
-EndP            LoadNextData
+;EndP            LoadNextData
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GotoRow                         ; DS:SI points to data.
+Proc GotoRow                         ; DS:SI points to data.
 
                 Push    CX
 
@@ -1532,16 +1529,16 @@ GotoRow2:
                 Pop     CX
                 Ret
 
-EndP            GotoRow
+;EndP            GotoRow
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetBeforeRows                   ; Returns
+Proc GetBeforeRows                   ; Returns
                                                 ; CX = number of rows to show.
                                                 ; the row numbers are handled.
                                                 ; Initialises DataSegment,
                                                 ; DataOffset and Array.
-                        Assume DS:InfoPage
+                        ;Assume DS:InfoPage
 
                 Xor     CX, CX
                 Mov     BX, CurrentRow
@@ -1592,7 +1589,7 @@ GetBeforeRows4:
 
 GetBeforeRows5:
                 Call    Music_GetPattern
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
                 LodsW
                 LodsW
                                         ; AX = rows.
@@ -1631,12 +1628,12 @@ GetBeforeRows8:
 GetBeforeRows9:
                 Ret
 
-EndP            GetBeforeRows
+;EndP            GetBeforeRows
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetAfterRows                   ; Returns
-                        Assume DS:InfoPage
+Proc GetAfterRows                   ; Returns
+                        ;Assume DS:InfoPage
 
                 Xor     CX, CX
                 Mov     BX, DecodeMaxRow
@@ -1690,13 +1687,13 @@ GetAfterRows4:
 
 GetAfterRows5:
                 Call    Music_GetPattern
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
                 Add     SI, 8
                 Mov     CS:DecodeSegment, DS
 
                 Push    CS
                 Pop     DS
-                        Assume DS:InfoPage
+                        ;Assume DS:InfoPage
 
                 Mov     DecodeOffset, SI
 
@@ -1727,12 +1724,12 @@ GetAfterRows8:
 GetAfterRows9:
                 Ret
 
-EndP            GetAfterRows
+;EndP            GetAfterRows
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetCurrentPatternRows           ; Returns CX = number of rows to show.
-                        Assume DS:InfoPage
+Proc GetCurrentPatternRows           ; Returns CX = number of rows to show.
+                        ;Assume DS:InfoPage
 
                 Mov     BX, CurrentRow
                 Mov     AX, [CS:BP+4]
@@ -1774,7 +1771,7 @@ GetCurrentPatternRows1:
 
 GetCurrentPatternRows5:
                 Call    Music_GetPattern
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
                 LodsW
                 LodsW
                                         ; AX = number of rows.
@@ -1816,11 +1813,11 @@ GetCurrentPatternRows8:
                 Pop     CX
                 Ret
 
-EndP            GetCurrentPatternRows
+;EndP            GetCurrentPatternRows
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DrawHilightBar
+Proc DrawHilightBar
 
                 Mov     DI, [CS:BP+6]
                 Mov     AX, [CS:BP+4]
@@ -1839,11 +1836,11 @@ DrawHilightBar1:
 
                 Ret
 
-EndP            DrawHilightBar
+;EndP            DrawHilightBar
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayTrackData
+Proc DisplayTrackData
 
                 Cmp     PlayMode, 0
                 JNE     DisplayTrackData1
@@ -1916,11 +1913,11 @@ DisplayTrackData5:
 DisplayTrackData6:
                 Ret
 
-EndP            DisplayTrackData
+;EndP            DisplayTrackData
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Show5Channel
+Proc Show5Channel
 
                 Mov     AL, [CS:BP+2]
                 Mov     AH, 5
@@ -2087,12 +2084,12 @@ Show5Channel9:
 Show5ChannelEnd:
                 Ret
 
-EndP            Show5Channel
+;EndP            Show5Channel
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Display_5Channel
-                        Assume DS:InfoPage
+Proc Display_5Channel
+                        ;Assume DS:InfoPage
 
                 Mov     AX, 4                   ; left
                 Push    AX
@@ -2162,12 +2159,12 @@ Display_5Channel4:
 
                 Ret
 
-EndP            Display_5Channel
-                Assume DS:Nothing
+;EndP            Display_5Channel
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Show8Channel
+Proc Show8Channel
 
                 Mov     AL, [CS:BP+2]
                 Mov     AH, 5
@@ -2303,12 +2300,12 @@ Show8Channel9:
 Show8ChannelEnd:
                 Ret
 
-EndP            Show8Channel
+;EndP            Show8Channel
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Display_8Channel
-                        Assume DS:InfoPage
+Proc Display_8Channel
+                        ;Assume DS:InfoPage
 
                 Mov     AX, 4                   ; left
                 Push    AX
@@ -2378,12 +2375,12 @@ Display_8Channel4:
 
                 Ret
 
-EndP            Display_8Channel
-                Assume DS:Nothing
+;EndP            Display_8Channel
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Show10Channel
+Proc Show10Channel
 
                 Mov     AL, [CS:BP+2]
                 Mov     AH, 5
@@ -2539,12 +2536,12 @@ Show10Channel10:
 
                 Ret
 
-EndP            Show10Channel
+;EndP            Show10Channel
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Display_10Channel
-                        Assume DS:InfoPage
+Proc Display_10Channel
+                        ;Assume DS:InfoPage
 
                 Mov     AX, 4                   ; left
                 Push    AX
@@ -2615,12 +2612,12 @@ Display_10Channel4:
 
                 Ret
 
-EndP            Display_10Channel
-                Assume DS:Nothing
+;EndP            Display_10Channel
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Process3CharacterRow
+Proc Process3CharacterRow
 
                 Push    SI
 
@@ -2766,11 +2763,11 @@ Show18Channel7:
 
                 Ret
 
-EndP            Process3CharacterRow
+;EndP            Process3CharacterRow
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Show18Channel
+Proc Show18Channel
 
                 Mov     AL, [CS:BP+2]
                 Mov     AH, 5
@@ -2794,12 +2791,12 @@ Show18Channel1:
 Show18ChannelEnd:
                 Ret
 
-EndP            Show18Channel
+;EndP            Show18Channel
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Display_18Channel
-                        Assume DS:InfoPage
+Proc Display_18Channel
+                        ;Assume DS:InfoPage
 
                 Mov     AX, 4                   ; left
                 Push    AX
@@ -2869,12 +2866,12 @@ Display_18Channel4:
 
                 Ret
 
-EndP            Display_18Channel
-                Assume DS:Nothing
+;EndP            Display_18Channel
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Show24Channel
+Proc Show24Channel
 
                 Mov     AL, [CS:BP+2]
                 Mov     AH, 5
@@ -2893,12 +2890,12 @@ Show24Channel1:
 
                 Ret
 
-EndP            Show24Channel
+;EndP            Show24Channel
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Display_24Channel
-                        Assume DS:InfoPage
+Proc Display_24Channel
+                        ;Assume DS:InfoPage
 
                 Mov     AX, 4                   ; left
                 Push    AX
@@ -2969,12 +2966,12 @@ Display_24Channel4:
 
                 Ret
 
-EndP            Display_24Channel
-                Assume DS:Nothing
+;EndP            Display_24Channel
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Show36Channel
+Proc Show36Channel
 
                 Mov     AL, [CS:BP+2]
                 Mov     AH, 5
@@ -3121,12 +3118,12 @@ Show36Channel7:
 Show36Channel9:
                 Jmp     Show36Channel1
 
-EndP            Show36Channel
+;EndP            Show36Channel
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Display_36Channel
-                        Assume DS:InfoPage
+Proc Display_36Channel
+                        ;Assume DS:InfoPage
 
                 Mov     AX, 4                   ; left
                 Push    AX
@@ -3194,12 +3191,12 @@ Display_36Channel4:
 
                 Ret
 
-EndP            Display_36Channel
-                Assume DS:Nothing
+;EndP            Display_36Channel
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Show64Channel
+Proc Show64Channel
                                         ; DS:SI points to stuff.
 
                 Mov     CX, 64
@@ -3298,12 +3295,12 @@ Show64Channel7:
 Show64Channel9:
                 Jmp     Show64Channel1
 
-EndP            Show64Channel
+;EndP            Show64Channel
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Display_64Channel
-                        Assume DS:InfoPage
+Proc Display_64Channel
+                        ;Assume DS:InfoPage
 
                 Mov     AX, 4                   ; left
                 Push    AX
@@ -3357,12 +3354,12 @@ Display_64Channel4:
 
                 Ret
 
-EndP            Display_64Channel
-                Assume DS:Nothing
+;EndP            Display_64Channel
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Display_Variables
+Proc Display_Variables
 
                 Mov     DI, [CS:BP+6]
                 Add     DI, (2+1*80)*2
@@ -3422,12 +3419,12 @@ Display_Variables3:
 
                 Ret
 
-EndP            Display_Variables
+;EndP            Display_Variables
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Display_NoteDots                        ; Draw boxes first.
-                                Assume DS:InfoPage
+Proc Display_NoteDots                        ; Draw boxes first.
+                                ;Assume DS:InfoPage
 
                 Mov     ES, Destination
 
@@ -3564,14 +3561,14 @@ Display_Dots8:
 
                 Ret
 
-EndP            Display_NoteDots
+;EndP            Display_NoteDots
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 Comment ~
 
-Proc            Display_SampleDots          ; Draw boxes first.
-                                Assume DS:InfoPage
+Proc Display_SampleDots          ; Draw boxes first.
+                                ;Assume DS:InfoPage
 
                 Mov     ES, Destination
 
@@ -3715,20 +3712,20 @@ Display_SampleDots8:
 
                 Ret
 
-EndP            Display_SampleDots
+;EndP            Display_SampleDots
 
 ~
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DrawDisplayData Far
+Proc DrawDisplayData Far
 
                 Call    PE_GetCurrentPattern
                 Mov     CS:PatternSegment, DS
 
                 Push    CS
                 Pop     DS
-                        Assume DS:InfoPage
+                        ;Assume DS:InfoPage
 
                 Call    S_GetDestination
                 Mov     Destination, ES
@@ -3753,7 +3750,7 @@ Proc            DrawDisplayData Far
 DrawDisplayData1:
                 Push    CS
                 Pop     DS
-                        Assume DS:InfoPage
+                        ;Assume DS:InfoPage
 
                 Push    BP
 
@@ -3814,16 +3811,16 @@ DisplayData3:
                 Mov     AX, 1
                 Ret
 
-EndP            DrawDisplayData
-                Assume DS:Nothing
+;EndP            DrawDisplayData
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PostDisplayData Far
+Proc PostDisplayData Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:InfoPage
+                        ;Assume DS:InfoPage
 
                 Mov     SI, Offset DisplayListKeys
                 Call    M_FunctionDivider
@@ -3835,12 +3832,12 @@ PostDisplayData1:
                 Xor     AX, AX
                 Ret
 
-EndP            PostDisplayData
+;EndP            PostDisplayData
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayUp Far
-                        Assume DS:InfoPage
+Proc DisplayUp Far
+                        ;Assume DS:InfoPage
 
                 Mov     AX, 1
 
@@ -3849,13 +3846,13 @@ Proc            DisplayUp Far
 
                 Ret
 
-EndP            DisplayUp
-                Assume DS:Nothing
+;EndP            DisplayUp
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayDown Far
-                        Assume DS:InfoPage
+Proc DisplayDown Far
+                        ;Assume DS:InfoPage
 
                 Mov     AX, CurrentChannel
                 Inc     AX
@@ -3868,35 +3865,35 @@ DisplayDown1:
                 Mov     AX, 1
                 Ret
 
-EndP            DisplayDown
-                Assume DS:Nothing
+;EndP            DisplayDown
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayPlus Far
+Proc DisplayPlus Far
 
                 Call    Music_NextOrder
 
                 Mov     AX, 1
                 Ret
 
-EndP            DisplayPlus
+;EndP            DisplayPlus
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayMinus Far
+Proc DisplayMinus Far
 
                 Call    Music_LastOrder
 
                 Mov     AX, 1
                 Ret
 
-EndP            DisplayMinus
+;EndP            DisplayMinus
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayInsert Far
-                Assume DS:InfoPage
+Proc DisplayInsert Far
+                ;Assume DS:InfoPage
 
                 Cmp     NumWindows, 5
                 JAE     DisplayInsert1
@@ -3953,13 +3950,13 @@ DisplayInsert1:
                 Mov     AX, 1
                 Ret
 
-EndP            DisplayInsert
-                Assume DS:Nothing
+;EndP            DisplayInsert
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayDelete Far
-                Assume DS:InfoPage
+Proc DisplayDelete Far
+                ;Assume DS:InfoPage
 
                 Cmp     NumWindows, 1
                 JBE     DisplayDelete1
@@ -4014,13 +4011,13 @@ DisplayDelete1:
                 Mov     AX, 1
                 Ret
 
-EndP            DisplayDelete
-                Assume DS:Nothing
+;EndP            DisplayDelete
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayNext Far
-                        Assume DS:InfoPage
+Proc DisplayNext Far
+                        ;Assume DS:InfoPage
 
                 Mov     AX, CurrentWindow
                 Inc     AX
@@ -4035,12 +4032,12 @@ DisplayNext1:
                 Mov     AX, 1
                 Ret
 
-EndP            DisplayNext
-                Assume DS:Nothing
+;EndP            DisplayNext
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayPrevious Far
+Proc DisplayPrevious Far
 
                 Mov     AX, CurrentWindow
                 And     AX, AX
@@ -4053,12 +4050,12 @@ DisplayPrevious1:
                 Mov     AX, 1
                 Ret
 
-EndP            DisplayPrevious
+;EndP            DisplayPrevious
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayAltUp Far
-                        Assume DS:InfoPage
+Proc DisplayAltUp Far
+                        ;Assume DS:InfoPage
 
                 Mov     BX, 3
 
@@ -4087,13 +4084,13 @@ DisplayAltUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            DisplayAltUp
-                Assume DS:Nothing
+;EndP            DisplayAltUp
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayAltDown Far
-                        Assume DS:InfoPage
+Proc DisplayAltDown Far
+                        ;Assume DS:InfoPage
 
                 Mov     AX, CurrentWindow
                 Inc     AX
@@ -4117,13 +4114,13 @@ DisplayAltDown1:
                 Mov     AX, 1
                 Ret
 
-EndP            DisplayAltDown
-                Assume DS:Nothing
+;EndP            DisplayAltDown
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayPageUp Far
-                        Assume DS:InfoPage
+Proc DisplayPageUp Far
+                        ;Assume DS:InfoPage
 
                 Mov     AX, CurrentWindow
                 Mov     AH, 8
@@ -4144,13 +4141,13 @@ DisplayPageUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            DisplayPageUp
-                Assume DS:Nothing
+;EndP            DisplayPageUp
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayPageDown Far
-                        Assume DS:InfoPage
+Proc DisplayPageDown Far
+                        ;Assume DS:InfoPage
 
                 Mov     AX, CurrentWindow
                 Mov     AH, 8
@@ -4171,26 +4168,26 @@ DisplayPageDown1:
                 Mov     AX, 1
                 Ret
 
-EndP            DisplayPageDown
-                Assume DS:Nothing
+;EndP            DisplayPageDown
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayHome Far
-                Assume DS:InfoPage
+Proc DisplayHome Far
+                ;Assume DS:InfoPage
 
                 Mov     CurrentChannel, 0
 
                 Mov     AX, 1
                 Ret
 
-EndP            DisplayHome
-                Assume DS:Nothing
+;EndP            DisplayHome
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayEnd Far
-                Assume DS:InfoPage
+Proc DisplayEnd Far
+                ;Assume DS:InfoPage
 
                 Call    Music_GetLastChannel
                 Mov     CurrentChannel, AX
@@ -4198,12 +4195,12 @@ Proc            DisplayEnd Far
                 Mov     AX, 1
                 Ret
 
-EndP            DisplayEnd
-                Assume DS:Nothing
+;EndP            DisplayEnd
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayToggleChannel Far
+Proc DisplayToggleChannel Far
 
                 Mov     AX, CurrentChannel
                 Call    Music_ToggleChannel
@@ -4211,11 +4208,11 @@ Proc            DisplayToggleChannel Far
                 Mov     AX, 1
                 Ret
 
-EndP            DisplayToggleChannel
+;EndP            DisplayToggleChannel
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplaySoloChannel Far
+Proc DisplaySoloChannel Far
 
                 Mov     AX, CurrentChannel
                 Call    Music_SoloChannel
@@ -4223,21 +4220,21 @@ Proc            DisplaySoloChannel Far
                 Mov     AX, 1
                 Ret
 
-EndP            DisplaySoloChannel
+;EndP            DisplaySoloChannel
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 OldEBX          DD      0
 OldECX          DD      0
 
-Proc            DisplayUpdateScreen Far
+Proc DisplayUpdateScreen Far
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Call    Network_Poll
 
                 Test    AX, AX
                 JNZ     DisplayUpdateScreen1
-ENDIF
+%ENDIF 
 
                 Call    Music_Poll
                 Call    Music_GetPlayMode2
@@ -4266,12 +4263,12 @@ DisplayUpdateScreen1:
                 Mov     AX, 1
                 Ret
 
-EndP            DisplayUpdateScreen
+;EndP            DisplayUpdateScreen
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayToggleStereo Far
-                Assume DS:InfoPage
+Proc DisplayToggleStereo Far
+                ;Assume DS:InfoPage
 
                 Call    Music_GetSongSegment
                 Mov     ES, AX
@@ -4293,26 +4290,26 @@ DisplayToggleStereo1:
                 Mov     AX, 1
                 Ret
 
-EndP            DisplayToggleStereo
-                Assume DS:Nothing
+;EndP            DisplayToggleStereo
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Display_GetDisplayWindowData Far
+Proc Display_GetDisplayWindowData Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:InfoPage
+                        ;Assume DS:InfoPage
 
                 Mov     DX, Offset DisplayWindows
 
                 Ret
 
-EndP            DIsplay_GetDisplayWindowData
+;EndP            DIsplay_GetDisplayWindowData
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Display_GotoPattern Far
+Proc Display_GotoPattern Far
 
                 Call    Music_GetPlayMode
                 Cmp     AX, 1
@@ -4321,7 +4318,7 @@ Proc            Display_GotoPattern Far
 
                 Push    Pattern
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     Order, DX
 
@@ -4336,22 +4333,22 @@ Display_GotoPattern1:
                 Xor     AX, AX
                 Ret
 
-EndP            Display_GotoPattern
-                Assume DS:Nothing
+;EndP            Display_GotoPattern
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Display_SpaceBar Far
-                Assume DS:InfoPage
+Proc Display_SpaceBar Far
+                ;Assume DS:InfoPage
 
                 Call    DisplayToggleChannel
                 Jmp     DisplayDown
 
-EndP            Display_SpaceBar
+;EndP            Display_SpaceBar
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayToggleVelocity Far
+Proc DisplayToggleVelocity Far
 
                 Mov     SI, Offset VolumeMsg
                 Xor     Byte Ptr Velocity, 1
@@ -4365,11 +4362,11 @@ DisplayToggleVelocity1:
                 Mov     AX, 1
                 Ret
 
-EndP            DisplayToggleVelocity
+;EndP            DisplayToggleVelocity
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayToggleInstrument Far
+Proc DisplayToggleInstrument Far
 
                 Mov     SI, Offset SampleMsg
                 Xor     Byte Ptr Instrument, 1
@@ -4383,32 +4380,32 @@ DisplayToggleInstrument1:
                 Mov     AX, 1
                 Ret
 
-EndP            DisplayToggleInstrument
+;EndP            DisplayToggleInstrument
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DisplayToggleReverse Far
+Proc DisplayToggleReverse Far
 
                 Call    Music_ToggleReverse
 
                 Mov     AX, 1
                 Ret
 
-EndP            DisplayToggleReverse
+;EndP            DisplayToggleReverse
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Display_SelectDisplayList Far
+Proc Display_SelectDisplayList Far
 
                 Cmp     CS:FullScreen, 1
                 JZ      Display_FullScreen3
                 Jmp     Display_FullScreen4
 
-EndP            Display_SelectDisplayList
+;EndP            Display_SelectDisplayList
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Display_FullScreen Far
+Proc Display_FullScreen Far
 
                 Cmp     NumWindows, 1
                 JE      Display_FullScreen1
@@ -4419,9 +4416,9 @@ Proc            Display_FullScreen Far
 Display_FullScreen1:
                 Push    Glbl
                 Pop     ES
-                        Assume ES:Glbl
+                        ;Assume ES:Glbl
                 Mov     ES:CurrentMode, 5
-                        Assume ES:Nothing
+                        ;Assume ES:Nothing
 
                 Xor     FullScreen, 1
 
@@ -4433,9 +4430,9 @@ Display_FullScreen1:
 Display_FullScreen3:
                 Push    Glbl
                 Pop     ES
-                        Assume ES:Glbl
+                        ;Assume ES:Glbl
                 Mov     ES:CurrentMode, 200
-                        Assume ES:Nothing
+                        ;Assume ES:Nothing
 
                 Mov     AX, 5
                 Mov     SI, 1
@@ -4451,9 +4448,9 @@ Display_FullScreen2:
 Display_FullScreen4:
                 Push    Glbl
                 Pop     ES
-                        Assume ES:Glbl
+                        ;Assume ES:Glbl
                 Mov     ES:CurrentMode, 5
-                        Assume ES:Nothing
+                        ;Assume ES:Nothing
 
                 Mov     AX, 5
                 Mov     SI, 1
@@ -4462,19 +4459,19 @@ Display_FullScreen4:
                 Mov     DX, Offset O1_DisplayList
                 Ret
 
-EndP            Display_FullScreen
+;EndP            Display_FullScreen
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-IF SPECTRUMANALYSER
+%IF  SPECTRUMANALYSER
 
-Proc            Display_FourierStart Far
+Proc Display_FourierStart Far
 
                 Jmp     Fourier_Start
 
-EndP            Display_FourierStart
+;EndP            Display_FourierStart
 
-ENDIF
+%ENDIF 
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 

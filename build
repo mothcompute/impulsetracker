@@ -3,7 +3,7 @@ mkdir -p obj gen
 
 for i in *.s; do
 	echo $i
-	nasm -g $i -felf32 -o "obj/$(echo $i | sed 's/s$/o/g')"
+	nasm -g $i -felf64 -o "obj/$(echo $i | sed 's/s$/o/g')"
 done
 
-cc -m32 main.c c/* obj/* -g3
+cc main.c c/* obj/* -g3

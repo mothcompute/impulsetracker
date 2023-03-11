@@ -2,11 +2,8 @@
 ;³ Disk Module                                                                 ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-include switch.inc
-include network.inc
-
-                        Jumps
-                        .386
+%include "switch.inc"
+%include "network.inc"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Externals                                                                   ³
@@ -16,128 +13,128 @@ Segment         Object1 BYTE Public 'Data'
 EndS
 
 Segment         Pattern BYTE Public 'Code'
-                Extrn   BaseOctave:Byte
-                Extrn   RowHilight1:Byte
-                Extrn   RowHilight2:Byte
+                extern    BaseOctave:Byte
+                extern    RowHilight1:Byte
+                extern    RowHilight2:Byte
 EndS
 
 Segment         Pattern BYTE Public 'Code'
-                Extrn   PatternDataArea:Word
+                extern    PatternDataArea:Word
 EndS
 
 Segment         Music BYTE Public 'Code'
 EndS
 
-                Extrn   Display_GetDisplayWindowData:Far
+                extern    Display_GetDisplayWindowData:Far
 
-                Extrn   E_UnInitEMS:Far
-                Extrn   E_MapEMSMemory:Far
-                Extrn   E_GetEMSPageFrame:Far
+                extern    E_UnInitEMS:Far
+                extern    E_MapEMSMemory:Far
+                extern    E_GetEMSPageFrame:Far
 
-                Extrn   Glbl_F3:Far
-                Extrn   Glbl_F4:Far
+                extern    Glbl_F3:Far
+                extern    Glbl_F4:Far
 
-                Extrn   I_GetSampleOffset:Far
-                Extrn   I_GetInstrumentOffset:Far
-                Extrn   I_ClearTables:Far
-                Extrn   I_GetPresetEnvelopeOffset:Far
+                extern    I_GetSampleOffset:Far
+                extern    I_GetInstrumentOffset:Far
+                extern    I_ClearTables:Far
+                extern    I_GetPresetEnvelopeOffset:Far
 
-                Extrn   K_UnInitKeyBoard:Far
-                Extrn   K_IsAnyKeyDown:Far
-                Extrn   K_ClearKeyBoardQueue:Far
-                Extrn   K_GetKey:Far
+                extern    K_UnInitKeyBoard:Far
+                extern    K_IsAnyKeyDown:Far
+                extern    K_ClearKeyBoardQueue:Far
+                extern    K_GetKey:Far
 
-                Extrn   M_FunctionDivider:Far
-                Extrn   M_Object1List:Far
+                extern    M_FunctionDivider:Far
+                extern    M_Object1List:Far
 
-                Extrn   Music_PlayNote:Far
-                Extrn   Music_PlaySample:Far
-                Extrn   Music_ReleaseAllPatterns:Far
-                Extrn   Music_ReleaseAllSamples:Far
-                Extrn   Music_ReleaseSample:Far
-                Extrn   Music_GetSongSegment:Far
-                Extrn   Music_AllocateSample:Far
-                Extrn   Music_ClearAllSampleNames:Far
-                Extrn   Music_GetNumberOfSamples:Far
-                Extrn   Music_GetNumberOfInstruments:Far
-                Extrn   Music_GetPattern:Far
-                Extrn   Music_AllocatePattern:Far
-                Extrn   Music_AllocateSample:Far
-                Extrn   Music_GetSampleLocation:Far
-                Extrn   Music_ClearAllInstruments:Far
-                Extrn   Music_GetInstrumentMode:Far
-                Extrn   Music_AssignSampleToInstrument:Far
-                Extrn   Music_SoundCardLoadSample:Far
-                Extrn   Music_SoundCardLoadAllSamples:Far
-                Extrn   Music_GetPitchTable:Far
-                Extrn   Music_GetMIDIDataArea:Far
+                extern    Music_PlayNote:Far
+                extern    Music_PlaySample:Far
+                extern    Music_ReleaseAllPatterns:Far
+                extern    Music_ReleaseAllSamples:Far
+                extern    Music_ReleaseSample:Far
+                extern    Music_GetSongSegment:Far
+                extern    Music_AllocateSample:Far
+                extern    Music_ClearAllSampleNames:Far
+                extern    Music_GetNumberOfSamples:Far
+                extern    Music_GetNumberOfInstruments:Far
+                extern    Music_GetPattern:Far
+                extern    Music_AllocatePattern:Far
+                extern    Music_AllocateSample:Far
+                extern    Music_GetSampleLocation:Far
+                extern    Music_ClearAllInstruments:Far
+                extern    Music_GetInstrumentMode:Far
+                extern    Music_AssignSampleToInstrument:Far
+                extern    Music_SoundCardLoadSample:Far
+                extern    Music_SoundCardLoadAllSamples:Far
+                extern    Music_GetPitchTable:Far
+                extern    Music_GetMIDIDataArea:Far
 
-                Extrn   Music_Stop:Far
-                Extrn   Msg_ResetMessage:Far
-                Extrn   Msg_GetMessageOffset:Far
-                Extrn   Msg_GetMessageLength:Far
+                extern    Music_Stop:Far
+                extern    Msg_ResetMessage:Far
+                extern    Msg_GetMessageOffset:Far
+                extern    Msg_GetMessageLength:Far
 
-IF TUTORIAL
-ELSE
-                Extrn   O1_LoadS3MList:Far
-                Extrn   O1_LoadXMList:Far
-                Extrn   O1_LoadMODList:Far
-                Extrn   O1_LoadMTMList:Far
-                Extrn   O1_Load669List:Far
-                Extrn   O1_LoadITList:Far
-ENDIF
-                Extrn   O1_ConfirmOverWriteList:Far
-                Extrn   O1_UnableToSaveList:Far
-                Extrn   O1_SaveITList:Far
-                Extrn   O1_SaveS3MList:Far
-                Extrn   O1_ConfirmDelete:Far    ; Updates Song name loader.
-                Extrn   O1_ConfirmDelete2:Far
-                Extrn   O1_ConfirmDelete3:Far
-                Extrn   O1_ConfirmSaveRenameList:Far
-                Extrn   O1_ConfirmResaveList:Far
-                Extrn   O1_ConfirmDiscardList:Far
-                Extrn   O1_InitInstrument:Far
-                Extrn   O1_EditSampleName:Far
-                Extrn   O1_OutOfSamplesList:Far
-                Extrn   O1_EnableInstrumentMode:Far
-                Extrn   O1_StereoSampleList:Far
+%IF  TUTORIAL
+%ELSE
+                extern    O1_LoadS3MList:Far
+                extern    O1_LoadXMList:Far
+                extern    O1_LoadMODList:Far
+                extern    O1_LoadMTMList:Far
+                extern    O1_Load669List:Far
+                extern    O1_LoadITList:Far
+%ENDIF 
+                extern    O1_ConfirmOverWriteList:Far
+                extern    O1_UnableToSaveList:Far
+                extern    O1_SaveITList:Far
+                extern    O1_SaveS3MList:Far
+                extern    O1_ConfirmDelete:Far    ; Updates Song name loader.
+                extern    O1_ConfirmDelete2:Far
+                extern    O1_ConfirmDelete3:Far
+                extern    O1_ConfirmSaveRenameList:Far
+                extern    O1_ConfirmResaveList:Far
+                extern    O1_ConfirmDiscardList:Far
+                extern    O1_InitInstrument:Far
+                extern    O1_EditSampleName:Far
+                extern    O1_OutOfSamplesList:Far
+                extern    O1_EnableInstrumentMode:Far
+                extern    O1_StereoSampleList:Far
 
-                Extrn   PE_TranslateXMPattern:Far
-                Extrn   PE_Translate669Pattern:Far
-                Extrn   PE_TranslateS3MPattern:Far
-                Extrn   PE_TranslateMTMPattern:Far
-                Extrn   PE_TranslateMODPattern:Far
-                Extrn   PE_ResetOrderPattern:Far
-                Extrn   PE_UnInitPatternEdit:Far
-                Extrn   PEFunction_OutOfMemoryMessage:Far
-                Extrn   PECheckModified:Far
-                Extrn   PEResetModified:Far
-                Extrn   PE_GetMaxPattern:Far
-                Extrn   PE_ConvAX2Num:Far
-                Extrn   PE_GetLastInstrument:Far
-                Extrn   PE_GetPatternConfigOffset:Far
-                Extrn   PE_SaveCurrentPattern:Far
-                Extrn   PE_RestoreCurrentPattern:Far
+                extern    PE_TranslateXMPattern:Far
+                extern    PE_Translate669Pattern:Far
+                extern    PE_TranslateS3MPattern:Far
+                extern    PE_TranslateMTMPattern:Far
+                extern    PE_TranslateMODPattern:Far
+                extern    PE_ResetOrderPattern:Far
+                extern    PE_UnInitPatternEdit:Far
+                extern    PEFunction_OutOfMemoryMessage:Far
+                extern    PECheckModified:Far
+                extern    PEResetModified:Far
+                extern    PE_GetMaxPattern:Far
+                extern    PE_ConvAX2Num:Far
+                extern    PE_GetLastInstrument:Far
+                extern    PE_GetPatternConfigOffset:Far
+                extern    PE_SaveCurrentPattern:Far
+                extern    PE_RestoreCurrentPattern:Far
 
-                Extrn   S_UnInitScreen:Far
-                Extrn   S_GetDestination:Far
-                Extrn   S_DrawString:Far
-                Extrn   S_SaveScreen:Far
-                Extrn   S_RestoreScreen:Far
-                Extrn   S_GetGenerationTableOffset:Far
-                Extrn   S_GenerateCharacters:Far
-                Extrn   S_RedefineCharacters:Far
-                Extrn   S_GetPaletteOffset:Far
-                Extrn   S_SetPalette:Far
+                extern    S_UnInitScreen:Far
+                extern    S_GetDestination:Far
+                extern    S_DrawString:Far
+                extern    S_SaveScreen:Far
+                extern    S_RestoreScreen:Far
+                extern    S_GetGenerationTableOffset:Far
+                extern    S_GenerateCharacters:Far
+                extern    S_RedefineCharacters:Far
+                extern    S_GetPaletteOffset:Far
+                extern    S_SetPalette:Far
 
-                Extrn   SetInfoLine:Far
-                Extrn   ClearInfoLine:Far
+                extern    SetInfoLine:Far
+                extern    ClearInfoLine:Far
 
-                Extrn   Glbl_SetCurrentMode:Far
-                Extrn   Glbl_F10:Far
+                extern    Glbl_SetCurrentMode:Far
+                extern    Glbl_F10:Far
 
-                Extrn   GetKeyboardLock:Far, GetTimerCounter:Far
-                Extrn   MouseUpdateEnable:Far, MouseUpdateDisable:Far
+                extern    GetKeyboardLock:Far, GetTimerCounter:Far
+                extern    MouseUpdateEnable:Far, MouseUpdateDisable:Far
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Globals                                                                     ³
@@ -239,30 +236,30 @@ ENDIF
                 Public  D_Resettimer
                 Public  D_ShowTime
 
-IF TIMERSCREEN
+%IF  TIMERSCREEN
                 Public  D_DrawTimer
                 Public  D_PostTimerList
-ENDIF
+%ENDIF 
 
-IF TUTORIAL
+%IF  TUTORIAL
                 Public  SamplesInModule
                 Public  InSampleFileName
-ELSE
+%ELSE
                 Public  D_LoadS3M
                 Public  D_LoadMTM
                 Public  D_LoadMOD
                 Public  D_Load669
                 Public  D_LoadIT
                 Public  D_LoadXM
-ENDIF
+%ENDIF 
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
 Segment                 Disk BYTE Public 'Code' USE16
-                        Assume CS:Disk, DS:Nothing
+                        ;Assume CS:Disk, DS:Nothing
 
 CREATENEWLOGFILE        EQU     0
-include debug.inc
+%include "debug.inc"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Variables                                                                   ³
@@ -576,7 +573,7 @@ MODModule1              DB      "MOD Format", 0
 ; ULTModule               DB      "Ultra Tracker Module", 0
 KRZFormat               DB      "Kurzweil Synth File", 0
 PATFormat               DB      "Gravis UltraSound Patch", 0
-IFFFormat               DB      "AIFF Sample", 0
+%IF FFormat               DB      "AIFF Sample", 0
 
 Unchecked               DB      "Unchecked", 0
 UnknownFormat           DB      "Unknown module format", 0
@@ -599,11 +596,11 @@ ITInstrumentSavedMsg    DB      "Instrument saved (instrument ", 0FDh, "D)", 0
 InstrumentErrorMsg      DB      "Error: Instrument ", 0FDh, "D NOT saved! (No Filename?)", 0
 ITSampleSavedMsg        DB      "Impulse Tracker sample saved (sample ", 0FDh, "D)", 0
 ST3SampleSavedMsg       DB      "Scream Tracker sample saved (sample ", 0FDh, "D)", 0
-IF SAVESAMPLEWAV
+%IF  SAVESAMPLEWAV
 RawSampleSavedMsg       DB      "WAV Sample saved (sample ", 0FDh, "D)", 0
-ELSE
+%ELSE
 RawSampleSavedMsg       DB      "RAW Sample saved (sample ", 0FDh, "D)", 0
-ENDIF
+%ENDIF 
 SampleErrorMsg          DB      "Error: Sample ", 0FDh, "D NOT saved! (No Filename?)", 0
 InitInstrumentMsg       DB      "Sample assigned to Instrument ", 0FDh, "D", 0
 InitInstrumentErrorMsg  DB      "Error: No available Instruments!", 0
@@ -629,7 +626,7 @@ FileSizeMsg             DB      0FDh, "Dk", 0
 FreeSampleMsg           DB      "Available", 13
                         DB      "Samples: ", 0FDh, 'D', 0
 
-IF SAVESAMPLEWAV
+%IF  SAVESAMPLEWAV
  WAVEFileHeader  DB      "RIFF"
  WAVEFileSize    DD      0
  WAVEFileHeader2 DB      "WAVEfmt "
@@ -642,7 +639,7 @@ IF SAVESAMPLEWAV
  WAVEBits        DW      16
  WAVEHeader3     DB      "data"
  WAVEDataSize    DD      0
-ENDIF
+%ENDIF 
 
 DiskOptions             DB      0
 EditTimer               DD      0
@@ -972,13 +969,13 @@ LSViewWindowKeys        Label
 ;³ Functions                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-Proc            D_InitDisk Far
+Proc D_InitDisk Far
 
                 Push    DS
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
                                         ; Get date/time for CACHE.IT file
 
                 Trace   " - Finding CDROM Drives"
@@ -1267,7 +1264,7 @@ D_InitDisk13:
 D_InitDisk2:                                    ; Load font data.. and set it.
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset StartingDirectory
                 Call    D_SetDriveDirectory
@@ -1316,16 +1313,16 @@ D_NoFontFile:
                 Pop     DS
                 Ret
 
-EndP            D_InitDisk
-                Assume DS:Nothing
+;EndP            D_InitDisk
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_UnInitDisk Far
+Proc D_UnInitDisk Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     AX, DiskDataArea
                 Test    AX, AX
@@ -1343,12 +1340,12 @@ D_UnInitDisk1:
 
                 Ret
 
-EndP            D_UnInitDisk
-                Assume DS:Nothing
+;EndP            D_UnInitDisk
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_GetDriveDirectory             ; DS:SI points to buffer
+Proc D_GetDriveDirectory             ; DS:SI points to buffer
 
                 Push    AX
                 Push    DX
@@ -1371,11 +1368,11 @@ Proc            D_GetDriveDirectory             ; DS:SI points to buffer
 
                 Ret
 
-EndP            D_GetDriveDirectory
+;EndP            D_GetDriveDirectory
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_SetDriveDirectory             ; DS:SI points to dir.
+Proc D_SetDriveDirectory             ; DS:SI points to dir.
 
                 Push    AX
                 Push    BX
@@ -1429,11 +1426,11 @@ D_SetDriveDirectory2:
                 Pop     AX
                 Ret
 
-EndP            D_SetDriveDirectory
+;EndP            D_SetDriveDirectory
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_LoadFileNames
+Proc D_LoadFileNames
 
                 Mov     ES, CS:DiskDataArea
                 Xor     DI, DI
@@ -1446,7 +1443,7 @@ Proc            D_LoadFileNames
 
                 Pop     DS
                 Pop     ES
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     NumFileInfo, 0
                 Mov     NumEntries, 0
@@ -1516,7 +1513,7 @@ D_LoadFileNames4:
                 Push    DX
 
                 Mov     DS, DiskDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     DX, 60000
                 Mov     AH, 1Ah
@@ -1524,7 +1521,7 @@ D_LoadFileNames4:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     AH, 4Eh
                 Pop     DX
@@ -1543,7 +1540,7 @@ D_LoadFileNames5:
                 Mov     CX, 21
 
                 Mov     DS, DiskDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     SI, 60000+16h
 
@@ -1576,12 +1573,12 @@ D_LoadFileNames8:
 D_LoadFileNames6:
                 RetN
 
-EndP            D_LoadFileNames
-                Assume DS:Nothing
+;EndP            D_LoadFileNames
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_SortRoutine
+Proc D_SortRoutine
 
                 Mov     DS, DiskDataArea
                 Push    DS
@@ -1667,11 +1664,11 @@ D_SortRoutine4:
 D_SortRoutine1:
                 Ret
 
-EndP            D_SortRoutine
+;EndP            D_SortRoutine
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_SortFileNames
+Proc D_SortFileNames
 
                 Xor     CX, CX
                 Mov     DX, CS:NumFiles
@@ -1679,11 +1676,11 @@ Proc            D_SortFileNames
 
                 Ret
 
-EndP            D_SortFileNames
+;EndP            D_SortFileNames
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_SortDirNames
+Proc D_SortDirNames
 
                 Mov     CX, CS:NumFiles
                 Mov     DX, CX
@@ -1692,11 +1689,11 @@ Proc            D_SortDirNames
 
                 Ret
 
-EndP            D_SortDirNames
+;EndP            D_SortDirNames
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_InitLoadModule Far
+Proc D_InitLoadModule Far
 
                 Push    DS
                 Push    ES
@@ -1706,7 +1703,7 @@ Proc            D_InitLoadModule Far
                 Push    CS
                 Pop     DS
                 Pop     ES
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset FileSpecifierDefault
                 Mov     DI, Offset FileSpecifier
@@ -1716,9 +1713,9 @@ Proc            D_InitLoadModule Far
                 Pop     DI
                 Pop     ES
                 Pop     DS
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
-Proc            D_InitLoadModule2 Far
+Proc D_InitLoadModule2 Far
 
                 Cmp     CS:FileSpecifier, 0
                 JE      D_InitLoadModule
@@ -1731,7 +1728,7 @@ Proc            D_InitLoadModule2 Far
                 Push    CS
                 Pop     DS
                 Pop     ES
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     DI, Offset CurrentSearchPos
                 Mov     CX, 14
@@ -1752,20 +1749,20 @@ Proc            D_InitLoadModule2 Far
                 Pop     DS
                 Ret
 
-EndP            D_InitLoadModule2
+;EndP            D_InitLoadModule2
 
-EndP            D_InitLoadModule
-                Assume DS:Nothing
+;EndP            D_InitLoadModule
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_DrawFileWindow Far            ; Layout of filenames in memory
+Proc D_DrawFileWindow Far            ; Layout of filenames in memory
                                                 ; Start at offset 2000
                                                 ; Pointers to filenames at 0
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Call    S_GetDestination
 
@@ -1788,7 +1785,7 @@ D_DrawFileWindow2:
                 Mov     BX, AX          ; BX = filenum
 
                 Mov     DS, DiskDataArea
-                Assume DS:Nothing
+                ;Assume DS:Nothing
 
                 Mov     DI, (3+13*80)*2
                 Mov     CX, 31
@@ -1893,7 +1890,7 @@ D_DrawFileWindow9:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Cmp     NumFiles, 0
                 JE      D_DrawFileWindow7
@@ -1937,7 +1934,7 @@ D_DrawFileWindow12:
                 Add     BX, BX
 
                 Mov     DS, DiskDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     BX, [BX]
                 Mov     SI, [BX+23]
@@ -1946,7 +1943,7 @@ D_DrawFileWindow12:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Add     SI, SI
                 Mov     SI, [FormatNames+SI]
@@ -1975,7 +1972,7 @@ D_DrawFileWindow13:
 
 D_DrawFileWindow14:
                 Mov     DS, DS:DiskDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     DX, [BX+6]
                 Mov     AX, [BX+4]
@@ -2028,7 +2025,7 @@ D_DrawFileWindow15:                             ; OK, time for a date :)
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     DI, (51+42*80)*2
                 Mov     AX, BX
@@ -2171,16 +2168,16 @@ D_DrawFileWindow27:
 
                 Ret
 
-EndP            D_DrawFileWindow
-                Assume DS:Nothing
+;EndP            D_DrawFileWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_DrawDirectoryWindow Far
+Proc D_DrawDirectoryWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Call    S_GetDestination
 
@@ -2206,7 +2203,7 @@ D_DrawDirectoryWindow2:
                 Mov     DI, (44+13*80)*2
 
                 Mov     DS, DiskDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 D_DrawDirectoryWindow3:
                 Cmp     BX, CS:NumDirectories
@@ -2240,7 +2237,7 @@ D_DrawDirectoryWindow8:
 D_DrawDirectoryWindow4:
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Cmp     NumDirectories, 0
                 JE      D_DrawDirectoryWindow6
@@ -2261,16 +2258,16 @@ D_DrawDirectoryWindow7:
 
                 Ret
 
-EndP            D_DrawDirectoryWindow
-                Assume DS:Nothing
+;EndP            D_DrawDirectoryWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_DrawDriveWindow Far
+Proc D_DrawDriveWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Call    S_GetDestination
 
@@ -2327,12 +2324,12 @@ D_DrawDriveWindow4:
 D_DrawDriveWindow5:
                 Ret
 
-EndP            D_DrawDriveWindow
-                Assume DS:Nothing
+;EndP            D_DrawDriveWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_LoadFileHeader                ; Given DS:SI = filename
+Proc D_LoadFileHeader                ; Given DS:SI = filename
 
                 Push    BP
 
@@ -2439,14 +2436,14 @@ D_LoadFileHeader1:
                 PushF
                 Jmp     D_LoadFileHeader4
 
-EndP            D_LoadFileHeader
+;EndP            D_LoadFileHeader
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_LoadModuleHeader
+Proc D_LoadModuleHeader
 
                 Mov     DS, DiskDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Add     BX, BX
                 Mov     SI, [BX]
@@ -2456,11 +2453,11 @@ Proc            D_LoadModuleHeader
 
                 Ret
 
-EndP            D_LoadModuleHeader
+;EndP            D_LoadModuleHeader
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_LoadSongNames Far             ; Part of idle list.
+Proc D_LoadSongNames Far             ; Part of idle list.
 
                 Call    K_IsAnyKeyDown
                 And     AL, AL
@@ -2472,7 +2469,7 @@ Proc            D_LoadSongNames Far             ; Part of idle list.
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     BX, LoadSongNameCount
                 Cmp     BX, NumFiles
@@ -2495,15 +2492,15 @@ D_LoadSongNames3:
                 Mov     AX, 1                   ; Signify redraw screen
                 Ret
 
-EndP            D_LoadSongNames
+;EndP            D_LoadSongNames
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_PreFileWindow Far
+Proc D_PreFileWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     AX, CurrentFile
                 Sub     AX, TopFile
@@ -2543,16 +2540,16 @@ D_PreFileWindow3:
 
                 Ret
 
-EndP            D_PreFileWindow
-                Assume DS:Nothing
+;EndP            D_PreFileWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_PreDirectoryWindow Far
+Proc D_PreDirectoryWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     AX, CurrentDirectory
                 Sub     AX, TopDirectory
@@ -2575,16 +2572,16 @@ D_PreDirectoryWindow1:
 
                 Ret
 
-EndP            D_PreDirectoryWindow
-                Assume DS:Nothing
+;EndP            D_PreDirectoryWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_PreDriveWindow Far
+Proc D_PreDriveWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     AL, CurrentDrive
                 Sub     AL, TopDrive
@@ -2605,19 +2602,19 @@ D_PreDriveWindow1:
 
                 Ret
 
-EndP            D_PreDriveWindow
-                Assume DS:Nothing
+;EndP            D_PreDriveWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_LoadFileOpenErrorMsg Far
+Proc D_LoadFileOpenErrorMsg Far
 
                 Mov     DI, (4+16*80)*2
                 Mov     AH, 4
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset OpenErrorMsg
 
@@ -2626,12 +2623,12 @@ Proc            D_LoadFileOpenErrorMsg Far
                 Mov     AX, 1
                 Ret
 
-EndP            D_LoadFileOpenErrorMsg
-                Assume DS:Nothing
+;EndP            D_LoadFileOpenErrorMsg
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_Decompress16BitData
+Proc D_Decompress16BitData
 
 ; Register usage:
 ; BX = LastValue
@@ -2740,11 +2737,11 @@ D_Decompress16BitB:
 
                 Jmp     D_Decompress16BitData1
 
-EndP            D_Decompress16BitData
+;EndP            D_Decompress16BitData
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_Decompress8BitData    ; DS:SI = source
+Proc D_Decompress8BitData    ; DS:SI = source
                                         ; ES:DI = destination
                                         ; CX = count.
 
@@ -2857,14 +2854,14 @@ D_Decompress8BitC:                      ; 9 bit representation
 
                 Jmp     D_Decompress8BitD
 
-EndP            D_Decompress8BitData
+;EndP            D_Decompress8BitData
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 TempData                DW      0
 DisableStereoMenu       DB      0
 
-Proc            D_LoadSampleData                ; DS:SI points to sample header
+Proc D_LoadSampleData                ; DS:SI points to sample header
                                                 ; AX = sample number (0 based)
 
                 Push    DS
@@ -2985,10 +2982,10 @@ NotTX12BitSampleA:
 
                 Mov     DX, Pattern
                 Mov     DS, DX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     DS, Word Ptr [PatternDataArea]
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Xor     DX, DX
                 Mov     CX, 2
@@ -3257,11 +3254,11 @@ D_LoadSampleData1:
                 StC
                 Ret
 
-EndP            D_LoadSampleData
+;EndP            D_LoadSampleData
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ConvertWriteData        ; DS:DX points to data
+Proc ConvertWriteData        ; DS:DX points to data
                                         ; BP = 1, convert, BP = 2, 16-bit
                                         ; CX = number of bytes
 
@@ -3296,11 +3293,11 @@ ConvertWriteData1:
                 PopF
                 Ret
 
-EndP            ConvertWriteData
+;EndP            ConvertWriteData
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_SaveSampleDataConvert         ; AX = sample number (1 based)
+Proc D_SaveSampleDataConvert         ; AX = sample number (1 based)
 
                 PushAD
                 Push    DS
@@ -3357,11 +3354,11 @@ D_SaveSampleDataConvert2:
                 PopAD
                 Ret
 
-EndP            D_SaveSampleDataConvert
+;EndP            D_SaveSampleDataConvert
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            WriteBits               ; CH = bits to write
+Proc WriteBits               ; CH = bits to write
                                         ; CL = current bit.
                                         ; BX = data.
                                         ; ES:DI = output buffer.
@@ -3393,7 +3390,7 @@ D_WriteBits1:
 D_WriteBits2:
                 Ret
 
-EndP            WriteBits
+;EndP            WriteBits
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
@@ -3403,7 +3400,7 @@ EndP            WriteBits
 ;     PatternDataArea:0 = bufferlength
 ;     PatternDataArea:2 = outputbuffer
 
-Proc            D_SaveSampleDataCompressed      ; AX = sample number, 1 based.
+Proc D_SaveSampleDataCompressed      ; AX = sample number, 1 based.
 
                 PushAD
                 Push    DS
@@ -3450,7 +3447,7 @@ D_SaveSampleCompressed8BitSample:
                 Mov     ES, CS:DiskDataArea
                 Mov     DI, 16384       ; Offset in DiskDataArea
 
-IF DDCOMPRESS
+%IF  DDCOMPRESS
                 Mov     DX, 1
 
                 Cmp     CS:SaveFormat, 3
@@ -3460,7 +3457,7 @@ IF DDCOMPRESS
 
 D_SaveFormatNot215:
 
-ENDIF
+%ENDIF 
 
 D_CalculateDeltas:
                 Xor     AH, AH          ; AH = lastdata.
@@ -3488,7 +3485,7 @@ D_Calculate8BitDeltas:
 
 D_CalculateDeltaEnd:
 
-IF DDCOMPRESS
+%IF  DDCOMPRESS
                 Mov     DI, 16384
                 Pop     CX
                 Push    ES
@@ -3501,11 +3498,11 @@ IF DDCOMPRESS
 
                 Push    Pattern
                 Pop     ES
-                        Assume ES:Pattern
+                        ;Assume ES:Pattern
                 Mov     ES, PatternDataArea
-                        Assume ES:Nothing
+                        ;Assume ES:Nothing
 
-ELSE
+%ELSE
 
                 Pop     CX
 
@@ -3516,15 +3513,15 @@ ELSE
 
                 Push    Pattern
                 Pop     ES
-                        Assume ES:Pattern
+                        ;Assume ES:Pattern
                 Mov     ES, PatternDataArea
-                        Assume ES:Nothing
+                        ;Assume ES:Nothing
 
                 Push    CX
 
                 Mov     SI, 16384
                 Mov     DI, SI
-ENDIF
+%ENDIF 
 
                 Mov     BH, 40
                 Test    BP, 1
@@ -3971,11 +3968,11 @@ D_SaveSampleDataCompressed2:
                 PopAD
                 Ret
 
-EndP            D_SaveSampleDataCompressed
+;EndP            D_SaveSampleDataCompressed
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_SaveSampleData                ; AX = sample number (1 based)
+Proc D_SaveSampleData                ; AX = sample number (1 based)
 
                 PushAD
                 Push    DS
@@ -4022,16 +4019,16 @@ D_SaveSampleData2:
 
                 Ret
 
-EndP            D_SaveSampleData
+;EndP            D_SaveSampleData
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-include it_timer.inc
-include it_d_rm.inc
+%include "it_timer.inc"
+%include "it_d_rm.inc"
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_CheckOverWrite                ; DS:DX points to filename
+Proc D_CheckOverWrite                ; DS:DX points to filename
                                                 ; Returns Carry set if not ok
 
                 Mov     CX, 6
@@ -4065,11 +4062,11 @@ D_CheckOverWrite2:
                 Ret
 
 
-EndP            D_CheckOverWrite
+;EndP            D_CheckOverWrite
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_PostFileSaveWindow Far
+Proc D_PostFileSaveWindow Far
 
 ;                Cmp     DX, 13
                 Cmp     CX, 11Ch
@@ -4094,7 +4091,7 @@ D_PostFileSaveWindow1:
 D_PostFileSaveWindow2:
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     DX, Offset SaveFileName
                 Call    D_CheckOverWrite
@@ -4112,12 +4109,12 @@ D_PostFileSaveWindow3:
 D_PostFileSaveWindow4:
                 Jmp     D_SaveFileS3MModule
 
-EndP            D_PostFileSaveWindow
-                Assume DS:Nothing
+;EndP            D_PostFileSaveWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_PostFileLoadWindow Far
+Proc D_PostFileLoadWindow Far
 
 ;                Cmp     DX, 13
                 Cmp     CX, 11Ch
@@ -4139,8 +4136,8 @@ D_PostFileLoadWindowLink:
                 Call    D_GetSongNameModuleType
                 Pop     DI
 
-IF TUTORIAL
-ELSE
+%IF  TUTORIAL
+%ELSE
                 Mov     BX, CS:CurrentFile
                 Add     BX, BX
                 Mov     BX, [BX]
@@ -4169,21 +4166,21 @@ ELSE
 
                 Cmp     AX, 18
                 JE      D_LoadFileMTMModule
-ENDIF
+%ENDIF 
 
 D_PostFileLoadWindow1:
                 Mov     AX, 1
                 Ret
 
-EndP            D_PostFileLoadWindow
+;EndP            D_PostFileLoadWindow
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_PostFileWindow Far
+Proc D_PostFileWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset FileWindowKeys
                 Call    M_FunctionDivider
@@ -4269,16 +4266,16 @@ D_PostFileWindow20:
                 Xor     AX, AX
                 Ret
 
-EndP            D_PostFileWindow
-                Assume DS:Nothing
+;EndP            D_PostFileWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_PostDirectoryWindow Far
+Proc D_PostDirectoryWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume  DS:Disk
+                        ;Assume  DS:Disk
 
                 Mov     SI, Offset DirectoryWindowKeys
                 Call    M_FunctionDivider
@@ -4353,16 +4350,16 @@ D_PostDirectoryWindow20:
                 Xor     AX, AX
                 Ret
 
-EndP            D_PostDirectoryWindow
-                Assume DS:Nothing
+;EndP            D_PostDirectoryWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_PostDriveWindow Far
+Proc D_PostDriveWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset DriveWindowKeys
                 Call    M_FunctionDivider
@@ -4374,16 +4371,16 @@ D_PostDriveWindow1:
                 Xor     AX, AX
                 Ret
 
-EndP            D_PostDriveWindow
-                Assume DS:Nothing
+;EndP            D_PostDriveWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_PostSaveDriveWindow Far
+Proc D_PostSaveDriveWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset SaveDriveWindowKeys
                 Call    M_FunctionDivider
@@ -4395,16 +4392,16 @@ D_PostSaveDriveWindow1:
                 Xor     AX, AX
                 Ret
 
-EndP            D_PostSaveDriveWindow
-                Assume DS:Nothing
+;EndP            D_PostSaveDriveWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_NewSpecifier Far
+Proc D_NewSpecifier Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Xor     BX, BX
                 Mov     SI, Offset FileSpecifier
@@ -4509,12 +4506,12 @@ D_NewSpecifier2:
                 Mov     AX, 1
                 Ret
 
-EndP            D_NewSpecifier
-                Assume DS:Nothing
+;EndP            D_NewSpecifier
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_NewDirectory Far
+Proc D_NewDirectory Far
 
 ;                Mov     SI, Offset SongDirectory
 ;                Push    CS
@@ -4534,11 +4531,11 @@ D_NewDirectory1:
                 Mov     AX, 1
                 Ret
 
-EndP            D_NewDirectory
+;EndP            D_NewDirectory
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_ClearFileSpecifier Far
+Proc D_ClearFileSpecifier Far
 
                 Push    ES
                 Push    DI
@@ -4559,15 +4556,15 @@ Proc            D_ClearFileSpecifier Far
 
                 Ret
 
-EndP            D_ClearFileSpecifier
+;EndP            D_ClearFileSpecifier
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_SaveModule Far
+Proc D_SaveModule Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset FileSpecifier
                 Cmp     Byte Ptr [SI], 0
@@ -4681,12 +4678,12 @@ D_SaveModule12:
                 Jmp     D_PostFileSaveWindow2
 ;                Jmp     D_SaveFileITModule
 
-EndP            D_SaveModule
-                Assume DS:Nothing
+;EndP            D_SaveModule
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_NoSaveMessage Far
+Proc D_NoSaveMessage Far
 
                 Call    S_SaveScreen
 
@@ -4699,11 +4696,11 @@ Proc            D_NoSaveMessage Far
                 Mov     AX, 1
                 Ret
 
-EndP            D_NoSaveMessage
+;EndP            D_NoSaveMessage
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_SaveBlock             ; DS:DX points to buffer
+Proc D_SaveBlock             ; DS:DX points to buffer
                                         ; BX = file handle
                                         ; CX = number of bytes
 
@@ -4742,11 +4739,11 @@ D_SaveBlock1:
 
                 Ret
 
-EndP            D_SaveBlock
+;EndP            D_SaveBlock
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_DeleteIfError         ; DS:DX = filename
+Proc D_DeleteIfError         ; DS:DX = filename
 
                 PushF
 
@@ -4764,11 +4761,11 @@ D_DeleteIfError1:
                 PopF
                 Ret
 
-EndP            D_DeleteIfError
+;EndP            D_DeleteIfError
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_UpdateFileName
+Proc D_UpdateFileName
 
                 Push    CS
                 Push    CS
@@ -4828,19 +4825,19 @@ D_UpdateFileName6:
 D_UpdateFileNameEnd:
                 Ret
 
-EndP            D_UpdateFileName
+;EndP            D_UpdateFileName
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-include it_d_wm.inc
+%include "it_d_wm.inc"
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_InitLoadSamples Far
+Proc D_InitLoadSamples Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset SampleDirectory
                 Call    D_SetDriveDirectory     ; DS:SI points to cur dir.
@@ -4877,7 +4874,7 @@ D_InitLoadSamples4:
                 Mov     CX, 4                   ; Integer containing number
                                                 ; of sample entries...
                 Mov     DS, DiskDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Xor     DX, DX
                 Int     21h
@@ -4931,7 +4928,7 @@ D_InitLoadSampleCacheFileOK:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     LoadSampleNameCount, SI
                 Mov     NumSamples, SI
@@ -4970,7 +4967,7 @@ D_InitLoadSamples3:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Call    DeleteSampleCacheFile
 
@@ -4980,12 +4977,12 @@ D_InitLoadSamples1:
 D_InitLoadSamples2:
                 Ret
 
-EndP            D_InitLoadSamples
-                Assume DS:Nothing
+;EndP            D_InitLoadSamples
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DeleteSampleCacheFile
+Proc DeleteSampleCacheFile
 
                 Push    DS
 
@@ -5000,11 +4997,11 @@ Proc            DeleteSampleCacheFile
 
                 Ret
 
-EndP            DeleteSampleCachefile
+;EndP            DeleteSampleCachefile
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DeleteInstrumentCacheFile
+Proc DeleteInstrumentCacheFile
 
                 Push    DS
 
@@ -5019,11 +5016,11 @@ Proc            DeleteInstrumentCacheFile
 
                 Ret
 
-EndP            DeleteInstrumentCachefile
+;EndP            DeleteInstrumentCachefile
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_GetNumFiles   ; DS = DiskDaraArea
+Proc D_GetNumFiles   ; DS = DiskDaraArea
 
                 Mov     DS, CS:DiskDataArea
 
@@ -5117,11 +5114,11 @@ D_GetNumFilesError:
                 Ret
 
 
-EndP            D_GetNumFiles
+;EndP            D_GetNumFiles
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_LoadSampleFiles
+Proc D_LoadSampleFiles
 
                 Mov     DS, CS:DiskDataArea
                 Push    DS
@@ -5253,11 +5250,11 @@ D_LoadSampleFiles8:
 
                 RetN
 
-EndP            D_LoadSampleFiles
+;EndP            D_LoadSampleFiles
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_DrawLoadSampleWindow Far              ; Has to handle
+Proc D_DrawLoadSampleWindow Far              ; Has to handle
                                                         ; 1) Sample list
                                                         ; 2) Sample info box
                                                         ; 3) WaveForm stuff
@@ -5311,7 +5308,7 @@ D_DrawLoadSampleWindow28:
 D_DrawLoadSampleWindow31:
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Call    S_GetDestination
 
@@ -5367,7 +5364,7 @@ D_DrawLoadSampleWindow3:
 
 D_DrawLoadSampleWindow9:
                 Mov     DS, DiskDataArea
-                Assume DS:Nothing
+                ;Assume DS:Nothing
                 Mov     AX, 96
                 Mul     BX
                 Mov     SI, AX                  ; SI = offset of first sample.
@@ -5719,7 +5716,7 @@ D_DrawLoadSampleWindow27:
 
                 Push    CS                      ; Wave form shit..
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     AX, CurrentSample
                 Cmp     AX, SampleInMemory
@@ -5744,16 +5741,16 @@ D_DrawLoadSampleWindow56:
 D_DrawLoadSampleWindow54:
                 Ret
 
-EndP            D_DrawLoadSampleWindow
-                Assume DS:Nothing
+;EndP            D_DrawLoadSampleWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_PreLoadSampleWindow Far
+Proc D_PreLoadSampleWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     AX, CurrentSample
                 Sub     AX, TopSample
@@ -5785,15 +5782,15 @@ D_PreLoadSample3:
 
                 Ret
 
-EndP            D_PreLoadSampleWindow
+;EndP            D_PreLoadSampleWindow
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_PostLoadSampleWindow Far
+Proc D_PostLoadSampleWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset LSWindowKeys
                 Call    M_FunctionDivider
@@ -5831,14 +5828,14 @@ D_PostLoadSampleWindow2:
 
                 Mov     CX, Pattern
                 Mov     DS, CX
-                                Assume DS:Pattern
+                                ;Assume DS:Pattern
 
                 Mov     AL, 12
                 Mul     BaseOctave
 
                 Push    CS
                 Pop     DS
-                                Assume DS:Disk
+                                ;Assume DS:Disk
 
                 Add     AX, BX
                 Cmp     AX, 119
@@ -5881,16 +5878,16 @@ D_PostLoadSampleWindow3:
                 Xor     AX, AX
                 Ret
 
-EndP            D_PostLoadSampleWindow
-                Assume DS:Nothing
+;EndP            D_PostLoadSampleWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_PostViewSampleLibrary Far
+Proc D_PostViewSampleLibrary Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset LSViewWindowKeys
                 Call    M_FunctionDivider
@@ -5898,15 +5895,15 @@ Proc            D_PostViewSampleLibrary Far
 
                 Jmp     [SI]
 
-EndP            D_PostViewSampleLibrary
+;EndP            D_PostViewSampleLibrary
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_LSDrawDriveWindow Far
+Proc D_LSDrawDriveWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Call    S_GetDestination
 
@@ -5963,16 +5960,16 @@ D_LSDrawDriveWindow4:
 D_LSDrawDriveWindow5:
                 Ret
 
-EndP            D_LSDrawDriveWindow
-                Assume DS:Nothing
+;EndP            D_LSDrawDriveWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_LSPreDriveWindow Far
+Proc D_LSPreDriveWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     AL, CurrentDrive
                 Sub     AL, TopDrive
@@ -5993,16 +5990,16 @@ D_LSPreDriveWindow1:
 
                 Ret
 
-EndP            D_LSPreDriveWindow
-                Assume DS:Nothing
+;EndP            D_LSPreDriveWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_LSPostDriveWindow Far
+Proc D_LSPostDriveWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset LSDriveWindowKeys
                 Call    M_FunctionDivider
@@ -6014,16 +6011,16 @@ D_LSPostDriveWindow1:
                 Xor     AX, AX
                 Ret
 
-EndP            D_LSPostDriveWindow
-                Assume DS:Nothing
+;EndP            D_LSPostDriveWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_LIDrawDriveWindow Far
+Proc D_LIDrawDriveWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Call    S_GetDestination
 
@@ -6063,16 +6060,16 @@ D_LIDrawDriveWindow4:
 D_LIDrawDriveWindow5:
                 Ret
 
-EndP            D_LIDrawDriveWindow
-                Assume DS:Nothing
+;EndP            D_LIDrawDriveWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_LIPreDriveWindow Far
+Proc D_LIPreDriveWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     AL, CurrentDrive
                 Add     AL, 16
@@ -6093,16 +6090,16 @@ D_LIPreDriveWindow1:
 
                 Ret
 
-EndP            D_LIPreDriveWindow
-                Assume DS:Nothing
+;EndP            D_LIPreDriveWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_LIPostDriveWindow Far
+Proc D_LIPostDriveWindow Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset LIDriveWindowKeys
                 Call    M_FunctionDivider
@@ -6114,17 +6111,17 @@ D_LIPostDriveWindow1:
                 Xor     AX, AX
                 Ret
 
-EndP            D_LIPostDriveWindow
-                Assume DS:Nothing
+;EndP            D_LIPostDriveWindow
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_LoadSampleHeader              ; Given BX = sample number.
+Proc D_LoadSampleHeader              ; Given BX = sample number.
 
                 Push    BX
 
                 Mov     DS, DiskDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     AX, 96
                 Mul     BX
@@ -6136,16 +6133,16 @@ Proc            D_LoadSampleHeader              ; Given BX = sample number.
 
                 Ret
 
-EndP            D_LoadSampleHeader
+;EndP            D_LoadSampleHeader
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_LoadInstrumentHeader          ; Given BX = instrument num
+Proc D_LoadInstrumentHeader          ; Given BX = instrument num
 
                 Push    BX
 
                 Mov     DS, DiskDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     AX, 48
                 Mul     BX
@@ -6158,20 +6155,20 @@ Proc            D_LoadInstrumentHeader          ; Given BX = instrument num
 
                 Ret
 
-EndP            D_LoadInstrumentHeader
+;EndP            D_LoadInstrumentHeader
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-include it_d_inf.inc
+%include "it_d_inf.inc"
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_SaveSampleCacheFile           ; Assumes DS=Disk
+Proc D_SaveSampleCacheFile           ; Assumes DS=Disk
 
                 Push    CS
                 Pop     DS
 
-                Assume DS:Disk
+                ;Assume DS:Disk
 
                 Test    DiskOptions, 2
                 JNZ     D_SaveSampleCacheFile1
@@ -6198,7 +6195,7 @@ Proc            D_SaveSampleCacheFile           ; Assumes DS=Disk
                 Mov     AH, 40h
                 Xor     DX, DX
                 Mov     DS, DiskDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
                 Int     21h                     ; Write cache file!
 
                                                 ; Set date and time...
@@ -6212,23 +6209,23 @@ Proc            D_SaveSampleCacheFile           ; Assumes DS=Disk
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
 D_SaveSampleCacheFile1:
                 Mov     SampleCacheFileComplete, 1
 
                 Ret
 
-EndP            D_SaveSampleCacheFile
-                Assume DS:Nothing
+;EndP            D_SaveSampleCacheFile
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_SaveInstrumentCacheFile           ; Assumes DS=Disk
+Proc D_SaveInstrumentCacheFile           ; Assumes DS=Disk
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Test    DiskOptions, 2
                 JNZ     D_SaveInstrumentCacheFile1
@@ -6252,7 +6249,7 @@ Proc            D_SaveInstrumentCacheFile           ; Assumes DS=Disk
                 Mov     AH, 40h
                 Xor     DX, DX
                 Mov     DS, DiskDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Int     21h                     ; Write cache file!
 
@@ -6267,23 +6264,23 @@ Proc            D_SaveInstrumentCacheFile           ; Assumes DS=Disk
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
 D_SaveInstrumentCacheFile1:
                 Mov     InstrumentCacheFileComplete, 1
 
                 Ret
 
-EndP            D_SaveInstrumentCacheFile
-                Assume DS:Nothing
+;EndP            D_SaveInstrumentCacheFile
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_LoadSampleNames Far
+Proc D_LoadSampleNames Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Cmp     SampleCacheFileComplete, 1
                 JNE     D_LoadSampleNames2
@@ -6321,7 +6318,7 @@ D_LoadSampleNames1:
 D_LoadSampleNames3:
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Inc     LoadSampleNameCount
                 Mov     BX, LoadSampleNameCount
@@ -6339,12 +6336,12 @@ D_LoadSampleNames4:
                 Mov     AX, 1                   ; Signify redraw screen
                 Ret
 
-EndP            D_LoadSampleNames
-                Assume DS:Nothing
+;EndP            D_LoadSampleNames
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_GetLoadSampleVars Far         ; Returns SI with offset of
+Proc D_GetLoadSampleVars Far         ; Returns SI with offset of
 
                 Push    AX
                 Push    DX
@@ -6359,11 +6356,11 @@ Proc            D_GetLoadSampleVars Far         ; Returns SI with offset of
 
                 Ret
 
-EndP            D_GetLoadSampleVars
+;EndP            D_GetLoadSampleVars
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_GotoStartingDirectory Far
+Proc D_GotoStartingDirectory Far
 
                 Push    DS
                 Push    CS
@@ -6375,15 +6372,15 @@ Proc            D_GotoStartingDirectory Far
 
                 Ret
 
-EndP            D_GotoStartingDirectory
+;EndP            D_GotoStartingDirectory
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_SaveDirectoryConfiguration Far
+Proc D_SaveDirectoryConfiguration Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     NoSaveError, 0
                 Mov     CountryTableConfig, 0
@@ -6426,14 +6423,14 @@ D_SaveDirectoryConfiguration1:
                 Mov     AX, 1
                 Ret
 
-EndP            D_SaveDirectoryConfiguration
-                Assume DS:Nothing
+;EndP            D_SaveDirectoryConfiguration
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            FileWindow_Up Far
+Proc FileWindow_Up Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, CurrentFile
                 And     AX, AX
@@ -6445,14 +6442,14 @@ FileWindow_Up1:
                 Mov     AX, 1
                 Ret
 
-EndP            FileWindow_Up
-                Assume  DS:Nothing
+;EndP            FileWindow_Up
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            FileWindow_Down Far
+Proc FileWindow_Down Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, CurrentFile
                 Inc     AX
@@ -6465,14 +6462,14 @@ FileWindow_Down1:
                 Mov     AX, 1
                 Ret
 
-EndP            FileWindow_Down
-                Assume  DS:Nothing
+;EndP            FileWindow_Down
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            FileWindow_PgUp Far
+Proc FileWindow_PgUp Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, CurrentFile
                 Sub     AX, 31
@@ -6486,14 +6483,14 @@ FileWindow_PgUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            FileWindow_PgUp
-                Assume  DS:Nothing
+;EndP            FileWindow_PgUp
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            FileWindow_PgDn Far
+Proc FileWindow_PgDn Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, CurrentFile
                 Add     AX, 31
@@ -6512,70 +6509,70 @@ FileWindow_PgDn1:
                 Mov     AX, 1
                 Ret
 
-EndP            FileWindow_PgDn
-                Assume  DS:Nothing
+;EndP            FileWindow_PgDn
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            FileWindow_Right Far
+Proc FileWindow_Right Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     Word Ptr [ES:DI], 13
 
                 Mov     AX, 1
                 Ret
 
-EndP            FileWindow_Right
-                Assume  DS:Nothing
+;EndP            FileWindow_Right
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            FileWindow_Left Far
+Proc FileWindow_Left Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     Word Ptr [ES:DI], 14
 
                 Mov     AX, 1
                 Ret
 
-EndP            FileWindow_Left
-                Assume  DS:Nothing
+;EndP            FileWindow_Left
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            FileWindow_ShiftTab Far
+Proc FileWindow_ShiftTab Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     Word Ptr [ES:DI], 16
 
                 Mov     AX, 1
                 Ret
 
-EndP            FileWindow_ShiftTab
-                Assume  DS:Nothing
+;EndP            FileWindow_ShiftTab
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            FileWindow_Home Far
+Proc FileWindow_Home Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     CurrentFile, 0
 
                 Mov     AX, 1
                 Ret
 
-EndP            FileWindow_Home
-                Assume  DS:Nothing
+;EndP            FileWindow_Home
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            FileWindow_End Far
+Proc FileWindow_End Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, NumFiles
                 Dec     AX
@@ -6587,14 +6584,14 @@ FileWindow_End1:
                 Mov     AX, 1
                 Ret
 
-EndP            FileWindow_End
-                Assume  DS:Nothing
+;EndP            FileWindow_End
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            FileWindow_DeleteFile Far
+Proc FileWindow_DeleteFile Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Cmp     NumFiles, 0
                 JE      FileWindow_DeleteFile26
@@ -6611,7 +6608,7 @@ Proc            FileWindow_DeleteFile Far
 FileWindow_DeleteFile24:                             ; Time to kill the sucker...
                 Mov     DS, CS:DiskDataArea
                 Mov     BX, CS:CurrentFile
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Add     BX, BX
                 Mov     DX, [BX]
@@ -6625,7 +6622,7 @@ FileWindow_DeleteFile24:                             ; Time to kill the sucker..
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     DI, CurrentFile
                 Mov     CX, DI
@@ -6665,14 +6662,14 @@ FileWindow_DeleteFile26:
                 Mov     AX, 1
                 Ret
 
-EndP            FileWindow_DeleteFile
-                Assume DS:Nothing
+;EndP            FileWindow_DeleteFile
+                ;Assume DS:Nothing
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
-Proc            DirectoryWindow_Up Far
+Proc DirectoryWindow_Up Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, CurrentDirectory
                 And     AX, AX
@@ -6684,13 +6681,13 @@ DirectoryWindow_Up1:
                 Mov     AX, 1
                 Ret
 
-EndP            DirectoryWindow_Up
+;EndP            DirectoryWindow_Up
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DirectoryWindow_Down Far
+Proc DirectoryWindow_Down Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, CurrentDirectory
                 Inc     AX
@@ -6703,13 +6700,13 @@ DirectoryWindow_Down1:
                 Mov     AX, 1
                 Ret
 
-EndP            DirectoryWindow_Down
+;EndP            DirectoryWindow_Down
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DirectoryWindow_PgUp Far
+Proc DirectoryWindow_PgUp Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, CurrentDirectory
                 Sub     AX, 21
@@ -6720,13 +6717,13 @@ Proc            DirectoryWindow_PgUp Far
                 Mov     AX, 1
                 Ret
 
-EndP            DirectoryWindow_PgUp
+;EndP            DirectoryWindow_PgUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DirectoryWindow_PgDn Far
+Proc DirectoryWindow_PgDn Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, CurrentDirectory
                 Add     AX, 21
@@ -6738,26 +6735,26 @@ Proc            DirectoryWindow_PgDn Far
                 Mov     AX, 1
                 Ret
 
-EndP            DirectoryWindow_PgDn
+;EndP            DirectoryWindow_PgDn
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DirectoryWindow_Home Far
+Proc DirectoryWindow_Home Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     CurrentDirectory, 0
 
                 Mov     AX, 1
                 Ret
 
-EndP            DirectoryWindow_Home
+;EndP            DirectoryWindow_Home
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DirectoryWindow_End Far
+Proc DirectoryWindow_End Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, NumDirectories
                 Dec     AX
@@ -6769,26 +6766,26 @@ DirectoryWindow_End1:
                 Mov     AX, 1
                 Ret
 
-EndP            DirectoryWindow_End
+;EndP            DirectoryWindow_End
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DirectoryWindow_Left Far
+Proc DirectoryWindow_Left Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     Word Ptr [ES:DI], 12
 
                 Mov     AX, 1
                 Ret
 
-EndP            DirectoryWindow_Left
+;EndP            DirectoryWindow_Left
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DirectoryWindow_Enter Far
+Proc DirectoryWindow_Enter Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Cmp     NumDirectories, 0
                 JE      DirectoryWindow_Enter2
@@ -6797,7 +6794,7 @@ Proc            DirectoryWindow_Enter Far
                 Add     BX, NumFiles
 
                 Mov     DS, DiskDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Add     BX, BX
                 Mov     DX, [BX]
@@ -6807,7 +6804,7 @@ Proc            DirectoryWindow_Enter Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset SongDirectory
                 Call    D_GetDriveDirectory
@@ -6832,13 +6829,13 @@ DirectoryWindow_Enter2:
                 Xor     AX, AX
                 Ret
 
-EndP            DirectoryWindow_Enter
+;EndP            DirectoryWindow_Enter
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
-Proc            DriveWindow_Up Far
+Proc DriveWindow_Up Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AL, CurrentDrive
                 And     AL, AL
@@ -6850,14 +6847,14 @@ DriveWindow_Up1:
                 Mov     AX, 1
                 Ret
 
-EndP            DriveWindow_Up
-                Assume  DS:Nothing
+;EndP            DriveWindow_Up
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DriveWindow_Down Far
+Proc DriveWindow_Down Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AL, CurrentDrive
                 Inc     AX
@@ -6870,56 +6867,56 @@ DriveWindow_Down1:
                 Mov     AX, 1
                 Ret
 
-EndP            DriveWindow_Down
-                Assume  DS:Nothing
+;EndP            DriveWindow_Down
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DriveWindow_Tab Far
+Proc DriveWindow_Tab Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     Word Ptr [ES:DI], 15
 
                 Mov     AX, 1
                 Ret
 
-EndP            DriveWindow_Tab
-                Assume  DS:Nothing
+;EndP            DriveWindow_Tab
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LIDriveWindow_Tab Far
+Proc LIDriveWindow_Tab Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     Word Ptr [ES:DI], 5
 
                 Mov     AX, 1
                 Ret
 
-EndP            LIDriveWindow_Tab
-                Assume  DS:Nothing
+;EndP            LIDriveWindow_Tab
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            SaveDriveWindow_Tab Far
+Proc SaveDriveWindow_Tab Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     Word Ptr [ES:DI], 18
 
                 Mov     AX, 1
                 Ret
 
-EndP            SaveDriveWindow_Tab
-                Assume  DS:Nothing
+;EndP            SaveDriveWindow_Tab
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DriveWindow_Enter Far
+Proc DriveWindow_Enter Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     BL, CurrentDrive
                 Xor     BH, BH
@@ -6950,14 +6947,14 @@ DriveWindow_Enter1:
                 Mov     AX, 1
                 Ret
 
-EndP            DriveWindow_Enter
-                Assume  DS:Nothing
+;EndP            DriveWindow_Enter
+                ;Assume  DS:Nothing
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
-Proc            LS_DriveWindow_Enter Far
+Proc LS_DriveWindow_Enter Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     BL, CurrentDrive
                 Xor     BH, BH
@@ -6980,13 +6977,13 @@ Proc            LS_DriveWindow_Enter Far
                 Mov     AX, 1
                 Ret
 
-EndP            LS_DriveWindow_Enter
+;EndP            LS_DriveWindow_Enter
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
-Proc            LI_DriveWindow_Enter Far
+Proc LI_DriveWindow_Enter Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     BL, CurrentDrive
                 Xor     BH, BH
@@ -7009,22 +7006,22 @@ Proc            LI_DriveWindow_Enter Far
                 Mov     AX, 1
                 Ret
 
-EndP            LI_DriveWindow_Enter
+;EndP            LI_DriveWindow_Enter
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LSDriveWindow_Right Far
+Proc LSDriveWindow_Right Far
 
                 Mov     Word Ptr [ES:DI], 17
 
                 Mov     AX, 1
                 Ret
 
-EndP            LSDriveWindow_Right
+;EndP            LSDriveWindow_Right
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
-Proc            LoadSample              ; AX = Sample number
+Proc LoadSample              ; AX = Sample number
                                         ; DS:SI points to sample header.
                 Call    PE_SaveCurrentPattern
 
@@ -7135,17 +7132,17 @@ LoadSample1:
                 PopF
                 Ret
 
-EndP            LoadSample
+;EndP            LoadSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-include it_d_ris.inc
+%include "it_d_ris.inc"
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LSViewWindow_Enter Far
+Proc LSViewWindow_Enter Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Cmp     NumSamples, 0
                 JE      LSViewWindow_Enter1
@@ -7153,7 +7150,7 @@ Proc            LSViewWindow_Enter Far
                 Mov     AX, 96
                 Mul     CurrentSample
                 Mov     SI, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     DS, DiskDataArea
                 Mov     DL, [DS:SI+88]
@@ -7166,13 +7163,13 @@ Proc            LSViewWindow_Enter Far
                 Mov     AX, 1
                 Ret
 
-EndP            LSViewWindow_Enter
+;EndP            LSViewWindow_Enter
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LSWindow_Enter  Far
+Proc LSWindow_Enter  Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Cmp     NumSamples, 0
                 JE      LSWindow_Enter2
@@ -7180,7 +7177,7 @@ Proc            LSWindow_Enter  Far
                 Mov     AX, 96
                 Mul     CurrentSample
                 Mov     SI, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     DS, DiskDataArea
                 Mov     DX, [DS:SI+88]          ; Also get DH = InsampleChannels
@@ -7204,7 +7201,7 @@ LSViewWindow_Enter1:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset SampleDirectory
                 Call    D_GetDriveDirectory
@@ -7212,7 +7209,7 @@ LSViewWindow_Enter1:
 LSWindow_EnterInModuleError:
                 Mov     SamplesInModule, 0
                 Call    D_InitLoadSamples
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
                 Mov     CS:CurrentSample, 0
 
                 Mov     AX, 1
@@ -7238,7 +7235,7 @@ LSViewWindow_Enter2:
                                                 ; Open file
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     CurrentSample, 0
 
@@ -7257,7 +7254,7 @@ LSWindow_EnterLoadInSampleData:
                 Mov     NumSamples, 1
 
                 Mov     DS, DiskDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Push    DS
                 Pop     ES
@@ -7272,7 +7269,7 @@ LSWindow_EnterLoadInSampleData:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Xor     DI, DI
                 Mov     SI, Offset ExitLibraryDirectory
@@ -7292,7 +7289,7 @@ LSWindow_EnterLoadInSampleData:
                 Mov     AX, 1
                 Ret
 
-                Assume DS:Nothing
+                ;Assume DS:Nothing
 
 LSWindow_EnterSample:
                 Call    Music_Stop
@@ -7308,7 +7305,7 @@ LSWindow_EnterSample:
                 Mov     AX, 99                  ; Release sample!
                 Call    Music_ReleaseSample
 
-                Xor     DX, DX                  ; Assume don't call.
+                Xor     DX, DX                  ; ;Assume don't call.
 
                 Call    Music_GetInstrumentMode
                 JZ      LSWindow_Enter4         ; Sample mode!
@@ -7320,13 +7317,13 @@ LSWindow_EnterSample:
                 Push    DS
                 Push    SI
 
-                Mov     CX, 4                   ; Assume Not OK
+                Mov     CX, 4                   ; ;Assume Not OK
 
                 Call    I_GetSampleOffset       ; DS:BX points to sample.
                 Test    Byte Ptr [BX+12h], 1
                 JNZ     LSWindow_Enter5
 
-                Mov     CX, 3                   ; Assume OK.
+                Mov     CX, 3                   ; ;Assume OK.
 
 LSWindow_Enter5:
                 Mov     DI, Offset O1_InitInstrument
@@ -7345,10 +7342,10 @@ LSWindow_Enter4:
                 Pop     CX
                 Xor     DX, DX
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 NetworkSendSample
                 Call    Network_QueueSampleData
-ENDIF
+%ENDIF 
 
                 Pop     DX
 
@@ -7375,14 +7372,14 @@ LSWindow_Enter2:
                 Mov     AX, 1
                 Ret
 
-EndP            LSWindow_Enter
-                Assume  DS:Nothing
+;EndP            LSWindow_Enter
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LSWindow_Space Far
+Proc LSWindow_Space Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Cmp     NumSamples, 0
                 JE      LSViewWindow_Enter1
@@ -7390,7 +7387,7 @@ Proc            LSWindow_Space Far
                 Mov     AX, 96
                 Mul     CurrentSample
                 LEA     SI, [EAX+14h]
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Push    SI
 
@@ -7436,7 +7433,7 @@ LS_WindowSpace3:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset SampleName
                 Mov     CX, 26
@@ -7447,16 +7444,16 @@ LS_WindowSpace4:
                 Mov     AX, 1
                 Ret
 
-EndP            LSWindow_Space
+;EndP            LSWindow_Space
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LSWindow_Up  Far
+Proc LSWindow_Up  Far
 
                 Call    CheckSampleModified
                 JC      LSWindow_Up1
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, CurrentSample
                 And     AX, AX
@@ -7468,17 +7465,17 @@ LSWindow_Up1:
                 Mov     AX, 1
                 Ret
 
-EndP            LSWindow_Up
-                Assume  DS:Nothing
+;EndP            LSWindow_Up
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LSWindow_Down  Far
+Proc LSWindow_Down  Far
 
                 Call    CheckSampleModified
                 JC      LSWindow_Down1
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, CurrentSample
 
@@ -7492,17 +7489,17 @@ LSWindow_Down1:
                 Mov     AX, 1
                 Ret
 
-EndP            LSWindow_Down
-                Assume  DS:Nothing
+;EndP            LSWindow_Down
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LSWindow_PgUp   Far
+Proc LSWindow_PgUp   Far
 
                 Call    CheckSampleModified
                 JC      LSWindow_PgUp1
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, CurrentSample
 
@@ -7515,17 +7512,17 @@ LSWindow_PgUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            LSWindow_PgUp
-                Assume  DS:Nothing
+;EndP            LSWindow_PgUp
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LSWindow_PgDn   Far
+Proc LSWindow_PgDn   Far
 
                 Call    CheckSampleModified
                 JC      LSWindow_PgDn1
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, CurrentSample
 
@@ -7539,17 +7536,17 @@ LSWindow_PgDn1:
                 Mov     AX, 1
                 Ret
 
-EndP            LSWindow_PgDn
-                Assume  DS:Nothing
+;EndP            LSWindow_PgDn
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LSWindow_Home   Far
+Proc LSWindow_Home   Far
 
                 Call    CheckSampleModified
                 JC      LSWindow_Home1
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     CurrentSample, 0
 
@@ -7557,17 +7554,17 @@ LSWindow_Home1:
                 Mov     AX, 1
                 Ret
 
-EndP            LSWindow_Home
-                Assume  DS:Nothing
+;EndP            LSWindow_Home
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LSWindow_End    Far
+Proc LSWindow_End    Far
 
                 Call    CheckSampleModified
                 JC      LSWindow_End1
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, NumSamples
 
@@ -7580,12 +7577,12 @@ LSWindow_End1:
                 Mov     AX, 1
                 Ret
 
-EndP            LSWindow_End
-                Assume  DS:Nothing
+;EndP            LSWindow_End
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_LSCheckLoopValues Far
+Proc D_LSCheckLoopValues Far
 
                 Call    D_GetLoadSampleVars             ; DS:SI points to thing
 
@@ -7615,11 +7612,11 @@ D_LSCheckLoopValues1:
 
                 Ret
 
-EndP            D_LSCheckLoopValues
+;EndP            D_LSCheckLoopValues
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_LSCheckSusLoopValues Far
+Proc D_LSCheckSusLoopValues Far
 
                 Call    D_GetLoadSampleVars             ; DS:SI points to thing
 
@@ -7649,15 +7646,15 @@ D_LSCheckSusLoopValues1:
 
                 Ret
 
-EndP            D_LSCheckSusLoopValues
+;EndP            D_LSCheckSusLoopValues
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_SaveSong Far
+Proc D_SaveSong Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset SongDirectory
                 Call    D_SetDriveDirectory     ; DS:SI points to cur dir.
@@ -7710,16 +7707,16 @@ D_SaveSong4:
                 JE      D_SaveFileS3MModule
                 Jmp     D_SaveFileITModule
 
-EndP            D_SaveSong
-                Assume DS:Nothing
+;EndP            D_SaveSong
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_PreSaveSample
+Proc D_PreSaveSample
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     NoSaveError, 0
 
@@ -7729,7 +7726,7 @@ Proc            D_PreSaveSample
                 Call    PE_GetLastInstrument
                 Call    Music_GetSongSegment
                 Mov     DS, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     SI, BX
                 Add     SI, SI
@@ -7751,16 +7748,16 @@ D_PreSaveSample1:
                 StC
                 Ret
 
-EndP            D_PreSaveSample
+;EndP            D_PreSaveSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_SaveSample Far
+Proc D_SaveSample Far
 
                 Call    D_PreSaveSample
                 JC      D_SaveSample2
 
-Proc            D_SaveSampleInternal Far
+Proc D_SaveSampleInternal Far
                                                 ; OK to save. DS:SI points to
                                                 ; structure, BX = sample num
                 Mov     ES, CS:DiskDataArea
@@ -7819,20 +7816,20 @@ D_SaveSampleEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            D_SaveSampleInternal
+;EndP            D_SaveSampleInternal
 
-EndP            D_SaveSample
+;EndP            D_SaveSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_SaveRawSample Far
-                Assume DS:Disk
+Proc D_SaveRawSample Far
+                ;Assume DS:Disk
 
                 Call    D_PreSaveSample         ; DS:SI points to structure
                 JC      D_SaveRawSample2
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
-IF SAVESAMPLEWAV
+%IF  SAVESAMPLEWAV
                 Mov     DWord Ptr [CS:WaveBytesPerSample], 80001h
                 Mov     ECX, [SI+3Ch]          ; C5Speed
                 Mov     [CS:WAVEMixSpeed], ECX
@@ -7847,7 +7844,7 @@ IF SAVESAMPLEWAV
 D_SaveWAVHeader1:
                 Mov     [CS:WAVEDataSize], EAX
                 Mov     [CS:WAVEBytesPerSecond], ECX
-ENDIF
+%ENDIF 
                 Push    DS
                 Push    SI
 
@@ -7870,7 +7867,7 @@ ENDIF
                 Int     21h
                 JC      D_SaveRawSample3
 
-IF SAVESAMPLEWAV
+%IF  SAVESAMPLEWAV
                 PushA
                 Push    DS
 
@@ -7885,7 +7882,7 @@ IF SAVESAMPLEWAV
 
                 Pop     DS
                 PopA
-ENDIF
+%ENDIF 
 
                 PopF
                 Push    BX
@@ -7912,7 +7909,7 @@ D_SaveRawSample4:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     AX, BX
                 Mov     SI, Offset RawSampleSavedMsg
@@ -7936,11 +7933,11 @@ D_SaveRawSampleEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            D_SaveRawSample
+;EndP            D_SaveRawSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_SaveST3Sample Far
+Proc D_SaveST3Sample Far
 
                 Call    D_PreSaveSample
                 JC      D_SaveST3Sample2
@@ -8049,15 +8046,15 @@ D_SaveST3SampleEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            D_SaveST3Sample
+;EndP            D_SaveST3Sample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_SaveInstrument Far
+Proc D_SaveInstrument Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     NoSaveError, 0
 
@@ -8067,7 +8064,7 @@ Proc            D_SaveInstrument Far
                 Call    PE_GetLastInstrument
                 Call    Music_GetSongSegment
                 Mov     DS, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     SI, BX
                 Add     SI, SI
@@ -8111,7 +8108,7 @@ D_SaveInstrument1:
                                                 ; Now to re-translate it.
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     AH, 0
                 Mov     CX, 99
@@ -8133,7 +8130,7 @@ D_SaveInstrument3:
 
                 Pop     SI
                 Pop     DS
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     ES, CS:DiskDataArea
                 Xor     DI, DI
@@ -8143,7 +8140,7 @@ D_SaveInstrument3:
 
                 Push    ES
                 Pop     DS
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     [DS:1Eh], AH    ; AH = number of samples.
                 Mov     Word Ptr [DS:1Ch], TRACKERVERSION
@@ -8272,16 +8269,16 @@ D_SaveInstrumentEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            D_SaveInstrument
-                Assume DS:Nothing
+;EndP            D_SaveInstrument
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_DeleteSampleFile Far
+Proc D_DeleteSampleFile Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Cmp     NumSamples, 0
                 JE      D_DeleteSampleFile1
@@ -8292,7 +8289,7 @@ Proc            D_DeleteSampleFile Far
                 Mul     CurrentSample
                 Mov     SI, AX
                 Mov     DS, DiskDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
                 Cmp     Byte Ptr [DS:SI+58h], 1
                 JBE     D_DeleteSampleFile1             ; Don't delete dirs!
 ;                Cmp     Byte Ptr [DS:SI+58h], 20h
@@ -8319,7 +8316,7 @@ Proc            D_DeleteSampleFile Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     DI, SI
                 Add     SI, 96
@@ -8365,16 +8362,16 @@ D_DeleteSampleFile1:
                 Mov     AX, 1
                 Ret
 
-EndP            D_DeleteSampleFile
-                Assume DS:Nothing
+;EndP            D_DeleteSampleFile
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            CheckSampleModified
+Proc CheckSampleModified
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Cmp     SamplesInModule, 0
                 JNE     CheckSampleModified1
@@ -8504,7 +8501,7 @@ CheckSampleModified4:                           ; Prompt to discard changes..
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset CheckDataArea
                 Mov     ES, DS:DiskDataArea
@@ -8534,12 +8531,12 @@ CheckSampleModified1:
                 ClC
                 Ret
 
-EndP            CheckSampleModified
-                Assume DS:Nothing
+;EndP            CheckSampleModified
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_DrawWaveForm Far
+Proc D_DrawWaveForm Far
 
                 PushAD
                 Push    DS
@@ -8782,11 +8779,11 @@ D_DrawWaveFormEnd:
 
                 Ret
 
-EndP            D_DrawWaveForm
+;EndP            D_DrawWaveForm
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_ClearFileName Far
+Proc D_ClearFileName Far
 
                 Push    AX
                 Push    CX
@@ -8806,11 +8803,11 @@ Proc            D_ClearFileName Far
                 Pop     AX
                 Ret
 
-EndP            D_ClearFileName
+;EndP            D_ClearFileName
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_GetFormatType Far
+Proc D_GetFormatType Far
 
                 Push    CS
                 Pop     ES
@@ -8818,21 +8815,21 @@ Proc            D_GetFormatType Far
 
                 Ret
 
-EndP            D_GetFormatType
+;EndP            D_GetFormatType
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_DisableFileColours Far
+Proc D_DisableFileColours Far
 
                 Mov     CS:FileColours, 0
 
                 Ret
 
-EndP            D_DisableFileColours
+;EndP            D_DisableFileColours
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_LoadInstrumentFiles
+Proc D_LoadInstrumentFiles
 
                 Mov     DS, CS:DiskDataArea
                 Push    DS
@@ -8977,15 +8974,15 @@ D_LoadInstrumentFiles8:
 
                 RetN
 
-EndP            D_LoadInstrumentFiles
+;EndP            D_LoadInstrumentFiles
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_InitLoadInstruments Far
+Proc D_InitLoadInstruments Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset InstrumentDirectory
                 Call    D_SetDriveDirectory     ; DS:SI points to cur dir.
@@ -9010,7 +9007,7 @@ D_InitLoadInstruments4:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     UnusedSamples, DX
 
@@ -9041,7 +9038,7 @@ D_InitLoadInstruments5:
                                                 ; of sample entries...
                                                 ; 3rd word = Version check
                 Mov     DS, DiskDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Xor     DX, DX
                 Int     21h
@@ -9098,7 +9095,7 @@ D_InitLoadInstrumentsCacheOK:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     LoadInstrumentNameCount, SI
                 Mov     NumInstruments, SI
@@ -9135,7 +9132,7 @@ D_InitLoadInstrument3:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Call    DeleteInstrumentCacheFile
 
@@ -9145,15 +9142,15 @@ D_InitLoadInstrument1:
 D_InitLoadInstrument2:
                 Ret
 
-EndP            D_InitLoadInstruments
+;EndP            D_InitLoadInstruments
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_LoadInstrumentNames Far
+Proc D_LoadInstrumentNames Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Cmp     InstrumentCacheFileComplete, 1
                 JNE     D_LoadInstrumentNames2
@@ -9194,7 +9191,7 @@ D_LoadInstrumentNames1:
 D_LoadInstrumentNames3:
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Inc     LoadInstrumentNameCount
 
@@ -9214,11 +9211,11 @@ D_LoadInstrumentNames4:
                 Mov     AX, 1                   ; Signify redraw screen
                 Ret
 
-EndP            D_LoadInstrumentNames
+;EndP            D_LoadInstrumentNames
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_DrawLoadInstrument Far
+Proc D_DrawLoadInstrument Far
 
                 Cmp     CS:NumInstruments, 0
                 JNE     D_DrawLoadInstrumentPresent
@@ -9244,7 +9241,7 @@ D_DrawLoadInstrumentWindow28:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     AX, TopInstrument
                 Mov     BX, CurrentInstrument
@@ -9264,7 +9261,7 @@ D_DrawLoadInstrument2:
                 Mov     TopInstrument, AX
 
                 Mov     DS, DiskDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     DI, (2+13*80)*2
                 Mov     CX, 35
@@ -9434,7 +9431,7 @@ D_DrawLoadInstrument5:
 D_DrawLoadInstrumentEnd:
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     DI, (6+13*80)*2                 ; (6, 13)
                 Mov     SI, Offset NoFilesMsg
@@ -9456,16 +9453,16 @@ D_DrawLoadInstrumentEnd2:                       ; Put Unused Sample msg.
 
                 Ret
 
-EndP            D_DrawLoadInstrument
-                Assume DS:Nothing
+;EndP            D_DrawLoadInstrument
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_PreLoadInstrument Far
+Proc D_PreLoadInstrument Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     AX, CurrentInstrument
                 Sub     AX, TopInstrument
@@ -9498,15 +9495,15 @@ D_PreLoadInstrument3:
 
                 Ret
 
-EndP            D_PreLoadInstrument
+;EndP            D_PreLoadInstrument
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_PostLoadInstrument Far
+Proc D_PostLoadInstrument Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset LoadInstrumentKeys
                 Call    M_FunctionDivider
@@ -9518,15 +9515,15 @@ D_PostLoadInstrument1:
                 Xor     AX, AX
                 Ret
 
-EndP            D_PostLoadInstrument
+;EndP            D_PostLoadInstrument
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_ViewInstrument Far
+Proc D_ViewInstrument Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset ViewInstrumentKeys
                 Call    M_FunctionDivider
@@ -9538,13 +9535,13 @@ D_ViewInstrument1:
                 Xor     AX, AX
                 Ret
 
-EndP            D_ViewInstrument
+;EndP            D_ViewInstrument
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LIWindow_Up  Far
+Proc LIWindow_Up  Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, CurrentInstrument
                 And     AX, AX
@@ -9556,14 +9553,14 @@ LIWindow_Up1:
                 Mov     AX, 1
                 Ret
 
-EndP            LIWindow_Up
-                Assume  DS:Nothing
+;EndP            LIWindow_Up
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LIWindow_Down  Far
+Proc LIWindow_Down  Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, CurrentInstrument
 
@@ -9577,14 +9574,14 @@ LIWindow_Down1:
                 Mov     AX, 1
                 Ret
 
-EndP            LIWindow_Down
-                Assume  DS:Nothing
+;EndP            LIWindow_Down
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LIWindow_PgUp   Far
+Proc LIWindow_PgUp   Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, CurrentInstrument
 
@@ -9597,14 +9594,14 @@ LIWindow_PgUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            LIWindow_PgUp
-                Assume  DS:Nothing
+;EndP            LIWindow_PgUp
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LIWindow_PgDn   Far
+Proc LIWindow_PgDn   Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, CurrentInstrument
 
@@ -9618,27 +9615,27 @@ LIWindow_PgDn1:
                 Mov     AX, 1
                 Ret
 
-EndP            LIWindow_PgDn
-                Assume  DS:Nothing
+;EndP            LIWindow_PgDn
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LIWindow_Home   Far
+Proc LIWindow_Home   Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
                 Mov     CurrentInstrument, 0
 
                 Mov     AX, 1
                 Ret
 
-EndP            LIWindow_Home
-                Assume  DS:Nothing
+;EndP            LIWindow_Home
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LIWindow_End    Far
+Proc LIWindow_End    Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Mov     AX, NumInstruments
 
@@ -9651,29 +9648,29 @@ LIWindow_End1:
                 Mov     AX, 1
                 Ret
 
-EndP            LIWindow_End
-                Assume  DS:Nothing
+;EndP            LIWindow_End
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LIViewWindow_Tab Far
+Proc LIViewWindow_Tab Far
 
                 Mov     Word Ptr [ES:DI], 7
 
                 Mov     AX, 1
                 Ret
 
-EndP            LIViewWindow_Tab
+;EndP            LIViewWindow_Tab
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-include it_d_ri.inc
+%include "it_d_ri.inc"
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LIViewWindow_Enter  Far
+Proc LIViewWindow_Enter  Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Cmp     NumInstruments, 0
                 JE      LIViewWindow_Enter2
@@ -9681,7 +9678,7 @@ Proc            LIViewWindow_Enter  Far
                 Mov     AX, 48
                 Mul     CurrentInstrument
                 Mov     SI, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     DS, DiskDataArea
                 Mov     DL, [DS:SI]
@@ -9694,14 +9691,14 @@ LIViewWindow_Enter2:
                 Mov     AX, 1
                 Ret
 
-EndP            LIViewWindow_Enter
-                Assume  DS:Nothing
+;EndP            LIViewWindow_Enter
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            LIWindow_Enter  Far
+Proc LIWindow_Enter  Far
 
-                Assume  DS:Disk
+                ;Assume  DS:Disk
 
                 Cmp     NumInstruments, 0
                 JE      LIWindow_Enter4
@@ -9709,7 +9706,7 @@ Proc            LIWindow_Enter  Far
                 Mov     AX, 48
                 Mul     CurrentInstrument
                 Mov     SI, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     DS, DiskDataArea
                 Mov     DL, [DS:SI]
@@ -9733,7 +9730,7 @@ LIViewWindow_Enter1:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset InstrumentDirectory
                 Call    D_GetDriveDirectory
@@ -9741,7 +9738,7 @@ LIViewWindow_Enter1:
 LIWindow_EnterInModuleError:
                 Mov     InstrumentsInModule, 0
                 Call    D_InitLoadInstruments
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     CS:CurrentInstrument, 0
 
@@ -9771,7 +9768,7 @@ LIWindow_InInstrument1:
                                                 ; Open file
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     CurrentInstrument, 0
 
@@ -9790,7 +9787,7 @@ LIWindow_EnterLoadInInstrumentData:
                 Mov     NumInstruments, 1
 
                 Mov     DS, DiskDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Push    DS
                 Pop     ES
@@ -9805,7 +9802,7 @@ LIWindow_EnterLoadInInstrumentData:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Xor     DI, DI
                 Mov     SI, Offset ExitInstrumentLibraryDirectory
@@ -9820,7 +9817,7 @@ LIWindow_EnterLoadInInstrumentData:
 
                 Mov     AX, 1
                 Ret
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 LIWindow_Enter2:
                 Mov     EAX, [SI+44]
@@ -9865,7 +9862,7 @@ LIWindow_Enter5:                        ; OK.. enough 'sample space'..
 
                 Call    Music_GetSongSegment
                 Mov     DS, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 
                 Call    PE_GetLastInstrument
@@ -10014,11 +10011,11 @@ LIWindow_Enter9:
                                         ; Need to load sample data??
                 Mov     Word Ptr [ES:DI-80+2Eh], 1
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Mov     AL, NETWORK_SAMPLEHEADEROBJECT
                 Mov     AH, DL
                 Call    Network_AddWordToQueue
-ENDIF
+%ENDIF 
                 Test    Byte Ptr [SI-80+12h], 1
                 JZ      LIWindow_Enter11        ; No!
 
@@ -10038,13 +10035,13 @@ ENDIF
 
                 Pop     CX
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Xor     DX, DX
                 Call    Network_QueueSampleData
 ;                Mov     AL, NETWORK_SAMPLEHEADEROBJECT
 ;                Mov     AH, DL
 ;                Call    Network_AddWordToQueue
-ENDIF
+%ENDIF 
 
 
                 Jmp     LIWindow_Enter11
@@ -10114,26 +10111,26 @@ LIWindow_Enter7:
                 Mov     DS, AX
                 Or      Byte Ptr [DS:2Ch], 4
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Mov     CX, 1
                 Mov     DX, 2Ch
                 Call    Network_SendSongDataInformation
-ENDIF
+%ENDIF 
 
 LIWindow_Enter13:
                 NetworkSendInstrument
                 Jmp     Glbl_F4
 
-EndP            LIWindow_Enter
-                Assume  DS:Nothing
+;EndP            LIWindow_Enter
+                ;Assume  DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_DeleteInstrumentFile Far
+Proc D_DeleteInstrumentFile Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Cmp     NumInstruments, 0
                 JE      D_DeleteInstrumentFile1
@@ -10144,7 +10141,7 @@ Proc            D_DeleteInstrumentFile Far
                 Mul     CurrentInstrument
                 Mov     SI, AX
                 Mov     DS, DiskDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
                 Cmp     Byte Ptr [DS:SI], 1
                 JBE     D_DeleteInstrumentFile1         ; Don't delete dirs!
                 Cmp     Byte Ptr [DS:SI], 8
@@ -10172,7 +10169,7 @@ Proc            D_DeleteInstrumentFile Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     DI, SI
                 Add     SI, 48
@@ -10216,12 +10213,12 @@ D_DeleteInstrumentFile1:
                 Mov     AX, 1
                 Ret
 
-EndP            D_DeleteInstrumentFile
-                Assume DS:Nothing
+;EndP            D_DeleteInstrumentFile
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_GetPreShellDirectory Far
+Proc D_GetPreShellDirectory Far
 
                 Push    CS
                 Pop     DS
@@ -10235,11 +10232,11 @@ Proc            D_GetPreShellDirectory Far
 
                 Ret
 
-EndP            D_GetPreShellDirectory
+;EndP            D_GetPreShellDirectory
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_RestorePreShellDirectory Far
+Proc D_RestorePreShellDirectory Far
 
                 Push    CS
                 Pop     DS
@@ -10249,20 +10246,20 @@ Proc            D_RestorePreShellDirectory Far
 
                 Ret
 
-EndP            D_RestorePreShellDirectory
+;EndP            D_RestorePreShellDirectory
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_SetDriveDirectoryFar Far
+Proc D_SetDriveDirectoryFar Far
 
                 Call    D_SetDriveDirectory
                 Ret
 
-EndP            D_SetDriveDirectoryFar
+;EndP            D_SetDriveDirectoryFar
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_GetFileName Far
+Proc D_GetFileName Far
 
                 Push    CS
                 Pop     DS
@@ -10270,17 +10267,17 @@ Proc            D_GetFileName Far
 
                 Ret
 
-EndP            D_GetFileName
+;EndP            D_GetFileName
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_ResetTimer Far
+Proc D_ResetTimer Far
 
                 Push    DS
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Call    GetTimerCounter
                 Mov     [EditTimer], EAX
@@ -10291,8 +10288,8 @@ Proc            D_ResetTimer Far
                 Pop     DS
                 Ret
 
-EndP            D_ResetTimer
-                Assume DS:Nothing
+;EndP            D_ResetTimer
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
@@ -10305,11 +10302,11 @@ RemainingDateMsg        DB      " ", 0FDh, "D, ", 0FDh, "D", 0
 Time2Msg                DB      0FDh, "D:00", 0
 TotalTime               DD      0
 
-Proc            D_ShowTime Far
+Proc D_ShowTime Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     EDX, 3600
                 Mul     EDX
@@ -10380,12 +10377,12 @@ D_ShowTime2:
 D_ShowTimeEnd:
                 Ret
 
-EndP            D_ShowTime
-                Assume DS:Nothing
+;EndP            D_ShowTime
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-IF TIMERSCREEN
+%IF  TIMERSCREEN
 
 TimerListKeys           Label
 
@@ -10417,11 +10414,11 @@ TimerListKeys           Label
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_PostTimerList Far
+Proc D_PostTimerList Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Mov     SI, Offset TimerListKeys
                 Call    M_FunctionDivider
@@ -10434,12 +10431,12 @@ D_PostTimerList1:
 
                 Ret
 
-EndP            D_PostTimerList
+;EndP            D_PostTimerList
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_TimerListUp Far
-                Assume DS:Disk
+Proc D_TimerListUp Far
+                ;Assume DS:Disk
 
                 Sub     TopTimerData, 1
                 AdC     TopTimerData, 0
@@ -10447,13 +10444,13 @@ Proc            D_TimerListUp Far
                 Mov     AX, 1
                 Ret
 
-EndP            D_TimerListUp
-                Assume DS:Nothing
+;EndP            D_TimerListUp
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_TimerListDown Far
-                Assume DS:Disk
+Proc D_TimerListDown Far
+                ;Assume DS:Disk
 
                 Mov     AX, TopTimerData
                 Cmp     AX, NumTimerData
@@ -10466,13 +10463,13 @@ D_TimerListDown1:
                 Mov     AX, 1
                 Ret
 
-EndP            D_TimerListDown
-                Assume DS:Nothing
+;EndP            D_TimerListDown
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_TimerListPgUp Far
-                Assume DS:Disk
+Proc D_TimerListPgUp Far
+                ;Assume DS:Disk
 
                 Sub     TopTimerData, 28
                 JNC     D_TimerListPgUp1
@@ -10483,13 +10480,13 @@ D_TimerListPgUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            D_TimerListPgUp
-                Assume DS:Nothing
+;EndP            D_TimerListPgUp
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_TimerListPgDn Far
-                Assume DS:Disk
+Proc D_TimerListPgDn Far
+                ;Assume DS:Disk
 
                 Mov     AX, TopTimerData
                 Add     AX, 28
@@ -10506,14 +10503,14 @@ D_TimerListPgDn1:
                 Mov     AX, 1
                 Ret
 
-EndP            D_TimerListPgDn
-                Assume DS:Nothing
+;EndP            D_TimerListPgDn
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 ShowTimes       DB      0
 
-Proc            D_DrawTimer Far
+Proc D_DrawTimer Far
 
                 Call    Music_GetSongSegment
                 Mov     ES, AX
@@ -10536,7 +10533,7 @@ Proc            D_DrawTimer Far
                 Test    ShowTimes, 1
                 JZ      D_DrawTimerEnd
 
-                Assume DS:Disk
+                ;Assume DS:Disk
 
                 Mov     CX, 28
                 Mov     SI, TopTimerData
@@ -10636,47 +10633,47 @@ D_DrawTimerEnd:
                 Xor     AX, AX
                 Ret
 
-EndP            D_DrawTimer
+;EndP            D_DrawTimer
 
-ENDIF
+%ENDIF 
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_ReleaseTimer Far
+Proc D_ReleaseTimer Far
 
                 Call    ReleaseTimerData
                 Inc     AX
                 Ret
 
-EndP            D_ReleaseTimer
+;EndP            D_ReleaseTimer
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-IF TIMERSCREEN
+%IF  TIMERSCREEN
 
-Proc            D_ToggleShowTimes Far
-                Assume DS:Disk
+Proc D_ToggleShowTimes Far
+                ;Assume DS:Disk
 
                 Xor     ShowTimes, 1
 
                 Mov     AX, 1
                 Ret
 
-EndP            D_ToggleShowTimes
-                Assume DS:Nothing
+;EndP            D_ToggleShowTimes
+                ;Assume DS:Nothing
 
-ENDIF
+%ENDIF 
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_SlowSampleSort Far
+Proc D_SlowSampleSort Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
-IF SORTENABLED
+%IF  SORTENABLED
                 Cmp     SamplesInModule, 1
                 JE      D_SlowSampleSortExit
                 Cmp     SampleCacheFileComplete, 1
@@ -10689,7 +10686,7 @@ IF SORTENABLED
                 Mov     ES, DiskDataArea
                 Push    ES
                 Pop     DS
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Xor     SI, SI
 
@@ -10785,22 +10782,22 @@ D_CompareSamplesNoSwap:
 
 D_SlowSampleSortExit:
 
-ENDIF
+%ENDIF 
 
                 Mov     AX, 1
                 Ret
 
-EndP            D_SlowSampleSort
+;EndP            D_SlowSampleSort
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            D_SlowInstrumentSort Far
+Proc D_SlowInstrumentSort Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
-IF SORTENABLED
+%IF  SORTENABLED
                 Cmp     InstrumentsInModule, 1
                 JE      D_SlowInstrumentSortExit
                 Cmp     InstrumentCacheFileComplete, 1
@@ -10810,7 +10807,7 @@ IF SORTENABLED
                 Mov     ES, DiskDataArea
                 Push    ES
                 Pop     DS
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Xor     SI, SI
 
@@ -10918,12 +10915,12 @@ D_CompareInstrumentsNoSwap:
 
 D_SlowInstrumentSortExit:
 
-ENDIF
+%ENDIF 
 
                 Mov     AX, 1
                 Ret
 
-EndP            D_SlowInstrumentSort
+;EndP            D_SlowInstrumentSort
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 

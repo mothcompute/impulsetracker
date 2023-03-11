@@ -2,25 +2,23 @@
 ;³ Help Module                                                                 ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-                        .386
-                        Jumps
+%include "switch.inc"
 
-include switch.inc
-
-Segment                 Object1 BYTE Public 'Data'
+;Segment                 Object1 BYTE Public 'Data'
+section .data
 EndS
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Externals                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-                Extrn   M_Object1List:Far
-                Extrn   Glbl_SaveMode:Far
-                Extrn   Glbl_RestoreMode:Far
+                Extern   M_Object1List:Far
+                extern    Glbl_SaveMode:Far
+                extern    Glbl_RestoreMode:Far
 
-                Extrn   S_DrawString:Far
+                extern    S_DrawString:Far
 
-                Extrn   O1_HelpList:Far
+                extern    O1_HelpList:Far
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Globals                                                                     ³
@@ -37,11 +35,14 @@ EndS
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
-Segment         Object1 BYTE Public 'Data'
+;Segment         Object1 BYTE Public 'Data'
+section .data
 EndS
 
-Segment                 Help BYTE Public USE16 'Code'
-                        Assume CS:Help, DS:Nothing
+;Segment                 Help BYTE Public USE16 'Code'
+;                        ;Assume CS:Help, DS:Nothing
+section .text
+%warning "USE16"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Variables                                                                   ³
@@ -70,158 +71,158 @@ TopLine                 DW      0
 Positions               DW      15 Dup (0)
               
 HelpContextPtrs         Label   Word
-                        DW      Offset HelpContext0Ptrs
-                        DW      Offset HelpContext1Ptrs
-                        DW      Offset HelpContext2Ptrs
-                        DW      Offset NoHelpContext
-                        DW      Offset HelpContext4Ptrs
-                        DW      Offset NoHelpContext
-                        DW      Offset NoHelpContext
-                        DW      Offset HelpContext7Ptrs
-                        DW      Offset NoHelpContext
-                        DW      Offset HelpContext9Ptrs
-                        DW      Offset NoHelpContext
-                        DW      Offset NoHelpContext
-                        DW      Offset HelpContext12Ptrs
-                        DW      Offset NoHelpContext
-                        DW      Offset NoHelpContext
+                        DW      HelpContext0Ptrs
+                        DW      HelpContext1Ptrs
+                        DW      HelpContext2Ptrs
+                        DW      NoHelpContext
+                        DW      HelpContext4Ptrs
+                        DW      NoHelpContext
+                        DW      NoHelpContext
+                        DW      HelpContext7Ptrs
+                        DW      NoHelpContext
+                        DW      HelpContext9Ptrs
+                        DW      NoHelpContext
+                        DW      NoHelpContext
+                        DW      HelpContext12Ptrs
+                        DW      NoHelpContext
+                        DW      NoHelpContext
 
-NoHelpContext           DW      Offset NewLine
-                        DW      Offset HelpGlobal_0
-                        DW      Offset HelpGlobal_1
-                        DW      Offset HelpGlobal_37
-                        DW      Offset HelpGlobal_3
-                        DW      Offset HelpGlobal_4
-                        DW      Offset HelpGlobal_20
-                        DW      Offset HelpGlobal_9
-                        DW      Offset HelpGlobal_10
-                        DW      Offset HelpGlobal_19
-                        DW      Offset HelpGlobal_11
-                        DW      Offset HelpGlobal_12
-                        DW      Offset HelpGlobal_33
-                        DW      Offset HelpGlobal_13
-                        DW      Offset HelpGlobal_5
-                        DW      Offset HelpGlobal_6
-                        DW      Offset HelpGlobal_2
-                        DW      Offset HelpGlobal_7
-                        DW      Offset HelpGlobal_8
-                        DW      Offset HelpGlobal_32
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_17
-                        DW      Offset HelpGlobal_31
-                        DW      Offset HelpGlobal_18
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_16
-                        DW      Offset HelpGlobal_34
-                        DW      Offset HelpGlobal_35
-                        DW      Offset HelpGlobal_36
-                        DW      Offset HelpGlobal_21
-                        DW      Offset HelpGlobal_14
-                        DW      Offset HelpGlobal_15
+NoHelpContext           DW      NewLine
+                        DW      HelpGlobal_0
+                        DW      HelpGlobal_1
+                        DW      HelpGlobal_37
+                        DW      HelpGlobal_3
+                        DW      HelpGlobal_4
+                        DW      HelpGlobal_20
+                        DW      HelpGlobal_9
+                        DW      HelpGlobal_10
+                        DW      HelpGlobal_19
+                        DW      HelpGlobal_11
+                        DW      HelpGlobal_12
+                        DW      HelpGlobal_33
+                        DW      HelpGlobal_13
+                        DW      HelpGlobal_5
+                        DW      HelpGlobal_6
+                        DW      HelpGlobal_2
+                        DW      HelpGlobal_7
+                        DW      HelpGlobal_8
+                        DW      HelpGlobal_32
+                        DW      NewLine
+                        DW      HelpGlobal_17
+                        DW      HelpGlobal_31
+                        DW      HelpGlobal_18
+                        DW      NewLine
+                        DW      HelpGlobal_16
+                        DW      HelpGlobal_34
+                        DW      HelpGlobal_35
+                        DW      HelpGlobal_36
+                        DW      HelpGlobal_21
+                        DW      HelpGlobal_14
+                        DW      HelpGlobal_15
                         DW      0                                
    
-HelpContext0Ptrs        DW      Offset HelpContext0_26
-                        DW      Offset HelpContext0_0
-                        DW      Offset HelpContext0_27
-                        DW      Offset NewLine
-                        DW      Offset HelpContext0_6
-                        DW      Offset HelpContext0_28
-                        DW      Offset HelpContext0_8
-                        DW      Offset HelpContext0_9
-                        DW      Offset HelpContext0_13
-                        DW      Offset HelpContext0_14
-                        DW      Offset HelpContext0_12
-                        DW      Offset HelpContext0_15
-                        DW      Offset NewLine
-                        DW      Offset HelpContext0_30
-                        DW      Offset HelpContext0_29
-                        DW      Offset NewLine
-                        DW      Offset Divider
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_0
-                        DW      Offset HelpGlobal_1
-                        DW      Offset HelpGlobal_37
-                        DW      Offset HelpGlobal_3
-                        DW      Offset HelpGlobal_4
-                        DW      Offset HelpGlobal_9
-                        DW      Offset HelpGlobal_10
-                        DW      Offset HelpGlobal_19
-                        DW      Offset HelpGlobal_11
-                        DW      Offset HelpGlobal_12
-                        DW      Offset HelpGlobal_33
-                        DW      Offset HelpGlobal_13
-                        DW      Offset HelpGlobal_5
-                        DW      Offset HelpGlobal_6
-                        DW      Offset HelpGlobal_2
-                        DW      Offset HelpGlobal_7
-                        DW      Offset HelpGlobal_8
-                        DW      Offset HelpGlobal_32
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_17
-                        DW      Offset HelpGlobal_31
-                        DW      Offset HelpGlobal_18
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_16
-                        DW      Offset HelpGlobal_34
-                        DW      Offset HelpGlobal_35
-                        DW      Offset HelpGlobal_36
-                        DW      Offset HelpGlobal_21
-                        DW      Offset HelpGlobal_14
-                        DW      Offset HelpGlobal_15
-                        DW      Offset NewLine
-                        DW      Offset Divider
+HelpContext0Ptrs        DW      HelpContext0_26
+                        DW      HelpContext0_0
+                        DW      HelpContext0_27
+                        DW      NewLine
+                        DW      HelpContext0_6
+                        DW      HelpContext0_28
+                        DW      HelpContext0_8
+                        DW      HelpContext0_9
+                        DW      HelpContext0_13
+                        DW      HelpContext0_14
+                        DW      HelpContext0_12
+                        DW      HelpContext0_15
+                        DW      NewLine
+                        DW      HelpContext0_30
+                        DW      HelpContext0_29
+                        DW      NewLine
+                        DW      Divider
+                        DW      NewLine
+                        DW      HelpGlobal_0
+                        DW      HelpGlobal_1
+                        DW      HelpGlobal_37
+                        DW      HelpGlobal_3
+                        DW      HelpGlobal_4
+                        DW      HelpGlobal_9
+                        DW      HelpGlobal_10
+                        DW      HelpGlobal_19
+                        DW      HelpGlobal_11
+                        DW      HelpGlobal_12
+                        DW      HelpGlobal_33
+                        DW      HelpGlobal_13
+                        DW      HelpGlobal_5
+                        DW      HelpGlobal_6
+                        DW      HelpGlobal_2
+                        DW      HelpGlobal_7
+                        DW      HelpGlobal_8
+                        DW      HelpGlobal_32
+                        DW      NewLine
+                        DW      HelpGlobal_17
+                        DW      HelpGlobal_31
+                        DW      HelpGlobal_18
+                        DW      NewLine
+                        DW      HelpGlobal_16
+                        DW      HelpGlobal_34
+                        DW      HelpGlobal_35
+                        DW      HelpGlobal_36
+                        DW      HelpGlobal_21
+                        DW      HelpGlobal_14
+                        DW      HelpGlobal_15
+                        DW      NewLine
+                        DW      Divider
                         DW      0                                
 
-HelpContext4Ptrs        DW      Offset HelpContext4_0
-                        DW      Offset HelpContext4_1
-                        DW      Offset HelpContext4_2
-                        DW      Offset NewLine
-                        DW      Offset HelpContext0_6
-                        DW      Offset HelpContext0_28
-                        DW      Offset HelpContext0_8
-                        DW      Offset HelpContext0_9
-                        DW      Offset HelpContext0_13
-                        DW      Offset HelpContext0_14
-                        DW      Offset HelpContext0_12
-                        DW      Offset HelpContext0_15
-                        DW      Offset NewLine
-                        DW      Offset Divider
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_0
-                        DW      Offset HelpGlobal_1
-                        DW      Offset HelpGlobal_37
-                        DW      Offset HelpGlobal_3
-                        DW      Offset HelpGlobal_4
-                        DW      Offset HelpGlobal_20
-                        DW      Offset HelpGlobal_9
-                        DW      Offset HelpGlobal_22
-                        DW      Offset HelpGlobal_10
-                        DW      Offset HelpGlobal_19
-                        DW      Offset HelpGlobal_11
-                        DW      Offset HelpGlobal_12
-                        DW      Offset HelpGlobal_33
-                        DW      Offset HelpGlobal_13
-                        DW      Offset HelpGlobal_5
-                        DW      Offset HelpGlobal_23
-                        DW      Offset HelpGlobal_6
-                        DW      Offset HelpGlobal_2
-                        DW      Offset HelpGlobal_7
-                        DW      Offset HelpGlobal_8
-                        DW      Offset HelpGlobal_32
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_17
-                        DW      Offset HelpGlobal_31
-                        DW      Offset HelpGlobal_18
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_16
-                        DW      Offset HelpGlobal_34
-                        DW      Offset HelpGlobal_35
-                        DW      Offset HelpGlobal_36
-                        DW      Offset HelpGlobal_21
-                        DW      Offset HelpGlobal_14
-                        DW      Offset HelpGlobal_15
-                        DW      Offset NewLine
-                        DW      Offset Divider
+HelpContext4Ptrs        DW      HelpContext4_0
+                        DW      HelpContext4_1
+                        DW      HelpContext4_2
+                        DW      NewLine
+                        DW      HelpContext0_6
+                        DW      HelpContext0_28
+                        DW      HelpContext0_8
+                        DW      HelpContext0_9
+                        DW      HelpContext0_13
+                        DW      HelpContext0_14
+                        DW      HelpContext0_12
+                        DW      HelpContext0_15
+                        DW      NewLine
+                        DW      Divider
+                        DW      NewLine
+                        DW      HelpGlobal_0
+                        DW      HelpGlobal_1
+                        DW      HelpGlobal_37
+                        DW      HelpGlobal_3
+                        DW      HelpGlobal_4
+                        DW      HelpGlobal_20
+                        DW      HelpGlobal_9
+                        DW      HelpGlobal_22
+                        DW      HelpGlobal_10
+                        DW      HelpGlobal_19
+                        DW      HelpGlobal_11
+                        DW      HelpGlobal_12
+                        DW      HelpGlobal_33
+                        DW      HelpGlobal_13
+                        DW      HelpGlobal_5
+                        DW      HelpGlobal_23
+                        DW      HelpGlobal_6
+                        DW      HelpGlobal_2
+                        DW      HelpGlobal_7
+                        DW      HelpGlobal_8
+                        DW      HelpGlobal_32
+                        DW      NewLine
+                        DW      HelpGlobal_17
+                        DW      HelpGlobal_31
+                        DW      HelpGlobal_18
+                        DW      NewLine
+                        DW      HelpGlobal_16
+                        DW      HelpGlobal_34
+                        DW      HelpGlobal_35
+                        DW      HelpGlobal_36
+                        DW      HelpGlobal_21
+                        DW      HelpGlobal_14
+                        DW      HelpGlobal_15
+                        DW      NewLine
+                        DW      Divider
                         DW      0                                
 
 NewLine                 DB      0, 0
@@ -283,298 +284,298 @@ HelpGlobal_15           DB      5, 81h, 'S', 0FFh, 12, ' Save ', 0A2h, 'song', 0
 
 
 HelpContext1Ptrs        Label   Word
-                        DW      Offset HelpContext1_0
-                        DW      Offset HelpContext1_1
-                        DW      Offset HelpContext1_2
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_3
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_200
-                        DW      Offset HelpContext1_201
-                        DW      Offset HelpContext1_202
-                        DW      Offset HelpContext1_203
-                        DW      Offset HelpContext1_204
-                        DW      Offset HelpContext1_205
-                        DW      Offset HelpContext1_206
-                        DW      Offset HelpContext1_207
-                        DW      Offset HelpContext1_208
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_299
-                        DW      Offset HelpContext1_4
-                        DW      Offset HelpContext1_5
-                        DW      Offset HelpContext1_6
-                        DW      Offset HelpContext1_7
-                        DW      Offset HelpContext1_8
-                        DW      Offset HelpContext1_9
-                        DW      Offset HelpContext1_10
-                        DW      Offset HelpContext1_11
-                        DW      Offset HelpContext1_12
-                        DW      Offset HelpContext1_13
-                        DW      Offset HelpContext1_14
-                        DW      Offset HelpContext1_15
-                        DW      Offset HelpContext1_16
-                        DW      Offset HelpContext1_17
-                        DW      Offset HelpContext1_18
-                        DW      Offset HelpContext1_19
-                        DW      Offset HelpContext1_20
-                        DW      Offset HelpContext1_21
-                        DW      Offset HelpContext1_22
-                        DW      Offset HelpContext1_23
-                        DW      Offset HelpContext1_24
-                        DW      Offset HelpContext1_141
-                        DW      Offset HelpContext1_142
-                        DW      Offset HelpContext1_143
-                        DW      Offset HelpContext1_25
-                        DW      Offset HelpContext1_26
-                        DW      Offset HelpContext1_135
-                        DW      Offset HelpContext1_136
-                        DW      Offset HelpContext1_137
-                        DW      Offset HelpContext1_27
-                        DW      Offset HelpContext1_28
-                        DW      Offset HelpContext1_29
-                        DW      Offset HelpContext1_30
-                        DW      Offset HelpContext1_31
-                        DW      Offset HelpContext1_32
-                        DW      Offset HelpContext1_33
-                        DW      Offset HelpContext1_34
-                        DW      Offset HelpContext1_35
-                        DW      Offset HelpContext1_36
-                        DW      Offset HelpContext1_45
-                        DW      Offset HelpContext1_46
-                        DW      Offset HelpContext1_47
-                        DW      Offset HelpContext1_48
-                        DW      Offset HelpContext1_49
-                        DW      Offset HelpContext1_50
-                        DW      Offset HelpContext1_51
-                        DW      Offset HelpContext1_62
-                        DW      Offset HelpContext1_63
-                        DW      Offset HelpContext1_64
-                        DW      Offset HelpContext1_65
-                        DW      Offset HelpContext1_66
-                        DW      Offset HelpContext1_52
-                        DW      Offset HelpContext1_53
-                        DW      Offset HelpContext1_144
-                        DW      Offset HelpContext1_145
-                        DW      Offset HelpContext1_153
-                        DW      Offset HelpContext1_154
-                        DW      Offset HelpContext1_155
-                        DW      Offset HelpContext1_156
-                        DW      Offset HelpContext1_157
-                        DW      Offset HelpContext1_162
-                        DW      Offset HelpContext1_168
-                        DW      Offset HelpContext1_169
-                        DW      Offset HelpContext1_170
-                        DW      Offset HelpContext1_171
-                        DW      Offset HelpContext1_54
-                        DW      Offset HelpContext1_55
-                        DW      Offset HelpContext1_56
-                        DW      Offset HelpContext1_57
-                        DW      Offset HelpContext1_146
-                        DW      Offset HelpContext1_58
-                        DW      Offset HelpContext1_59
-                        DW      Offset HelpContext1_60
-                        DW      Offset HelpContext1_61
-                        DW      Offset HelpContext1_179
-                        DW      Offset HelpContext1_180
-                        DW      Offset HelpContext1_67
-                        DW      Offset HelpContext1_68
-                        DW      Offset HelpContext1_69
-                        DW      Offset HelpContext1_70
-                        DW      Offset HelpContext1_138
-                        DW      Offset HelpContext1_139
-                        DW      Offset HelpContext1_140
-                        DW      Offset HelpContext1_71
-                        DW      Offset HelpContext1_72
-                        DW      Offset HelpContext1_73
-                        DW      Offset NewLine
-                        DW      Offset Divider
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_74
-                        DW      Offset HelpContext1_114
-                        DW      Offset HelpContext1_115
-                        DW      Offset HelpContext1_134
-                        DW      Offset HelpContext1_75
-                        DW      Offset HelpContext1_76
-                        DW      Offset HelpContext1_77
-                        DW      Offset HelpContext1_78
-                        DW      Offset HelpContext1_79
-                        DW      Offset HelpContext1_80
-                        DW      Offset HelpContext1_81
-                        DW      Offset HelpContext1_181
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_82
-                        DW      Offset HelpContext1_83
-                        DW      Offset HelpContext1_163
-                        DW      Offset HelpContext1_84
-                        DW      Offset HelpContext1_85
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_86
-                        DW      Offset HelpContext1_127
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_87
-                        DW      Offset HelpContext1_164
-                        DW      Offset HelpContext1_129
-                        DW      Offset HelpContext1_88
-                        DW      Offset HelpContext1_131
-                        DW      Offset HelpContext1_90
-                        DW      Offset HelpContext1_89
-                        DW      Offset HelpContext1_160
-                        DW      Offset HelpContext1_91
-                        DW      Offset HelpContext1_92
-                        DW      Offset HelpContext1_93
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_116
-                        DW      Offset HelpContext1_124
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_130
-                        DW      Offset HelpContext1_117
-                        DW      Offset HelpContext1_161
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_166
-                        DW      Offset HelpContext1_174
-                        DW      Offset HelpContext1_300
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_176
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_118
-                        DW      Offset HelpContext1_119
-                        DW      Offset HelpContext1_120
-                        DW      Offset HelpContext1_121
-                        DW      Offset HelpContext1_122
-                        DW      Offset HelpContext1_123
-                        DW      Offset HelpContext1_128
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_167
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_159
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_94
-                        DW      Offset HelpContext1_95
-                        DW      Offset HelpContext1_96
-                        DW      Offset HelpContext1_97
-                        DW      Offset HelpContext1_98
-                        DW      Offset HelpContext1_165
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_99
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_113
-                        DW      Offset HelpContext1_100
-                        DW      Offset HelpContext1_101
-                        DW      Offset HelpContext1_102
-                        DW      Offset HelpContext1_103
-                        DW      Offset HelpContext1_104
-                        DW      Offset HelpContext1_133
-                        DW      Offset HelpContext1_105
-                        DW      Offset HelpContext1_106
-                        DW      Offset HelpContext1_132
-                        DW      Offset HelpContext1_107
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_108
-                        DW      Offset HelpContext1_109
-                        DW      Offset HelpContext1_110
-                        DW      Offset HelpContext1_111
-                        DW      Offset HelpContext1_173
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_125
-                        DW      Offset HelpContext1_126
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_112
-                        DW      Offset HelpContext1_175
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_147
-                        DW      Offset HelpContext1_148
-                        DW      Offset HelpContext1_149
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_152
-                        DW      Offset HelpContext1_158
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_150
-                        DW      Offset HelpContext1_151
-                        DW      Offset NewLine
-                        DW      Offset HelpContext1_172
-                        DW      Offset HelpContext1_177
-                        DW      Offset HelpContext1_178
-                        DW      Offset NewLine
-                        DW      Offset Divider
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_0
-                        DW      Offset HelpGlobal_1
-                        DW      Offset HelpGlobal_37
-                        DW      Offset HelpGlobal_3
-                        DW      Offset HelpGlobal_4
-                        DW      Offset HelpGlobal_20
-                        DW      Offset HelpGlobal_9
-                        DW      Offset HelpGlobal_22
-                        DW      Offset HelpGlobal_10
-                        DW      Offset HelpGlobal_19
-                        DW      Offset HelpGlobal_11
-                        DW      Offset HelpGlobal_12
-                        DW      Offset HelpGlobal_33
-                        DW      Offset HelpGlobal_13
-                        DW      Offset HelpGlobal_5
-                        DW      Offset HelpGlobal_23
-                        DW      Offset HelpGlobal_6
-                        DW      Offset HelpGlobal_2
-                        DW      Offset HelpGlobal_7
-                        DW      Offset HelpGlobal_8
-                        DW      Offset HelpGlobal_32
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_17
-                        DW      Offset HelpGlobal_31
-                        DW      Offset HelpGlobal_18
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_16
-                        DW      Offset HelpGlobal_34
-                        DW      Offset HelpGlobal_35
-                        DW      Offset HelpGlobal_36
-                        DW      Offset HelpGlobal_21
-                        DW      Offset HelpGlobal_14
-                        DW      Offset HelpGlobal_15
-                        DW      Offset NewLine
-                        DW      Offset Divider
+                        DW      HelpContext1_0
+                        DW      HelpContext1_1
+                        DW      HelpContext1_2
+                        DW      NewLine
+                        DW      HelpContext1_3
+                        DW      NewLine
+                        DW      HelpContext1_200
+                        DW      HelpContext1_201
+                        DW      HelpContext1_202
+                        DW      HelpContext1_203
+                        DW      HelpContext1_204
+                        DW      HelpContext1_205
+                        DW      HelpContext1_206
+                        DW      HelpContext1_207
+                        DW      HelpContext1_208
+                        DW      NewLine
+                        DW      HelpContext1_299
+                        DW      HelpContext1_4
+                        DW      HelpContext1_5
+                        DW      HelpContext1_6
+                        DW      HelpContext1_7
+                        DW      HelpContext1_8
+                        DW      HelpContext1_9
+                        DW      HelpContext1_10
+                        DW      HelpContext1_11
+                        DW      HelpContext1_12
+                        DW      HelpContext1_13
+                        DW      HelpContext1_14
+                        DW      HelpContext1_15
+                        DW      HelpContext1_16
+                        DW      HelpContext1_17
+                        DW      HelpContext1_18
+                        DW      HelpContext1_19
+                        DW      HelpContext1_20
+                        DW      HelpContext1_21
+                        DW      HelpContext1_22
+                        DW      HelpContext1_23
+                        DW      HelpContext1_24
+                        DW      HelpContext1_141
+                        DW      HelpContext1_142
+                        DW      HelpContext1_143
+                        DW      HelpContext1_25
+                        DW      HelpContext1_26
+                        DW      HelpContext1_135
+                        DW      HelpContext1_136
+                        DW      HelpContext1_137
+                        DW      HelpContext1_27
+                        DW      HelpContext1_28
+                        DW      HelpContext1_29
+                        DW      HelpContext1_30
+                        DW      HelpContext1_31
+                        DW      HelpContext1_32
+                        DW      HelpContext1_33
+                        DW      HelpContext1_34
+                        DW      HelpContext1_35
+                        DW      HelpContext1_36
+                        DW      HelpContext1_45
+                        DW      HelpContext1_46
+                        DW      HelpContext1_47
+                        DW      HelpContext1_48
+                        DW      HelpContext1_49
+                        DW      HelpContext1_50
+                        DW      HelpContext1_51
+                        DW      HelpContext1_62
+                        DW      HelpContext1_63
+                        DW      HelpContext1_64
+                        DW      HelpContext1_65
+                        DW      HelpContext1_66
+                        DW      HelpContext1_52
+                        DW      HelpContext1_53
+                        DW      HelpContext1_144
+                        DW      HelpContext1_145
+                        DW      HelpContext1_153
+                        DW      HelpContext1_154
+                        DW      HelpContext1_155
+                        DW      HelpContext1_156
+                        DW      HelpContext1_157
+                        DW      HelpContext1_162
+                        DW      HelpContext1_168
+                        DW      HelpContext1_169
+                        DW      HelpContext1_170
+                        DW      HelpContext1_171
+                        DW      HelpContext1_54
+                        DW      HelpContext1_55
+                        DW      HelpContext1_56
+                        DW      HelpContext1_57
+                        DW      HelpContext1_146
+                        DW      HelpContext1_58
+                        DW      HelpContext1_59
+                        DW      HelpContext1_60
+                        DW      HelpContext1_61
+                        DW      HelpContext1_179
+                        DW      HelpContext1_180
+                        DW      HelpContext1_67
+                        DW      HelpContext1_68
+                        DW      HelpContext1_69
+                        DW      HelpContext1_70
+                        DW      HelpContext1_138
+                        DW      HelpContext1_139
+                        DW      HelpContext1_140
+                        DW      HelpContext1_71
+                        DW      HelpContext1_72
+                        DW      HelpContext1_73
+                        DW      NewLine
+                        DW      Divider
+                        DW      NewLine
+                        DW      HelpContext1_74
+                        DW      HelpContext1_114
+                        DW      HelpContext1_115
+                        DW      HelpContext1_134
+                        DW      HelpContext1_75
+                        DW      HelpContext1_76
+                        DW      HelpContext1_77
+                        DW      HelpContext1_78
+                        DW      HelpContext1_79
+                        DW      HelpContext1_80
+                        DW      HelpContext1_81
+                        DW      HelpContext1_181
+                        DW      NewLine
+                        DW      HelpContext1_82
+                        DW      HelpContext1_83
+                        DW      HelpContext1_163
+                        DW      HelpContext1_84
+                        DW      HelpContext1_85
+                        DW      NewLine
+                        DW      HelpContext1_86
+                        DW      HelpContext1_127
+                        DW      NewLine
+                        DW      HelpContext1_87
+                        DW      HelpContext1_164
+                        DW      HelpContext1_129
+                        DW      HelpContext1_88
+                        DW      HelpContext1_131
+                        DW      HelpContext1_90
+                        DW      HelpContext1_89
+                        DW      HelpContext1_160
+                        DW      HelpContext1_91
+                        DW      HelpContext1_92
+                        DW      HelpContext1_93
+                        DW      NewLine
+                        DW      HelpContext1_116
+                        DW      HelpContext1_124
+                        DW      NewLine
+                        DW      HelpContext1_130
+                        DW      HelpContext1_117
+                        DW      HelpContext1_161
+                        DW      NewLine
+                        DW      HelpContext1_166
+                        DW      HelpContext1_174
+                        DW      HelpContext1_300
+                        DW      NewLine
+                        DW      HelpContext1_176
+                        DW      NewLine
+                        DW      HelpContext1_118
+                        DW      HelpContext1_119
+                        DW      HelpContext1_120
+                        DW      HelpContext1_121
+                        DW      HelpContext1_122
+                        DW      HelpContext1_123
+                        DW      HelpContext1_128
+                        DW      NewLine
+                        DW      HelpContext1_167
+                        DW      NewLine
+                        DW      HelpContext1_159
+                        DW      NewLine
+                        DW      HelpContext1_94
+                        DW      HelpContext1_95
+                        DW      HelpContext1_96
+                        DW      HelpContext1_97
+                        DW      HelpContext1_98
+                        DW      HelpContext1_165
+                        DW      NewLine
+                        DW      HelpContext1_99
+                        DW      NewLine
+                        DW      HelpContext1_113
+                        DW      HelpContext1_100
+                        DW      HelpContext1_101
+                        DW      HelpContext1_102
+                        DW      HelpContext1_103
+                        DW      HelpContext1_104
+                        DW      HelpContext1_133
+                        DW      HelpContext1_105
+                        DW      HelpContext1_106
+                        DW      HelpContext1_132
+                        DW      HelpContext1_107
+                        DW      NewLine
+                        DW      HelpContext1_108
+                        DW      HelpContext1_109
+                        DW      HelpContext1_110
+                        DW      HelpContext1_111
+                        DW      HelpContext1_173
+                        DW      NewLine
+                        DW      HelpContext1_125
+                        DW      HelpContext1_126
+                        DW      NewLine
+                        DW      HelpContext1_112
+                        DW      HelpContext1_175
+                        DW      NewLine
+                        DW      HelpContext1_147
+                        DW      HelpContext1_148
+                        DW      HelpContext1_149
+                        DW      NewLine
+                        DW      HelpContext1_152
+                        DW      HelpContext1_158
+                        DW      NewLine
+                        DW      HelpContext1_150
+                        DW      HelpContext1_151
+                        DW      NewLine
+                        DW      HelpContext1_172
+                        DW      HelpContext1_177
+                        DW      HelpContext1_178
+                        DW      NewLine
+                        DW      Divider
+                        DW      NewLine
+                        DW      HelpGlobal_0
+                        DW      HelpGlobal_1
+                        DW      HelpGlobal_37
+                        DW      HelpGlobal_3
+                        DW      HelpGlobal_4
+                        DW      HelpGlobal_20
+                        DW      HelpGlobal_9
+                        DW      HelpGlobal_22
+                        DW      HelpGlobal_10
+                        DW      HelpGlobal_19
+                        DW      HelpGlobal_11
+                        DW      HelpGlobal_12
+                        DW      HelpGlobal_33
+                        DW      HelpGlobal_13
+                        DW      HelpGlobal_5
+                        DW      HelpGlobal_23
+                        DW      HelpGlobal_6
+                        DW      HelpGlobal_2
+                        DW      HelpGlobal_7
+                        DW      HelpGlobal_8
+                        DW      HelpGlobal_32
+                        DW      NewLine
+                        DW      HelpGlobal_17
+                        DW      HelpGlobal_31
+                        DW      HelpGlobal_18
+                        DW      NewLine
+                        DW      HelpGlobal_16
+                        DW      HelpGlobal_34
+                        DW      HelpGlobal_35
+                        DW      HelpGlobal_36
+                        DW      HelpGlobal_21
+                        DW      HelpGlobal_14
+                        DW      HelpGlobal_15
+                        DW      NewLine
+                        DW      Divider
 
         Comment &
 
-                        DW      Offset NewLine
-                        DW      Offset HelpHexTable0
-                        DW      Offset HelpHexTable1
-                        DW      Offset HelpHexTable2
-                        DW      Offset NewLine
-                        DW      Offset HelpHexTable3
-                        DW      Offset Divider
-                        DW      Offset HelpHexTable4
-                        DW      Offset HelpHexTable5
-                        DW      Offset HelpHexTable6
-                        DW      Offset HelpHexTable7
-                        DW      Offset HelpHexTable8
-                        DW      Offset HelpHexTable9
-                        DW      Offset HelpHexTable10
-                        DW      Offset HelpHexTable11
-                        DW      Offset HelpHexTable12
-                        DW      Offset HelpHexTable13
-                        DW      Offset HelpHexTable14
-                        DW      Offset HelpHexTable15
-                        DW      Offset HelpHexTable16
-                        DW      Offset HelpHexTable17
-                        DW      Offset HelpHexTable18
-                        DW      Offset HelpHexTable19
-                        DW      Offset HelpHexTable20
-                        DW      Offset HelpHexTable21
-                        DW      Offset HelpHexTable22
-                        DW      Offset HelpHexTable23
-                        DW      Offset HelpHexTable24
-                        DW      Offset HelpHexTable25
-                        DW      Offset HelpHexTable26
-                        DW      Offset HelpHexTable27
-                        DW      Offset HelpHexTable28
-                        DW      Offset HelpHexTable29
-                        DW      Offset HelpHexTable30
-                        DW      Offset HelpHexTable31
-                        DW      Offset HelpHexTable32
-                        DW      Offset HelpHexTable33
-                        DW      Offset HelpHexTable34
-                        DW      Offset HelpHexTable35
-                        DW      Offset Divider
+                        DW      NewLine
+                        DW      HelpHexTable0
+                        DW      HelpHexTable1
+                        DW      HelpHexTable2
+                        DW      NewLine
+                        DW      HelpHexTable3
+                        DW      Divider
+                        DW      HelpHexTable4
+                        DW      HelpHexTable5
+                        DW      HelpHexTable6
+                        DW      HelpHexTable7
+                        DW      HelpHexTable8
+                        DW      HelpHexTable9
+                        DW      HelpHexTable10
+                        DW      HelpHexTable11
+                        DW      HelpHexTable12
+                        DW      HelpHexTable13
+                        DW      HelpHexTable14
+                        DW      HelpHexTable15
+                        DW      HelpHexTable16
+                        DW      HelpHexTable17
+                        DW      HelpHexTable18
+                        DW      HelpHexTable19
+                        DW      HelpHexTable20
+                        DW      HelpHexTable21
+                        DW      HelpHexTable22
+                        DW      HelpHexTable23
+                        DW      HelpHexTable24
+                        DW      HelpHexTable25
+                        DW      HelpHexTable26
+                        DW      HelpHexTable27
+                        DW      HelpHexTable28
+                        DW      HelpHexTable29
+                        DW      HelpHexTable30
+                        DW      HelpHexTable31
+                        DW      HelpHexTable32
+                        DW      HelpHexTable33
+                        DW      HelpHexTable34
+                        DW      HelpHexTable35
+                        DW      Divider
 
         &
                         DW      0
@@ -795,82 +796,82 @@ HelpContext1_177        DB      5, 81h, 'Z', 0FFh, 11,      ' ', 0C8h, 'MIDI pla
 HelpContext1_178        DB      5, 80h, 'Scroll Lock  ', 9Dh, 'MIDI input', 0
 
 HelpContext2Ptrs        Label   Word
-                        DW      Offset HelpContext2_0
-                        DW      Offset HelpContext2_1
-                        DW      Offset HelpContext2_2
-                        DW      Offset NewLine
-                        DW      Offset HelpContext2_3
-                        DW      Offset HelpContext2_10
-                        DW      Offset HelpContext2_4
-                        DW      Offset HelpContext2_5
-                        DW      Offset NewLine
-                        DW      Offset HelpContext2_11
-                        DW      Offset HelpContext2_23
-                        DW      Offset HelpContext2_8
-                        DW      Offset HelpContext2_6
-                        DW      Offset HelpContext2_17
-                        DW      Offset HelpContext2_18
-                        DW      Offset HelpContext2_27
-                        DW      Offset HelpContext2_30
-                        DW      Offset HelpContext2_33
-                        DW      Offset HelpContext2_7
-                        DW      Offset HelpContext2_29
-                        DW      Offset HelpContext2_28
-                        DW      Offset HelpContext2_14
-                        DW      Offset HelpContext2_19
-                        DW      Offset HelpContext2_12
-                        DW      Offset HelpContext2_13
-                        DW      Offset HelpContext2_16
-                        DW      Offset HelpContext2_15
-                        DW      Offset HelpContext2_9
-                        DW      Offset NewLine
-                        DW      Offset HelpContext2_31
-                        DW      Offset HelpContext2_32
-                        DW      Offset NewLine
-                        DW      Offset HelpContext2_26
-                        DW      Offset NewLine
-                        DW      Offset HelpContext2_21
-                        DW      Offset HelpContext2_22
-                        DW      Offset HelpContext2_24
-                        DW      Offset HelpContext2_25
-                        DW      Offset NewLine
-                        DW      Offset Divider
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_0
-                        DW      Offset HelpGlobal_1
-                        DW      Offset HelpGlobal_37
-                        DW      Offset HelpGlobal_3
-                        DW      Offset HelpGlobal_4
-                        DW      Offset HelpGlobal_20
-                        DW      Offset HelpGlobal_9
-                        DW      Offset HelpGlobal_22
-                        DW      Offset HelpGlobal_10
-                        DW      Offset HelpGlobal_19
-                        DW      Offset HelpGlobal_11
-                        DW      Offset HelpGlobal_12
-                        DW      Offset HelpGlobal_33
-                        DW      Offset HelpGlobal_13
-                        DW      Offset HelpGlobal_5
-                        DW      Offset HelpGlobal_23
-                        DW      Offset HelpGlobal_6
-                        DW      Offset HelpGlobal_2
-                        DW      Offset HelpGlobal_7
-                        DW      Offset HelpGlobal_8
-                        DW      Offset HelpGlobal_32
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_17
-                        DW      Offset HelpGlobal_31
-                        DW      Offset HelpGlobal_18
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_16
-                        DW      Offset HelpGlobal_34
-                        DW      Offset HelpGlobal_35
-                        DW      Offset HelpGlobal_36
-                        DW      Offset HelpGlobal_21
-                        DW      Offset HelpGlobal_14
-                        DW      Offset HelpGlobal_15
-                        DW      Offset NewLine
-                        DW      Offset Divider
+                        DW      HelpContext2_0
+                        DW      HelpContext2_1
+                        DW      HelpContext2_2
+                        DW      NewLine
+                        DW      HelpContext2_3
+                        DW      HelpContext2_10
+                        DW      HelpContext2_4
+                        DW      HelpContext2_5
+                        DW      NewLine
+                        DW      HelpContext2_11
+                        DW      HelpContext2_23
+                        DW      HelpContext2_8
+                        DW      HelpContext2_6
+                        DW      HelpContext2_17
+                        DW      HelpContext2_18
+                        DW      HelpContext2_27
+                        DW      HelpContext2_30
+                        DW      HelpContext2_33
+                        DW      HelpContext2_7
+                        DW      HelpContext2_29
+                        DW      HelpContext2_28
+                        DW      HelpContext2_14
+                        DW      HelpContext2_19
+                        DW      HelpContext2_12
+                        DW      HelpContext2_13
+                        DW      HelpContext2_16
+                        DW      HelpContext2_15
+                        DW      HelpContext2_9
+                        DW      NewLine
+                        DW      HelpContext2_31
+                        DW      HelpContext2_32
+                        DW      NewLine
+                        DW      HelpContext2_26
+                        DW      NewLine
+                        DW      HelpContext2_21
+                        DW      HelpContext2_22
+                        DW      HelpContext2_24
+                        DW      HelpContext2_25
+                        DW      NewLine
+                        DW      Divider
+                        DW      NewLine
+                        DW      HelpGlobal_0
+                        DW      HelpGlobal_1
+                        DW      HelpGlobal_37
+                        DW      HelpGlobal_3
+                        DW      HelpGlobal_4
+                        DW      HelpGlobal_20
+                        DW      HelpGlobal_9
+                        DW      HelpGlobal_22
+                        DW      HelpGlobal_10
+                        DW      HelpGlobal_19
+                        DW      HelpGlobal_11
+                        DW      HelpGlobal_12
+                        DW      HelpGlobal_33
+                        DW      HelpGlobal_13
+                        DW      HelpGlobal_5
+                        DW      HelpGlobal_23
+                        DW      HelpGlobal_6
+                        DW      HelpGlobal_2
+                        DW      HelpGlobal_7
+                        DW      HelpGlobal_8
+                        DW      HelpGlobal_32
+                        DW      NewLine
+                        DW      HelpGlobal_17
+                        DW      HelpGlobal_31
+                        DW      HelpGlobal_18
+                        DW      NewLine
+                        DW      HelpGlobal_16
+                        DW      HelpGlobal_34
+                        DW      HelpGlobal_35
+                        DW      HelpGlobal_36
+                        DW      HelpGlobal_21
+                        DW      HelpGlobal_14
+                        DW      HelpGlobal_15
+                        DW      NewLine
+                        DW      Divider
                         DW      0               ; End of list.
 
 HelpContext2_0          DB      31, 0FFh, 1, 139, 0FFh, 17, 134, 0FFh, 1, 138, 0
@@ -900,11 +901,11 @@ HelpContext2_12         DB      5, 80h, 'R', 0FFh, 8, ' Replace ', 0A2h, 95h, ' 
 HelpContext2_13         DB      5, 80h, 'S', 0FFh, 8, ' Swap ', 95h, ' (in song also)', 0
 HelpContext2_16         DB      5, 80h, 'T', 0FFh, 8, ' Save ', 0A2h, 95h, ' ', 0B1h, 'disk (ST3 Format)', 0
 
-IF SAVESAMPLEWAV
+%IF SAVESAMPLEWAV
 HelpContext2_15         DB      5, 80h, 'W', 0FFh, 8, ' Save ', 0A2h, 95h, ' ', 0B1h, 'disk (WAV Format)', 0
-ELSE
+%ELSE
 HelpContext2_15         DB      5, 80h, 'W', 0FFh, 8, ' Save ', 0A2h, 95h, ' ', 0B1h, 'disk (RAW Format)', 0
-ENDIF
+%ENDIF
 
 HelpContext2_9          DB      5, 80h, 'X', 0FFh, 8, ' Ex', 0C9h, 95h, ' (only in ', 94h, 'List)', 0
 
@@ -919,87 +920,87 @@ HelpContext2_24         DB      5, 81h, 'Grey +  ', 92h, 0AEh, 0AFh, 0
 HelpContext2_25         DB      5, 81h, 'Grey -  ', 93h, 0AEh, 0AFh, 0
 
 HelpContext7Ptrs        Label   Word
-                        DW      Offset HelpContext7_0
-                        DW      Offset HelpContext7_1
-                        DW      Offset HelpContext7_2
-                        DW      Offset NewLine
-                        DW      Offset HelpContext7_8
-                        DW      Offset HelpContext7_26
-                        DW      Offset HelpContext7_9
-                        DW      Offset HelpContext7_10
-                        DW      Offset HelpContext7_36
-                        DW      Offset HelpContext7_22
-                        DW      Offset NewLine
-                        DW      Offset HelpContext7_25
-                        DW      Offset HelpContext7_24
-                        DW      Offset HelpContext7_23
-                        DW      Offset HelpContext7_28
-                        DW      Offset HelpContext7_11
-                        DW      Offset HelpContext7_12
-                        DW      Offset HelpContext7_13
-                        DW      Offset HelpContext7_14
-                        DW      Offset NewLine
-                        DW      Offset HelpContext7_34
-                        DW      Offset HelpContext7_35
-                        DW      Offset NewLine
-                        DW      Offset HelpContext7_33
-                        DW      Offset NewLine
-                        DW      Offset HelpContext7_3
-                        DW      Offset HelpContext7_4
-                        DW      Offset HelpContext7_5
-                        DW      Offset NewLine
-                        DW      Offset HelpContext7_6
-                        DW      Offset HelpContext7_7
-                        DW      Offset HelpContext7_27
-                        DW      Offset HelpContext7_29
-                        DW      Offset HelpContext7_30
-                        DW      Offset NewLine
-                        DW      Offset HelpContext7_15
-                        DW      Offset HelpContext7_16
-                        DW      Offset HelpContext7_17
-                        DW      Offset HelpContext7_18
-                        DW      Offset HelpContext7_19
-                        DW      Offset NewLine
-                        DW      Offset HelpContext7_20
-                        DW      Offset HelpContext7_21
-                        DW      Offset NewLine
-                        DW      Offset Divider
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_0
-                        DW      Offset HelpGlobal_1
-                        DW      Offset HelpGlobal_37
-                        DW      Offset HelpGlobal_3
-                        DW      Offset HelpGlobal_4
-                        DW      Offset HelpGlobal_20
-                        DW      Offset HelpGlobal_9
-                        DW      Offset HelpGlobal_22
-                        DW      Offset HelpGlobal_10
-                        DW      Offset HelpGlobal_19
-                        DW      Offset HelpGlobal_11
-                        DW      Offset HelpGlobal_12
-                        DW      Offset HelpGlobal_33
-                        DW      Offset HelpGlobal_13
-                        DW      Offset HelpGlobal_5
-                        DW      Offset HelpGlobal_23
-                        DW      Offset HelpGlobal_6
-                        DW      Offset HelpGlobal_2
-                        DW      Offset HelpGlobal_7
-                        DW      Offset HelpGlobal_8
-                        DW      Offset HelpGlobal_32
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_17
-                        DW      Offset HelpGlobal_31
-                        DW      Offset HelpGlobal_18
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_16
-                        DW      Offset HelpGlobal_34
-                        DW      Offset HelpGlobal_35
-                        DW      Offset HelpGlobal_36
-                        DW      Offset HelpGlobal_21
-                        DW      Offset HelpGlobal_14
-                        DW      Offset HelpGlobal_15
-                        DW      Offset NewLine
-                        DW      Offset Divider
+                        DW      HelpContext7_0
+                        DW      HelpContext7_1
+                        DW      HelpContext7_2
+                        DW      NewLine
+                        DW      HelpContext7_8
+                        DW      HelpContext7_26
+                        DW      HelpContext7_9
+                        DW      HelpContext7_10
+                        DW      HelpContext7_36
+                        DW      HelpContext7_22
+                        DW      NewLine
+                        DW      HelpContext7_25
+                        DW      HelpContext7_24
+                        DW      HelpContext7_23
+                        DW      HelpContext7_28
+                        DW      HelpContext7_11
+                        DW      HelpContext7_12
+                        DW      HelpContext7_13
+                        DW      HelpContext7_14
+                        DW      NewLine
+                        DW      HelpContext7_34
+                        DW      HelpContext7_35
+                        DW      NewLine
+                        DW      HelpContext7_33
+                        DW      NewLine
+                        DW      HelpContext7_3
+                        DW      HelpContext7_4
+                        DW      HelpContext7_5
+                        DW      NewLine
+                        DW      HelpContext7_6
+                        DW      HelpContext7_7
+                        DW      HelpContext7_27
+                        DW      HelpContext7_29
+                        DW      HelpContext7_30
+                        DW      NewLine
+                        DW      HelpContext7_15
+                        DW      HelpContext7_16
+                        DW      HelpContext7_17
+                        DW      HelpContext7_18
+                        DW      HelpContext7_19
+                        DW      NewLine
+                        DW      HelpContext7_20
+                        DW      HelpContext7_21
+                        DW      NewLine
+                        DW      Divider
+                        DW      NewLine
+                        DW      HelpGlobal_0
+                        DW      HelpGlobal_1
+                        DW      HelpGlobal_37
+                        DW      HelpGlobal_3
+                        DW      HelpGlobal_4
+                        DW      HelpGlobal_20
+                        DW      HelpGlobal_9
+                        DW      HelpGlobal_22
+                        DW      HelpGlobal_10
+                        DW      HelpGlobal_19
+                        DW      HelpGlobal_11
+                        DW      HelpGlobal_12
+                        DW      HelpGlobal_33
+                        DW      HelpGlobal_13
+                        DW      HelpGlobal_5
+                        DW      HelpGlobal_23
+                        DW      HelpGlobal_6
+                        DW      HelpGlobal_2
+                        DW      HelpGlobal_7
+                        DW      HelpGlobal_8
+                        DW      HelpGlobal_32
+                        DW      NewLine
+                        DW      HelpGlobal_17
+                        DW      HelpGlobal_31
+                        DW      HelpGlobal_18
+                        DW      NewLine
+                        DW      HelpGlobal_16
+                        DW      HelpGlobal_34
+                        DW      HelpGlobal_35
+                        DW      HelpGlobal_36
+                        DW      HelpGlobal_21
+                        DW      HelpGlobal_14
+                        DW      HelpGlobal_15
+                        DW      NewLine
+                        DW      Divider
 
                         DW      0               ; End of list
 
@@ -1047,67 +1048,67 @@ HelpContext7_20         DB      5, 'Press Spacebar  ', 9Fh, 'default ', 0A5h, 0
 HelpContext7_21         DB      5, 'Release Space   ', 0C3h, 'off command', 0
 
 HelpContext9Ptrs        Label   Word
-                        DW      Offset HelpContext9_0
-                        DW      Offset HelpContext9_1
-                        DW      Offset HelpContext9_2
-                        DW      Offset NewLine
-                        DW      Offset HelpContext9_3
-                        DW      Offset HelpContext9_4
-                        DW      Offset HelpContext9_11
-                        DW      Offset HelpContext9_5
-                        DW      Offset HelpContext9_6
-                        DW      Offset HelpContext9_7
-                        DW      Offset NewLine
-                        DW      Offset HelpContext9_15
-                        DW      Offset HelpContext9_16
-                        DW      Offset NewLine
-                        DW      Offset HelpContext9_8
-                        DW      Offset HelpContext9_9
-                        DW      Offset NewLine
-                        DW      Offset HelpContext9_10
-                        DW      Offset NewLine
-                        DW      Offset HelpContext9_12
-                        DW      Offset HelpContext9_14
-                        DW      Offset NewLine
-                        DW      Offset HelpContext9_13
-                        DW      Offset NewLine
-                        DW      Offset Divider
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_0
-                        DW      Offset HelpGlobal_1
-                        DW      Offset HelpGlobal_37
-                        DW      Offset HelpGlobal_3
-                        DW      Offset HelpGlobal_4
-                        DW      Offset HelpGlobal_20
-                        DW      Offset HelpGlobal_9
-                        DW      Offset HelpGlobal_22
-                        DW      Offset HelpGlobal_10
-                        DW      Offset HelpGlobal_19
-                        DW      Offset HelpGlobal_11
-                        DW      Offset HelpGlobal_12
-                        DW      Offset HelpGlobal_33
-                        DW      Offset HelpGlobal_13
-                        DW      Offset HelpGlobal_5
-                        DW      Offset HelpGlobal_23
-                        DW      Offset HelpGlobal_6
-                        DW      Offset HelpGlobal_2
-                        DW      Offset HelpGlobal_7
-                        DW      Offset HelpGlobal_8
-                        DW      Offset HelpGlobal_32
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_17
-                        DW      Offset HelpGlobal_31
-                        DW      Offset HelpGlobal_18
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_16
-                        DW      Offset HelpGlobal_34
-                        DW      Offset HelpGlobal_35
-                        DW      Offset HelpGlobal_36
-                        DW      Offset HelpGlobal_21
-                        DW      Offset HelpGlobal_14
-                        DW      Offset HelpGlobal_15
-                        DW      Offset NewLine
-                        DW      Offset Divider
+                        DW      HelpContext9_0
+                        DW      HelpContext9_1
+                        DW      HelpContext9_2
+                        DW      NewLine
+                        DW      HelpContext9_3
+                        DW      HelpContext9_4
+                        DW      HelpContext9_11
+                        DW      HelpContext9_5
+                        DW      HelpContext9_6
+                        DW      HelpContext9_7
+                        DW      NewLine
+                        DW      HelpContext9_15
+                        DW      HelpContext9_16
+                        DW      NewLine
+                        DW      HelpContext9_8
+                        DW      HelpContext9_9
+                        DW      NewLine
+                        DW      HelpContext9_10
+                        DW      NewLine
+                        DW      HelpContext9_12
+                        DW      HelpContext9_14
+                        DW      NewLine
+                        DW      HelpContext9_13
+                        DW      NewLine
+                        DW      Divider
+                        DW      NewLine
+                        DW      HelpGlobal_0
+                        DW      HelpGlobal_1
+                        DW      HelpGlobal_37
+                        DW      HelpGlobal_3
+                        DW      HelpGlobal_4
+                        DW      HelpGlobal_20
+                        DW      HelpGlobal_9
+                        DW      HelpGlobal_22
+                        DW      HelpGlobal_10
+                        DW      HelpGlobal_19
+                        DW      HelpGlobal_11
+                        DW      HelpGlobal_12
+                        DW      HelpGlobal_33
+                        DW      HelpGlobal_13
+                        DW      HelpGlobal_5
+                        DW      HelpGlobal_23
+                        DW      HelpGlobal_6
+                        DW      HelpGlobal_2
+                        DW      HelpGlobal_7
+                        DW      HelpGlobal_8
+                        DW      HelpGlobal_32
+                        DW      NewLine
+                        DW      HelpGlobal_17
+                        DW      HelpGlobal_31
+                        DW      HelpGlobal_18
+                        DW      NewLine
+                        DW      HelpGlobal_16
+                        DW      HelpGlobal_34
+                        DW      HelpGlobal_35
+                        DW      HelpGlobal_36
+                        DW      HelpGlobal_21
+                        DW      HelpGlobal_14
+                        DW      HelpGlobal_15
+                        DW      NewLine
+                        DW      Divider
                         DW      0
 
 HelpContext9_0          DB      33, 0FFh, 1, 139, 0FFh, 13, 134, 0FFh, 1, 138, 0
@@ -1135,53 +1136,53 @@ HelpContext9_14         DB      3, 80h, 'R', 0FFh, 13, ' Reverse output ', 0A3h,
 Helpcontext9_13         DB      3, 'G', 0FFh, 17, ' Goto ', 85h, 'currently playing', 0
 
 HelpContext12Ptrs       Label   Word
-                        DW      Offset HelpContext12_0
-                        DW      Offset HelpContext12_1
-                        DW      Offset HelpContext12_2
-                        DW      Offset NewLine
-                        DW      Offset HelpContext12_3
-                        DW      Offset NewLine
-                        DW      Offset HelpContext12_4
-                        DW      Offset HelpContext12_5
-                        DW      Offset HelpContext12_6
-                        DW      Offset NewLine
-                        DW      Offset Divider
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_0
-                        DW      Offset HelpGlobal_1
-                        DW      Offset HelpGlobal_37
-                        DW      Offset HelpGlobal_3
-                        DW      Offset HelpGlobal_4
-                        DW      Offset HelpGlobal_20
-                        DW      Offset HelpGlobal_9
-                        DW      Offset HelpGlobal_22
-                        DW      Offset HelpGlobal_10
-                        DW      Offset HelpGlobal_19
-                        DW      Offset HelpGlobal_11
-                        DW      Offset HelpGlobal_12
-                        DW      Offset HelpGlobal_33
-                        DW      Offset HelpGlobal_13
-                        DW      Offset HelpGlobal_5
-                        DW      Offset HelpGlobal_23
-                        DW      Offset HelpGlobal_6
-                        DW      Offset HelpGlobal_2
-                        DW      Offset HelpGlobal_7
-                        DW      Offset HelpGlobal_8
-                        DW      Offset HelpGlobal_32
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_17
-                        DW      Offset HelpGlobal_31
-                        DW      Offset HelpGlobal_18
-                        DW      Offset NewLine
-                        DW      Offset HelpGlobal_16
-                        DW      Offset HelpGlobal_34
-                        DW      Offset HelpGlobal_35
-                        DW      Offset HelpGlobal_36
-                        DW      Offset HelpGlobal_21
-                        DW      Offset HelpGlobal_14
-                        DW      Offset HelpGlobal_15
-                        DW      Offset NewLine
-                        DW      Offset Divider
+                        DW      HelpContext12_0
+                        DW      HelpContext12_1
+                        DW      HelpContext12_2
+                        DW      NewLine
+                        DW      HelpContext12_3
+                        DW      NewLine
+                        DW      HelpContext12_4
+                        DW      HelpContext12_5
+                        DW      HelpContext12_6
+                        DW      NewLine
+                        DW      Divider
+                        DW      NewLine
+                        DW      HelpGlobal_0
+                        DW      HelpGlobal_1
+                        DW      HelpGlobal_37
+                        DW      HelpGlobal_3
+                        DW      HelpGlobal_4
+                        DW      HelpGlobal_20
+                        DW      HelpGlobal_9
+                        DW      HelpGlobal_22
+                        DW      HelpGlobal_10
+                        DW      HelpGlobal_19
+                        DW      HelpGlobal_11
+                        DW      HelpGlobal_12
+                        DW      HelpGlobal_33
+                        DW      HelpGlobal_13
+                        DW      HelpGlobal_5
+                        DW      HelpGlobal_23
+                        DW      HelpGlobal_6
+                        DW      HelpGlobal_2
+                        DW      HelpGlobal_7
+                        DW      HelpGlobal_8
+                        DW      HelpGlobal_32
+                        DW      NewLine
+                        DW      HelpGlobal_17
+                        DW      HelpGlobal_31
+                        DW      HelpGlobal_18
+                        DW      NewLine
+                        DW      HelpGlobal_16
+                        DW      HelpGlobal_34
+                        DW      HelpGlobal_35
+                        DW      HelpGlobal_36
+                        DW      HelpGlobal_21
+                        DW      HelpGlobal_14
+                        DW      HelpGlobal_15
+                        DW      NewLine
+                        DW      Divider
                         DW      0
 
 HelpContext12_0         DB      31, 0FFh, 1, 139, 0FFh, 18, 134, 0FFh, 1, 138, 0
@@ -1282,52 +1283,52 @@ DecodeWordCEh           DB      "Wipe ", 0
 ; cursor, window
 
 DecodeBuffer            DB      80 Dup (0)
-DecodeWords             DW      Offset DecodeWord80h, Offset DecodeWord81h
-                        DW      Offset DecodeWord82h, Offset DecodeWord83h
-                        DW      Offset DecodeWord84h, Offset DecodeWord85h
-                        DW      Offset DecodeWord86h, Offset DecodeWord87h
-                        DW      Offset DecodeWord88h, Offset DecodeWord89h
-                        DW      Offset DecodeWord8Ah, Offset DecodeWord8Bh
-                        DW      Offset DecodeWord8Ch, Offset DecodeWord8Dh
-                        DW      Offset DecodeWord8Eh, Offset DecodeWord8Fh
-                        DW      Offset DecodeWord90h, Offset DecodeWord91h
-                        DW      Offset DecodeWord92h, Offset DecodeWord93h
-                        DW      Offset DecodeWord94h, Offset DecodeWord95h
-                        DW      Offset DecodeWord96h, Offset DecodeWord97h
-                        DW      Offset DecodeWord98h, Offset DecodeWord99h
-                        DW      Offset DecodeWord9Ah, Offset DecodeWord9Bh
-                        DW      Offset DecodeWord9Ch, Offset DecodeWord9Dh
-                        DW      Offset DecodeWord9Eh, Offset DecodeWord9Fh
-                        DW      Offset DecodeWordA0h, Offset DecodeWordA1h
-                        DW      Offset DecodeWordA2h, Offset DecodeWordA3h
-                        DW      Offset DecodeWordA4h, Offset DecodeWordA5h
-                        DW      Offset DecodeWordA6h, Offset DecodeWordA7h
-                        DW      Offset DecodeWordA8h, Offset DecodeWordA9h
-                        DW      Offset DecodeWordAAh, Offset DecodeWordABh
-                        DW      Offset DecodeWordACh, Offset DecodeWordADh
-                        DW      Offset DecodeWordAEh, Offset DecodeWordAFh
-                        DW      Offset DecodeWordB0h, Offset DecodeWordB1h
-                        DW      Offset DecodeWordB2h, Offset DecodeWordB3h
-                        DW      Offset DecodeWordB4h, Offset DecodeWordB5h
-                        DW      Offset DecodeWordB6h, Offset DecodeWordB7h
-                        DW      Offset DecodeWordB8h, Offset DecodeWordB9h
-                        DW      Offset DecodeWordBAh, Offset DecodeWordBBh
-                        DW      Offset DecodeWordBCh, Offset DecodeWordBDh
-                        DW      Offset DecodeWordBEh, Offset DecodeWordBFh
-                        DW      Offset DecodeWordC0h, Offset DecodeWordC1h
-                        DW      Offset DecodeWordC2h, Offset DecodeWordC3h
-                        DW      Offset DecodeWordC4h, Offset DecodeWordC5h
-                        DW      Offset DecodeWordC6h, Offset DecodeWordC7h
-                        DW      Offset DecodeWordC8h, Offset DecodeWordC9h
-                        DW      Offset DecodeWordCAh, Offset DecodeWordCBh
-                        DW      Offset DecodeWordCCh, Offset DecodeWordCDh
-                        DW      Offset DecodeWordCEh
+DecodeWords             DW      DecodeWord80h, DecodeWord81h
+                        DW      DecodeWord82h, DecodeWord83h
+                        DW      DecodeWord84h, DecodeWord85h
+                        DW      DecodeWord86h, DecodeWord87h
+                        DW      DecodeWord88h, DecodeWord89h
+                        DW      DecodeWord8Ah, DecodeWord8Bh
+                        DW      DecodeWord8Ch, DecodeWord8Dh
+                        DW      DecodeWord8Eh, DecodeWord8Fh
+                        DW      DecodeWord90h, DecodeWord91h
+                        DW      DecodeWord92h, DecodeWord93h
+                        DW      DecodeWord94h, DecodeWord95h
+                        DW      DecodeWord96h, DecodeWord97h
+                        DW      DecodeWord98h, DecodeWord99h
+                        DW      DecodeWord9Ah, DecodeWord9Bh
+                        DW      DecodeWord9Ch, DecodeWord9Dh
+                        DW      DecodeWord9Eh, DecodeWord9Fh
+                        DW      DecodeWordA0h, DecodeWordA1h
+                        DW      DecodeWordA2h, DecodeWordA3h
+                        DW      DecodeWordA4h, DecodeWordA5h
+                        DW      DecodeWordA6h, DecodeWordA7h
+                        DW      DecodeWordA8h, DecodeWordA9h
+                        DW      DecodeWordAAh, DecodeWordABh
+                        DW      DecodeWordACh, DecodeWordADh
+                        DW      DecodeWordAEh, DecodeWordAFh
+                        DW      DecodeWordB0h, DecodeWordB1h
+                        DW      DecodeWordB2h, DecodeWordB3h
+                        DW      DecodeWordB4h, DecodeWordB5h
+                        DW      DecodeWordB6h, DecodeWordB7h
+                        DW      DecodeWordB8h, DecodeWordB9h
+                        DW      DecodeWordBAh, DecodeWordBBh
+                        DW      DecodeWordBCh, DecodeWordBDh
+                        DW      DecodeWordBEh, DecodeWordBFh
+                        DW      DecodeWordC0h, DecodeWordC1h
+                        DW      DecodeWordC2h, DecodeWordC3h
+                        DW      DecodeWordC4h, DecodeWordC5h
+                        DW      DecodeWordC6h, DecodeWordC7h
+                        DW      DecodeWordC8h, DecodeWordC9h
+                        DW      DecodeWordCAh, DecodeWordCBh
+                        DW      DecodeWordCCh, DecodeWordCDh
+                        DW      DecodeWordCEh
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Functions                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-Proc            H_DrawHelp Far
+H_DrawHelp:;:;Far
 
                 Push    CS
                 Pop     DS
@@ -1335,7 +1336,7 @@ Proc            H_DrawHelp Far
                 Push    CS
                 Pop     ES
 
-                        Assume DS:Help
+                        ;Assume DS:Help
 
                 Mov     CX, 32
                 Mov     SI, HelpContext
@@ -1360,7 +1361,7 @@ H_DrawHelp1:
 ; DS:SI points to string. Deposit into buffer
 
                 Push    DI
-                Mov     DI, Offset DecodeBuffer
+                Mov     DI, DecodeBuffer
 
                 Mov     DX, 1
 
@@ -1379,7 +1380,7 @@ H_DecodeBuffer2:
 
                 ; Insert word
                 Push    SI
-                LEA     SI, [EAX*2 + Offset DecodeWords - 100h]
+                LEA     SI, [EAX*2 + DecodeWords - 100h]
                 Inc     DX
                 Mov     SI, [SI]
                 Jmp     H_DecodeBuffer1
@@ -1403,7 +1404,7 @@ H_DecodeBufferEnd:
                 StosB
                 Pop     DI
 
-                Mov     SI, Offset DecodeBuffer
+                Mov     SI, DecodeBuffer
                 Mov     AH, 6
                 Call    S_DrawString
 
@@ -1416,12 +1417,12 @@ H_DecodeBufferEnd:
 
                 Ret
 
-EndP            H_DrawHelp
-                Assume DS:Nothing
+;EndP            H_DrawHelp
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            H_Help Far
+H_Help:;Far
 
                 Call    Glbl_SaveMode
 
@@ -1433,16 +1434,16 @@ Proc            H_Help Far
 
                 Mov     AX, 5
                 Mov     CX, Object1
-                Mov     DX, Offset O1_HelpList
+                Mov     DX, O1_HelpList
                 Mov     SI, 1
 
                 Ret
 
-EndP            H_Help
+;EndP            H_Help
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            H_HelpUp Far
+H_HelpUp:;Far
 
                 Sub     CS:TopLine, 1
                 AdC     CS:Topline, 0
@@ -1450,17 +1451,17 @@ Proc            H_HelpUp Far
                 Mov     AX, 1
                 Ret
 
-EndP            H_HelpUp
+;EndP            H_HelpUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            H_HelpDown Far
+H_HelpDown:;Far
 
                 Push    CX
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Help
+                        ;Assume DS:Help
 
                 Mov     SI, HelpContext
                 Add     SI, SI
@@ -1484,12 +1485,12 @@ H_HelpDown1:
                 Mov     AX, 1
                 Ret
 
-EndP            H_HelpDown
-                Assume DS:Nothing
+;EndP            H_HelpDown
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            H_HelpPgUp Far
+H_HelpPgUp:;Far
 
                 Mov     AX, CS:TopLine
                 Sub     AX, 32
@@ -1502,11 +1503,11 @@ H_HelpPgUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            H_HelpPgUp
+;EndP            H_HelpPgUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            H_HelpPgDn Far
+H_HelpPgDn:;Far
 
                 Mov     CX, 32
 
@@ -1516,11 +1517,11 @@ H_HelpPgDn1:
 
                 Ret                     ; AX = 1, set by H_HelpDown
 
-EndP            H_HelpPgDn
+;EndP            H_HelpPgDn
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            H_HelpESC Far
+H_HelpESC:;Far
 
                 Mov     AX, CS:TopLine
                 Mov     BX, CS:HelpContext
@@ -1530,18 +1531,18 @@ Proc            H_HelpESC Far
 
                 Jmp     Glbl_RestoreMode
 
-EndP            H_HelpESC
+;EndP            H_HelpESC
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            H_SetHelpContext Far
+H_SetHelpContext:;Far
 
                 Mov     AX, [SI+2]
                 Mov     CS:HelpContext, AX
              
                 Ret
 
-EndP            H_SetHelpContext
+;EndP            H_SetHelpContext
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
@@ -1549,4 +1550,4 @@ EndS
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
-End
+;End

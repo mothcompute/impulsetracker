@@ -5,103 +5,103 @@
 ; TODO
 ;Jumps
 
-include switch.inc
+%include "switch.inc"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Externals                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
 Segment         Object1 BYTE Public 'Data'
-                Extrn   HelpKeyValue:Word, OrderKeyValue:Word
+                extern    HelpKeyValue:Word, OrderKeyValue:Word
 EndS
 
 Segment         InfoLine BYTE Public 'Code' USE16
-                Extrn   ShowUsageTime:Byte
+                extern    ShowUsageTime:Byte
 EndS
 
 Segment         Disk BYTE Public 'Code' USE16
-                Extrn   DiskOptions:Byte
+                extern    DiskOptions:Byte
 EndS
 
 Segment         Screen BYTE Public 'Code'
-                Extrn   CharacterGenerationOffset:Word
-                Extrn   VGAFlags:Byte
+                extern    CharacterGenerationOffset:Word
+                extern    VGAFlags:Byte
 EndS
 
 Segment         Mouse BYTE Public 'Code'
-                Extrn   MouseCharacterGenerationOffset:Word
+                extern    MouseCharacterGenerationOffset:Word
 EndS
 
 Segment         Main DWORD Public 'Code' USE16
-                Extrn   ReleaseTimeSlice:Byte
+                extern    ReleaseTimeSlice:Byte
 EndS
 
-                Extrn   D_InitDisk:Far
-                Extrn   D_UnInitDisk:Far
-                Extrn   D_DisableFileColours:Far
+                extern    D_InitDisk:Far
+                extern    D_UnInitDisk:Far
+                extern    D_DisableFileColours:Far
 
-                Extrn   E_InitEMS:Far
-                Extrn   E_UnInitEMS:Far
+                extern    E_InitEMS:Far
+                extern    E_UnInitEMS:Far
 
-                Extrn   Error_InitHandler:Far
-                Extrn   Error_UnInitHandler:Far
+                extern    Error_InitHandler:Far
+                extern    Error_UnInitHandler:Far
 
-                Extrn   K_InitKeyBoard:Far
-                Extrn   K_UnInitKeyBoard:Far
-                Extrn   K_InstallKeyboardType:Far
-                Extrn   K_RemoveKeyboardType:Far
+                extern    K_InitKeyBoard:Far
+                extern    K_UnInitKeyBoard:Far
+                extern    K_InstallKeyboardType:Far
+                extern    K_RemoveKeyboardType:Far
 
-                Extrn   K_InstallDOSHandler:Far
-                Extrn   K_UnInstallDOSHandler:Far
-                Extrn   K_SwapKeyBoard:Far
+                extern    K_InstallDOSHandler:Far
+                extern    K_UnInstallDOSHandler:Far
+                extern    K_SwapKeyBoard:Far
 
-                Extrn   O1_AutoDetectList:Far
-                Extrn   O1_ConfirmQuit:Far
-                Extrn   O1_PatternEditList:Far
-                Extrn   O1_CrashRecovery:Far
-                Extrn   O1_KeyboardList:Far
+                extern    O1_AutoDetectList:Far
+                extern    O1_ConfirmQuit:Far
+                extern    O1_PatternEditList:Far
+                extern    O1_CrashRecovery:Far
+                extern    O1_KeyboardList:Far
 
-                Extrn   M_Object1List:Far
+                extern    M_Object1List:Far
 
-                Extrn   S_InitScreen:Far
-                Extrn   S_ClearScreen:Far
-                Extrn   S_UnInitScreen:Far
-                Extrn   S_SetDirectMode:Far
-                Extrn   S_DrawString:Far
+                extern    S_InitScreen:Far
+                extern    S_ClearScreen:Far
+                extern    S_UnInitScreen:Far
+                extern    S_SetDirectMode:Far
+                extern    S_DrawString:Far
 
-                Extrn   Music_InitMusic:Far
-                Extrn   Music_UnInitMusic:Far
+                extern    Music_InitMusic:Far
+                extern    Music_UnInitMusic:Far
 
-                Extrn   Music_SetLimit:Far
-                Extrn   Music_SetSoundCard:Far
-                Extrn   Music_SetDMA:Far
-                Extrn   Music_SetIRQ:Far
-                Extrn   Music_SetMixSpeed:Far
-                Extrn   Music_SetAddress:Far
-                Extrn   Music_ReverseChannels:Far
-                Extrn   Music_PatternStorage:Far
-                Extrn   Music_SetSoundCardDriver:Far
-                Extrn   Music_Stop:Far
-                Extrn   Music_AutoDetectSoundCard:Far
+                extern    Music_SetLimit:Far
+                extern    Music_SetSoundCard:Far
+                extern    Music_SetDMA:Far
+                extern    Music_SetIRQ:Far
+                extern    Music_SetMixSpeed:Far
+                extern    Music_SetAddress:Far
+                extern    Music_ReverseChannels:Far
+                extern    Music_PatternStorage:Far
+                extern    Music_SetSoundCardDriver:Far
+                extern    Music_Stop:Far
+                extern    Music_AutoDetectSoundCard:Far
 
-IF NETWORKENABLED
-                Extrn   Network_Shutdown:Far
-ENDIF
+%IF  NETWORKENABLED
+                extern    Network_Shutdown:Far
+%ENDIF 
 
-                Extrn   PE_InitPatternEdit:Far
-                Extrn   PE_UnInitPatternEdit:Far
-                Extrn   PECheckModified:Far
+                extern    PE_InitPatternEdit:Far
+                extern    PE_UnInitPatternEdit:Far
+                extern    PECheckModified:Far
 
-                Extrn   D_RestorePreShellDirectory:Far
-                Extrn   D_GetPreShellDirectory:Far
+                extern    D_RestorePreShellDirectory:Far
+                extern    D_GetPreShellDirectory:Far
 
-                Extrn   MMTSR_InstallMMTSR:Far
-                Extrn   MMTSR_UninstallMMTSR:Far
+                extern    MMTSR_InstallMMTSR:Far
+                extern    MMTSR_UninstallMMTSR:Far
 
-                Extrn   InitMouse:Far, UnInitMouse:Far
-                Extrn   CmdLineDisableMouse:Far
+                extern    InitMouse:Far, UnInitMouse:Far
+                extern    CmdLineDisableMouse:Far
 
-                Extrn   InitTimerHandler:Far, UnInitTimerHandler:Far
+                extern    InitTimerHandler:Far, UnInitTimerHandler:Far
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
@@ -114,17 +114,19 @@ ENDIF
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
-Segment                 StartUp BYTE Public 'Code' USE16
-                        Assume  CS:StartUp, DS:Nothing, ES:Nothing
+;Segment                 StartUp BYTE Public 'Code' USE16
+section .text
+%warning "USE16"
+;                        ;Assume  CS:StartUp, DS:Nothing, ES:Nothing
 
 CREATENEWLOGFILE        EQU     1
-include debug.inc
+%include "debug.inc"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Variables                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-StackSize       =       1000h
+StackSize       equ     1000h
 
 No386Msg        DB      "Sorry, Impulse Tracker requires a 386+ processor to run."
                 DB      13, 10, "$"
@@ -154,24 +156,24 @@ EXECData        DW      0               ; Inherit same environment block
                 DW      Offset FCB2, Startup
 ShellMsg        DB      "Type EXIT to return to Impulse Tracker$"
 
-IF SHOWREGISTERNAME
-include wavswitc.inc
-include username.inc
-ENDIF
+%IF SHOWREGISTERNAME
+%include "wavswitc.inc"
+%include "username.inc"
+%ENDIF
 
 Label           CmdLineHelp Byte
-IF SHOWVERSION
+%IF  SHOWVERSION
                 DB      "Impulse Tracker 2.14, Copyright (C) 1995-2000 Jeffrey Lim", 13, 10
                 DB      10
                 DB      "  Usage: IT.EXE [Switches]", 13, 10
-ELSE
+%ELSE
                 DB      "Impulse Tracker, Copyright (C) 1995-2000 Jeffrey Lim", 13, 10
-IF SHOWREGISTERNAME
+%IF  SHOWREGISTERNAME
                 DB      "Registered to: "
                 DB      REGISTERNAME
                 DB      13, 10
-ENDIF
-ENDIF
+%ENDIF 
+%ENDIF 
                 DB      10
                 DB      "Switches:", 13, 10
                 DB      "  SFilename.Drv  Select sound card driver", 13, 10
@@ -232,7 +234,7 @@ StartupQueueNextFunction DW     Offset GetStartupKeyList2
 ;³ Functions                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-Proc            CapitaliseAL
+CapitaliseAL:
 
                 Cmp     AL, 'a'
                 JB      CapitaliseAL1
@@ -245,7 +247,7 @@ Proc            CapitaliseAL
 CapitaliseAL1:
                 Ret
 
-EndP            CapitaliseAL
+;EndP            CapitaliseAL
 
 CapitaliseAL:
 	cmp al, 'a'
@@ -257,7 +259,7 @@ CapitaliseAL:
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetDecimalNumber        ; Returns CX
+GetDecimalNumber:        ; Returns CX
 
                 LodsB
                 Cmp     AL, '0'
@@ -294,12 +296,12 @@ GetDecimalNumber4:
                 ClC
                 Ret
 
-EndP            GetDecimalNumber
+;EndP            GetDecimalNumber
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Start
-                        Assume DS:Nothing
+Start:
+                        ;Assume DS:Nothing
 
 ; 386 check.
 
@@ -416,13 +418,13 @@ NoShowUsageTime:
 
                 Push    InfoLine
                 Pop     DS
-                        Assume DS:InfoLine
+                        ;Assume DS:InfoLine
 
                 Mov     [ShowUsageTime], 0
 
                 Pop     DS
                 Jmp     CmdLine1
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 NoReleaseTimeSlice:
                 Cmp     AL, '2'
@@ -433,7 +435,7 @@ NoReleaseTimeSlice2:
 
                 Push    Main
                 Pop     DS
-                        Assume DS:Main
+                        ;Assume DS:Main
 
                 Mov     [ReleaseTimeSlice], 1
 
@@ -477,31 +479,31 @@ DisableMMTSR:
 DisableDetectDriveMap:
                 Push    Disk
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Or      [DiskOptions], 1
                 Jmp     CmdLine1
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 DisableCacheFiles:
                 Push    Disk
                 Pop     DS
-                        Assume DS:Disk
+                        ;Assume DS:Disk
 
                 Or      [DiskOptions], 2
                 Jmp     CmdLine1
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 KeyboardSwap:
                 Mov     AX, Object1
                 Mov     DS, AX
-                        Assume DS:Object1
+                        ;Assume DS:Object1
 
                 Mov     [HelpKeyValue], 157h
                 Mov     [OrderKeyValue], 13Bh
 
                 Jmp     CmdLine1
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 DisableColours:
                 Call    D_DisableFileColours
@@ -516,7 +518,7 @@ OverrideVGA:
 
                 Mov     CX, Screen
                 Mov     DS, CX
-                        Assume DS:Screen
+                        ;Assume DS:Screen
 
                 Cmp     AL, '1'
                 JE      OverrideVGA1
@@ -545,11 +547,11 @@ Matrox:
 
                 Mov     AX, Mouse
                 Mov     DS, AX
-                        Assume DS:Mouse
+                        ;Assume DS:Mouse
                 Mov     [MouseCharacterGenerationOffset], 256*32
 
                 Jmp     CmdLine1
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 SetControl:
                 Mov     [CS:Control], 1
@@ -624,7 +626,7 @@ SetMixSpeed1:
 SetMixSpeedError:
                 Push    CS
                 Pop     DS
-                        Assume DS:StartUp
+                        ;Assume DS:StartUp
 
                 Mov     AH, 9
                 Mov     DX, Offset MixErrorMsg
@@ -632,7 +634,7 @@ SetMixSpeedError:
 
                 Mov     [Pause], 1
                 Jmp     CmdLine1
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 SetIRQ1:
                 Call    GetDecimalNumber
@@ -648,7 +650,7 @@ SetIRQ1:
 IRQError:
                 Push    CS
                 Pop     DS
-                        Assume DS:StartUp
+                        ;Assume DS:StartUp
 
                 Mov     AH, 9
                 Mov     DX, Offset IRQErrorMsg
@@ -656,7 +658,7 @@ IRQError:
 
                 Mov     [Pause], 1
                 Jmp     CmdLine1
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 
 SetAddress1:
@@ -713,7 +715,7 @@ SetAddress5:
 AddressError:
                 Push    CS
                 Pop     DS
-                        Assume DS:StartUp
+                        ;Assume DS:StartUp
 
                 Mov     AH, 9
                 Mov     DX, Offset AddressErrorMsg
@@ -721,7 +723,7 @@ AddressError:
 
                 Mov     [Pause], 1
                 Jmp     CmdLine1
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 Limit1:
                 Call    GetDecimalNumber
@@ -739,7 +741,7 @@ Limit1:
 LimitError:
                 Push    CS
                 Pop     DS
-                        Assume DS:StartUp
+                        ;Assume DS:StartUp
 
                 Mov     AH, 9
                 Mov     DX, Offset LimitErrorMsg
@@ -747,7 +749,7 @@ LimitError:
 
                 Mov     [Pause], 1
                 Jmp     CmdLine1
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 
 CmdLineEnd:
@@ -755,7 +757,7 @@ CmdLineEnd:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:StartUp
+                        ;Assume DS:StartUp
 
                 Trace   "Windows Detection"
 
@@ -862,7 +864,7 @@ SkipMMTSR:
                 Call    M_Object1List
                 Jmp     Quit1
 
-Proc            Quit Far
+Quit:;Far
 
                 Mov     DI, Offset O1_ConfirmQuit
                 Mov     CX, 3
@@ -878,9 +880,9 @@ Quit1:
                 Call    PECheckModified
                 Call    Music_Stop
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Call    Network_Shutdown
-ENDIF
+%ENDIF 
 
                 Call    MMTSR_UninstallMMTSR
                 Call    PE_UnInitPatternEdit
@@ -897,23 +899,23 @@ ENDIF
                 Mov     AX, 4C00h
                 Int     21h
 
-EndP            Quit
+;EndP            Quit
 
-EndP            Start
+;EndP            Start
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            IsStartupKeyList Far
+IsStartupKeyList:;Far
 
                 Mov     AL,CS:StartupList
 
                 Ret
 
-EndP            IsStartupKeyList
+;EndP            IsStartupKeyList
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetStartupKeyList Far
+GetStartupKeyList:;Far
 
                 Jmp     [CS:StartupKeyListFunction]
 
@@ -977,11 +979,11 @@ GetStartupKeyList3:                     ; Save module then quit
                 Mov     [CS:StartupList], 0
                 Ret
 
-EndP            GetStartupKeyList
+;EndP            GetStartupKeyList
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            CrashRecovery Far               ; CtrlAltDel location.
+CrashRecovery:;Far               ; CtrlAltDel location.
 
                 ClD
                 StI
@@ -999,11 +1001,11 @@ Proc            CrashRecovery Far               ; CtrlAltDel location.
                 Mov     CX, 0FFFFh
                 Jmp     M_Object1List
 
-EndP            CrashRecovery
+;EndP            CrashRecovery
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetEnvironment Far              ; DS:SI points to string.
+GetEnvironment:;Far              ; DS:SI points to string.
                                                 ; CX = length of string.
                                                 ; Returns ES:DI
 
@@ -1042,11 +1044,11 @@ GetEnvironment3:
                 ClC
                 Ret
 
-EndP            GetEnvironment
+;EndP            GetEnvironment
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Refresh Far
+Refresh:;Far
 
                 Call    D_GetPreShellDirectory
                 Call    S_InitScreen
@@ -1057,11 +1059,11 @@ Proc            Refresh Far
                 Mov     AX, 1
                 Ret
 
-EndP            Refresh
+;EndP            Refresh
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            DOSShell Far
+DOSShell:;Far
 
                 PushAD
                 Push    DS
@@ -1090,7 +1092,7 @@ DOSShell3:
                 Push    CS
                 Pop     DS
                 Pop     ES
-                        Assume DS:StartUp
+                        ;Assume DS:StartUp
 
                 Mov     AH, 9
                 Mov     DX, Offset ShellMsg
@@ -1107,7 +1109,7 @@ DOSShell3:
 DOSShell1:
                 ClI
                 Int     21h
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 PopF
 
@@ -1134,8 +1136,8 @@ DOSShell5:
                 Mov     AX, 1
                 Ret
 
-EndP            DOSShell
-                Assume DS:Nothing
+;EndP            DOSShell
+                ;Assume DS:Nothing
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 

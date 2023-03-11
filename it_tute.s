@@ -1,34 +1,30 @@
+%include "switch.inc"
 
-        Jumps
-        .386
+%IF  TUTORIAL
 
-include switch.inc
-
-IF TUTORIAL
-
-                Extrn   S_DrawBox:Far
-                Extrn   S_DrawString:Far
-                Extrn   Music_GetSongSegment:Far
-                Extrn   Music_GetPlayMode:Far
-                Extrn   PE_GetLastInstrument:Far        ; Returns BX = LastInst-1
+                extern    S_DrawBox:Far
+                extern    S_DrawString:Far
+                extern    Music_GetSongSegment:Far
+                extern    Music_GetPlayMode:Far
+                extern    PE_GetLastInstrument:Far        ; Returns BX = LastInst-1
 
 Segment         Pattern BYTE Public 'Code'
-                Extrn   PatternDataArea:Word
-                Extrn   LastKeyBoard1:Word
-                Extrn   LastKeyBoard2:Word
+                extern    PatternDataArea:Word
+                extern    LastKeyBoard1:Word
+                extern    LastKeyBoard2:Word
 EndS
 
 Segment         Disk Byte Public 'Code' USE16
-                Extrn   SamplesInModule:Byte
-                Extrn   InSampleFileName:Byte
+                extern    SamplesInModule:Byte
+                extern    InSampleFileName:Byte
 EndS
 
                 Public  Glbl_TutorialHandler
 
 Segment                 Glbl BYTE Public 'Code' USE16
-                        Assume CS:Glbl, DS:Nothing, GS:Pattern
+                        ;Assume CS:Glbl, DS:Nothing, GS:Pattern
 
-Extrn   CurrentMode:Byte
+extern    CurrentMode:Byte
 
 TutorialState           DW      0
 
@@ -266,38 +262,38 @@ SnareDrumText           DB      "Snare Drum"
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Tute_State0
+Proc Tute_State0
 
                 Cmp     AL, 9
                 Ret
 
-EndP            Tute_State0
+;EndP            Tute_State0
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Tute_State1
+Proc Tute_State1
 
                 Cmp     AL, 3
                 Ret
 
-EndP            Tute_State1
+;EndP            Tute_State1
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Tute_State2
+Proc Tute_State2
 
                 Cmp     AL, 13
                 Ret
 
-EndP            Tute_State2
+;EndP            Tute_State2
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Tute_State3
+Proc Tute_State3
 
                 Push    Disk
                 Pop     ES
-                        Assume ES:Disk
+                        ;Assume ES:Disk
 
                 Cmp     ES:SamplesInModule, 1
                 JNE     Tute_State3a
@@ -310,11 +306,11 @@ Proc            Tute_State3
 Tute_State3a:
                 Ret
 
-EndP            Tute_State3
+;EndP            Tute_State3
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Tute_State4
+Proc Tute_State4
 
                 Call    Music_GetSongSegment
                 Mov     ES, AX
@@ -325,78 +321,78 @@ Proc            Tute_State4
                 RepE    CmpSB
                 Ret
 
-EndP            Tute_State4
+;EndP            Tute_State4
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Tute_State5
+Proc Tute_State5
 
                 Cmp     AL, 2
                 Ret
 
-EndP            Tute_State5
+;EndP            Tute_State5
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Tute_State6
+Proc Tute_State6
 
                 Cmp     Word Ptr [FS:0], 13Ch
                 Ret
 
-EndP            Tute_State6
+;EndP            Tute_State6
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Tute_State7
+Proc Tute_State7
 
                 Cmp     Word Ptr [FS:320*16], 13Ch
                 Ret
 
-EndP            Tute_State7
+;EndP            Tute_State7
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Tute_State8
+Proc Tute_State8
 
                 Call    Music_GetPlayMode
                 Cmp     AX, 1
 
                 Ret
 
-EndP            Tute_State8
+;EndP            Tute_State8
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Tute_State9
+Proc Tute_State9
 
                 Call    Music_GetPlayMode
                 Test    AX, AX
                 Ret
 
-EndP            Tute_State9
+;EndP            Tute_State9
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Tute_State10
+Proc Tute_State10
 
                 Cmp     Word Ptr [FS:60*320], 13Ch
                 Ret
 
-EndP            Tute_State10
+;EndP            Tute_State10
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Tute_State12
+Proc Tute_State12
 
                 Call    PE_GetLastInstrument
                 Cmp     BX, 1
                 Ret
 
-EndP            Tute_State12
+;EndP            Tute_State12
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Tute_State14
+Proc Tute_State14
 
                 Call    Music_GetSongSegment
                 Mov     ES, AX
@@ -407,60 +403,60 @@ Proc            Tute_State14
                 RepE    CmpSB
                 Ret
 
-EndP            Tute_State14
+;EndP            Tute_State14
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Tute_StateEnd
+Proc Tute_StateEnd
 
                 Inc     AX      ; Ensure zero flag is not set.
                 Ret
 
-EndP            Tute_StateEnd
+;EndP            Tute_StateEnd
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Tute_State16
+Proc Tute_State16
 
                 Cmp     Word Ptr [FS:62*320], 23Ch
                 Ret
 
-EndP            Tute_State16
+;EndP            Tute_State16
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Tute_State18
+Proc Tute_State18
 
                 Cmp     [Word Ptr GS:LastKeyboard1+2], 2600h
                 Ret
 
-EndP            Tute_State18
+;EndP            Tute_State18
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Tute_State19
+Proc Tute_State19
 
                 Cmp     [Word Ptr GS:LastKeyboard1+2], 2200h
                 Ret
 
-EndP            Tute_State19
+;EndP            Tute_State19
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_TutorialHandler Far
+Proc Glbl_TutorialHandler Far
 
                 PushAD
                 Push    DS
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Glbl
+                        ;Assume DS:Glbl
 
                 Push    Pattern
                 Pop     GS
 
                 Mov     FS, [GS:PatternDataArea]
-                        Assume FS:Nothing
+                        ;Assume FS:Nothing
 
                 Mov     BX, [TutorialState]
                 Mov     AL, CurrentMode
@@ -509,11 +505,9 @@ Tute_TuteFinished:
                 PopAD
                 Ret
 
-EndP            Glbl_TutorialHandler
-                Assume DS:Nothing, FS:Nothing
+;EndP            Glbl_TutorialHandler
+                ;Assume DS:Nothing, FS:Nothing
 
 EndS
 
-ENDIF
-
-End
+%ENDIF 

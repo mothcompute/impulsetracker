@@ -2,95 +2,93 @@
 ;³ Global Key Handler                                                          ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-                        Jumps
-
-include switch.inc
-include network.inc
+%include "switch.inc"
+%include "network.inc"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Externals                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
 Segment         Pattern BYTE Public 'Code'
-                Extrn   LastInstrument:Byte
-                Extrn   Order:Word
-                Extrn   MaxRow:Word
-                Extrn   NumberOfRows:Word
-                Extrn   PatternNumber:Word
+                extern    LastInstrument:Byte
+                extern    Order:Word
+                extern    MaxRow:Word
+                extern    NumberOfRows:Word
+                extern    PatternNumber:Word
 EndS
 
 Segment         Inst BYTE Public 'Code'
-                Extrn   SampleNumber:Byte
-                Extrn   InstrumentScreen:Word
+                extern    SampleNumber:Byte
+                extern    InstrumentScreen:Word
 EndS
 
 Segment         Object1 BYTE Public 'Data'
 EndS
 
-                Extrn   D_InitLoadModule:Far
-                Extrn   D_InitLoadSamples:Far
-                Extrn   D_InitLoadInstruments:Far
-                Extrn   Display_SelectDisplayList:Far
+                extern    D_InitLoadModule:Far
+                extern    D_InitLoadSamples:Far
+                extern    D_InitLoadInstruments:Far
+                extern    Display_SelectDisplayList:Far
 
-                Extrn   M_Object1List:Far
+                extern    M_Object1List:Far
 
-                Extrn   I_ClearTables:Far
+                extern    I_ClearTables:Far
 
-                Extrn   Music_GetInstrumentMode:Far
-                Extrn   Music_GetPlayMode:Far
-                Extrn   Music_PlayPattern:Far
-                Extrn   Music_PlaySong:Far
-                Extrn   Music_Stop:Far
-                Extrn   Music_ToggleChannel:Far
-                Extrn   Music_GetSlaveChannelInformationTable:Far
-                Extrn   Music_IncreaseSpeed:Far
-                Extrn   Music_DecreaseSpeed:Far
-                Extrn   Music_IncreaseVolume:Far
-                Extrn   Music_DecreaseVolume:Far
-                Extrn   Music_GetSongSegment:Far
-                Extrn   Music_GetDriverScreen:Far
+                extern    Music_GetInstrumentMode:Far
+                extern    Music_GetPlayMode:Far
+                extern    Music_PlayPattern:Far
+                extern    Music_PlaySong:Far
+                extern    Music_Stop:Far
+                extern    Music_ToggleChannel:Far
+                extern    Music_GetSlaveChannelInformationTable:Far
+                extern    Music_IncreaseSpeed:Far
+                extern    Music_DecreaseSpeed:Far
+                extern    Music_IncreaseVolume:Far
+                extern    Music_DecreaseVolume:Far
+                extern    Music_GetSongSegment:Far
+                extern    Music_GetDriverScreen:Far
 
-                Extrn   SetInfoLine:Far
+                extern    SetInfoLine:Far
 
-                Extrn   PE_GetCurrentPattern:Far
-                Extrn   PE_SetPatternModified:far
+                extern    PE_GetCurrentPattern:Far
+                extern    PE_SetPatternModified:far
 
-                Extrn   O1_InstrumentListGeneral:Far
-                Extrn   O1_InstrumentListVolume:Far
-                Extrn   O1_InstrumentListPanning:Far
-                Extrn   O1_InstrumentListPitch:Far
+                extern    O1_InstrumentListGeneral:Far
+                extern    O1_InstrumentListVolume:Far
+                extern    O1_InstrumentListPanning:Far
+                extern    O1_InstrumentListPitch:Far
 
-                Extrn   O1_KeyboardList:Far
-                Extrn   O1_LoadSampleList:Far
-                Extrn   O1_OrderPanningList:Far
-                Extrn   O1_PatternEditList:Far
-                Extrn   O1_PEConfigList:Far
-                Extrn   O1_SampleList:Far
-                Extrn   O1_LoadModuleList:Far
-                Extrn   O1_ViewInstrumentLibrary:Far
-                Extrn   O1_SaveModuleList:Far
-                Extrn   O1_LoadInstrumentList:Far
-                Extrn   O1_MessageList:Far
-                Extrn   O1_OrderVolumeList:Far
-                Extrn   O1_DisplayList:Far
-                Extrn   I_DrawWaveForm:Far
-                Extrn   S_DefineSmallNumbers:Far
-                Extrn   S_SaveScreen:Far, S_RestoreScreen:Far
-                Extrn   RestoreMouse:Far, RestoreMouseGraphics:Far
-                Extrn   D_ClearFileSpecifier:Far
-                Extrn   O1_ConfigureITList:Far
-                Extrn   O1_ViewSampleLibrary:Far
-                Extrn   O1_ConfigurePaletteList:Far
-                Extrn   O1_MIDIScreen:Far
-                Extrn   O1_TimerList:Far
-                Extrn   I_MapEnvelope:Far
-                Extrn   NewCharacterSet:Far
-                Extrn   S_GetDestination:Far
-                Extrn   S_DefineHiASCII:Far
+                extern    O1_KeyboardList:Far
+                extern    O1_LoadSampleList:Far
+                extern    O1_OrderPanningList:Far
+                extern    O1_PatternEditList:Far
+                extern    O1_PEConfigList:Far
+                extern    O1_SampleList:Far
+                extern    O1_LoadModuleList:Far
+                extern    O1_ViewInstrumentLibrary:Far
+                extern    O1_SaveModuleList:Far
+                extern    O1_LoadInstrumentList:Far
+                extern    O1_MessageList:Far
+                extern    O1_OrderVolumeList:Far
+                extern    O1_DisplayList:Far
+                extern    I_DrawWaveForm:Far
+                extern    S_DefineSmallNumbers:Far
+                extern    S_SaveScreen:Far, S_RestoreScreen:Far
+                extern    RestoreMouse:Far, RestoreMouseGraphics:Far
+                extern    D_ClearFileSpecifier:Far
+                extern    O1_ConfigureITList:Far
+                extern    O1_ViewSampleLibrary:Far
+                extern    O1_ConfigurePaletteList:Far
+                extern    O1_MIDIScreen:Far
+                extern    O1_TimerList:Far
+                extern    I_MapEnvelope:Far
+                extern    NewCharacterSet:Far
+                extern    S_GetDestination:Far
+                extern    S_DefineHiASCII:Far
 
-IF MEMORYDEBUG
-                Extrn   O1_DebugList:Far
-ENDIF
+%IF  MEMORYDEBUG
+                extern    O1_DebugList:Far
+%ENDIF 
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Globals                                                                     ³
@@ -135,25 +133,25 @@ ENDIF
                 Global  Glbl_SaveMode:Far
                 Global  Glbl_RestoreMode:Far
 
-IF TIMERSCREEN
+%IF  TIMERSCREEN
                 Global  Glbl_TimerScreen:Far
-ENDIF
+%ENDIF 
 
                 Global  CurrentMode:Byte
 
                 Public  Glbl_F2_2
                 Public  Glbl_F11_2
 
-IF MEMORYDEBUG
+%IF  MEMORYDEBUG
                 Global  Glbl_Debug:Far
-ENDIF
+%ENDIF 
                 Global  Glbl_DriverScreen:Far
 
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
 Segment                 Glbl BYTE Public 'Code'
-                        Assume CS:Glbl, DS:Nothing
+                        ;Assume CS:Glbl, DS:Nothing
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Variables                                                                   ³
@@ -203,7 +201,7 @@ InstrumentScreenTable   Label
 ;³ Functions                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-Proc            Glbl_F2 Far
+Proc Glbl_F2 Far
 
                 Call    Glbl_SampleToInstrument
                 Cmp     CS:CurrentMode, 2
@@ -227,7 +225,7 @@ Glbl_F2_1:
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AX, MaxRow
                 Inc     AX
@@ -240,13 +238,13 @@ Glbl_F2_1:
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     BX, NumberOfRows
                 Dec     BX
                 Mov     MaxRow, BX
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Call    Network_GetSendQueue
                 JZ      Glbl_F2_Network
 
@@ -258,18 +256,18 @@ IF NETWORKENABLED
 
 Glbl_F2_Network:
                 Call    Network_FinishedSendQueue
-ENDIF
+%ENDIF 
                 Mov     CS:CurrentMode, 2
 
                 Mov     AX, 1
                 Ret
 
-EndP            Glbl_F2
-                Assume DS:Nothing
+;EndP            Glbl_F2
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_F3 Far
+Proc Glbl_F3 Far
 
                 Call    I_DrawWaveForm
 
@@ -281,18 +279,18 @@ Proc            Glbl_F3 Far
                 Mov     DX, Offset O1_SampleList
                 Ret
 
-EndP            Glbl_F3
+;EndP            Glbl_F3
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_F4 Far
+Proc Glbl_F4 Far
 
                                         ; Init SampleNumber
                 Call    Glbl_SampleToInstrument
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     BL, LastInstrument
                 And     BL, BL
@@ -303,10 +301,10 @@ Proc            Glbl_F4 Far
 Glbl_F4_1:
                 Mov     AX, Inst
                 Mov     DS, AX
-                        Assume DS:Inst
+                        ;Assume DS:Inst
                 Mov     SampleNumber, BL
 
-Proc            Glbl_F4_2 Far
+Proc Glbl_F4_2 Far
 
                 Call    I_MapEnvelope
 
@@ -321,14 +319,14 @@ Proc            Glbl_F4_2 Far
 
                 Ret
 
-EndP            Glbl_F4_2
+;EndP            Glbl_F4_2
 
-EndP            Glbl_F4
-                Assume DS:Nothing
+;EndP            Glbl_F4
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_F5 Far
+Proc Glbl_F5 Far
 
                 Cmp     CS:CurrentMode, 5
                 JE      Glbl_F5_1
@@ -370,11 +368,11 @@ Glbl_F5_2:
                 Mov     AX, 1
                 Ret
 
-EndP            Glbl_F5
+;EndP            Glbl_F5
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_F6 Far
+Proc Glbl_F6 Far
 
                 Call    I_ClearTables
 
@@ -385,11 +383,11 @@ Proc            Glbl_F6 Far
                 Mov     AX, 1
                 Ret
 
-EndP            Glbl_F6
+;EndP            Glbl_F6
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_LoadSample Far
+Proc Glbl_LoadSample Far
 
                 Call    D_InitLoadSamples
 
@@ -401,11 +399,11 @@ Proc            Glbl_LoadSample Far
                 Mov     DX, Offset O1_LoadSampleList
                 Ret
 
-EndP            Glbl_LoadSample
+;EndP            Glbl_LoadSample
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_LoadInstrument Far
+Proc Glbl_LoadInstrument Far
 
                 Call    D_InitLoadInstruments
 
@@ -417,11 +415,11 @@ Proc            Glbl_LoadInstrument Far
                 Mov     DX, Offset O1_LoadInstrumentList
                 Ret
 
-EndP            Glbl_LoadInstrument
+;EndP            Glbl_LoadInstrument
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_Shift_F1 Far
+Proc Glbl_Shift_F1 Far
 
                 Mov     AX, 5
                 Mov     SI, 1
@@ -431,11 +429,11 @@ Proc            Glbl_Shift_F1 Far
                 Mov     DX, Offset O1_MIDIScreen
                 Ret
 
-EndP            Glbl_Shift_F1
+;EndP            Glbl_Shift_F1
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_Shift_F9 Far
+Proc Glbl_Shift_F9 Far
 
                 Call    S_DefineHIASCII
 
@@ -447,17 +445,17 @@ Proc            Glbl_Shift_F9 Far
                 Mov     DX, Offset O1_MessageList
                 Ret
 
-EndP            Glbl_Shift_F9
+;EndP            Glbl_Shift_F9
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_Shift_F6 Far
+Proc Glbl_Shift_F6 Far
 
                 Call    I_ClearTables
 
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
                 Mov     AX, Order
 
                 Call    Music_PlaySong
@@ -465,23 +463,23 @@ Proc            Glbl_Shift_F6 Far
                 Mov     AX, 1
                 Ret
 
-EndP            Glbl_Shift_F6
-                Assume DS:Nothing
+;EndP            Glbl_Shift_F6
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_F8 Far
+Proc Glbl_F8 Far
 
                 Call    Music_Stop
 
                 Mov     AX, 1
                 Ret
 
-EndP            Glbl_F8
+;EndP            Glbl_F8
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_F9 Far
+Proc Glbl_F9 Far
 
                 Call    D_InitLoadModule
 
@@ -498,11 +496,11 @@ Proc            Glbl_F9 Far
 
                 Ret
 
-EndP            Glbl_F9
+;EndP            Glbl_F9
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_F10 Far
+Proc Glbl_F10 Far
 
                 Call    D_InitLoadModule
 
@@ -521,11 +519,11 @@ Proc            Glbl_F10 Far
 
                 Ret
 
-EndP            Glbl_F10
+;EndP            Glbl_F10
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_F11 Far
+Proc Glbl_F11 Far
 
                 Cmp     CS:CurrentMode, 11
                 JE      Glbl_F11_1
@@ -549,11 +547,11 @@ Glbl_F11_1:
                 Mov     DX, Offset O1_OrderVolumeList
                 Ret
 
-EndP            Glbl_F11
+;EndP            Glbl_F11
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_F12 Far
+Proc Glbl_F12 Far
 
                 Mov     AX, 5
                 Mov     SI, 1
@@ -563,11 +561,11 @@ Proc            Glbl_F12 Far
                 Mov     DX, Offset O1_ConfigureITList
                 Ret
 
-EndP            Glbl_F12
+;EndP            Glbl_F12
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_Ctrl_F1 Far
+Proc Glbl_Ctrl_F1 Far
 
                 Mov     AX, 5
                 Mov     SI, 1
@@ -577,11 +575,11 @@ Proc            Glbl_Ctrl_F1 Far
                 Mov     DX, Offset O1_KeyboardList
                 Ret
 
-EndP            Glbl_Ctrl_F1
+;EndP            Glbl_Ctrl_F1
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_Ctrl_F3 Far
+Proc Glbl_Ctrl_F3 Far
 
                 Call    D_InitLoadSamples
 
@@ -593,11 +591,11 @@ Proc            Glbl_Ctrl_F3 Far
                 Mov     DX, Offset O1_ViewSampleLibrary
                 Ret
 
-EndP            Glbl_Ctrl_F3
+;EndP            Glbl_Ctrl_F3
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_Ctrl_F4 Far
+Proc Glbl_Ctrl_F4 Far
 
                 Call    D_InitLoadInstruments
 
@@ -609,11 +607,11 @@ Proc            Glbl_Ctrl_F4 Far
                 Mov     DX, Offset O1_ViewInstrumentLibrary
                 Ret
 
-EndP            Glbl_Ctrl_F4
+;EndP            Glbl_Ctrl_F4
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_Ctrl_F5 Far
+Proc Glbl_Ctrl_F5 Far
 
                 Call    I_ClearTables
 
@@ -623,11 +621,11 @@ Proc            Glbl_Ctrl_F5 Far
                 Mov     AX, 1
                 Ret
 
-EndP            Glbl_Ctrl_F5
+;EndP            Glbl_Ctrl_F5
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_Ctrl_F12 Far
+Proc Glbl_Ctrl_F12 Far
 
                 Mov     AX, 5
                 Mov     SI, 1
@@ -638,16 +636,16 @@ Proc            Glbl_Ctrl_F12 Far
 
                 Ret
 
-EndP            Glbl_Ctrl_F12
+;EndP            Glbl_Ctrl_F12
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_GetHeaderMode Far
+Proc Glbl_GetHeaderMode Far
 
                 Push    DS
                 Mov     AX, Pattern
                 Mov     DS, AX
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
                 Mov     AL, LastInstrument
                 Pop     DS
 
@@ -673,7 +671,7 @@ Glbl_GetHeaderMode2:
 
                 Mov     AX, Inst
                 Mov     DS, AX
-                        Assume DS:Inst
+                        ;Assume DS:Inst
 
                 Pop     AX
                 Mov     AL, SampleNumber
@@ -681,32 +679,32 @@ Glbl_GetHeaderMode2:
                 Pop     DS
                 Ret
 
-EndP            Glbl_GetHeaderMode
-                Assume DS:Nothing
+;EndP            Glbl_GetHeaderMode
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_SetCurrentMode Far
+Proc Glbl_SetCurrentMode Far
 
                 Mov     CS:CurrentMode, AL
 
                 Ret
 
-EndP            Glbl_SetCurrentMode
+;EndP            Glbl_SetCurrentMode
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_GetCurrentMode Far         ; Returns AL
+Proc Glbl_GetCurrentMode Far         ; Returns AL
 
                 Mov     AL, CS:CurrentMode
 
                 Ret
 
-EndP            Glbl_GetCurrentMode
+;EndP            Glbl_GetCurrentMode
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_Alt_F1 Far
+Proc Glbl_Alt_F1 Far
 
                 Mov     AX, 0
                 Call    Music_ToggleChannel
@@ -714,11 +712,11 @@ Proc            Glbl_Alt_F1 Far
                 Mov     AX, 1
                 Ret
 
-EndP            Glbl_Alt_F1
+;EndP            Glbl_Alt_F1
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_Alt_F2 Far
+Proc Glbl_Alt_F2 Far
 
                 Mov     AX, 1
                 Call    Music_ToggleChannel
@@ -726,11 +724,11 @@ Proc            Glbl_Alt_F2 Far
                 Mov     AX, 1
                 Ret
 
-EndP            Glbl_Alt_F2
+;EndP            Glbl_Alt_F2
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_Alt_F3 Far
+Proc Glbl_Alt_F3 Far
 
                 Mov     AX, 2
                 Call    Music_ToggleChannel
@@ -738,11 +736,11 @@ Proc            Glbl_Alt_F3 Far
                 Mov     AX, 1
                 Ret
 
-EndP            Glbl_Alt_F3
+;EndP            Glbl_Alt_F3
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_Alt_F4 Far
+Proc Glbl_Alt_F4 Far
 
                 Mov     AX, 3
                 Call    Music_ToggleChannel
@@ -750,11 +748,11 @@ Proc            Glbl_Alt_F4 Far
                 Mov     AX, 1
                 Ret
 
-EndP            Glbl_Alt_F4
+;EndP            Glbl_Alt_F4
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_Alt_F5 Far
+Proc Glbl_Alt_F5 Far
 
                 Mov     AX, 4
                 Call    Music_ToggleChannel
@@ -762,11 +760,11 @@ Proc            Glbl_Alt_F5 Far
                 Mov     AX, 1
                 Ret
 
-EndP            Glbl_Alt_F5
+;EndP            Glbl_Alt_F5
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_Alt_F6 Far
+Proc Glbl_Alt_F6 Far
 
                 Mov     AX, 5
                 Call    Music_ToggleChannel
@@ -774,11 +772,11 @@ Proc            Glbl_Alt_F6 Far
                 Mov     AX, 1
                 Ret
 
-EndP            Glbl_Alt_F6
+;EndP            Glbl_Alt_F6
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_Alt_F7 Far
+Proc Glbl_Alt_F7 Far
 
                 Mov     AX, 6
                 Call    Music_ToggleChannel
@@ -786,11 +784,11 @@ Proc            Glbl_Alt_F7 Far
                 Mov     AX, 1
                 Ret
 
-EndP            Glbl_Alt_F7
+;EndP            Glbl_Alt_F7
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_Alt_F8 Far
+Proc Glbl_Alt_F8 Far
 
                 Mov     AX, 7
                 Call    Music_ToggleChannel
@@ -798,11 +796,11 @@ Proc            Glbl_Alt_F8 Far
                 Mov     AX, 1
                 Ret
 
-EndP            Glbl_Alt_F8
+;EndP            Glbl_Alt_F8
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_LeftBrace Far
+Proc Glbl_LeftBrace Far
 
                 Push    CS
                 Pop     DS
@@ -814,11 +812,11 @@ Proc            Glbl_LeftBrace Far
                 Mov     AX, 1
                 Ret
 
-EndP            Glbl_LeftBrace
+;EndP            Glbl_LeftBrace
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_RightBrace Far
+Proc Glbl_RightBrace Far
 
                 Push    CS
                 Pop     DS
@@ -830,11 +828,11 @@ Proc            Glbl_RightBrace Far
                 Mov     AX, 1
                 Ret
 
-EndP            Glbl_RightBrace
+;EndP            Glbl_RightBrace
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_LeftSquareBracket Far
+Proc Glbl_LeftSquareBracket Far
 
                 Push    CS
                 Pop     DS
@@ -847,11 +845,11 @@ Proc            Glbl_LeftSquareBracket Far
                 Mov     AX, 1
                 Ret
 
-EndP            Glbl_LeftSquareBracket
+;EndP            Glbl_LeftSquareBracket
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_RightSquareBracket Far
+Proc Glbl_RightSquareBracket Far
 
                 Push    CS
                 Pop     DS
@@ -864,11 +862,11 @@ Proc            Glbl_RightSquareBracket Far
                 Mov     AX, 1
                 Ret
 
-EndP            Glbl_RightSquareBracket
+;EndP            Glbl_RightSquareBracket
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_SaveMode Far
+Proc Glbl_SaveMode Far
 
 ;                Call    S_GetDestination
 ;                Mov     AX, 0B800h
@@ -889,11 +887,11 @@ Proc            Glbl_SaveMode Far
 
                 Ret
 
-EndP            Glbl_SaveMode
+;EndP            Glbl_SaveMode
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_RestoreMode Far
+Proc Glbl_RestoreMode Far
 
 ;                Call    NewCharacterSet
 
@@ -909,13 +907,13 @@ Proc            Glbl_RestoreMode Far
 
                 Ret
 
-EndP            Glbl_RestoreMode
+;EndP            Glbl_RestoreMode
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-IF MEMORYDEBUG
+%IF  MEMORYDEBUG
 
-Proc            Glbl_Debug Far
+Proc Glbl_Debug Far
 
                 Mov     AX, 5
                 Mov     SI, 1
@@ -925,27 +923,27 @@ Proc            Glbl_Debug Far
                 Mov     DX, Offset O1_DebugList
                 Ret
 
-EndP            Glbl_Debug
+;EndP            Glbl_Debug
 
-ENDIF
+%ENDIF 
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_SampleToInstrument
+Proc Glbl_SampleToInstrument
 
                 Cmp     CS:CurrentMode, 3
                 JNE     Glbl_SampleToInstrument1
 
                 Call    Music_GetSongSegment
                 Mov     DS, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Test    Byte Ptr [DS:2Ch], 4
                 JZ      Glbl_SampleToInstrument1
 
                 Mov     AX, Pattern
                 Mov     ES, AX
-                        Assume ES:Pattern
+                        ;Assume ES:Pattern
 
                 Mov     AH, ES:LastInstrument
                 Mov     BX, [DS:64712]  ; Offset of first instrument
@@ -982,14 +980,14 @@ Glbl_SampleToInstrument3:
 Glbl_SampleToInstrument1:
                 Ret
 
-EndP            Glbl_SampleToInstrument
-                Assume ES:Nothing
+;EndP            Glbl_SampleToInstrument
+                ;Assume ES:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-IF TIMERSCREEN
+%IF  TIMERSCREEN
 
-Proc            Glbl_TimerScreen Far
+Proc Glbl_TimerScreen Far
 
                 Mov     AX, 5
                 Mov     SI, 1
@@ -999,13 +997,13 @@ Proc            Glbl_TimerScreen Far
                 Mov     DX, Offset O1_TimerList
                 Ret
 
-EndP            Glbl_TimerScreen
+;EndP            Glbl_TimerScreen
 
-ENDIF
+%ENDIF 
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            Glbl_DriverScreen Far
+Proc Glbl_DriverScreen Far
 
                 Call    Music_GetDriverScreen
                 JC      Glbl_DriverScreen1
@@ -1015,7 +1013,7 @@ Proc            Glbl_DriverScreen Far
 Glbl_DriverScreen1:
                 Ret
 
-EndP            Glbl_DriverScreen
+;EndP            Glbl_DriverScreen
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 

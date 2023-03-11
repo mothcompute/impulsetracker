@@ -2,121 +2,120 @@
 ;³ PatternEdit module                                                          ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-                        Jumps
-                        .386
-
-include switch.inc
-
-include network.inc
+%include "switch.inc"
+%include "network.inc"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Externals                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-Segment         Object1 BYTE Public 'Data'
+;Segment         Object1 BYTE Public 'Data'
+section .data
 EndS
 
-Segment         Disk BYTE Public 'Code'
+;Segment         Disk BYTE Public 'Code'
+section .text
 EndS
 
-Segment         Inst BYTE Public 'Code'
-                Extrn   InstrumentEdit:Byte
-                Extrn   NodeHeld:Byte
+;Segment         Inst BYTE Public 'Code'
+section .text
+                extern    InstrumentEdit:Byte
+                extern    NodeHeld:Byte
 EndS
 
-                Extrn   E_GetFreeEMS:Far
-                Extrn   E_UnInitEMS:Far
-                Extrn   E_ReleaseEMS:Far
-                Extrn   E_AllocateEMS:Far
-                Extrn   E_MapAvailableEMSMemory:Far
-                Extrn   E_GetEMSPageFrame:Far
+                extern    E_GetFreeEMS:Far
+                extern    E_UnInitEMS:Far
+                extern    E_ReleaseEMS:Far
+                extern    E_AllocateEMS:Far
+                extern    E_MapAvailableEMSMemory:Far
+                extern    E_GetEMSPageFrame:Far
 
-                Extrn   Glbl_F2:Far, Glbl_F6:Far
-                Extrn   Glbl_GetHeaderMode:Far
-                Extrn   Glbl_LeftBrace:Far, Glbl_RightBrace:Far
-                Extrn   Glbl_LeftSquareBracket:Far, Glbl_RightSquareBracket:Far
+                extern    Glbl_F2:Far, Glbl_F6:Far
+                extern    Glbl_GetHeaderMode:Far
+                extern    Glbl_LeftBrace:Far, Glbl_RightBrace:Far
+                extern    Glbl_LeftSquareBracket:Far, Glbl_RightSquareBracket:Far
 
-                Extrn   I_ClearTables:Far
+                extern    I_ClearTables:Far
 
-                Extrn   K_UnInitKeyBoard:Far
-                Extrn   K_SetScrollLock:Far
-                Extrn   K_IsKeyDown:Far
+                extern    K_UnInitKeyBoard:Far
+                extern    K_SetScrollLock:Far
+                extern    K_IsKeyDown:Far
 
-                Extrn   M_FunctionHandler:Far
-                Extrn   M_Object1List:Far
-                Extrn   M_FunctionDivider:Far
+                extern    M_FunctionHandler:Far
+                extern    M_Object1List:Far
+                extern    M_FunctionDivider:Far
 
-                Extrn   Music_PlayPartSong:Far
-                Extrn   Music_GetSongSegment:Far
-                Extrn   Music_UnInitMusic:Far
-                Extrn   Music_ReleasePattern:Far
-                Extrn   Music_AllocatePattern:Far
-                Extrn   Music_GetPattern:Far
-                Extrn   Music_GetInstrumentMode:Far
-                Extrn   Music_UpdatePatternOffset:Far
-                Extrn   Music_PlayNote:Far
-                Extrn   Music_InitMixTable:Far
-                Extrn   Music_InitMuteTable:Far
-                Extrn   Music_InitStereo:Far
-                Extrn   Music_ToggleChannel:Far
-                Extrn   Music_SoloChannel:Far
-                Extrn   Music_GetPlayMode:Far
-                Extrn   Music_PlayPattern:Far
-                Extrn   Music_GetLastChannel:Far
-                Extrn   Music_SetNextOrder:Far
-                Extrn   Music_NextOrder:Far
-                Extrn   Music_LastOrder:Far
-                Extrn   Music_Stop:Far
+                extern    Music_PlayPartSong:Far
+                extern    Music_GetSongSegment:Far
+                extern    Music_UnInitMusic:Far
+                extern    Music_ReleasePattern:Far
+                extern    Music_AllocatePattern:Far
+                extern    Music_GetPattern:Far
+                extern    Music_GetInstrumentMode:Far
+                extern    Music_UpdatePatternOffset:Far
+                extern    Music_PlayNote:Far
+                extern    Music_InitMixTable:Far
+                extern    Music_InitMuteTable:Far
+                extern    Music_InitStereo:Far
+                extern    Music_ToggleChannel:Far
+                extern    Music_SoloChannel:Far
+                extern    Music_GetPlayMode:Far
+                extern    Music_PlayPattern:Far
+                extern    Music_GetLastChannel:Far
+                extern    Music_SetNextOrder:Far
+                extern    Music_NextOrder:Far
+                extern    Music_LastOrder:Far
+                extern    Music_Stop:Far
 
-                Extrn   Music_UnmuteAll:Far
+                extern    Music_UnmuteAll:Far
 
-                Extrn   Music_SoundCardLoadSample:Far
-                Extrn   Music_SoundCardLoadAllSamples:Far
-                Extrn   Music_GetDisplayVariables:Far
+                extern    Music_SoundCardLoadSample:Far
+                extern    Music_SoundCardLoadAllSamples:Far
+                extern    Music_GetDisplayVariables:Far
 
-                Extrn   Network_UpdatePattern:Far
+                extern    Network_UpdatePattern:Far
 
-                Extrn   FileName:Byte
+                extern    FileName:Byte
 
-                Extrn   O1_ConfirmNoSave:Far
-                Extrn   O1_NoBlockMarkedList:Far
-                Extrn   O1_SwapOutOfRangeList:Far
-                Extrn   O1_OverlapBlockList:Far
-                Extrn   O1_OutOfMemoryList:Far
-                Extrn   O1_NoBlockDataList:Far
-                Extrn   O1_GetAmpList:Far
-                Extrn   O1_GetFastAmpList:Far
+                extern    O1_ConfirmNoSave:Far
+                extern    O1_NoBlockMarkedList:Far
+                extern    O1_SwapOutOfRangeList:Far
+                extern    O1_OverlapBlockList:Far
+                extern    O1_OutOfMemoryList:Far
+                extern    O1_NoBlockDataList:Far
+                extern    O1_GetAmpList:Far
+                extern    O1_GetFastAmpList:Far
 
-IF SHOWPATTERNLENGTH
-                Extrn   O1_ShowPatternLengthList:Far
-ENDIF
+%IF SHOWPATTERNLENGTH
+                extern    O1_ShowPatternLengthList:Far
+%ENDIF
 
-                Extrn   O1_TemplateErrorList:Far
-                Extrn   O1_PatternTooLongList:Far
-                Extrn   O1_SelectMultiChannel:Far
-                Extrn   O1_UndoList:Far
-                Extrn   O1_SetPatternLength:Far
-                Extrn   O1_PatternSizeMismatchList:Far
+                extern    O1_TemplateErrorList:Far
+                extern    O1_PatternTooLongList:Far
+                extern    O1_SelectMultiChannel:Far
+                extern    O1_UndoList:Far
+                extern    O1_SetPatternLength:Far
+                extern    O1_PatternSizeMismatchList:Far
 
-                Extrn   S_UnInitScreen:Far
-                Extrn   S_DrawBox:Far
-                Extrn   S_DrawString:Far
-                Extrn   S_GetDestination:Far
-                Extrn   S_SaveScreen:Far
-                Extrn   S_RestoreScreen:Far
-                Extrn   S_SetDirectMode:Far
-                Extrn   S_DrawSmallBox:Far
-                Extrn   S_InvertCursor:Far
+                extern    S_UnInitScreen:Far
+                extern    S_DrawBox:Far
+                extern    S_DrawString:Far
+                extern    S_GetDestination:Far
+                extern    S_SaveScreen:Far
+                extern    S_RestoreScreen:Far
+                extern    S_SetDirectMode:Far
+                extern    S_DrawSmallBox:Far
+                extern    S_InvertCursor:Far
 
-                Extrn   PatternLength
+                extern    PatternLength
 
-                Extrn   UpdateInfoLine:Far
-                Extrn   SetInfoLine:Far
-                Extrn   MouseUpdateDisable:Far
-                Extrn   UpdateWAVEForm:Far
+                extern    UpdateInfoLine:Far
+                extern    SetInfoLine:Far
+                extern    MouseUpdateDisable:Far
+                extern    UpdateWAVEForm:Far
 
-                Extrn   MIDI_AllocateChannel:Far, MIDI_FindChannel:Far
-                Extrn   Music_GetDelay:Far, MIDI_GetChannel:Far
+                extern    MIDI_AllocateChannel:Far, MIDI_FindChannel:Far
+                extern    Music_GetDelay:Far, MIDI_GetChannel:Far
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Globals                                                                     ³
@@ -198,10 +197,10 @@ ENDIF
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
 Segment                 Pattern WORD Public 'Code' USE16
-                        Assume CS:Pattern, DS:Nothing
+                        ;Assume CS:Pattern, DS:Nothing
 
 CREATENEWLOGFILE        EQU     0
-include debug.inc
+%include "debug.inc"
 
 ;ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
 ;³ Variables                                                                   ³
@@ -356,11 +355,11 @@ PEFunctions             Label   Word
                         DW      11Ch            ; Enter
                         DW      Offset PEFunction_PickUp
 
-IF SHOWPATTERNLENGTH
+%IF  SHOWPATTERNLENGTH
                         DB      0
                         DW      111Ch            ; Right Ctrl+Enter
                         DW      Offset PE_ShowPatternLength
-ENDIF
+%ENDIF 
 
                         DB      1
                         DW      '{'
@@ -958,11 +957,11 @@ TracePlayback           DB      0
 
 OrderListKeys   Label
 
-IF ORDERSORT
+%IF  ORDERSORT
         DB      1
         DW      1300h   ; Alt-R
         DW      Offset PE_PostOrderListReorder
-ENDIF
+%ENDIF 
 
         DB      0
         DW      10Fh
@@ -1042,7 +1041,7 @@ ENDIF
 ;³ Functions                                                                   ³
 ;ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
 
-Proc            PE_ConvAX2Num Far               ; ES:DI points to screen
+Proc PE_ConvAX2Num Far               ; ES:DI points to screen
                                                 ; CH = colour
                                                 ; AX = number
 
@@ -1088,11 +1087,11 @@ PE_ConvAX2Num2:
 
                 Ret
 
-EndP            PE_ConvAX2Num
+;EndP            PE_ConvAX2Num
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_ConvHexAL Near
+Proc PE_ConvHexAL Near
 
                 Cmp     AL, 10
                 SBB     AL, 69h
@@ -1101,11 +1100,11 @@ Proc            PE_ConvHexAL Near
 
                 Ret
 
-EndP            PE_ConvHexAL
+;EndP            PE_ConvHexAL
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_GetMaxOrder Far              ; Returns AX with max order
+Proc PE_GetMaxOrder Far              ; Returns AX with max order
 
                 Push    CX
                 Push    ES
@@ -1132,11 +1131,11 @@ PE_GetMaxOrder1:
 
                 Ret
 
-EndP            PE_GetMaxOrder
+;EndP            PE_GetMaxOrder
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ClearEncodingInfo       ; Encoding info
+Proc ClearEncodingInfo       ; Encoding info
                                         ; 1.Mask, 2.Instrument, 3.Volume, 4.Cmd
                                         ; 5.CmdVal, 6.Note
 
@@ -1159,13 +1158,13 @@ ClearEncodingInfo1:
 
                 Ret
 
-EndP            ClearEncodingInfo
+;EndP            ClearEncodingInfo
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-IF ORDERSORT
+%IF  ORDERSORT
 
-Proc            PE_PostOrderListSwapPatterns    ; Given BX = pattern 1
+Proc PE_PostOrderListSwapPatterns    ; Given BX = pattern 1
                                                 ;       DX = Pattern 2
 
                 PushA
@@ -1222,11 +1221,11 @@ PE_PostOrderListSwapPatterns5:
                 PopA
                 Ret
 
-EndP            PE_PostOrderListSwapPatterns
+;EndP            PE_PostOrderListSwapPatterns
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_PostOrderListReorder Far
+Proc PE_PostOrderListReorder Far
 
                 EnsureNoNetwork
 
@@ -1262,18 +1261,18 @@ PE_PostOrderListReorderExit:
                 Mov     AX, 1
                 Ret
 
-EndP            PE_PostOrderListReorder
-                Assume DS:Nothing
+;EndP            PE_PostOrderListReorder
+                ;Assume DS:Nothing
 
-ENDIF           ; ORDERSORT
+%ENDIF            ; ORDERSORT
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_ResetOrderPattern Far
+Proc PE_ResetOrderPattern Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Xor     AX, AX
                 Mov     Order, AX
@@ -1308,18 +1307,18 @@ PE_ResetOrderPattern1:
 
                 Mov     AX, Inst
                 Mov     DS, AX
-                        Assume DS:Inst
+                        ;Assume DS:Inst
                 Mov     NodeHeld, 0
                 Mov     InstrumentEdit, 0
 
                 Ret
 
-EndP            PE_ResetOrderPattern
-                Assume DS:Nothing
+;EndP            PE_ResetOrderPattern
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_GetMaxPattern Far            ; Assumes DS:SongData
+Proc PE_GetMaxPattern Far            ; Assumes DS:SongData
 
                 Push    CX
                 Push    DS
@@ -1352,11 +1351,11 @@ PE_GetMaxPattern2:
                 Pop     CX
                 Ret
 
-EndP            PE_GetMaxPattern
+;EndP            PE_GetMaxPattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_FillHeader Far
+Proc PE_FillHeader Far
 
                 Call    Music_GetSongSegment
                 Mov     DS, AX
@@ -1557,11 +1556,11 @@ PE_FillHeader5:
 
                 Ret
 
-EndP            PE_FillHeader
+;EndP            PE_FillHeader
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_FillSpeedTempo Far
+Proc PE_FillSpeedTempo Far
 
                 Call    S_GetDestination
 
@@ -1576,11 +1575,11 @@ Proc            PE_FillSpeedTempo Far
 
                 Ret
 
-EndP            PE_FillSpeedTempo
+;EndP            PE_FillSpeedTempo
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_DrawOrderList Far
+Proc PE_DrawOrderList Far
 
                 Mov     AL, 80
                 Mul     Byte Ptr [SI+3]
@@ -1592,7 +1591,7 @@ Proc            PE_DrawOrderList Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AX, TopOrder            ; Bounds checking...
                 Mov     BX, Order
@@ -1680,12 +1679,12 @@ PE_DrawOrderList6:
 PE_DrawOrderList8:
                 Ret
 
-EndP            PE_DrawOrderList
-                Assume DS:Nothing
+;EndP            PE_DrawOrderList
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_PreOrderList Far
+Proc PE_PreOrderList Far
 
                 Mov     AL, 80
                 Mov     BX, Order
@@ -1705,13 +1704,13 @@ Proc            PE_PreOrderList Far
 
                 Ret
 
-EndP            PE_PreOrderList
+;EndP            PE_PreOrderList
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            NetworkOrderList Near
+Proc NetworkOrderList Near
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Call    Network_GetSendQueue
                 JZ      NetworkOrderList1
 
@@ -1723,14 +1722,14 @@ IF NETWORKENABLED
 
 NetworkOrderList1:
                 Call    Network_FinishedSendQueue
-ENDIF
+%ENDIF 
                 Ret
 
-EndP            NetworkOrderList
+;EndP            NetworkOrderList
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_PostOrderList Far
+Proc PE_PostOrderList Far
 
                 Push    ES
                 Pop     DS
@@ -1754,7 +1753,7 @@ Proc            PE_PostOrderList Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Push    ES
                 Pop     FS
@@ -2029,12 +2028,12 @@ PE_PostOrderList24:                             ; 'G'
 
                 Jmp     PE_GotoPattern2
 
-EndP            PE_PostOrderList
-                Assume DS:Nothing
+;EndP            PE_PostOrderList
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_UnInitPatternEdit Far
+Proc PE_UnInitPatternEdit Far
 
                 Mov     AX, CS:BlockDataArea
                 And     AX, AX
@@ -2049,17 +2048,17 @@ PE_UnInitPatternEdit1:
 
                 Ret
 
-EndP            PE_UnInitPatternEdit
+;EndP            PE_UnInitPatternEdit
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_ClearPatternData
+Proc PE_ClearPatternData
 
                 Push    CX DX DS SI ES DI
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     ES, PatternDataArea
                 Xor     DI, DI
@@ -2077,31 +2076,31 @@ PE_ClearPatternData1:
                 Pop     DI ES SI DS DX CX
                 Ret
 
-EndP            PE_ClearPatternData
-                Assume DS:Nothing
+;EndP            PE_ClearPatternData
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_InitPatternEdit Far
+Proc PE_InitPatternEdit Far
 
                 Trace   " - Initialising pattern data area"
 
                 Call    PE_ClearPatternData
                 Ret
 
-EndP            PE_InitPatternEdit
+;EndP            PE_InitPatternEdit
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-include it_pe_v.inc
+%include "it_pe_v.inc"
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_DrawPatternEdit Far
+Proc PE_DrawPatternEdit Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Cmp     TracePlayback, 0
                 JE      PE_TraceOff
@@ -2573,7 +2572,7 @@ PE_DrawPatternEdit33:
 
                 Mov     CX, 32                  ; 32 rows
                 Mov     DS, PatternDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 PE_DrawPatternEdit5:
                 Push    CX
@@ -2884,16 +2883,16 @@ PE_DrawPattern42:
 PE_DrawPattern40:
                 Ret
 
-EndP            PE_DrawPatternEdit
-                Assume DS:Nothing
+;EndP            PE_DrawPatternEdit
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_PrePatternEdit Far
+Proc PE_PrePatternEdit Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Cmp     NumChannelsEdit, 0
                 JNE     PE_PrePatternEdit18
@@ -3105,14 +3104,14 @@ PE_PrePatternEdit15:
                 StosW
                 Ret
 
-EndP            PE_PrePatternEdit
-                Assume DS:Nothing
+;EndP            PE_PrePatternEdit
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetPatternOffset
+Proc GetPatternOffset
 
-                Assume DS:Pattern
+                ;Assume DS:Pattern
 
                 Push    AX
                 Push    BX
@@ -3131,14 +3130,14 @@ Proc            GetPatternOffset
                 Pop     AX
                 Ret
 
-EndP            GetPatternOffset
-                Assume DS:Nothing
+;EndP            GetPatternOffset
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            NetworkPatternBlock Near   ; CL = width, CH = Height, BL = Channel, BH = Row
+Proc NetworkPatternBlock Near   ; CL = width, CH = Height, BL = Channel, BH = Row
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Call    Network_GetSendQueue
                 JZ      PE_GotoNextInputNoNetwork
 
@@ -3155,30 +3154,30 @@ PE_GotoNextInputNoNetwork:
                 Call    Network_FinishedSendQueue
 
                 Ret
-ENDIF
+%ENDIF 
 
-EndP            NetworkPatternBlock
+;EndP            NetworkPatternBlock
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            NetworkPartialPattern Near   ; CL = width, CH = Height
+Proc NetworkPartialPattern Near   ; CL = width, CH = Height
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Push    BX
                 Mov     BL, Byte Ptr Channel
                 Mov     BH, Byte Ptr Row
                 Call    NetworkPatternBlock
                 Pop     BX
-ENDIF
+%ENDIF 
                 Ret
 
-EndP            NetworkPartialPattern
+;EndP            NetworkPartialPattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            NetworkBlock Near
+Proc NetworkBlock Near
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Mov     BL, Byte Ptr BlockLeft
                 Mov     BH, Byte Ptr BlockTop
                 Mov     CL, Byte Ptr BlockRight
@@ -3186,10 +3185,10 @@ IF NETWORKENABLED
                 Sub     CX, BX
                 Add     CX, 101h
                 Call    NetworkPatternBlock
-ENDIF
+%ENDIF 
                 Ret
 
-EndP            NetworkBlock
+;EndP            NetworkBlock
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
@@ -3203,11 +3202,11 @@ PatternCursorJumpTable  DW      Offset PE_PatternCursorPos0
                         DW      Offset PE_PatternCursorPos7
                         DW      Offset PE_PatternCursorPos8
 
-Proc            PE_PostPatternEdit Far
+Proc PE_PostPatternEdit Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Test    CH, 1
                 JZ      PE_PostPatternEdit17
@@ -3328,22 +3327,22 @@ PE_PostPatternEdit7:
                 Xor     AX, AX
                 Ret
 
-EndP            PE_PostPatternEdit
+;EndP            PE_PostPatternEdit
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Ctrl_PgUp Far
+Proc PEFunction_Ctrl_PgUp Far
 
                 Mov     Row, 0
 
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_Ctrl_PgUp
+;EndP            PEFunction_Ctrl_PgUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Ctrl_PgDn Far
+Proc PEFunction_Ctrl_PgDn Far
 
                 Mov     AX, MaxRow
                 Mov     Row, AX
@@ -3351,11 +3350,11 @@ Proc            PEFunction_Ctrl_PgDn Far
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_Ctrl_PgDn
+;EndP            PEFunction_Ctrl_PgDn
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Up Far
+Proc PEFunction_Up Far
 
                 Mov     BX, SkipValue
                 And     BX, BX
@@ -3374,11 +3373,11 @@ PEFunction_Up1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_Up
+;EndP            PEFunction_Up
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Down Far
+Proc PEFunction_Down Far
 
                 Push    CS
                 Pop     DS
@@ -3401,11 +3400,11 @@ PEFunction_Down1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_Down
+;EndP            PEFunction_Down
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Left Far
+Proc PEFunction_Left Far
 
                 Mov     CX, PatternCursor
                 Mov     BX, Channel
@@ -3441,11 +3440,11 @@ PEFunction_Left2:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_Left
+;EndP            PEFunction_Left
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Right Far                    ; If there is no
+Proc PEFunction_Right Far                    ; If there is no
                                                         ; command value... skip!
 
                 Mov     CX, PatternCursor
@@ -3486,11 +3485,11 @@ PEFunction_Right2:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_Right
+;EndP            PEFunction_Right
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Press_Shift Far
+Proc PEFunction_Press_Shift Far
 
                 Mov     AX, Channel
                 Mov     BX, Row
@@ -3503,11 +3502,11 @@ Proc            PEFunction_Press_Shift Far
                 Xor     AX, AX
                 Ret
 
-EndP            PEFunction_Press_Shift
+;EndP            PEFunction_Press_Shift
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Release_Shift Far
+Proc PEFunction_Release_Shift Far
 
                 Cmp     NoteEntered, 0
                 JE      PEFunction_Release_Shift1
@@ -3524,15 +3523,15 @@ PEFunction_Release_Shift1:
                 Xor     AX, AX
                 Ret
 
-EndP            PEFunction_Release_Shift
+;EndP            PEFunction_Release_Shift
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Alt_Home Far
+Proc PEFunction_Alt_Home Far
                 Mov     BL, RowHilight1
                 Jmp     PEFunction_PgUpChain
 
-Proc            PEFunction_PgUp Far
+Proc PEFunction_PgUp Far
 
                 Mov     BL, RowHiLight2
 
@@ -3574,13 +3573,13 @@ PEFunction_PgUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_PgUp
+;EndP            PEFunction_PgUp
 
-EndP            PEFunction_Alt_Home
+;EndP            PEFunction_Alt_Home
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_CentraliseCursor
+Proc PE_CentraliseCursor
 
                 Mov     AX, Row
                 Sub     AX, 16
@@ -3592,16 +3591,16 @@ PE_CentraliseCursor1:
                 Mov     TopRow, AX
                 Ret
 
-EndP            PE_CentraliseCursor
+;EndP            PE_CentraliseCursor
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 
-Proc            PEFunction_Alt_End Far
+Proc PEFunction_Alt_End Far
                 Mov     BL, RowHilight1
                 Jmp     PEFunction_PgDnChain
 
-Proc            PEFunction_PgDn Far
+Proc PEFunction_PgDn Far
 
                 Mov     BL, RowHiLight2
 
@@ -3625,13 +3624,13 @@ PEFunction_PgDn1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_PgDn
+;EndP            PEFunction_PgDn
 
-EndP            PEFunction_Alt_End
+;EndP            PEFunction_Alt_End
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_ShiftPgUp Far
+Proc PEFunction_ShiftPgUp Far
 
                 Call    PEFunction_PgUp
                 Call    PE_CentraliseCursor
@@ -3639,11 +3638,11 @@ Proc            PEFunction_ShiftPgUp Far
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_ShiftPgUp
+;EndP            PEFunction_ShiftPgUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_ShiftPgDn Far
+Proc PEFunction_ShiftPgDn Far
 
                 Call    PEFunction_PgDn
                 Call    PE_CentraliseCursor
@@ -3651,11 +3650,11 @@ Proc            PEFunction_ShiftPgDn Far
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_ShiftPgDn
+;EndP            PEFunction_ShiftPgDn
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Home Far
+Proc PEFunction_Home Far
 
                 Cmp     PatternCursor, 0
                 JE      PEFunction_Home1
@@ -3677,11 +3676,11 @@ PEFunction_Home3:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_Home
+;EndP            PEFunction_Home
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_End Far
+Proc PEFunction_End Far
 
                 Cmp     PatternCursor, 8
                 JE      PEFunction_End1
@@ -3706,11 +3705,11 @@ PEFunction_End3:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_End
+;EndP            PEFunction_End
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Tab Far
+Proc PEFunction_Tab Far
 
                 Mov     AX, Channel
                 Cmp     AX, 63
@@ -3723,11 +3722,11 @@ PEFunction_Tab1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_Tab
+;EndP            PEFunction_Tab
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_ShiftTab Far
+Proc PEFunction_ShiftTab Far
 
                 Cmp     PatternCursor, 0
                 JNE     PEFunction_ShiftTab2
@@ -3745,11 +3744,11 @@ PEFunction_ShiftTab1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_ShiftTab
+;EndP            PEFunction_ShiftTab
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_SetMask Far
+Proc PEFunction_SetMask Far
 
                 Mov     BX, PatternCursor
                 Mov     AL, [MaskChange+BX]
@@ -3758,11 +3757,11 @@ Proc            PEFunction_SetMask Far
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_SetMask
+;EndP            PEFunction_SetMask
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_ToggleMultiChannel Far
+Proc PEFunction_ToggleMultiChannel Far
 
                 Mov     BX, Channel
                 Xor     [MultiChannelInfo+BX], 1
@@ -3779,11 +3778,11 @@ PEFunction_ToggleMultiChannel1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_ToggleMultiChannel
+;EndP            PEFunction_ToggleMultiChannel
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_BackSpace Far
+Proc PEFunction_BackSpace Far
 
                 Xor     CX, CX
 
@@ -3850,11 +3849,11 @@ PEFunction_BackSpace3:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_BackSpace
+;EndP            PEFunction_BackSpace
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_PickUp Far
+Proc PEFunction_PickUp Far
 
                 Cmp     Template, 4
                 JE      PEFunction_PickUp2
@@ -3878,11 +3877,11 @@ PEFunction_PickUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_PickUp
+;EndP            PEFunction_PickUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_PatternCursorPos1 Far
+Proc PE_PatternCursorPos1 Far
 
                 Test    CL, CL
                 JZ      PE_PatternCursorPos1_1
@@ -3913,11 +3912,11 @@ PE_PatternCursorPos1_1:
                 Xor     AX, AX
                 Ret
 
-EndP            PE_PatternCursorPos1
+;EndP            PE_PatternCursorPos1
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_PatternCursorPos0 Far
+Proc PE_PatternCursorPos0 Far
 
                 Test    CL, CL
                 JZ      PE_PatternCursorPos0_4
@@ -4003,20 +4002,20 @@ PE_PatternCursorPos0_4:
                 Xor     AX, AX
                 Ret
 
-EndP            PE_PatternCursorPos0
+;EndP            PE_PatternCursorPos0
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            NoteSpace Far
+Proc NoteSpace Far
 
                 Mov     AL, LastNote
                 Jmp     PE_NewNote4
 
-EndP            NoteSpace
+;EndP            NoteSpace
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            WipeNote Far
+Proc WipeNote Far
 
                 Mov     AH, EditMask
 
@@ -4063,7 +4062,7 @@ WipeNote3:
                 Dec     BP
                 JNZ     WipeNote5
 
-IF CHORDENTRY
+%IF  CHORDENTRY
                 Cmp     ShiftPressed, 0
                 JE      PE_GotoNextInput
 
@@ -4076,15 +4075,15 @@ IF CHORDENTRY
 
                 Mov     AX, 1
                 Ret
-ELSE
+%ELSE
                 Jmp     PE_GotoNextInput
-ENDIF
+%ENDIF 
 
-EndP            WipeNote
+;EndP            WipeNote
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_GotoNextInput Far
+Proc PE_GotoNextInput Far
 
 
                 Mov     CX, PatternCursor
@@ -4202,11 +4201,11 @@ PE_GotoNextInput3:
                 Mov     AX, 1
                 Ret
 
-EndP            PE_GotoNextInput
+;EndP            PE_GotoNextInput
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            TemplateSetup
+Proc TemplateSetup
 
                 Mov     AH, AL
                 Push    AX
@@ -4239,11 +4238,11 @@ Proc            TemplateSetup
 
                 Ret
 
-EndP            TemplateSetup
+;EndP            TemplateSetup
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_TemplateOverwrite            ; AX = note
+Proc PE_TemplateOverwrite            ; AX = note
 
                 Push    DS
                 Push    ES
@@ -4299,11 +4298,11 @@ PE_TemplateOverWrite5:
                 Pop     DS
                 Ret
 
-EndP            PE_TemplateOverWrite
+;EndP            PE_TemplateOverWrite
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_TemplateMixPattern            ; AX = note
+Proc PE_TemplateMixPattern            ; AX = note
 
                 Push    DS
                 Push    ES
@@ -4382,11 +4381,11 @@ PE_TemplateMixPattern5:
                 Pop     DS
                 Ret
 
-EndP            PE_TemplateMixPattern
+;EndP            PE_TemplateMixPattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_TemplateMixClipBoard            ; AX = note
+Proc PE_TemplateMixClipBoard            ; AX = note
 
                 Push    DS
                 Push    ES
@@ -4465,11 +4464,11 @@ PE_TemplateMixClipBoard5:
                 Pop     DS
                 Ret
 
-EndP            PE_TemplateMixClipBoard
+;EndP            PE_TemplateMixClipBoard
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_TemplateNotesOnly
+Proc PE_TemplateNotesOnly
 
                 Push    DS
                 Push    ES
@@ -4548,11 +4547,11 @@ PE_TemplateNotesOnly4:
 
                 Ret
 
-EndP            PE_TemplateNotesOnly
+;EndP            PE_TemplateNotesOnly
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_Template Far                 ; AX = note.
+Proc PE_Template Far                 ; AX = note.
 
                 Mov     BX, BlockDataArea
                 Test    BX, BX
@@ -4643,11 +4642,11 @@ PE_Template5:
                 Mov     AX, 1
                 Ret
 
-EndP            PE_Template
+;EndP            PE_Template
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_NewNote Far
+Proc PE_NewNote Far
 
                 Mov     AX, 12
                 Mul     BaseOctave
@@ -4709,7 +4708,7 @@ PE_NewNote3:                                    ; Play routine reqd here...
                 Mov     CX, 101h
                 Call    NetworkPartialPattern
 
-IF CHORDENTRY
+%IF  CHORDENTRY
                 Cmp     ShiftPressed, 0
                 JE      PE_GotoNextInput
 
@@ -4722,15 +4721,15 @@ IF CHORDENTRY
 
                 Mov     AX, 1
                 Ret
-ELSE
+%ELSE
                 Jmp     PE_GotoNextInput
-ENDIF
+%ENDIF 
 
-EndP            PE_NewNote
+;EndP            PE_NewNote
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Delete Far
+Proc PEFunction_Delete Far
 
                 Mov     Word Ptr [Modified], 101h
 
@@ -4798,11 +4797,11 @@ PEFunction_Delete2:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_Delete
+;EndP            PEFunction_Delete
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Insert Far
+Proc PEFunction_Insert Far
 
                 Mov     BP, 1
                 Cmp     Template, 0
@@ -4875,11 +4874,11 @@ PEFunction_Insert2:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_Insert
+;EndP            PEFunction_Insert
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_RowDelete Far
+Proc PEFunction_RowDelete Far
 
                 Cmp     Byte Ptr LastKeyBoard2, 0D3h
                 JE      PEFunction_RowDelete2
@@ -4929,12 +4928,12 @@ PEFunction_RowDelete1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_RowDelete
+;EndP            PEFunction_RowDelete
 
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_RowInsert Far
+Proc PEFunction_RowInsert Far
 
                 Cmp     Byte Ptr LastKeyBoard2, 0D2h
                 JE      PEFunction_RowInsert2
@@ -4992,11 +4991,11 @@ PEFunction_RowInsert1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_RowInsert
+;EndP            PEFunction_RowInsert
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_DecreaseInstrument Far
+Proc PEFunction_DecreaseInstrument Far
 
                 Sub     LastInstrument, 1
                 AdC     LastInstrument, 0
@@ -5004,11 +5003,11 @@ Proc            PEFunction_DecreaseInstrument Far
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_DecreaseInstrument
+;EndP            PEFunction_DecreaseInstrument
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_IncreaseInstrument Far
+Proc PEFunction_IncreaseInstrument Far
 
                 Cmp     LastInstrument, 99
                 AdC     LastInstrument, 0
@@ -5016,11 +5015,11 @@ Proc            PEFunction_IncreaseInstrument Far
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_IncreaseInstrument
+;EndP            PEFunction_IncreaseInstrument
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_DecreaseOctave Far
+Proc PEFunction_DecreaseOctave Far
 
                 Push    CS
                 Pop     DS
@@ -5031,11 +5030,11 @@ Proc            PEFunction_DecreaseOctave Far
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_DecreaseOctave
+;EndP            PEFunction_DecreaseOctave
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_IncreaseOctave Far
+Proc PEFunction_IncreaseOctave Far
 
                 Push    CS
                 Pop     DS
@@ -5046,11 +5045,11 @@ Proc            PEFunction_IncreaseOctave Far
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_IncreaseOctave
+;EndP            PEFunction_IncreaseOctave
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_PatternCursorPos2 Far                ; Tens column of ins.
+Proc PE_PatternCursorPos2 Far                ; Tens column of ins.
 
                 Test    CL, CL
                 JZ      PE_PatternCursorPos2_1
@@ -5097,11 +5096,11 @@ PE_PatternCursorPos2_1:
                 Xor     AX, AX
                 Ret
 
-EndP            PE_PatternCursorPos2
+;EndP            PE_PatternCursorPos2
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_PatternCursorPos3 Far                ; Unit column of ins.
+Proc PE_PatternCursorPos3 Far                ; Unit column of ins.
 
                 Test    CL, CL
                 JZ      PE_PatternCursorPos3_1
@@ -5144,11 +5143,11 @@ PE_PatternCursorPos3_1:
                 Xor     AX, AX
                 Ret
 
-EndP            PE_PatternCursorPos3
+;EndP            PE_PatternCursorPos3
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_PatternCursorPos4 Far                ; Tens column of vol.
+Proc PE_PatternCursorPos4 Far                ; Tens column of vol.
 
                 Test    CL, CL
                 JZ      PE_PatternCursorPos4_1
@@ -5250,11 +5249,11 @@ PE_PatternCursorPos4_1:
                 Xor     AX, AX
                 Ret
 
-EndP            PE_PatternCursorPos4
+;EndP            PE_PatternCursorPos4
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_VolumePan Far
+Proc PE_VolumePan Far
 
                 Xor     VolumePan, 80h
                 Mov     SI, Offset PanningControlSetMsg
@@ -5269,11 +5268,11 @@ PE_VolumePan1:
                 Mov     AX, 1
                 Ret
 
-EndP            PE_VolumePan
+;EndP            PE_VolumePan
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_PatternCursorPos5 Far                ; Unit column of vol.
+Proc PE_PatternCursorPos5 Far                ; Unit column of vol.
 
                 Test    CL, CL
                 JZ      PE_PatternCursorPos5_1
@@ -5353,11 +5352,11 @@ PE_PatternCursorPos5_1:
                 Xor     AX, AX
                 Ret
 
-EndP            PE_PatternCursorPos5
+;EndP            PE_PatternCursorPos5
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_PatternCursorPos6 Far
+Proc PE_PatternCursorPos6 Far
 
                 Test    CL, CL
                 JZ      PE_PatternCursorPos6_2
@@ -5402,11 +5401,11 @@ PE_PatternCursorPos6_2:
                 Xor     AX, AX
                 Ret
 
-EndP            PE_PatternCursorPos6
+;EndP            PE_PatternCursorPos6
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_PatternCursorPos7 Far
+Proc PE_PatternCursorPos7 Far
 
                 Test    CL, CL
                 JZ      PE_PatternCursorPos7_3
@@ -5469,11 +5468,11 @@ PE_PatternCursorPos7_3:
                 Xor     AX, AX
                 Ret
 
-EndP            PE_PatternCursorPos7
+;EndP            PE_PatternCursorPos7
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_PatternCursorPos8 Far
+Proc PE_PatternCursorPos8 Far
 
                 Test    CL, CL
                 JZ      PE_PatternCursorPos8_3
@@ -5534,11 +5533,11 @@ PE_PatternCursorPos8_3:
                 Xor     AX, AX
                 Ret
 
-EndP            PE_PatternCursorPos8
+;EndP            PE_PatternCursorPos8
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_SetCommandCursor Far
+Proc PE_SetCommandCursor Far
 
                 Push    CS
                 Pop     ES
@@ -5548,11 +5547,11 @@ Proc            PE_SetCommandCursor Far
 
                 Ret
 
-EndP            PE_SetCommandCursor
+;EndP            PE_SetCommandCursor
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_MarkBeginBlock Far
+Proc PEFunction_MarkBeginBlock Far
 
                 Mov     AX, Channel
                 Mov     BX, Row
@@ -5596,11 +5595,11 @@ PEFunction_MarkBeginBlock5:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_MarkBeginBlock
+;EndP            PEFunction_MarkBeginBlock
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_MarkEndBlock Far
+Proc PEFunction_MarkEndBlock Far
 
                 Mov     AX, Channel
                 Mov     BX, Row
@@ -5644,11 +5643,11 @@ PEFunction_MarkEndBlock5:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_MarkEndBlock
+;EndP            PEFunction_MarkEndBlock
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_AltD Far
+Proc PEFunction_AltD Far
 
                 Mov     AX, Channel
                 Mov     BX, Row
@@ -5693,11 +5692,11 @@ PEFunction_AltD4:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_AltD
+;EndP            PEFunction_AltD
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_AltS Far
+Proc PEFunction_AltS Far
 
                 Cmp     BlockMark, 0
                 JE      PEFunction_NoBlockMarkedMessage
@@ -5754,11 +5753,11 @@ PEFunction_AltS4:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_AltS
+;EndP            PEFunction_AltS
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEGetVolume             ; Given DL = note, DH = instrument
+Proc PEGetVolume             ; Given DL = note, DH = instrument
                                         ; Returns DL, Carry if none
 
                 Push    AX BX DI DS
@@ -5798,11 +5797,11 @@ PEGetVolumeEnd:
                 Pop     DS DI BX AX
                 Ret
 
-EndP            PEGetVolume
+;EndP            PEGetVolume
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_AltK Far
+Proc PEFunction_AltK Far
 
                 Cmp     BlockMark, 0
                 JE      PEFunction_NoBlockMarkedMessage
@@ -5987,11 +5986,11 @@ PEFunction_AltK2:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_AltK
+;EndP            PEFunction_AltK
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_AltL Far
+Proc PEFunction_AltL Far
 
                 Call    Music_GetLastChannel    ; AX = max channel.
                 Mov     BX, MaxRow
@@ -6031,11 +6030,11 @@ PEFunction_AltL3:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_AltL
+;EndP            PEFunction_AltL
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_WipeBlock Far
+Proc PEFunction_WipeBlock Far
 
                 Cmp     BlockMark, 0
                 JE      PEFunction_NoBlockMarkedMessage
@@ -6097,11 +6096,11 @@ PEFunction_WipeBlock1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_WipeBlock
+;EndP            PEFunction_WipeBlock
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_RollUp Far
+Proc PEFunction_RollUp Far
 
                 Cmp     BlockMark, 0
                 JE      PEFunction_NoBlockMarkedMessage
@@ -6165,11 +6164,11 @@ PEFunction_RollUpEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_RollUp
+;EndP            PEFunction_RollUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_RollDown Far
+Proc PEFunction_RollDown Far
 
                 Cmp     BlockMark, 0
                 JE      PEFunction_NoBlockMarkedMessage
@@ -6233,11 +6232,11 @@ PEFunction_RollDownEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_RollDown
+;EndP            PEFunction_RollDown
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_BlockHalve Far
+Proc PEFunction_BlockHalve Far
 
                 Cmp     BlockMark, 0
                 JE      PEFunction_NoBlockMarkedMessage
@@ -6319,11 +6318,11 @@ PEFunction_BlockHalve4:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_BlockHalve
+;EndP            PEFunction_BlockHalve
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_BlockDouble Far
+Proc PEFunction_BlockDouble Far
 
                 Cmp     BlockMark, 0
                 JE      PEFunction_NoBlockMarkedMessage
@@ -6423,11 +6422,11 @@ PEFunction_BlockDouble5:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_BlockDouble
+;EndP            PEFunction_BlockDouble
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_BlockSwap Far                ; Alt-H... sorry.
+Proc PEFunction_BlockSwap Far                ; Alt-H... sorry.
 
                 Cmp     BlockMark, 0
                 JE      PEFunction_NoBlockMarkedMessage
@@ -6573,11 +6572,11 @@ PEFunction_BlockSwap7:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_BlockSwap
+;EndP            PEFunction_BlockSwap
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_BlockCopy Far
+Proc PEFunction_BlockCopy Far
 
                 Cmp     BlockMark, 0
                 JE      PEFunction_NoBlockMarkedMessage
@@ -6656,11 +6655,11 @@ PEFunction_BlockCopy3:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_BlockCopy
+;EndP            PEFunction_BlockCopy
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_NoBlockMarkedMessage Far
+Proc PEFunction_NoBlockMarkedMessage Far
 
                 Mov     DI, Offset O1_NoBlockMarkedList
                 Mov     CX, 2
@@ -6669,11 +6668,11 @@ Proc            PEFunction_NoBlockMarkedMessage Far
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_NoBlockMarkedMessage
+;EndP            PEFunction_NoBlockMarkedMessage
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_OutOfMemoryMessage Far
+Proc PEFunction_OutOfMemoryMessage Far
 
                 Call    PE_FillHeader
                 Call    S_SaveScreen
@@ -6687,11 +6686,11 @@ Proc            PEFunction_OutOfMemoryMessage Far
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_OutOfMemoryMessage
+;EndP            PEFunction_OutOfMemoryMessage
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_NoBlockData Far
+Proc PEFunction_NoBlockData Far
 
                 Mov     DI, Offset O1_NoBlockDataList
                 Mov     CX, 2
@@ -6700,11 +6699,11 @@ Proc            PEFunction_NoBlockData Far
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_NoBlockData
+;EndP            PEFunction_NoBlockData
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_BlockOverWrite Far
+Proc PEFunction_BlockOverWrite Far
 
                 Mov     AX, BlockDataArea
                 And     AX, AX
@@ -6775,11 +6774,11 @@ PEFunction_BlockOverWrite5:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_BlockOverWrite
+;EndP            PEFunction_BlockOverWrite
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_BlockPaste Far
+Proc PEFunction_BlockPaste Far
 
                 Mov     AX, BlockDataArea
                 And     AX, AX
@@ -6891,11 +6890,11 @@ PEFunction_BlockPaste2:
                 Mov     AX, BlockDataArea
                 Jmp     PEFunction_BlockOverWrite6
 
-EndP            PEFunction_BlockPaste
+;EndP            PEFunction_BlockPaste
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_SecondBlockMix Far
+Proc PEFunction_SecondBlockMix Far
 
                 Mov     BP, MaxRow
                 Mov     BX, Row
@@ -7000,11 +6999,11 @@ PEFunction_SecondBlockMix5:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_SecondBlockMix
+;EndP            PEFunction_SecondBlockMix
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_BlockMix Far
+Proc PEFunction_BlockMix Far
 
                 Cmp     BlockDataArea, 0
                 JE      PEFunction_NoBlockData
@@ -7086,11 +7085,11 @@ PEFunction_BlockMix6:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_BlockMix
+;EndP            PEFunction_BlockMix
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_UnMarkBlock Far
+Proc PEFunction_UnMarkBlock Far
 
                 Cmp     BlockMark, 0
                 JZ      PEFunction_UnMarkBlock1
@@ -7112,11 +7111,11 @@ PEFunction_UnMarkBlock2:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_UnMarkBlock
+;EndP            PEFunction_UnMarkBlock
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_SemiUp Far
+Proc PEFunction_SemiUp Far
 
                 Cmp     [Word Ptr LastKeyBoard2+2], 1000h
                 JE      PEFunction_SemiUp6
@@ -7186,11 +7185,11 @@ PEFunction_SemiUp3:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_SemiUp
+;EndP            PEFunction_SemiUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_SemiDown Far
+Proc PEFunction_SemiDown Far
 
                 Cmp     [Word Ptr LastKeyBoard2+2], 1E00h
                 JE      PEFunction_SemiDown6
@@ -7260,11 +7259,11 @@ PEFunction_SemiDown3:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_SemiDown
+;EndP            PEFunction_SemiDown
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_SlideCommand Far
+Proc PEFunction_SlideCommand Far
 
                 Mov     DI, 15
                 Call    PE_AddToUndoBuffer
@@ -7348,11 +7347,11 @@ PEFunction_AltX2:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_SlideCommand
+;EndP            PEFunction_SlideCommand
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_WipeCommands Far
+Proc PEFunction_WipeCommands Far
 
                 Cmp     BlockMark, 0
                 JE      PEFunction_NoBlockMarkedMessage
@@ -7411,11 +7410,11 @@ PEFunction_WipeCommands1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_WipeCommands
+;EndP            PEFunction_WipeCommands
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_VolumeAmp Far
+Proc PEFunction_VolumeAmp Far
 
                 Cmp     BlockMark, 0
                 JE      PEFunction_NoBlockMarkedMessage
@@ -7546,11 +7545,11 @@ PEFunction_VolumeAmp1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_VolumeAmp
+;EndP            PEFunction_VolumeAmp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            GetPatternLength
+Proc GetPatternLength
 
                 Push    AX
                 Push    BX
@@ -7698,13 +7697,13 @@ GetPatternLength13:
                 Mov     AX, 1
                 RetF
 
-EndP            GetPatternLength
+;EndP            GetPatternLength
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-IF SHOWPATTERNLENGTH
+%IF  SHOWPATTERNLENGTH
 
-Proc            PE_ShowPatternLength Far
+Proc PE_ShowPatternLength Far
 
                 Push    AX                      ; Just for stack length..
                 Call    GetPatternLength
@@ -7722,16 +7721,16 @@ Proc            PE_ShowPatternLength Far
                 Mov     AX, 1
                 Ret
 
-EndP            PE_ShowPatternLength
+;EndP            PE_ShowPatternLength
 
-ENDIF
+%ENDIF 
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 DecodePatternBytes      DW      0
 DecodePatternOffset     DW      0
 
-Proc            DecodePattern           ; DS:SI points to pattern info to decode
+Proc DecodePattern           ; DS:SI points to pattern info to decode
 
                 PushA
                 Push    DS
@@ -7889,11 +7888,11 @@ DecodePatternEnd:
 
                 Ret
 
-EndP            DecodePattern
+;EndP            DecodePattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            EncodePattern           ; ES:DI points to area to deposit data
+Proc EncodePattern           ; ES:DI points to area to deposit data
                                         ; DX = length of data
 
                 Push    AX
@@ -8070,13 +8069,13 @@ EncodePattern4:
                 Pop     AX
                 Ret
 
-EndP            EncodePattern
+;EndP            EncodePattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_StorePattern
+Proc PEFunction_StorePattern
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Cmp     PatternModified, 0
                 JE      PEFunction_StorePattern5
 
@@ -8086,7 +8085,7 @@ IF NETWORKENABLED
                 Call    Network_AddWordToQueue
 
 PEFunction_StorePattern5:
-ENDIF
+%ENDIF 
 
                 Mov     AX, PatternNumber
                 Mov     SI, AX
@@ -8131,11 +8130,11 @@ PEFunction_StorePattern4:
                 Mov     AX, 1
                 RetF
 
-EndP            PEFunction_StorePattern
+;EndP            PEFunction_StorePattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_StoreCurrentPattern Far
+Proc PEFunction_StoreCurrentPattern Far
 
                 Push    CS
                 Pop     DS
@@ -8144,15 +8143,15 @@ Proc            PEFunction_StoreCurrentPattern Far
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_StoreCurrentPattern
+;EndP            PEFunction_StoreCurrentPattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            NewPattern                      ; Reqs. AX = pattern
+Proc NewPattern                      ; Reqs. AX = pattern
 
-IF NETWORKENABLED
+%IF  NETWORKENABLED
                 Call    Network_UpdatePattern
-ENDIF
+%ENDIF 
                 Call    Music_GetPattern
                 Call    DecodePattern
 
@@ -8165,11 +8164,11 @@ ENDIF
 
                 Ret
 
-EndP            NewPattern
+;EndP            NewPattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_GotoPattern Far                      ; AX = pattern.
+Proc PE_GotoPattern Far                      ; AX = pattern.
 
                 Push    CS
                 Pop     DS
@@ -8191,15 +8190,15 @@ PE_GotoPattern1:
 
                 Jmp     Glbl_F2
 
-EndP            PE_GotoPattern
+;EndP            PE_GotoPattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-include pe_trans.inc
+%include "pe_trans.inc"
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_NextPattern Far
+Proc PEFunction_NextPattern Far
 
                 Cmp     TracePlayback, 0
                 JE      PEFunction_NextPatternNoTrace
@@ -8231,11 +8230,11 @@ PEFunction_NextPattern1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_NextPattern
+;EndP            PEFunction_NextPattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_LastPattern Far
+Proc PEFunction_LastPattern Far
 
                 Cmp     TracePlayback, 0
                 JE      PEFunction_LastPatternNoTrace
@@ -8267,10 +8266,10 @@ PEFunction_LastPattern1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_LastPattern
+;EndP            PEFunction_LastPattern
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Next4Patterns Far
+Proc PEFunction_Next4Patterns Far
 
                 Cmp     PatternModified, 0
                 JE      PEFunction_Next4Patterns2
@@ -8293,11 +8292,11 @@ PEFunction_Next4Patterns1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_Next4Patterns
+;EndP            PEFunction_Next4Patterns
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Last4Patterns Far
+Proc PEFunction_Last4Patterns Far
 
                 Cmp     PatternModified, 0
                 JE      PEFunction_Last4Patterns2
@@ -8319,11 +8318,11 @@ PEFunction_Last4Patterns1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_Last4Patterns
+;EndP            PEFunction_Last4Patterns
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_LastOrderPattern Far
+Proc PEFunction_LastOrderPattern Far
 
                 Cmp     PatternModified, 0
                 JE      PEFunction_LastOrderPattern3
@@ -8357,11 +8356,11 @@ PEFunction_LastOrderPattern1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_LastOrderPattern
+;EndP            PEFunction_LastOrderPattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_NextOrderPattern Far
+Proc PEFunction_NextOrderPattern Far
 
                 Cmp     PatternModified, 0
                 JE      PEFunction_NextOrderPattern3
@@ -8395,11 +8394,11 @@ PEFunction_NextOrderPattern1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_NextOrderPattern
+;EndP            PEFunction_NextOrderPattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Alt0 Far
+Proc PEFunction_Alt0 Far
 
                 Xor     AX, AX
                 Mov     SkipValue, AX
@@ -8410,11 +8409,11 @@ Proc            PEFunction_Alt0 Far
 
                 Ret
 
-EndP            PEFunction_Alt0
+;EndP            PEFunction_Alt0
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_BlockVolume Far
+Proc PEFunction_BlockVolume Far
 
                 Cmp     BlockMark, 0
                 JE      PEFunction_NoBlockMarkedMessage
@@ -8467,11 +8466,11 @@ PEFunction_BlockVolume2:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_BlockVolume
+;EndP            PEFunction_BlockVolume
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_WipeExcessVolumes Far
+Proc PEFunction_WipeExcessVolumes Far
 
                 Cmp     BlockMark, 0
                 JE      PEFunction_NoBlockMarkedMessage
@@ -8531,11 +8530,11 @@ PEFunction_WipeExcessVolumes4:
                 Mov     [SI+2], AL
                 Jmp     PEFunction_WipeExcessVolumes3
 
-EndP            PEFunction_WipeExcessVolumes
+;EndP            PEFunction_WipeExcessVolumes
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_PlayCurrentNote Far
+Proc PEFunction_PlayCurrentNote Far
 
                 Mov     AX, 64
                 Mul     Row
@@ -8548,7 +8547,7 @@ Proc            PEFunction_PlayCurrentNote Far
                 Mov     DH, 32
                 Call    Music_PlayNote
 
-IF CHORDENTRY
+%IF  CHORDENTRY
                 Push    CS
                 Pop     DS
 
@@ -8564,15 +8563,15 @@ IF CHORDENTRY
 
                 Mov     AX, 1
                 Ret
-ELSE
+%ELSE
                 Jmp     PEFunction_Down
-ENDIF
+%ENDIF 
 
-EndP            PEFunction_PlayCurrentNote
+;EndP            PEFunction_PlayCurrentNote
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_PlayCurrentRow Far
+Proc PEFunction_PlayCurrentRow Far
 
                 Mov     CX, 64
                 Mov     DS, PatternDataArea
@@ -8603,11 +8602,11 @@ PEFunction_PlayCurrentRow1:
 
                 Jmp     PEFunction_Down
 
-EndP            PEFunction_PlayCurrentRow
+;EndP            PEFunction_PlayCurrentRow
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_RestoreData Far
+Proc PEFunction_RestoreData Far
 
 ;                Mov     PatternModified, 0
 
@@ -8634,11 +8633,11 @@ PEFunction_RestoreData1:
 
                 Ret
 
-EndP            PEFunction_RestoreData
+;EndP            PEFunction_RestoreData
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_ToggleDefaultVolume Far
+Proc PE_ToggleDefaultVolume Far
 
                 Xor     Flags, 1
                 Mov     SI, Offset DefaultVolumeOn
@@ -8653,11 +8652,11 @@ PEFunction_ToggleDefaultVolume1:
                 Mov     AX, 1
                 Ret
 
-EndP            PE_ToggleDefaultVolume
+;EndP            PE_ToggleDefaultVolume
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_ToggleTemplate Far
+Proc PEFunction_ToggleTemplate Far
 
                 Test    CentraliseCursor, 4
                 JZ      ToggleTemplate2
@@ -8679,7 +8678,7 @@ ToggleTemplate2:
                 Cmp     AL, 4
                 JBE     PEFunction_ToggleTemplate1
 
-Proc            PEFunction_TemplateOff Far
+Proc PEFunction_TemplateOff Far
 
                 Xor     AL, AL
 
@@ -8689,13 +8688,13 @@ PEFunction_ToggleTemplate1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_TemplateOff
+;EndP            PEFunction_TemplateOff
 
-EndP            PEFunction_ToggleTemplate
+;EndP            PEFunction_ToggleTemplate
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_GetCurrentPattern Far
+Proc PE_GetCurrentPattern Far
 
                 Mov     AX, CS:PatternNumber
                 Mov     BX, CS:MaxRow
@@ -8704,11 +8703,11 @@ Proc            PE_GetCurrentPattern Far
 
                 Ret
 
-EndP            PE_GetCurrentPattern
+;EndP            PE_GetCurrentPattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_CheckWidth
+Proc PE_CheckWidth
 
                 Xor     DX, DX                          ; Time to work out width
                 Xor     CX, CX                          ; Count of channels.
@@ -8760,11 +8759,11 @@ PE_CheckWidth5:                 ;
                 StC             ;
                 Ret
 
-EndP            PE_CheckWidth
+;EndP            PE_CheckWidth
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_ViewTrack Far
+Proc PEFunction_ViewTrack Far
 
                 Mov     DX, Channel
                 Mov     SI, Offset ViewChannels
@@ -8828,11 +8827,11 @@ PEFunction_ViewTrack10:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_ViewTrack
+;EndP            PEFunction_ViewTrack
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_ClearViews Far
+Proc PEFunction_ClearViews Far
 
                 Push    CS
                 Pop     ES
@@ -8849,11 +8848,11 @@ Proc            PEFunction_ClearViews Far
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_ClearViews
+;EndP            PEFunction_ClearViews
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_SelectColour Near
+Proc PE_SelectColour Near
 
                 MovZX   AX, CL                  ; AL = row number
 
@@ -8911,11 +8910,11 @@ PE_SelectColour3:
 PE_SelectColour6:
                 Ret
 
-EndP            PE_SelectColour
+;EndP            PE_SelectColour
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_HilightCursor Near
+Proc PE_HilightCursor Near
 
                 Mov     AX, [ES:DI]
                 And     AH, 8
@@ -8924,11 +8923,11 @@ Proc            PE_HilightCursor Near
 
                 Ret
 
-EndP            PE_HilightCursor
+;EndP            PE_HilightCursor
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_HilightView Near
+Proc PE_HilightView Near
 
                 Mov     AX, 1
                 Cmp     CS:Template, 0
@@ -9005,11 +9004,11 @@ PE_HilightView2:
 
                 Ret
 
-EndP            PE_HilightView
+;EndP            PE_HilightView
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_GetChannelColour             ; Puts colour in AH
+Proc PE_GetChannelColour             ; Puts colour in AH
                                                 ; Param: BP = channel
 
                 Push    DS
@@ -9028,11 +9027,11 @@ PE_GetChannelColour1:
 
                 Ret
 
-EndP            PE_GetChannelColour
+;EndP            PE_GetChannelColour
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ViewCommon
+Proc ViewCommon
 
                 Push    DS
                 Push    ES
@@ -9066,12 +9065,12 @@ Proc            ViewCommon
 
                 Ret
 
-EndP            ViewCommon
+;EndP            ViewCommon
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
 
-Proc            ViewFull                        ; DS:SI = pattern data
+Proc ViewFull                        ; DS:SI = pattern data
                                                 ; ES:DI = screen pointer
                                                 ; CS:BX = note data
                                                 ; CX = row number
@@ -9202,11 +9201,11 @@ ViewFull11:
                 Mov     BP, Offset CursorPositions
                 Jmp     PE_HilightView
 
-EndP            ViewFull
+;EndP            ViewFull
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ViewCompress                        ; DS:SI = pattern data
+Proc ViewCompress                        ; DS:SI = pattern data
                                                 ; ES:DI = screen pointer
                                                 ; CS:BX = note data
                                                 ; CX = row number
@@ -9335,11 +9334,11 @@ ViewCompress11:
                 Mov     BP, Offset CursorPositions+9
                 Jmp     PE_HilightView
 
-EndP            ViewCompress
+;EndP            ViewCompress
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ViewAllSmall                    ; DS:SI = pattern data
+Proc ViewAllSmall                    ; DS:SI = pattern data
                                                 ; ES:DI = screen pointer
                                                 ; CS:BX = note data
                                                 ; CX = row number
@@ -9472,11 +9471,11 @@ ViewAllSmall11:
                 Mov     BP, Offset CursorPositions+18
                 Jmp     PE_HilightView
 
-EndP            ViewAllSmall
+;EndP            ViewAllSmall
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ViewNote                        ; DS:SI = pattern data
+Proc ViewNote                        ; DS:SI = pattern data
                                                 ; ES:DI = screen pointer
                                                 ; CS:BX = note data
                                                 ; CX = row number
@@ -9811,11 +9810,11 @@ ViewNoteEndHilight:
                 Jmp     PE_HilightView
 
 
-EndP            ViewNote
+;EndP            ViewNote
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ViewTiny                        ; DS:SI = pattern data
+Proc ViewTiny                        ; DS:SI = pattern data
                                                 ; ES:DI = screen pointer
                                                 ; CS:BX = note data
                                                 ; CX = row number
@@ -10088,11 +10087,11 @@ ViewTinyEndHilight:
                 Mov     BP, Offset CursorPositions+36
                 Jmp     PE_HilightView
 
-EndP            ViewTiny
+;EndP            ViewTiny
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_ToggleDivision Far
+Proc PEFunction_ToggleDivision Far
 
                 Xor     ViewDivision, 1
 
@@ -10108,65 +10107,65 @@ PEFunction_ToggleDivision1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_ToggleDivision
+;EndP            PEFunction_ToggleDivision
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Ctrl0 Far
+Proc PEFunction_Ctrl0 Far
 
                 Mov     AX, 0
                 Jmp     PE_FastView
 
-EndP            PEFunction_Ctrl0
+;EndP            PEFunction_Ctrl0
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Ctrl1 Far
+Proc PEFunction_Ctrl1 Far
 
                 Mov     AX, 1
                 Jmp     PE_FastView
 
-EndP            PEFunction_Ctrl1
+;EndP            PEFunction_Ctrl1
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Ctrl2 Far
+Proc PEFunction_Ctrl2 Far
 
                 Mov     AX, 2
                 Jmp     PE_FastView
 
-EndP            PEFunction_Ctrl2
+;EndP            PEFunction_Ctrl2
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Ctrl3 Far
+Proc PEFunction_Ctrl3 Far
 
                 Mov     AX, 3
                 Jmp     PE_FastView
 
-EndP            PEFunction_Ctrl3
+;EndP            PEFunction_Ctrl3
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Ctrl4 Far
+Proc PEFunction_Ctrl4 Far
 
                 Mov     AX, 4
                 Jmp     PE_FastView
 
-EndP            PEFunction_Ctrl4
+;EndP            PEFunction_Ctrl4
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Ctrl5 Far
+Proc PEFunction_Ctrl5 Far
 
                 Mov     AX, 5
                 Jmp     PE_FastView
 
-EndP            PEFunction_Ctrl5
+;EndP            PEFunction_Ctrl5
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_QuickViewSetup Far           ; CX = num with div
+Proc PEFunction_QuickViewSetup Far           ; CX = num with div
                                                         ; BX = num without div
                                                         ; AH = type.
                 Cmp     ViewDivision, 0
@@ -10203,55 +10202,55 @@ PEFunction_QuickViewSetup2:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_QuickViewSetup
+;EndP            PEFunction_QuickViewSetup
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Ctrl_Shift1 Far
+Proc PEFunction_Ctrl_Shift1 Far
 
                 Mov     AX, 100h
                 Mov     BX, 7
                 Mov     CX, 6
                 Jmp     PEFunction_QuickViewSetup
 
-EndP            PEFunction_Ctrl_Shift1
+;EndP            PEFunction_Ctrl_Shift1
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Ctrl_Shift2 Far
+Proc PEFunction_Ctrl_Shift2 Far
 
                 Mov     AX, 200h
                 Mov     BX, 10
                 Mov     CX, 9
                 Jmp     PEFunction_QuickViewSetup
 
-EndP            PEFunction_Ctrl_Shift2
+;EndP            PEFunction_Ctrl_Shift2
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Ctrl_Shift3 Far
+Proc PEFunction_Ctrl_Shift3 Far
 
                 Mov     AX, 300h
                 Mov     BX, 24
                 Mov     CX, 18
                 Jmp     PEFunction_QuickViewSetup
 
-EndP            PEFunction_Ctrl_Shift3
+;EndP            PEFunction_Ctrl_Shift3
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Ctrl_Shift4 Far
+Proc PEFunction_Ctrl_Shift4 Far
 
                 Mov     AX, 400h
                 Mov     BX, 36
                 Mov     CX, 24
                 Jmp     PEFunction_QuickViewSetup
 
-EndP            PEFunction_Ctrl_Shift4
+;EndP            PEFunction_Ctrl_Shift4
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_FastView Far
+Proc PE_FastView Far
 
                 Dec     AX              ; AL = viewmethod
                 Mov     CL, AL
@@ -10314,11 +10313,11 @@ PE_FastView6:
                 Mov     AX, 1
                 Ret
 
-EndP            PE_FastView
+;EndP            PE_FastView
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_ViewLeft Far
+Proc PEFunction_ViewLeft Far
                                                 ; First find current channel.
                 Mov     DX, Channel
                 Mov     SI, Offset ViewChannels
@@ -10341,11 +10340,11 @@ PEFunction_ViewLeft2:                           ; Else decrease channel
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_ViewLeft
+;EndP            PEFunction_ViewLeft
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_ViewRight Far
+Proc PEFunction_ViewRight Far
 
                 Mov     DX, Channel
                 Mov     SI, Offset ViewChannels
@@ -10369,11 +10368,11 @@ PEFunction_ViewRight2:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_ViewRight
+;EndP            PEFunction_ViewRight
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_AltRight Far
+Proc PEFunction_AltRight Far
 
                 Mov     AX, Channel
                 Inc     AX
@@ -10386,11 +10385,11 @@ PEFunction_AltRight1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_AltRight
+;EndP            PEFunction_AltRight
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_AltLeft Far
+Proc PEFunction_AltLeft Far
 
                 Mov     AX, Channel
                 And     AX, AX
@@ -10403,11 +10402,11 @@ PEFunction_AltLeft1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_AltLeft
+;EndP            PEFunction_AltLeft
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Ctrl_Home Far
+Proc PEFunction_Ctrl_Home Far
 
                 Mov     AX, Row
                 Sub     AL, 1
@@ -10417,11 +10416,11 @@ Proc            PEFunction_Ctrl_Home Far
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_Ctrl_Home
+;EndP            PEFunction_Ctrl_Home
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Ctrl_End Far
+Proc PEFunction_Ctrl_End Far
 
                 Mov     AX, Row
                 Cmp     AX, MaxRow
@@ -10431,11 +10430,11 @@ Proc            PEFunction_Ctrl_End Far
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_Ctrl_End
+;EndP            PEFunction_Ctrl_End
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_AltUp Far
+Proc PEFunction_AltUp Far
 
                 Mov     AX, TopRow
                 Mov     BX, Row
@@ -10454,11 +10453,11 @@ PEFunction_AltUp1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_AltUp
+;EndP            PEFunction_AltUp
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_AltDown Far
+Proc PEFunction_AltDown Far
 
                 Mov     AX, TopRow
                 Mov     BX, MaxRow
@@ -10478,27 +10477,27 @@ PEFunction_AltDown1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_AltDown
+;EndP            PEFunction_AltDown
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_GetLastInstrument Far
+Proc PE_GetLastInstrument Far
 
                 MovZX   BX, [CS:LastInstrument]
                 Dec     BX
                 Ret
 
-EndP            PE_GetLastInstrument
+;EndP            PE_GetLastInstrument
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_SwapInstruments Far                   ; DH/DL = instruments
+Proc PE_SwapInstruments Far                   ; DH/DL = instruments
                                                          ; to swap.
                 Call    Music_GetSongSegment
                 Mov     DS, AX
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     TempVariableArea2, DX
                 Mov     AX, PatternNumber
@@ -10520,7 +10519,7 @@ Proc            PE_SwapInstruments Far                   ; DH/DL = instruments
                 Call    S_DrawSmallBox
 
                 Mov     TempVariableArea3, 0
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 PE_SwapInstruments1:                            ; Draw % Complete on screen first
                 Mov     AX, 100
@@ -10531,7 +10530,7 @@ PE_SwapInstruments1:                            ; Draw % Complete on screen firs
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     SI, Offset CompleteMsg
                 Mov     DI, (34+26*80)*2
@@ -10542,7 +10541,7 @@ PE_SwapInstruments1:                            ; Draw % Complete on screen firs
 
                 Mov     AX, TempVariableArea3
                 Mov     PatternNumber, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Call    Music_GetPattern
                 Call    DecodePattern           ; Next pattern should be in mem
@@ -10602,7 +10601,7 @@ PE_SwapInstruments2:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AX, TempVariableArea
                 Mov     PatternNumber, AX
@@ -10611,16 +10610,16 @@ PE_SwapInstruments2:
 
                 Ret
 
-EndP            PE_SwapInstruments
-                Assume DS:Nothing
+;EndP            PE_SwapInstruments
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_InsertInstrument Far                  ; DL = instrument
+Proc PE_InsertInstrument Far                  ; DL = instrument
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     TempVariableArea2, DX
                 Mov     AX, PatternNumber
@@ -10642,7 +10641,7 @@ Proc            PE_InsertInstrument Far                  ; DL = instrument
                 Call    S_DrawSmallBox
 
                 Mov     TempVariableArea3, 0
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 PE_InsertInstrument1:                   ; Draw % Complete on screen first
                 Mov     AX, 100
@@ -10653,7 +10652,7 @@ PE_InsertInstrument1:                   ; Draw % Complete on screen first
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     SI, Offset CompleteMsg
                 Mov     DI, (34+26*80)*2
@@ -10664,7 +10663,7 @@ PE_InsertInstrument1:                   ; Draw % Complete on screen first
 
                 Mov     AX, TempVariableArea3
                 Mov     PatternNumber, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Call    Music_GetPattern
                 Call    DecodePattern           ; Next pattern should be in mem
@@ -10714,7 +10713,7 @@ PE_InsertInstrument2:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AX, TempVariableArea
                 Mov     PatternNumber, AX
@@ -10723,16 +10722,16 @@ PE_InsertInstrument2:
 
                 Ret
 
-EndP            PE_InsertInstrument
-                Assume DS:Nothing
+;EndP            PE_InsertInstrument
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_DeleteInstrument Far                  ; DL = instrument
+Proc PE_DeleteInstrument Far                  ; DL = instrument
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     TempVariableArea2, DX
                 Mov     AX, PatternNumber
@@ -10754,7 +10753,7 @@ Proc            PE_DeleteInstrument Far                  ; DL = instrument
                 Call    S_DrawSmallBox
 
                 Mov     TempVariableArea3, 0
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 PE_DeleteInstrument1:                   ; Draw % Complete on screen first
                 Mov     AX, 100
@@ -10765,7 +10764,7 @@ PE_DeleteInstrument1:                   ; Draw % Complete on screen first
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     SI, Offset CompleteMsg
                 Mov     DI, (34+26*80)*2
@@ -10776,7 +10775,7 @@ PE_DeleteInstrument1:                   ; Draw % Complete on screen first
 
                 Mov     AX, TempVariableArea3
                 Mov     PatternNumber, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Call    Music_GetPattern
                 Call    DecodePattern           ; Next pattern should be in mem
@@ -10823,7 +10822,7 @@ PE_DeleteInstrument2:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AX, TempVariableArea
                 Mov     PatternNumber, AX
@@ -10832,16 +10831,16 @@ PE_DeleteInstrument2:
 
                 Ret
 
-EndP            PE_DeleteInstrument
-                Assume DS:Nothing
+;EndP            PE_DeleteInstrument
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_UpdateInstruments Far                 ; ES:DI = instrument table
+Proc PE_UpdateInstruments Far                 ; ES:DI = instrument table
                                                          ; DL = instrument number
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     Byte Ptr TempVariableArea2, DL
                 Mov     AX, PatternNumber
@@ -10866,7 +10865,7 @@ Proc            PE_UpdateInstruments Far                 ; ES:DI = instrument ta
                 Call    S_DrawSmallBox
 
                 Mov     TempVariableArea3, 0
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
 PE_UpdateInstruments1:                            ; Draw % Complete on screen first
                 Mov     AX, 100
@@ -10877,7 +10876,7 @@ PE_UpdateInstruments1:                            ; Draw % Complete on screen fi
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     SI, Offset CompleteMsg
                 Mov     DI, (34+26*80)*2
@@ -10887,7 +10886,7 @@ PE_UpdateInstruments1:                            ; Draw % Complete on screen fi
 
                 Mov     AX, TempVariableArea3
                 Mov     PatternNumber, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Call    Music_GetPattern
                 Call    DecodePattern           ; Next pattern should be in mem
@@ -10957,7 +10956,7 @@ PE_UpdateInstruments2:
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AX, TempVariableArea
                 Mov     PatternNumber, AX
@@ -10966,13 +10965,13 @@ PE_UpdateInstruments2:
 
                 Ret
 
-EndP            PE_UpdateInstruments
-                Assume DS:Nothing
+;EndP            PE_UpdateInstruments
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Alt_F9 Far
-                Assume DS:Pattern
+Proc PEFunction_Alt_F9 Far
+                ;Assume DS:Pattern
 
                 Mov     AX, Channel
                 Call    Music_ToggleChannel
@@ -10980,34 +10979,34 @@ Proc            PEFunction_Alt_F9 Far
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_Alt_F9
-                Assume DS:Nothing
+;EndP            PEFunction_Alt_F9
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_MuteNext Far
-                Assume DS:Pattern
+Proc PEFunction_MuteNext Far
+                ;Assume DS:Pattern
 
                 Call    PEFunction_Alt_F9
                 Jmp     PEFunction_Tab
 
-EndP            PEFunction_MuteNext
+;EndP            PEFunction_MuteNext
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_MutePrevious Far
-                Assume DS:Pattern
+Proc PEFunction_MutePrevious Far
+                ;Assume DS:Pattern
 
                 Sub     Channel, 1
                 AdC     Channel, 0
                 Jmp     PEFunction_Alt_F9
 
-EndP            PEFunction_MutePrevious
+;EndP            PEFunction_MutePrevious
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Alt_F10 Far
-                Assume DS:Pattern
+Proc PEFunction_Alt_F10 Far
+                ;Assume DS:Pattern
 
                 Mov     AX, Channel
                 Call    Music_SoloChannel
@@ -11015,32 +11014,32 @@ Proc            PEFunction_Alt_F10 Far
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_Alt_F10
-                Assume DS:Nothing
+;EndP            PEFunction_Alt_F10
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_SoloGotoNext Far
+Proc PEFunction_SoloGotoNext Far
 
                 Call    PEFunction_Alt_F10
                 Jmp     PEFunction_Tab
 
-EndP            PEFunction_SoloGotoNext
+;EndP            PEFunction_SoloGotoNext
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_UnmuteAll Far
+Proc PEFunction_UnmuteAll Far
 
                 Call    Music_UnmuteAll
 
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_UnmuteAll
+;EndP            PEFunction_UnmuteAll
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_ShowOrder Far                        ; DX = order.
+Proc PE_ShowOrder Far                        ; DX = order.
 
                 Call    S_GetDestination
                 Mov     CX, 32
@@ -11068,12 +11067,12 @@ PE_ShowOrder2:
 
                 Ret
 
-EndP            PE_ShowOrder
+;EndP            PE_ShowOrder
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_PlayCurrentPosition Far
-                Assume DS:Pattern
+Proc PE_PlayCurrentPosition Far
+                ;Assume DS:Pattern
 
                 Call    I_ClearTables
 
@@ -11087,13 +11086,13 @@ Proc            PE_PlayCurrentPosition Far
                 Mov     AX, 1
                 Ret
 
-EndP            PE_PlayCurrentPosition
-                Assume DS:Nothing
+;EndP            PE_PlayCurrentPosition
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_SetPlayMark Far
-                Assume DS:Pattern
+Proc PEFunction_SetPlayMark Far
+                ;Assume DS:Pattern
 
                 Cmp     PlayMarkOn, 1     ; If on..
                 JNE     PEFunction_SetPlayMarkNew
@@ -11120,18 +11119,18 @@ PEFunction_SetPlayMarkEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_SetPlayMark
-                Assume DS:Nothing
+;EndP            PEFunction_SetPlayMark
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_F7 Far                       ; If no mark is set, use
+Proc PE_F7 Far                       ; If no mark is set, use
                                                 ; current pattern & row
                 Call    I_ClearTables
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     CX, PatternNumber
                 Mov     BX, Row
@@ -11182,12 +11181,12 @@ PE_F7_2:
                 Mov     AX, 1
                 Ret
 
-EndP            PE_F7
+;EndP            PE_F7
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_ToggleTracking Far
-                Assume DS:Pattern
+Proc PEFunction_ToggleTracking Far
+                ;Assume DS:Pattern
 
                 Mov     SI, Offset NoViewChannelTrackingMsg
                 Xor     ViewChannelTracking, 1
@@ -11201,13 +11200,13 @@ PEFunction_ToggleTracking1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_ToggleTracking
-                Assume DS:Nothing
+;EndP            PEFunction_ToggleTracking
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_ToggleRowHilight Far
-                Assume DS:Pattern
+Proc PEFunction_ToggleRowHilight Far
+                ;Assume DS:Pattern
 
                 Mov     SI, Offset NoRowHilightMsg
                 Xor     CentraliseCursor, 2
@@ -11222,13 +11221,13 @@ PEFunction_ToggleRowHilight1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_ToggleRowHilight
-                Assume DS:Nothing
+;EndP            PEFunction_ToggleRowHilight
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_ToggleCentralise Far
-                Assume DS:Pattern
+Proc PEFunction_ToggleCentralise Far
+                ;Assume DS:Pattern
 
                 Mov     SI, Offset NoCentraliseCursorMsg
                 Xor     CentraliseCursor, 1
@@ -11243,13 +11242,13 @@ PEFunction_ToggleCentralise1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_ToggleCentralise
-                Assume DS:Nothing
+;EndP            PEFunction_ToggleCentralise
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_ToggleTrace Far
-                Assume DS:Pattern
+Proc PEFunction_ToggleTrace Far
+                ;Assume DS:Pattern
 
                 Mov     SI, Offset NoTraceMsg
                 Xor     TracePlayback, 1
@@ -11266,12 +11265,12 @@ PEFunction_ToggleTrace1:
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_ToggleTrace
-                Assume DS:Nothing
+;EndP            PEFunction_ToggleTrace
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_GetPatternConfigOffset Far
+Proc PE_GetPatternConfigOffset Far
 
                 Push    CS
                 Pop     DS
@@ -11280,11 +11279,11 @@ Proc            PE_GetPatternConfigOffset Far
 
                 Ret
 
-EndP            PE_GetPatternConfigOffset
+;EndP            PE_GetPatternConfigOffset
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ReleaseUndoMemory
+Proc ReleaseUndoMemory
 
                 Test    AX, AX
                 JZ      ReleaseUndoMemoryEnd
@@ -11312,11 +11311,11 @@ ReleaseUndoMemoryEMS:
 ReleaseUndoMemoryEnd:
                 Ret
 
-EndP            ReleaseUndoMemory
+;EndP            ReleaseUndoMemory
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_AddToUndoBuffer Far          ; 1) Release oldest data.
+Proc PE_AddToUndoBuffer Far          ; 1) Release oldest data.
                                                 ; 2) Shift all stuff down.
                                                 ; 3) Store newest data.
 
@@ -11328,7 +11327,7 @@ Proc            PE_AddToUndoBuffer Far          ; 1) Release oldest data.
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AX, DI
                 Cmp     AL, 22
@@ -11416,12 +11415,12 @@ PE_AddToUndoBufferEnd:
 
                 Ret
 
-EndP            PE_AddToUndoBuffer
-                Assume DS:Nothing
+;EndP            PE_AddToUndoBuffer
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_ClearUndoBuffer Far
+Proc PE_ClearUndoBuffer Far
 
                 Push    EAX
                 Push    CX
@@ -11430,7 +11429,7 @@ Proc            PE_ClearUndoBuffer Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     CX, 10
                 Mov     SI, Offset UndoBuffer
@@ -11453,12 +11452,12 @@ PE_ClearUndoBuffer1:
 
                 Ret
 
-EndP            PE_ClearUndoBuffer
-                Assume DS:Nothing
+;EndP            PE_ClearUndoBuffer
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_Undo Far
+Proc PEFunction_Undo Far
 
                 Mov     SelectUndo, 0
 
@@ -11469,13 +11468,13 @@ Proc            PEFunction_Undo Far
                 Mov     AX, 1
                 Ret
 
-EndP            PEFunction_Undo
+;EndP            PEFunction_Undo
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_DrawUndo Far
+Proc PEFunction_DrawUndo Far
 
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
                 Push    CS
                 Pop     DS
 
@@ -11507,16 +11506,16 @@ PEFunction_DrawUndo1:
 
                 Ret
 
-EndP            PEFunction_DrawUndo
-                Assume DS:Nothing
+;EndP            PEFunction_DrawUndo
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_PreUndo Far
+Proc PEFunction_PreUndo Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Call    S_GetDestination
                 Mov     AX, 160
@@ -11534,16 +11533,16 @@ PEFunction_PreUndo1:
 
                 Ret
 
-EndP            PEFunction_PreUndo
-                Assume DS:Nothing
+;EndP            PEFunction_PreUndo
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEFunction_PostUndo Far
+Proc PEFunction_PostUndo Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     BX, SelectUndo
 
@@ -11601,7 +11600,7 @@ PEFunction_PostUndoEMS:
 
 PEFunction_PostUndoEnterEnd:
                 Mov     DS, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
                 Xor     SI, SI
                 Call    DecodePattern
 
@@ -11615,12 +11614,12 @@ PEFunction_PostUndoEnd:
                 Mov     AX, 4
                 Ret
 
-EndP            PEFunction_PostUndo
+;EndP            PEFunction_PostUndo
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            ToggleFastVolume Far
-                Assume DS:Pattern
+Proc ToggleFastVolume Far
+                ;Assume DS:Pattern
 
                 Mov     SI, Offset NoFastVolumeMsg
                 Xor     CentraliseCursor, 4
@@ -11651,12 +11650,12 @@ ToggleFastVolume3:
                 Mov     AX, 1
                 Ret
 
-EndP            ToggleFastVolume
-                Assume DS:Nothing
+;EndP            ToggleFastVolume
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PECheckModified Far
+Proc PECheckModified Far
 
                 Cmp     CS:Modified, 0
                 JE      PECheckModified1
@@ -11675,22 +11674,22 @@ Proc            PECheckModified Far
 PECheckModified1:
                 Ret
 
-EndP            PECheckModified
+;EndP            PECheckModified
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PEResetModified Far
+Proc PEResetModified Far
 
                 Mov     CS:Modified, 0
 
                 Ret
 
-EndP            PEResetModified
+;EndP            PEResetModified
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_SetPatternLength Far
-                Assume DS:Pattern
+Proc PE_SetPatternLength Far
+                ;Assume DS:Pattern
 
 ;                Mov     AX, MaxRow
 ;                Inc     AX
@@ -11699,7 +11698,7 @@ Proc            PE_SetPatternLength Far
                 Mov     PatternLengthStart, AX
                 Mov     PatternLengthEnd, AX
 
-                Assume DS:Nothing
+                ;Assume DS:Nothing
 
                 Mov     CX, 4
                 Mov     DI, Offset O1_SetPatternLength
@@ -11710,7 +11709,7 @@ Proc            PE_SetPatternLength Far
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Call    PEFunction_StorePattern
 
@@ -11726,14 +11725,14 @@ PE_SetPatternLength3:
                 JA      PE_SetPatternLength4
 
                 Mov     PatternNumber, AX
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Call    Music_GetPattern
                 Call    DecodePattern           ; Next pattern should be in mem
 
                 Push    CS
                 Pop     DS
-                        Assume DS:Pattern
+                        ;Assume DS:Pattern
 
                 Mov     AX, PatternSetLength
                 Mov     PatternModified, 1
@@ -11754,44 +11753,44 @@ PE_SetPatternLength2:
                 Mov     AX, 1
                 Ret
 
-EndP            PE_SetPatternLength
-                Assume DS:Nothing
+;EndP            PE_SetPatternLength
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_LeftBrace Far
+Proc PE_LeftBrace Far
 
                 Jmp     Glbl_LeftBrace
 
-EndP            PE_LeftBrace
+;EndP            PE_LeftBrace
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_RightBrace Far
+Proc PE_RightBrace Far
 
                 Jmp     Glbl_RightBrace
 
-EndP            PE_RightBrace
+;EndP            PE_RightBrace
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_LeftSquareBracket Far
+Proc PE_LeftSquareBracket Far
 
                 Jmp     Glbl_LeftSquareBracket
 
-EndP            PE_LeftSquareBracket
+;EndP            PE_LeftSquareBracket
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_RightSquareBracket Far
+Proc PE_RightSquareBracket Far
 
                 Jmp     Glbl_RightSquareBracket
 
-EndP            PE_RightSquareBracket
+;EndP            PE_RightSquareBracket
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MIDI_SetInstrument Far
+Proc MIDI_SetInstrument Far
 
                 Test    Byte Ptr CS:CentraliseCursor, 16
                 JZ      MIDI_SetInstrument2
@@ -11813,12 +11812,12 @@ MIDI_SetInstrument1:
                 Mov     AX, 1
                 Ret
 
-EndP            MIDI_SetInstrument
+;EndP            MIDI_SetInstrument
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_MIDIAfterTouch Far
-                Assume DS:Pattern
+Proc PE_MIDIAfterTouch Far
+                ;Assume DS:Pattern
 
                 Cmp     MIDIInputEnabled, 0
                 JNE     PE_MIDIAfterTouch2
@@ -11849,7 +11848,7 @@ PE_MIDIAfterTouch2:
                 Mov     Word Ptr [Modified], 101h
                 Add     SI, AX
                 Mov     DS, PatternDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
                 Cmp     SI, 64000
                 JAE     PE_MIDIAfterTouch1
 
@@ -11859,13 +11858,13 @@ PE_MIDIAfterTouch1:
                 Mov     AX, 1
                 Ret
 
-EndP            PE_MIDIAfterTouch
-                Assume DS:Nothing
+;EndP            PE_MIDIAfterTouch
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_MIDINoteOff Far
-                        Assume DS:Pattern
+Proc PE_MIDINoteOff Far
+                        ;Assume DS:Pattern
 
                 Cmp     MIDIInputEnabled, 0
                 JNE     PE_MIDINoteOff1
@@ -11907,7 +11906,7 @@ PE_MIDINoteOff1:
                 JAE     PE_MIDINoteOff3
 
                 Mov     DS, PatternDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Cmp     Word Ptr [SI], NONOTE
                 JE      PE_MIDINoteOff4
@@ -11959,13 +11958,13 @@ PE_MIDINoteOff3:
                 Mov     AX, 1
                 Ret
 
-EndP            PE_MIDINoteOff
-                Assume DS:Nothing
+;EndP            PE_MIDINoteOff
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_MIDINote Far
-                        Assume DS:Pattern
+Proc PE_MIDINote Far
+                        ;Assume DS:Pattern
 
                 Cmp     MIDIInputEnabled, 0
                 JNE     PE_MIDINote6
@@ -12084,7 +12083,7 @@ PE_MIDINote5:
                 JAE     PE_MIDINote1
 
                 Mov     DS, PatternDataArea
-                        Assume DS:Nothing
+                        ;Assume DS:Nothing
 
                 Mov     [SI], CX
                 Mov     [SI+2], BL
@@ -12105,12 +12104,12 @@ PE_MIDINote1:
                 Mov     AX, 1
                 Ret
 
-EndP            PE_MIDINote
-                Assume DS:Nothing
+;EndP            PE_MIDINote
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_TranslateMIDI Far
+Proc PE_TranslateMIDI Far
                                         ; Given DL = 0->127, return DL = 0->127
                                         ; Given DH = 0->127, return DH=0->64
 
@@ -12169,23 +12168,23 @@ PE_TranslateMIDIVolumeEnd:
                 Pop     AX
                 Ret
 
-EndP            PE_TranslateMIDI
+;EndP            PE_TranslateMIDI
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_RestoreMIDINote Far
+Proc PE_RestoreMIDINote Far
 
                 Add     DL, 60
                 Sub     DL, CS:MIDICentralNote
 
                 Ret
 
-EndP            PE_RestoreMIDINote
+;EndP            PE_RestoreMIDINote
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_CycleMIDIPlayTrigger Far
-                Assume DS:Pattern
+Proc PE_CycleMIDIPlayTrigger Far
+                ;Assume DS:Pattern
 
                 Mov     AL, MIDIPlayTrigger
                 Inc     AX
@@ -12211,13 +12210,13 @@ PE_CycleMIDIPlayTriggerEnd:
                 Mov     AX, 1
                 Ret
 
-EndP            PE_CycleMIDIPlayTrigger
-                Assume DS:Nothing
+;EndP            PE_CycleMIDIPlayTrigger
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            MIDIInputToggle Far                     ; Ctrl-Scroll Lock
-                Assume DS:Pattern
+Proc MIDIInputToggle Far                     ; Ctrl-Scroll Lock
+                ;Assume DS:Pattern
 
                 Mov     SI, Offset MIDIInputEnabledMsg
                 Xor     MIDIInputEnabled, 1
@@ -12230,21 +12229,21 @@ MIDIInputToggle1:
                 Mov     AX, 1
                 Ret
 
-EndP            MIDIInputToggle
-                Assume DS:Nothing
+;EndP            MIDIInputToggle
+                ;Assume DS:Nothing
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_SetPatternModified Far
+Proc PE_SetPatternModified Far
 
                 Mov     Word Ptr [CS:Modified], 101h
                 Ret
 
-EndP            PE_SetPatternModified
+;EndP            PE_SetPatternModified
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_SaveCurrentPattern Far
+Proc PE_SaveCurrentPattern Far
 
                 PushAD
                 Push    DS
@@ -12263,11 +12262,11 @@ Proc            PE_SaveCurrentPattern Far
                 PopAD
                 Ret
 
-EndP            PE_SaveCurrentPattern
+;EndP            PE_SaveCurrentPattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_RestoreCurrentPattern Far
+Proc PE_RestoreCurrentPattern Far
 
                 PushAD
                 Push    DS
@@ -12281,11 +12280,11 @@ Proc            PE_RestoreCurrentPattern Far
                 PopAD
                 Ret
 
-EndP            PE_RestoreCurrentPattern
+;EndP            PE_RestoreCurrentPattern
 
 ;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
-Proc            PE_NewPattern Far
+Proc PE_NewPattern Far
 
                 Mov     AX, CS:PatternNumber
                 Call    Music_GetPattern
@@ -12294,7 +12293,7 @@ Proc            PE_NewPattern Far
                 Mov     CS:PatternModified, 0
                 Ret
 
-EndP            PE_NewPattern
+;EndP            PE_NewPattern
 
 ;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
 
